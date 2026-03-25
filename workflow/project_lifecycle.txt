@@ -1,0 +1,13 @@
+Omics Codeathon Project Cycle (+ Timelines):
+
+				2. Finish Building Pipeline (by Jan 20, 2026)
+
+                  1. Decide on datasets (by Jan 06, 2026)       3. Design and Submit the project's poster and slides (by Sep 20, 2025) Mar 07, 2025
+
+                10. Upgrade                     4. Highlight >= 2 new insights from the work (by Sep 15, 2025) Mar 03, 2025
+
+                9. Manage                        5. Test and Benchmark against related work (by Sep 02, 2025) Feb 17, 2025
+
+                  8. Publish                   6. Submit Manuscript (by Mar 30, 2025) Mar 17, 2025
+
+			  7. Address Reviewer Comments
