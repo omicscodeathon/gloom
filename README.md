@@ -6,9 +6,9 @@ In this study, we developed **_gloom_**, a framework for prioritizing disease-as
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<palign="center">
+<p align="center">
 
-  <imgsrc="https://github.com/omicscodeathon/gloom/blob/main/figures/ranking_score_distribution.png"alt="gloom logo"width="300"/>
+  <img src="https://github.com/omicscodeathon/gloom/blob/main/figures/ranking_score_distribution.png" alt="gloom logo" width="300"/>
 
 </p>
 
@@ -134,24 +134,20 @@ pip install -r requirements.txt
 
 Below is the main workflow used in gloom for LUAD gene prioritization:
 
-```mermaid
+``` mermaid
 
 graph TD
 
-    A[Input RNA-seq Data (TCGA)] --> B[Data Preprocessing]
-
+    A["Input RNA-seq Data (TCGA)"] --> B[Data Preprocessing]
+  
     B --> C[Co-Expression Network Construction]
-
-    C --> D[Feature Engineering<br/>(Centrality Metrics,<br/>DEA: Log2FC & FDR)]
-
-    D --> E[Machine Learning Model Training<br/>(Random Forest, Logistic Regression)]
-
+    C --> D["Feature Engineering (Centrality Metrics, DEA: Log2FC & FDR)"]
+    D --> E["Machine Learning Model Training (Random Forest, Logistic Regression)"]
     E --> F[Model Evaluation & Feature Importance]
-
     F --> G[Gene Ranking Table]
+    F --> H["Visualization (Volcano Plot, Network Graphs)"]
 
-    F --> H[Visualization<br/>(Volcano Plot,<br/>Network Graphs)]
-
+  
 ```
 
 #### **Pipeline Step Descriptions**
@@ -202,9 +198,9 @@ graph TD
 
 -**Co-Expression Networks**: Publication-ready network figures in HTML/PNG/SVG.
 
-<palign="center">
+<p align="center">
 
-  <imgsrc="https://github.com/omicscodeathon/gloom/blob/main/workflow/ML_pipeline.png"alt="workflow overview"width="700"/>
+  <img src="https://github.com/omicscodeathon/gloom/blob/main/workflow/ML_pipeline.png" alt="workflow overview" width="700"/>
 
 </p>
 
