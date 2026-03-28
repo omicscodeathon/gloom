@@ -1,11 +1,3 @@
-Steps: [Convert the steps into workflow diagram (include tools for each step) and update README.md]
-. Pull down the reads
-.
-.
-.
-.
-.
-.
-.
-.
-.
+version https://git-lfs.github.com/spec/v1
+oid sha256:e6b7e415c6c53b12671ddd36fed2e22156e4b67ded0246d040fe287a8f91c444
+size 140
