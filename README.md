@@ -238,10 +238,10 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 | Malick Traore                          |                    |                   |
 | Olaitan I. Awe                         | Institute for Genomic Medicine Research (IGMR); African Society for Bioinformatics and Computational Biology (ASBCB)                 | Project Advisor                  |
 
-<br>📧 **Rahma Yasser Mahmoud**:** rahmayasserm@gmail.com
-<br>📧 **Rana Hamed Abu-Zeid**:** ranahamed2111@gmail.com
-<br>📧 **Khadija Adam Rogo**:** khadijarogo212@gmail.com
-<br>📧 **Malick Traore ** :** malicktra100@gmail.com
+<br>📧 **Rahma Yasser Mahmoud**: rahmayasserm@gmail.com
+<br>📧 **Rana Hamed Abu-Zeid**: ranahamed2111@gmail.com
+<br>📧 **Khadija Adam Rogo**: khadijarogo212@gmail.com
+<br>📧 **Malick Traore**: malicktra100@gmail.com
 <br>📧 **Olaitan I. Awe, Ph.D.** : laitanawe@gmail.com
 
 ---
