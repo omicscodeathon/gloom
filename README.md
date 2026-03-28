@@ -2,8 +2,6 @@
 
 In this study, we developed **_gloom_**, a framework for prioritizing disease-associated genes and reconstructing gene interaction networks. This is a visualization package based on machine learning for gene expression analysis starting with lung adenocarcinoma (TCGA-LUAD), designed to predict cancer-relevant genes and present  the results through interpretable network visualizations. Future releases will expand to other diseases. This project therefore proposes an interpretable machine learning package, starting with LUAD candidate gene prioritization and co-expression network visualization. State-of-the-art methods either implement only gene prioritization or gene network visualization. With gloom, we have implemented both of these features into a single tool.
 
-# gloom: An Interpretable Machine Learning Package for LUAD Gene Prioritization and Co-Expression Network Visualization
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
@@ -48,11 +46,11 @@ Despite large-scale transcriptome sequencing efforts (e.g., TCGA), effective ide
 
 **_gloom_** bridges this gap by providing a unified platform that combines:
 
--**Preprocessing**: Automated expression and network feature extraction.
+- **Preprocessing**: Automated expression and network feature extraction.
 
--**Modular Machine Learning**: Flexible model selection, interpretability via feature importance.
+- **Modular Machine Learning**: Flexible model selection, interpretability via feature importance.
 
--**Visualization**: Generation of publication-ready figures (gene ranks, volcano plots, interactive co-expression graphs).
+- **Visualization**: Generation of publication-ready figures (gene ranks, volcano plots, interactive co-expression graphs).
 
 Unlike generic tools, gloom is tailored for LUAD, emphasizing transparent workflows, script-based customization, and reproducibility. Feature importance scoring highlights the contributions of both biological and topological markers to LUAD gene prioritization.
 
@@ -152,37 +150,37 @@ graph TD
 
 #### **Pipeline Step Descriptions**
 
--**Input RNA-seq Data (TCGA):**
+- **Input RNA-seq Data (TCGA):**
 
   Start with raw or preprocessed RNA-seq data from TCGA for LUAD.
 
--**Data Preprocessing:**
+- **Data Preprocessing:**
 
   Normalize expression values, filter low-quality samples/genes, and prepare a standardized expression matrix.
 
--**Co-Expression Network Construction:**
+- **Co-Expression Network Construction:**
 
   Build a gene co-expression network (e.g., using correlation or WGCNA) to explore gene-gene interactions.
 
--**Feature Engineering:**
+- **Feature Engineering:**
 
   -*Centrality Metrics*: Calculate network topological features (Degree, Betweenness, PageRank).
 
   -*DEA Metrics*: Compute differential expression (Log2 Fold Change, FDR) between tumor and normal samples.
 
--**Machine Learning Model Training:**
+- **Machine Learning Model Training:**
 
   Use extracted features to train Random Forest and Logistic Regression models, using known LUAD genes as labels.
 
--**Model Evaluation & Feature Importance:**
+- **Model Evaluation & Feature Importance:**
 
   Assess model accuracy and extract feature importance scores for interpretability.
 
--**Gene Ranking Table:**
+- **Gene Ranking Table:**
 
   Output a ranked table of candidate genes most likely involved in LUAD.
 
--**Visualization:**
+- **Visualization:**
 
   Automatically generate volcano plots and interactive co-expression network graphs for publication or downstream analysis.
 
@@ -190,13 +188,13 @@ graph TD
 
 ## Outputs & Visualization
 
--**Gene Ranking Tables**: Prioritized candidate list based on combined features.
+- **Gene Ranking Tables**: Prioritized candidate list based on combined features.
 
--**Feature Importance Plot**: Highlights strongest biological and topological predictors.
+- **Feature Importance Plot**: Highlights strongest biological and topological predictors.
 
--**Volcano Plot**: Visual summary of differential expression.
+- **Volcano Plot**: Visual summary of differential expression.
 
--**Co-Expression Networks**: Publication-ready network figures in HTML/PNG/SVG.
+- **Co-Expression Networks**: Publication-ready network figures in HTML/PNG/SVG.
 
 <p align="center">
 
@@ -208,13 +206,13 @@ graph TD
 
 ## Reproducibility
 
--**Version control** for all scripts and dependencies.
+- **Version control** for all scripts and dependencies.
 
--**Fixed random seeds** in model training for deterministic results.
+- **Fixed random seeds** in model training for deterministic results.
 
--**Extensive documentation and example notebooks** provided.
+- **Extensive documentation and example notebooks** provided.
 
-- Results are fully reproducible from documented commands.
+- **Results are fully reproducible** from documented commands.
 
 ---
 
