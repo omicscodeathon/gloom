@@ -241,8 +241,8 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 <br>📧 **Rahma Yasser Mahmoud**:** rahmayasserm@gmail.com
 <br>📧 **Rana Hamed Abu-Zeid**:** ranahamed2111@gmail.com
 <br>📧 **Khadija Adam Rogo**:** khadijarogo212@gmail.com
-📧 **Malick Traore ** :** malicktra100@gmail.com
-📧 **Olaitan I. Awe, Ph.D.** : laitanawe@gmail.com
+<br>📧 **Malick Traore ** :** malicktra100@gmail.com
+<br>📧 **Olaitan I. Awe, Ph.D.** : laitanawe@gmail.com
 
 ---
 
