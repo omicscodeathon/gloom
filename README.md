@@ -226,15 +226,11 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ## Contributors
 
-|   Name   | Affiliation | Role |
-
-|----------|-------------|------|
-
-| [Names]                       | [Affiliations] | [Roles here] |
+| [Names                       | [Affiliation(s) | Role(s) |
 | -------------------------------------- | ------------------ | ----------------- |
 | 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 |                    |                   |
 | 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       |                    |                   |
-| Rana H.Abu −zeid                      |                    |                   |
+| Rana Hamed Abu-Zeid   |                    |                   |
 | Malick Traore                          |                    |                   |
 | Olaitan I. Awe                         | Institute for Genomic Medicine Research (IGMR); African Society for Bioinformatics and Computational Biology (ASBCB)                 | Project Advisor                  |
 
