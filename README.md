@@ -32,11 +32,11 @@ In this study, we developed **_gloom_**, a framework for prioritizing disease-as
 
 ## Background
 
-Lung adenocarcinoma (LUAD) is a leading cause of cancer-related mortality worldwide, characterized by high molecular heterogeneity. The prioritization of driver genes is essential for biomarker discovery and therapeutic interventions. Classical bioinformatics workflows often separate predictive modeling from network visualization, which can hinder reproducibility and biological interpretability. To address this gap, **gloom** provides a modular, interpretable machine learning platform for prioritizing LUAD candidate genes by seamlessly integrating TCGA tumor/normal RNA-seq data and co-expression network topologies.
+Lung adenocarcinoma (LUAD) is a leading cause of cancer-related mortality worldwide, characterized by high molecular heterogeneity. The prioritization of driver genes is essential for biomarker discovery and therapeutic interventions. Classical bioinformatics workflows often separate predictive modeling from network visualization, which can hinder reproducibility and biological interpretability. To address this gap, **_gloom_** provides a modular, interpretable machine learning platform for prioritizing LUAD candidate genes by seamlessly integrating TCGA tumor/normal RNA-seq data and co-expression network topologies.
 
 Features used for training include graph-theoretic metrics (e.g., Degree, Betweenness, PageRank) and differential expression statistics (Log2FC, FDR). Models-Random Forest and Logistic Regression-are trained and validated on LUAD-associated gene sets, leveraging both transcriptome signals and network centrality. Feature importance analysis demonstrates that combining network and expression data enhances prediction performance over single-modality approaches.
 
-**gloom** transitions users from raw data to actionable biological insights, generating gene ranking tables, volcano plots, and automated co-expression network visualizations in a single, reproducible Python-based workflow.
+**_gloom_** transitions users from raw data to actionable biological insights, generating gene ranking tables, volcano plots, and automated co-expression network visualizations in a single, reproducible Python-based workflow.
 
 > **Keywords:** Reproducible bioinformatics, gene prioritization, machine learning, lung cancer, co-expression networks.
 
@@ -46,7 +46,7 @@ Features used for training include graph-theoretic metrics (e.g., Degree, Betwee
 
 Despite large-scale transcriptome sequencing efforts (e.g., TCGA), effective identification of LUAD driver genes remains a challenge. Conventional differential expression analysis (DEA) can miss genes with subtle expression shifts but important roles in regulatory networks. Network-based approaches help, but researchers face fragmented solutions-visualization tools like Cytoscape lack automation and integrated ML; web solutions like PINTA lack customizability.
 
-**gloom** bridges this gap by providing a unified platform that combines:
+**_gloom_** bridges this gap by providing a unified platform that combines:
 
 -**Preprocessing**: Automated expression and network feature extraction.
 
@@ -76,7 +76,7 @@ Unlike generic tools, gloom is tailored for LUAD, emphasizing transparent workfl
 
 ## Installation
 
-**gloom** is implemented primarily in Python with a simple setup:
+**_gloom_** is implemented primarily in Python with a simple setup:
 
 ```bash
 
@@ -91,7 +91,7 @@ or via cloning this repository (for the latest version):
 git clone https://github.com/omicscodeathon/gloom.git
 
 cd gloom
- 
+
 pip install -r requirements.txt
 
 ```
@@ -100,30 +100,30 @@ pip install -r requirements.txt
 
 ## Usage Workflow
 
-1.**Data Input**
+1. **Data Input**
 
    Accepts raw or preprocessed TCGA RNA-seq data (tumor/normal samples).
 
-2.**Preprocessing**
+2. **Preprocessing**
 
    Generation of normalized expression matrices.
 
    Filtering low-quality samples/genes.
 
-3.**Co-Expression Network Construction**
+3. **Co-Expression Network Construction**
 
    Build gene co-expression network (correlation/WGCNA).
 
-4.**Feature Engineering**
+4. **Feature Engineering**
 
 - Network Measures: Degree, Betweenness, PageRank.
 - DEA: Log2 Fold Change, FDR.
 
-5.**Machine Learning**
+5. **Machine Learning**
 
    Trains Random Forest and Logistic Regression models with known LUAD labels.
 
-6.**Interpretation & Visualization**
+6. **Interpretation & Visualization**
 
 - Feature importance analysis.
 - Generation of gene ranking tables, volcano plots, network graphs.
@@ -139,7 +139,7 @@ Below is the main workflow used in gloom for LUAD gene prioritization:
 graph TD
 
     A["Input RNA-seq Data (TCGA)"] --> B[Data Preprocessing]
-  
+
     B --> C[Co-Expression Network Construction]
     C --> D["Feature Engineering (Centrality Metrics, DEA: Log2FC & FDR)"]
     D --> E["Machine Learning Model Training (Random Forest, Logistic Regression)"]
@@ -147,7 +147,7 @@ graph TD
     F --> G[Gene Ranking Table]
     F --> H["Visualization (Volcano Plot, Network Graphs)"]
 
-  
+
 ```
 
 #### **Pipeline Step Descriptions**
@@ -236,7 +236,13 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 | 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       |                    |                   |
 | Rana H.Abu −zeid                      |                    |                   |
 | Malick Traore                          |                    |                   |
-| Olaitan I. Awe                         |                    |                   |
+| Olaitan I. Awe                         | Institute for Genomic Medicine Research (IGMR)                   | Project Advisor                  |
+
+📧 ****Rahma Yasser Mahmoud**  :** rahmayasserm@gmail.com
+📧 ****Rana Hamed Abu-Zeid**  :** ranahamed2111@gmail.com  
+📧 ****Khadija Adam Rogo**  :** khadijarogo212@gmail.com
+📧 ****Malick Traore **  :** malicktra100@gmail.com
+📧 ****Olaitan I. Awe, Ph.D.**  :** laitanawe@gmail.com
 
 ---
 
