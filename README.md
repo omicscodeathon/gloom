@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/omicscodeathon/gloom/main/figures/logos/gloom.jpeg" alt="cellitac logo" width="300"  />
+  <img src="https://github.com/omicscodeathon/gloom/blob/main/figures/logos/gloom.jpeg?raw=true" alt="gloom logo" width="300"  />
 </p>
 
 ## Overview
