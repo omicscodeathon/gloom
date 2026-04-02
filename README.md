@@ -1,2 +1,9 @@
 # gloom: Gene network Learning and Organization through Optimized Machine intelligence
-In this study, we developed **_gloom_**, a framework for prioritizing disease-associated genes and reconstructing gene interaction networks. This is a visualization package based on machine learning for gene expression analysis starting with lung adenocarcinoma (TCGA-LUAD), designed to predict cancer-relevant genes and present  the results through interpretable network visualizations. Future releases will expand to other diseases. This project therefore proposes an interpretable machine learning package, starting with LUAD candidate gene prioritization and co-expression network visualization. State-of-the-art methods either implement only gene prioritization or gene network visualization. With gloom, we have implemented both of these features into a single tool.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI version](https://badge.fury.io/py/gloom.svg)](https://pypi.org/project/gloom/)
+[![Conda Bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg)](https://anaconda.org/channels/bioconda/packages/gloom/overview)
+
+<p align="center">
+  <img src="https://github.com/YourUsername/gloom/blob/main/figures/logo.png" alt="gloom logo" width="300" />
+</p>
