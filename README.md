@@ -24,9 +24,9 @@ While state-of-the-art methods typically implement either gene prioritization or
 Current development is focused on LUAD prioritization and visualization; however, future releases will expand the **_gloom_** framework to encompass a wide range of other complex diseases.
 
 ---
+**Lead Developer:** [Rana Hamed Abu Zaid](https://github.com/RanaHamedAbuZeid)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+---
 
 
 </p>
