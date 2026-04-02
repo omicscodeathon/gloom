@@ -237,7 +237,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ## Contributors
 
-| [Names                       | [Affiliation(s) | Role(s) |
+| Names                       | Affiliation(s) | Role(s) |
 | -------------------------------------- | ------------------ | ----------------- |
 | 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 |                    |                   |
 | 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       |                    |                   |
