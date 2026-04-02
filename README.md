@@ -5,7 +5,7 @@
 [![Conda Bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg)](https://anaconda.org/channels/bioconda/packages/gloom/overview)
 
 <p align="center">
-  <img src="https://github.com/RanaHamedAbuZeid/gloom/blob/main/figures/logos/gloom.jpeg?raw=true" alt="gloom logo" width="300" />
+  <img src="https://raw.githubusercontent.com/omicscodeathon/gloom/main/figures/logos/gloom.jpeg" alt="gloom logo" width="300" />
 </p>
 
 ## Overview
@@ -24,10 +24,6 @@ While state-of-the-art methods typically implement either gene prioritization or
 Current development is focused on LUAD prioritization and visualization; however, future releases will expand the **_gloom_** framework to encompass a wide range of other complex diseases.
 
 ---
-**Lead Developer:** [Rana Hamed Abu Zaid](https://github.com/RanaHamedAbuZeid)
-
----
-
 
 </p>
 
