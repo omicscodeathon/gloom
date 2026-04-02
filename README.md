@@ -51,8 +51,6 @@ Features used for training include graph-theoretic metrics (e.g., Degree, Betwee
 
 **_gloom_** transitions users from raw data to actionable biological insights, generating gene ranking tables, volcano plots, and automated co-expression network visualizations in a single, reproducible Python-based workflow.
 
-> **Keywords:** Reproducible bioinformatics, gene prioritization, machine learning, lung cancer, co-expression networks.
-
 ---
 
 ## Overview
