@@ -3,7 +3,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="https://github.com/omicscodeathon/gloom/blob/main/figures/logos/gloom.jpeg?raw=true" alt="gloom logo" width="300"  />
+  <img src="https://github.com/omicscodeathon/gloom![new logo](https://github.com/user-attachments/assets/c4332142-7421-4e4f-b48b-1e2c3ff69fab)
+/blob/main/figures/logos/gloom.jpeg?raw=true" alt="gloom logo" width="300"  />
 </p>
 
 ## Overview
