@@ -239,10 +239,10 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 | Names                       | Affiliation(s) | Role(s) |
 | -------------------------------------- | ------------------ | ----------------- |
-| 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 |                    | 1Faculty of Computers and Information, Assiut University, Assiut, Egypt                 |
-| 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       |                    |                   |
-| Rana Hamed Abu-Zeid   |                    |                   |
-| Malick Traore                          |                    |                   |
+| 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 | Faculty of Computers and Information, Assiut University, Assiut, Egypt                    |                  |
+| 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       | Department of Bioinformatics, Kalinga University, Raipur, India                   |                   |
+| Rana Hamed Abu-Zeid   | Department of Artificial Intelligence, Badya University, Giza, Egypt                   |                   |
+| Malick Traore         | African Center of Excellence in Bioinformatics and Data Science, USTTB, Mali           |                 |
 | Olaitan I. Awe                         | Institute for Genomic Medicine Research (IGMR); African Society for Bioinformatics and Computational Biology (ASBCB)                 | Project Advisor                  |
 
 <br>📧 **Rahma Yasser Mahmoud**: rahmayasserm@gmail.com
