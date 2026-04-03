@@ -239,7 +239,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 | Names                       | Affiliation(s) | Role(s) |
 | -------------------------------------- | ------------------ | ----------------- |
-| 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 |                    |                   |
+| 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 |                    | 1Faculty of Computers and Information, Assiut University, Assiut, Egypt                 |
 | 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       |                    |                   |
 | Rana Hamed Abu-Zeid   |                    |                   |
 | Malick Traore                          |                    |                   |
