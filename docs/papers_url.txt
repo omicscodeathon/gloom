@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:da179d2fd4bcab51312ee4a7f76ee09f67978aa2d470246387784a2de39b68c4
-size 73
+[1] H. Shadman, S. Gomrok, C. Litle, Q. Cheng, Y. Jiang, X. Huang, J. D. Ziebarth, and Y. Wang, “A machine learning-based investigation of integrin expression patterns in cancer and metastasis,” Scientific Reports, vol. 15, art. no. 5270, 2025.
+[2] E. Glaab, J. Bacardit, J. M. Garibaldi, and N. Krasnogor, “Using rule-based machine learning for candidate disease gene prioritization and sample classification of cancer gene expression data,” PLoS ONE, vol. 7, no. 7, e39932, 2012.
+[3] J. Figueroa-Martínez, D. M. Saz-Navarro, A. López-Fernández, D. S. Rodríguez-Baena, and F. A. Gómez-Vela, “Computational ensemble gene co-expression networks for the analysis of cancer biomarkers,” 2024.
+[4] M. Khalsan, L. R. Machado, E. S. Al-Shamery, S. Ajit, K. Anthony, M. U. Mu, and M. O. Agyeman, “A survey of machine learning approaches applied to gene expression analysis for cancer prediction,” IEEE Access, vol. 10, pp. 27522–27534, 2022, doi: 10.1109/ACCESS.2022.3146312.
+[5] G. Kallah-Dagadu, M. Mohammed, J. B. Nasejje, N. N. Mchunu, H. S. Twabi, J. M. Batidzirai, G. C. Singini, P. Nevhungoni, and I. Maposa, “Breast cancer prediction based on gene expression data using interpretable machine learning techniques,” Scientific Reports, vol. 15, art. no. 7594, 2025.
