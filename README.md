@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://github.com/omicscodeathon/gloom/blob/main/figures/logos/gloom.jpeg?raw=true" alt="gloom logo" width="300"  />
-  <img src=  "![new logo](https://github.com/user-attachments/assets/34d8ddad-94ed-49e0-8c3b-fa7006642db5)" alt="new logo" width="300" />
+  <img src=  "https://github.com/user-attachments/assets/34d8ddad-94ed-49e0-8c3b-fa7006642db5" alt="new logo" width="300" />
 
 </p>
 
