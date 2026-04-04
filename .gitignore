@@ -3,3 +3,4 @@ LUAD_ML_Pipeline/models/*.joblib
 LUAD_ML_Pipeline/__pycache__/
 *.pyc
 *.zip
+.history
