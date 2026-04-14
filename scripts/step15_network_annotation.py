@@ -21,10 +21,10 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL),
     handlers=[logging.FileHandler(config.LOG_FILE), logging.StreamHandler(sys.stdout)])
 log = logging.getLogger(__name__)
 
-COLOR_CGC="#E8524A"; COLOR_NOVEL="#3A7DBF"; COLOR_DE_ONLY="#F0882A"; COLOR_NS="#CCCCCC"
+COLOR_LCGENE="#E8524A"; COLOR_NOVEL="#3A7DBF"; COLOR_DE_ONLY="#F0882A"; COLOR_NS="#CCCCCC"
 
 def assign_node_color(row):
-    if row.get("is_cgc_gene",False): return COLOR_CGC
+    if row.get("is_lcgene_gene",False): return COLOR_LCGENE
     if row.get("novel_candidate",False): return COLOR_NOVEL
     if row.get("is_de_significant",False): return COLOR_DE_ONLY
     return COLOR_NS
@@ -52,9 +52,9 @@ def run_network_annotation():
     node_df["predicted_prob"]  = node_df.get("predicted_prob",pd.Series(0.0,index=graph_nodes)).fillna(0.0)
     node_df["rank"]            = node_df.get("rank",pd.Series(n_genes,index=graph_nodes)).fillna(n_genes).astype(int)
     node_df["novel_candidate"] = node_df.get("novel_candidate",pd.Series(False,index=graph_nodes)).fillna(False).astype(bool)
-    for col in ["is_cgc_gene","log2fc","pvalue_adj","neg_log10_padj","direction","is_de_significant","mean_tumor","mean_normal"]:
+    for col in ["is_lcgene_gene","log2fc","pvalue_adj","neg_log10_padj","direction","is_de_significant","mean_tumor","mean_normal"]:
         if col in annotation.columns: node_df[col] = annotation[col].reindex(graph_nodes)
-    node_df["is_cgc_gene"]       = node_df.get("is_cgc_gene",pd.Series(False,index=graph_nodes)).fillna(False).astype(bool)
+    node_df["is_lcgene_gene"]       = node_df.get("is_lcgene_gene",pd.Series(False,index=graph_nodes)).fillna(False).astype(bool)
     node_df["is_de_significant"] = node_df.get("is_de_significant",pd.Series(False,index=graph_nodes)).fillna(False).astype(bool)
     node_df["log2fc"]            = node_df.get("log2fc",pd.Series(0.0,index=graph_nodes)).fillna(0.0)
     node_df["direction"]         = node_df.get("direction",pd.Series("ns",index=graph_nodes)).fillna("ns")
@@ -88,8 +88,8 @@ def run_network_annotation():
     rows = []
     for u,v,data in G.edges(data=True):
         ud=G.nodes[u]; vd=G.nodes[v]
-        uc = ud.get("is_cgc_gene",False) or ud.get("novel_candidate",False)
-        vc = vd.get("is_cgc_gene",False) or vd.get("novel_candidate",False)
+        uc = ud.get("is_lcgene_gene",False) or ud.get("novel_candidate",False)
+        vc = vd.get("is_lcgene_gene",False) or vd.get("novel_candidate",False)
         rows.append({"gene_a":u,"gene_b":v,"weight":float(data.get("weight",0.0)),
                      "abs_weight":float(data.get("abs_weight",0.0)),"edge_type":data.get("edge_type","positive"),
                      "gene_a_rank":int(ud.get("rank",0)),"gene_b_rank":int(vd.get("rank",0)),
@@ -101,9 +101,9 @@ def run_network_annotation():
     if "degree" in node_df.columns and "rank" in node_df.columns:
         fig, ax = plt.subplots(figsize=(9,6))
         categories = [
-            ("CGC",   node_df["is_cgc_gene"],                                                   COLOR_CGC,     60, 0.85),
+            ("LCGene", node_df["is_lcgene_gene"],                                                   COLOR_LCGENE,     60, 0.85),
             ("Novel", node_df.get("novel_candidate",pd.Series(False,index=node_df.index)),       COLOR_NOVEL,   40, 0.80),
-            ("Other", ~node_df.get("is_cgc_gene",pd.Series(False,index=node_df.index)) & ~node_df.get("novel_candidate",pd.Series(False,index=node_df.index)), COLOR_NS, 5, 0.20),
+            ("Other", ~node_df.get("is_lcgene_gene",pd.Series(False,index=node_df.index)) & ~node_df.get("novel_candidate",pd.Series(False,index=node_df.index)), COLOR_NS, 5, 0.20),
         ]
         for cat_name,(mask,color,size,alpha) in [(c[0],(c[1],c[2],c[3],c[4])) for c in categories]:
             sub = node_df[mask] if isinstance(mask,pd.Series) else node_df
@@ -116,10 +116,10 @@ def run_network_annotation():
     nx.write_graphml(G, str(config.ANNOTATED_NETWORK_FILE))
     node_df.to_csv(config.ANNOTATED_NODES_FILE)
     edge_df.to_csv(config.ANNOTATED_EDGES_FILE, index=False)
-    log.info(f"  CGC nodes: {node_df['is_cgc_gene'].sum()}  Novel: {node_df.get('novel_candidate',pd.Series()).sum()}")
+    log.info(f"  LCGene nodes: {node_df['is_lcgene_gene'].sum()}  Novel: {node_df.get('novel_candidate',pd.Series()).sum()}")
     log.info("STEP 15 COMPLETE")
     return {"graph":G,"node_df":node_df,"edge_df":edge_df}
 
 if __name__ == "__main__":
     r = run_network_annotation()
-    print(r["node_df"].nsmallest(10,"rank")[["rank","predicted_prob","is_cgc_gene","novel_candidate","log2fc","direction"]].round(4))
+    print(r["node_df"].nsmallest(10,"rank")[["rank","predicted_prob","is_lcgene_gene","novel_candidate","log2fc","direction"]].round(4))

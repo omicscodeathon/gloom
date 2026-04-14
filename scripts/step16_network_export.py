@@ -77,7 +77,7 @@ def run_network_export():
     subnetwork_sizes = {}
     subdefs = [
         ("top100",     None,               None, 100),
-        ("cgc",        "is_cgc_gene",      True, None),
+        ("lcgene",     "is_lcgene_gene",       True, None),
         ("novel",      "novel_candidate",  True, None),
         ("candidates", "predicted_label",  1,    None),
     ]
@@ -110,7 +110,7 @@ def run_network_export():
              "largest_component_size":len(largest_cc),"avg_clustering_coeff":round(avg_clust,6),
              "avg_degree":round(float(np.mean(degrees)),4),"max_degree":int(np.max(degrees)),
              "degree_assortativity":round(assortativity,6)}
-    if "is_cgc_gene" in node_df.columns:   stats["n_cgc_nodes"]   = int(node_df["is_cgc_gene"].sum())
+    if "is_lcgene_gene" in node_df.columns:   stats["n_lcgene_nodes"] = int(node_df["is_lcgene_gene"].sum())
     if "novel_candidate" in node_df.columns: stats["n_novel_nodes"] = int(node_df["novel_candidate"].sum())
     pd.DataFrame(list(stats.items()),columns=["metric","value"]).to_csv(EXPORT_DIR/"network_statistics_report.csv",index=False)
     degree_series = pd.Series(dict(G_clean.degree()),name="degree")

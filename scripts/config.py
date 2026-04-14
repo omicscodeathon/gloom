@@ -31,23 +31,30 @@ TUMOR_META_FILE   = RAW_DIR / "cBioPortal (RNA Seq Data)" / "data_clinical_patie
 
 # --- Normal (GTEx lung) ---
 NORMAL_EXPR_FILE  = RAW_DIR / "Gtex (normal samples)" / "gene_tpm_v11_lung.gct.gz"
-NORMAL_META_FILE  = RAW_DIR / "Gtex (normal samples)" / "GTEx_Analysis_v11_Annotations_SampleAttributesDD.xlsx"
+# Corrected: TSV file, not Excel; filename matches the actual provided file
+NORMAL_META_FILE  = RAW_DIR / "Gtex (normal samples)" / \
+                    "GTEx_Analysis_v11_Annotations_SampleAttributesDS - LUAD.txt"
 
-# --- Known cancer / LUAD genes (Cancer Gene Census) ---
-CANCER_GENE_FILE  = RAW_DIR / "Cancer Gene Census (Labeled Data)" / \
-                    "Census_allWed Mar 18 05_48_31 2026.csv"
+# --- Labeled LUAD gene list (LCGene database) ---
+# MODIFIED: replaced Cancer Gene Census CSV with LCGene_human_LUAD_filtered.tsv
+CANCER_GENE_FILE  = RAW_DIR / "LCGene (Labeled LUAD Data)" / \
+                    "LCGene_human_LUAD_filtered.tsv"
 
 # ==================================================
 # PROCESSED / INTERMEDIATE OUTPUT PATHS
 # ==================================================
 
 PROCESSED_DIR       = DATA_ROOT / "processed"
-RESULTS_DIR         = PROJECT_ROOT / "results"
-FIGURES_DIR         = PROJECT_ROOT / "figures"
-MODELS_DIR          = PROJECT_ROOT / "models"
-LOGS_DIR            = PROJECT_ROOT / "logs"
-NETWORK_DIR         = RESULTS_DIR / "network"
-REPORTS_DIR         = RESULTS_DIR / "reports"
+
+# All generated outputs live under trial/outputs/ - outside the pipeline code folder
+OUTPUTS_ROOT = PROJECT_ROOT.parent / "outputs"
+RESULTS_DIR  = OUTPUTS_ROOT / "results"
+FIGURES_DIR  = OUTPUTS_ROOT / "figures"
+MODELS_DIR   = OUTPUTS_ROOT / "models"
+LOGS_DIR     = OUTPUTS_ROOT / "logs"
+NETWORK_DIR     = RESULTS_DIR  / "network"
+REPORTS_DIR     = RESULTS_DIR  / "reports"
+ENRICHMENT_DIR  = RESULTS_DIR  / "enrichment"
 
 # Processed expression matrices (after QC + harmonization)
 TUMOR_EXPR_PROCESSED  = PROCESSED_DIR / "tumor_expression_processed.csv"
@@ -98,6 +105,12 @@ INTERACTIVE_HTML_FILE   = FIGURES_DIR / "interactive_network.html"
 # Final report
 FINAL_REPORT_FILE       = REPORTS_DIR / "pipeline_summary_report.csv"
 
+# KEGG enrichment (Step 19)
+KEGG_ALL_FILE           = ENRICHMENT_DIR / "kegg_all_candidates.csv"
+KEGG_UP_FILE            = ENRICHMENT_DIR / "kegg_upregulated.csv"
+KEGG_DOWN_FILE          = ENRICHMENT_DIR / "kegg_downregulated.csv"
+KEGG_SUMMARY_FILE       = ENRICHMENT_DIR / "kegg_summary.csv"
+
 # ==================================================
 # DATA FORMAT ASSUMPTIONS
 # ==================================================
@@ -110,7 +123,9 @@ NORMAL_SAMPLE_START = 2
 
 NORMAL_META_SAMPLE_COL = "SAMPID"
 TUMOR_META_SAMPLE_COL  = "PATIENT_ID"
-CGC_GENE_COL = "Gene Symbol"
+
+# LCGene TSV uses 'GeneSymbol' as the gene-symbol column
+LCGENE_GENE_COL = "GeneSymbol"
 
 # ==================================================
 # QC PARAMETERS
@@ -147,6 +162,38 @@ POSITIVE_LABEL    = 1
 NEGATIVE_LABEL    = 0
 
 # ==================================================
+# EVALUATION SETTINGS
+# ==================================================
+
+# Primary metric for selecting the best model: "auroc" or "auprc"
+# AUPRC is preferred for imbalanced datasets (Step 3)
+CV_METRIC_PRIMARY = "auprc"
+
+# Threshold strategy for binary classification decisions (Step 4):
+#   "f1"               - maximise F1 on the PR curve (default)
+#   "target_recall"    - smallest threshold reaching THRESHOLD_TARGET_RECALL
+#   "target_precision" - smallest threshold reaching THRESHOLD_TARGET_PRECISION
+#   "top_k"            - flag top-THRESHOLD_TOP_K ranked genes as positive
+THRESHOLD_STRATEGY         = "f1"
+THRESHOLD_TARGET_RECALL    = 0.80
+THRESHOLD_TARGET_PRECISION = 0.50
+THRESHOLD_TOP_K            = 200
+
+# SMOTE resampling - applied inside each CV training fold only (Step 5)
+# Requires: pip install imbalanced-learn
+USE_SMOTE = False
+
+# Random undersampling - applied inside each CV training fold only (Step 5)
+# Applied after SMOTE when both are True (SMOTE-then-undersample pipeline)
+# Requires: pip install imbalanced-learn
+USE_UNDERSAMPLING = True
+
+# Positive-Unlabeled framing (Step 6)
+# When True: negatives are treated as "unlabeled" (unannotated) rather than
+# confirmed non-cancer genes.  Labels (0/1) are unchanged; only language changes.
+PU_FRAMING = True
+
+# ==================================================
 # LOGGING
 # ==================================================
 
@@ -157,6 +204,7 @@ LOG_LEVEL  = "INFO"
 def create_output_dirs() -> None:
     """Create all necessary output directories if they do not exist."""
     dirs = [
+        OUTPUTS_ROOT,
         PROCESSED_DIR,
         RESULTS_DIR,
         FIGURES_DIR,
@@ -164,6 +212,7 @@ def create_output_dirs() -> None:
         LOGS_DIR,
         NETWORK_DIR,
         REPORTS_DIR,
+        ENRICHMENT_DIR,
     ]
     for d in dirs:
         d.mkdir(parents=True, exist_ok=True)
@@ -179,12 +228,12 @@ def validate_input_files() -> None:
         "Tumor metadata"           : TUMOR_META_FILE,
         "Normal expression matrix" : NORMAL_EXPR_FILE,
         "Normal metadata"          : NORMAL_META_FILE,
-        "Cancer gene list"         : CANCER_GENE_FILE,
+        "Labeled LUAD gene list"   : CANCER_GENE_FILE,
     }
     missing = []
     for label, path in required.items():
         if not path.exists():
-            missing.append(f"  [{label}]  →  {path}")
+            missing.append(f"  [{label}]  ->  {path}")
 
     if missing:
         msg = "The following required input files were NOT found:\n" + "\n".join(missing)
@@ -206,10 +255,10 @@ if __name__ == "__main__":
         print(f"[config] WARNING - {e}")
     print()
     print("--- Key paths ---")
-    print(f"  Tumor expr   : {TUMOR_EXPR_FILE}")
-    print(f"  Normal expr  : {NORMAL_EXPR_FILE}")
-    print(f"  Cancer genes : {CANCER_GENE_FILE}")
-    print(f"  Results      : {RESULTS_DIR}")
-    print(f"  Figures      : {FIGURES_DIR}")
+    print(f"  Tumor expr        : {TUMOR_EXPR_FILE}")
+    print(f"  Normal expr       : {NORMAL_EXPR_FILE}")
+    print(f"  Labeled gene list : {CANCER_GENE_FILE}")
+    print(f"  Results           : {RESULTS_DIR}")
+    print(f"  Figures           : {FIGURES_DIR}")
     print()
     print("[config] Step 0 complete.")

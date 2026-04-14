@@ -1,6 +1,6 @@
 """
 run_pipeline.py - Master Pipeline Runner
-Executes all 18 steps of the LUAD ML Pipeline in sequence.
+Executes all 19 steps of the LUAD ML Pipeline in sequence.
 Usage: cd LUAD_ML_Pipeline && python run_pipeline.py
 """
 import sys, time, logging
@@ -35,6 +35,7 @@ STEPS = [
     ("Step 16 - Network export",      "step16_network_export",           "run_network_export"),
     ("Step 17 - Visualization",       "step17_interactive_visualization","run_interactive_visualization"),
     ("Step 18 - Final report",        "step18_final_report",             "run_final_report"),
+    ("Step 19 - KEGG enrichment",     "step19_kegg_enrichment",          "run_kegg_enrichment"),
 ]
 
 def run_pipeline():

@@ -51,7 +51,7 @@ def get_native_importance(model, model_name, feature_names):
 def get_permutation_importance(model, model_name, use_scaled, X_val, X_val_scaled, y_val, n_repeats=10):
     X = X_val_scaled if use_scaled else X_val
     log.info(f"  [{model_name}] Permutation importance (n_repeats={n_repeats}) …")
-    result = permutation_importance(model, X.values, y_val, n_repeats=n_repeats,
+    result = permutation_importance(model, X, y_val, n_repeats=n_repeats,
                                     random_state=config.RANDOM_STATE, scoring="roc_auc", n_jobs=-1)
     s = pd.Series(normalise_importance(result.importances_mean), index=X.columns, name=f"{model_name} (permutation)")
     log.info(f"  Top 5: {s.nlargest(5).to_dict()}")

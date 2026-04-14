@@ -27,24 +27,24 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL),
     handlers=[logging.FileHandler(config.LOG_FILE), logging.StreamHandler(sys.stdout)])
 log = logging.getLogger(__name__)
 
-COLOR_CGC="#E8524A"; COLOR_NOVEL="#3A7DBF"; COLOR_DE_ONLY="#F0882A"; COLOR_NS="#AAAAAA"
-COLOR_MAP = {"CGC gene":COLOR_CGC,"Novel candidate":COLOR_NOVEL,"DE significant":COLOR_DE_ONLY,"Not significant":COLOR_NS}
+COLOR_LCGENE="#E8524A"; COLOR_NOVEL="#3A7DBF"; COLOR_DE_ONLY="#F0882A"; COLOR_NS="#AAAAAA"
+COLOR_MAP = {"LCGene gene":COLOR_LCGENE,"Novel candidate":COLOR_NOVEL,"DE significant":COLOR_DE_ONLY,"Not significant":COLOR_NS}
 
 def assign_category(row):
-    if row.get("is_cgc_gene",False): return "CGC gene"
+    if row.get("is_lcgene_gene",False): return "LCGene gene"
     if row.get("novel_candidate",False): return "Novel candidate"
     if row.get("is_de_significant",False): return "DE significant"
     return "Not significant"
 
 def make_interactive_volcano(de_df, ranking, out_path):
     merged = de_df[["log2fc","pvalue_adj","neg_log10_padj","direction","significant"]].copy()
-    merged = merged.join(ranking[["predicted_prob","rank","is_cgc_gene","novel_candidate","is_de_significant"]], how="left")
+    merged = merged.join(ranking[["predicted_prob","rank","is_lcgene_gene","novel_candidate","is_de_significant"]], how="left")
     merged["category"] = merged.apply(assign_category, axis=1)
     merged["gene"]     = merged.index
     merged["neg_log10_padj"] = merged["neg_log10_padj"].replace([np.inf,-np.inf],np.nan).fillna(merged["neg_log10_padj"].quantile(0.999))
     merged["hover"] = merged.apply(lambda r: f"<b>{r['gene']}</b><br>Log2FC: {r['log2fc']:.3f}<br>Adj.P: {r['pvalue_adj']:.2e}<br>Dir: {r['direction']}<br>Prob: {r.get('predicted_prob',0):.4f}<br>Category: {r['category']}", axis=1)
     fig = go.Figure()
-    for cat in ["CGC gene","Novel candidate","DE significant","Not significant"]:
+    for cat in ["LCGene gene","Novel candidate","DE significant","Not significant"]:
         sub = merged[merged["category"]==cat]
         if not len(sub): continue
         fig.add_trace(go.Scatter(x=sub["log2fc"],y=sub["neg_log10_padj"],mode="markers",name=f"{cat} (n={len(sub):,})",
@@ -66,7 +66,7 @@ def make_interactive_ranking(ranking, out_path):
     df["marker_size"] = (df["abs_log2fc"].clip(0,8)*2+4).round(1)
     df["hover"] = df.apply(lambda r: f"<b>{r['gene']}</b><br>Rank: {int(r['rank'])}<br>Prob: {r['predicted_prob']:.4f}<br>Log2FC: {r['log2fc']:.3f}<br>Dir: {r['direction']}<br>Category: {r['category']}", axis=1)
     fig = go.Figure()
-    for cat in ["CGC gene","Novel candidate","DE significant","Not significant"]:
+    for cat in ["LCGene gene","Novel candidate","DE significant","Not significant"]:
         sub = df[df["category"]==cat]
         if not len(sub): continue
         fig.add_trace(go.Scatter(x=sub["rank"],y=sub["predicted_prob"],mode="markers",name=f"{cat} (n={len(sub):,})",
@@ -101,7 +101,7 @@ def make_interactive_network(node_df, edge_df, out_path, top_n=150):
     df_plot["category"] = df_plot.apply(assign_category, axis=1)
     df_plot["size"]     = (df_plot["predicted_prob"]*25+6).clip(6,31)
     df_plot["hover"]    = df_plot.apply(lambda r: f"<b>{r.name}</b><br>Rank: {int(r.get('rank',0))}<br>Prob: {r['predicted_prob']:.4f}<br>Dir: {r.get('direction','ns')}<br>Degree: {int(r.get('degree',0))}<br>Cat: {r['category']}", axis=1)
-    for cat in ["Not significant","DE significant","Novel candidate","CGC gene"]:
+    for cat in ["Not significant","DE significant","Novel candidate","LCGene gene"]:
         sub = df_plot[df_plot["category"]==cat]
         if not len(sub): continue
         fig.add_trace(go.Scatter(x=sub["x"],y=sub["y"],mode="markers",name=f"{cat} (n={len(sub)})",
@@ -138,36 +138,92 @@ def make_interactive_feature_importance(imp_table, out_path):
     return fig
 
 def make_combined_dashboard(fig_volcano, fig_ranking, fig_network, fig_importance, out_path):
-    def _div(fig, div_id):
-        return pio.to_html(fig, full_html=False, include_plotlyjs=False, div_id=div_id, config={"responsive":True})
-    vol_div = _div(fig_volcano,"volcano_div"); rank_div = _div(fig_ranking,"ranking_div")
-    net_div = _div(fig_network,"network_div"); imp_div  = _div(fig_importance,"importance_div")
-    html = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+    # Embed Plotly JS inline inside the first div - works offline, no CDN needed,
+    # compatible with all Plotly versions (no get_plotlyjs() required)
+    def _div(fig, div_id, embed_js=False):
+        return pio.to_html(
+            fig, full_html=False,
+            include_plotlyjs=embed_js,   # True only for first plot → embeds the JS once
+            div_id=div_id, config={"responsive": True}
+        )
+
+    vol_div  = _div(fig_volcano,    "volcano_div",   embed_js=True)   # JS lives here
+    rank_div = _div(fig_ranking,    "ranking_div",   embed_js=False)
+    net_div  = _div(fig_network,    "network_div",   embed_js=False)
+    imp_div  = _div(fig_importance, "importance_div",embed_js=False)
+
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LUAD ML Pipeline Dashboard</title>
-<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-<style>*{{box-sizing:border-box;margin:0;padding:0}}body{{font-family:Arial,sans-serif;background:#F8F9FA}}
-header{{background:linear-gradient(135deg,#1A3A5C,#2D6A9F);color:white;padding:18px 30px}}
-header h1{{font-size:1.6em;font-weight:700}}header p{{font-size:.95em;opacity:.85;margin-top:4px}}
-.tab-bar{{display:flex;background:#1A3A5C;padding:0 20px}}.tab{{padding:12px 22px;cursor:pointer;color:#AAC4E0;font-size:.95em;border-bottom:3px solid transparent;transition:all .2s;user-select:none}}
-.tab:hover{{color:white}}.tab.active{{color:white;border-bottom:3px solid #5BB4F0;background:rgba(255,255,255,.08)}}
-.tab-content{{display:none;padding:20px 30px}}.tab-content.active{{display:block}}
-.plot-card{{background:white;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:16px;margin-bottom:20px}}
-.plot-desc{{font-size:.88em;color:#666;margin-bottom:10px;line-height:1.5}}
-footer{{text-align:center;padding:16px;font-size:.82em;color:#888;border-top:1px solid #DDD;margin-top:20px}}</style></head><body>
-<header><h1>LUAD ML Pipeline - Interactive Results Dashboard</h1>
-<p>Machine Learning Pipeline for Lung Adenocarcinoma Candidate Gene Prioritization</p></header>
+<style>
+  *{{box-sizing:border-box;margin:0;padding:0}}
+  body{{font-family:Arial,sans-serif;background:#F8F9FA}}
+  header{{background:linear-gradient(135deg,#1A3A5C,#2D6A9F);color:white;padding:18px 30px}}
+  header h1{{font-size:1.6em;font-weight:700}}
+  header p{{font-size:.95em;opacity:.85;margin-top:4px}}
+  .tab-bar{{display:flex;background:#1A3A5C;padding:0 20px;flex-wrap:wrap}}
+  .tab{{padding:12px 22px;cursor:pointer;color:#AAC4E0;font-size:.95em;
+        border-bottom:3px solid transparent;transition:all .2s;user-select:none}}
+  .tab:hover{{color:white}}
+  .tab.active{{color:white;border-bottom:3px solid #5BB4F0;background:rgba(255,255,255,.08)}}
+  .tab-content{{display:none;padding:20px 30px}}
+  .tab-content.active{{display:block}}
+  .plot-card{{background:white;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08);
+              padding:16px;margin-bottom:20px}}
+  .plot-desc{{font-size:.88em;color:#666;margin-bottom:10px;line-height:1.5}}
+  footer{{text-align:center;padding:16px;font-size:.82em;color:#888;
+          border-top:1px solid #DDD;margin-top:20px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>LUAD ML Pipeline - Interactive Results Dashboard</h1>
+  <p>Machine Learning Pipeline for Lung Adenocarcinoma Candidate Gene Prioritization</p>
+</header>
 <div class="tab-bar">
-<div class="tab active" onclick="showTab('volcano',event)">Volcano Plot</div>
-<div class="tab" onclick="showTab('ranking',event)">Gene Ranking</div>
-<div class="tab" onclick="showTab('network',event)">Network</div>
-<div class="tab" onclick="showTab('importance',event)">Feature Importance</div></div>
-<div id="tab-volcano" class="tab-content active"><div class="plot-card"><div class="plot-desc"><b>Volcano Plot</b> - Differential expression LUAD tumor vs GTEx normal. Hover for gene details.</div>{vol_div}</div></div>
-<div id="tab-ranking" class="tab-content"><div class="plot-card"><div class="plot-desc"><b>Gene Ranking</b> - All genes ranked by ML predicted probability. Hover for full annotation.</div>{rank_div}</div></div>
-<div id="tab-network" class="tab-content"><div class="plot-card"><div class="plot-desc"><b>Co-expression Network</b> - Top-150 ranked genes. Node size = predicted probability.</div>{net_div}</div></div>
-<div id="tab-importance" class="tab-content"><div class="plot-card"><div class="plot-desc"><b>Feature Importance</b> - Normalised importance across methods. Error bars = std.</div>{imp_div}</div></div>
-<footer>LUAD ML Pipeline · step17_interactive_visualization.py</footer>
-<script>function showTab(name,event){{document.querySelectorAll(".tab-content").forEach(el=>el.classList.remove("active"));document.querySelectorAll(".tab").forEach(el=>el.classList.remove("active"));document.getElementById("tab-"+name).classList.add("active");if(event&&event.target)event.target.classList.add("active");}}</script>
-</body></html>"""
+  <div class="tab active"  onclick="showTab('volcano',this)">Volcano Plot</div>
+  <div class="tab"         onclick="showTab('ranking',this)">Gene Ranking</div>
+  <div class="tab"         onclick="showTab('network',this)">Network</div>
+  <div class="tab"         onclick="showTab('importance',this)">Feature Importance</div>
+</div>
+<div id="tab-volcano" class="tab-content active">
+  <div class="plot-card">
+    <div class="plot-desc"><b>Volcano Plot</b> - Differential expression LUAD tumor vs GTEx normal. Hover over a point for gene details.</div>
+    {vol_div}
+  </div>
+</div>
+<div id="tab-ranking" class="tab-content">
+  <div class="plot-card">
+    <div class="plot-desc"><b>Gene Ranking</b> - All genes ranked by ML predicted probability. Hover for full annotation.</div>
+    {rank_div}
+  </div>
+</div>
+<div id="tab-network" class="tab-content">
+  <div class="plot-card">
+    <div class="plot-desc"><b>Co-expression Network</b> - Top-150 ranked genes. Node size = predicted probability. Node colour = category.</div>
+    {net_div}
+  </div>
+</div>
+<div id="tab-importance" class="tab-content">
+  <div class="plot-card">
+    <div class="plot-desc"><b>Feature Importance</b> - Normalised importance across methods. Error bars = std deviation.</div>
+    {imp_div}
+  </div>
+</div>
+<footer>LUAD ML Pipeline &middot; step17_interactive_visualization.py &middot; Plotly embedded (offline-ready)</footer>
+<script>
+function showTab(name, clickedTab) {{
+  document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
+  document.getElementById("tab-" + name).classList.add("active");
+  clickedTab.classList.add("active");
+}}
+</script>
+</body>
+</html>"""
     out_path.write_text(html, encoding="utf-8")
     log.info(f"  Combined dashboard saved: {out_path}")
 
@@ -180,7 +236,7 @@ def run_interactive_visualization():
     node_df   = pd.read_csv(config.ANNOTATED_NODES_FILE,   index_col=0)
     edge_df   = pd.read_csv(config.ANNOTATED_EDGES_FILE)
     imp_table = pd.read_csv(config.FEATURE_IMPORTANCE_FILE, index_col=0) if config.FEATURE_IMPORTANCE_FILE.exists() else None
-    for col in ["is_cgc_gene","novel_candidate","is_de_significant","predicted_prob","rank"]:
+    for col in ["is_lcgene_gene","novel_candidate","is_de_significant","predicted_prob","rank"]:
         if col not in de_df.columns and col in ranking.columns:
             de_df[col] = ranking[col].reindex(de_df.index)
     log.info("[1] Volcano …")

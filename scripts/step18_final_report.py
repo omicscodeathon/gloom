@@ -66,14 +66,53 @@ def build_pipeline_report(summary_table):
         lines += [f"  Genes tested: {len(de_df):,}  Significant: {int(n_sig):,}  Up: {int(n_up):,}  Down: {int(n_down):,}",""]
     metrics = safe_read_csv(config.MODEL_METRICS_FILE)
     best_name = (config.MODELS_DIR/"best_model_name.txt").read_text().strip() if (config.MODELS_DIR/"best_model_name.txt").exists() else "N/A"
-    lines += ["SECTION 4 - MODEL PERFORMANCE",sep2]
+    primary_metric = getattr(config, "CV_METRIC_PRIMARY", "auprc").upper()
+    pu_framing = getattr(config, "PU_FRAMING", False)
+    framing_note = " [PU framing: negatives are unlabeled]" if pu_framing else ""
+    lines += [f"SECTION 4 - MODEL PERFORMANCE{framing_note}",sep2]
     if metrics is not None:
+        lines.append(f"  Primary selection metric: {primary_metric}")
         lines.append(f"  Best model: {best_name}")
-        lines.append(f"  {'Model':<25} {'AUROC':>7} {'AUPRC':>7} {'MCC':>7} {'F1':>7}")
-        lines.append(f"  {'-'*55}")
+        lines.append(f"  {'Model':<25} {'AUROC':>7} {'AUPRC':>7} {'Acc':>7} {'MCC':>7} {'F1':>7} {'R@100':>7} {'P@100':>7}")
+        lines.append(f"  {'-'*80}")
         for _,row in metrics.iterrows():
             m = " *" if row["model_name"]==best_name else ""
-            lines.append(f"  {row['model_name']:<25} {row['auroc']:>7.4f} {row['auprc']:>7.4f} {row['mcc']:>7.4f} {row['f1_opt']:>7.4f}{m}")
+            r100 = row.get("recall_at_100", float("nan"))
+            p100 = row.get("precision_at_100", float("nan"))
+            acc  = row.get("accuracy", float("nan"))
+            lines.append(f"  {row['model_name']:<25} {row['auroc']:>7.4f} {row['auprc']:>7.4f} "
+                         f"{acc:>7.4f} {row['mcc']:>7.4f} {row['f1_opt']:>7.4f} "
+                         f"{r100:>7.4f} {p100:>7.4f}{m}")
+    lines.append("")
+    # Classification reports from step12
+    clf_rpt_dir = config.RESULTS_DIR / "classification_reports"
+    lines += ["SECTION 4c - CLASSIFICATION REPORTS (per-model)", sep2]
+    if clf_rpt_dir.exists():
+        rpt_files = sorted(clf_rpt_dir.glob("classification_report_*.txt"))
+        if rpt_files:
+            for rpt_file in rpt_files:
+                model_tag = rpt_file.stem.replace("classification_report_", "")
+                lines.append(f"\n  --- {model_tag} ---")
+                try:
+                    for ln in rpt_file.read_text(encoding="utf-8").splitlines():
+                        lines.append("  " + ln)
+                except Exception:
+                    lines.append("  [could not read report]")
+        else:
+            lines.append("  No classification reports found.")
+    else:
+        lines.append("  Classification reports directory not found (run step 12 first).")
+    lines.append("")
+    # Ranking metrics from step14
+    rank_m = safe_read_csv(config.RESULTS_DIR/"ranking_metrics.csv")
+    pos_str = "positive (known)" if pu_framing else "LCGene"
+    lines += [f"SECTION 4b - RANKING METRICS (all genes, {pos_str} as ground truth)",sep2]
+    if rank_m is not None:
+        for col in ["recall_at_50","recall_at_100","recall_at_200","recall_at_500",
+                    "precision_at_50","precision_at_100","median_lcgene_rank",
+                    "lcgene_top50","lcgene_top100","lcgene_top200","n_novel"]:
+            if col in rank_m.columns:
+                lines.append(f"  {col:<25}: {rank_m[col].iloc[0]}")
     lines.append("")
     imp = safe_read_csv(config.FEATURE_IMPORTANCE_FILE, index_col=0)
     lines += ["SECTION 5 - TOP 15 FEATURES",sep2]
@@ -84,13 +123,15 @@ def build_pipeline_report(summary_table):
     lines.append("")
     ranking = safe_read_csv(config.GENE_RANKINGS_FILE, index_col=0)
     novel   = safe_read_csv(config.RESULTS_DIR/"novel_candidates.csv", index_col=0)
+    known_col = "Known+" if pu_framing else "LCGene"
     lines += ["SECTION 6 - TOP 20 RANKED GENES",sep2]
     if ranking is not None:
-        lines.append(f"  {'Rank':<6} {'Gene':<15} {'Prob':>7} {'Log2FC':>8} {'Dir':>5} {'CGC':>5} {'Novel':>6}")
+        lines.append(f"  {'Rank':<6} {'Gene':<15} {'Prob':>7} {'Log2FC':>8} {'Dir':>5} {known_col:>6} {'Novel':>6}")
         for gene,row in ranking.head(20).iterrows():
-            lines.append(f"  {int(row['rank']):<6} {gene:<15} {row['predicted_prob']:>7.4f} {row.get('log2fc',0):>8.3f} {row.get('direction','ns'):>5} {'Yes' if row.get('is_cgc_gene',False) else 'No':>5} {'Yes' if row.get('novel_candidate',False) else 'No':>6}")
+            lines.append(f"  {int(row['rank']):<6} {gene:<15} {row['predicted_prob']:>7.4f} {row.get('log2fc',0):>8.3f} {row.get('direction','ns'):>5} {'Yes' if row.get('is_lcgene_gene',False) else 'No':>6} {'Yes' if row.get('novel_candidate',False) else 'No':>6}")
     lines.append("")
-    lines += ["SECTION 7 - NOVEL CANDIDATES (top 15)",sep2]
+    novel_label = "high-scoring unlabeled" if pu_framing else "novel"
+    lines += [f"SECTION 7 - {novel_label.upper()} CANDIDATES (top 15)",sep2]
     if novel is not None:
         lines.append(f"  Total: {len(novel):,}")
         for gene,row in novel.head(15).iterrows():
@@ -124,18 +165,27 @@ def build_summary_figure(out_path_prefix):
         ax_B.axvline(-config.DE_LOG2FC_THRESHOLD,color="black",linestyle="--",lw=0.8,alpha=0.5)
         ax_B.axhline(-np.log10(config.DE_PVALUE_THRESHOLD),color="black",linestyle=":",lw=0.8,alpha=0.5)
         ax_B.set_xlabel("Log2 Fold-Change",fontsize=9); ax_B.set_ylabel("-log10(adj P)",fontsize=9); ax_B.set_title("(B) Volcano Plot",fontsize=10)
-    # Panel C: CV AUROC
+    # Panel C: CV AUPRC (primary metric, Step 3)
     cv_res = safe_read_csv(config.MODELS_DIR/"cv_results.csv")
     best_name = (config.MODELS_DIR/"best_model_name.txt").read_text().strip() if (config.MODELS_DIR/"best_model_name.txt").exists() else ""
+    primary_metric = getattr(config, "CV_METRIC_PRIMARY", "auprc")
     if cv_res is not None:
-        models_cv=cv_res["model"].tolist(); means_cv=cv_res["mean_auroc"].tolist(); stds_cv=cv_res["std_auroc"].tolist()
-        colors_cv=["tomato" if m==best_name else "steelblue" for m in models_cv]
-        ax_C.bar(range(len(models_cv)),means_cv,yerr=stds_cv,capsize=4,color=colors_cv,alpha=0.85,error_kw={"elinewidth":1.2})
-        ax_C.set_xticks(range(len(models_cv))); ax_C.set_xticklabels(models_cv,rotation=20,ha="right",fontsize=8)
-        ax_C.set_ylabel("CV AUROC",fontsize=9); ax_C.set_title("(C) Cross-Validation AUROC",fontsize=10)
-    # Panel D: ROC curve
+        models_cv = cv_res["model"].tolist()
+        colors_cv = ["tomato" if m==best_name else "steelblue" for m in models_cv]
+        for ax_sub, metric, panel_letter in [(ax_C, primary_metric, "C")]:
+            col_mean = f"mean_{metric}"; col_std = f"std_{metric}"
+            if col_mean in cv_res.columns:
+                means_cv = cv_res[col_mean].tolist(); stds_cv = cv_res[col_std].tolist()
+                ax_sub.bar(range(len(models_cv)),means_cv,yerr=stds_cv,capsize=4,
+                           color=colors_cv,alpha=0.85,error_kw={"elinewidth":1.2})
+                ax_sub.set_xticks(range(len(models_cv)))
+                ax_sub.set_xticklabels(models_cv,rotation=20,ha="right",fontsize=8)
+                ax_sub.set_ylabel(f"CV {metric.upper()}",fontsize=9)
+                ax_sub.set_title(f"({panel_letter}) Cross-Validation {metric.upper()} ★ primary",fontsize=10)
+    # Panel D: PR curve (Step 3 - more informative than ROC for imbalanced/PU data)
     try:
         import joblib
+        from sklearn.metrics import precision_recall_curve as _prc, average_precision_score as _aps
         model_path = config.MODELS_DIR/"best_model.joblib"
         if model_path.exists():
             model = joblib.load(model_path)
@@ -143,23 +193,36 @@ def build_summary_figure(out_path_prefix):
             X_val_use = safe_read_csv(config.PROCESSED_DIR/"val_features_scaled.csv" if scaled else config.VAL_FEATURES_FILE, index_col=0)
             y_val = pd.read_csv(config.VAL_LABELS_FILE).set_index("gene")["label"].values
             if X_val_use is not None:
-                y_prob = model.predict_proba(X_val_use.values)[:,1] if hasattr(model,"predict_proba") else model.decision_function(X_val_use.values)
-                fpr,tpr,_ = roc_curve(y_val,y_prob); roc_auc_v = auc(fpr,tpr)
-                ax_D.plot(fpr,tpr,color="tomato",lw=2,label=f"{best_name}\n(AUROC={roc_auc_v:.4f})")
-                ax_D.plot([0,1],[0,1],"k--",lw=0.8,alpha=0.5,label="Random")
-                ax_D.set_xlabel("FPR",fontsize=9); ax_D.set_ylabel("TPR",fontsize=9); ax_D.set_title("(D) ROC Curve",fontsize=10); ax_D.legend(fontsize=8)
+                y_prob = model.predict_proba(X_val_use)[:,1] if hasattr(model,"predict_proba") else model.decision_function(X_val_use)
+                # PR curve
+                prec_c, rec_c, _ = _prc(y_val, y_prob)
+                ap = _aps(y_val, y_prob)
+                baseline = y_val.mean()
+                ax_D.plot(rec_c, prec_c, color="tomato", lw=2,
+                          label=f"{best_name}\n(AUPRC={ap:.4f})")
+                ax_D.axhline(baseline, color="black", linestyle="--", lw=0.8, alpha=0.5,
+                             label=f"No-skill ({baseline:.3f})")
+                ax_D.set_xlabel("Recall",fontsize=9); ax_D.set_ylabel("Precision",fontsize=9)
+                ax_D.set_title("(D) PR Curve - Validation Set",fontsize=10)
+                ax_D.legend(fontsize=8)
     except Exception as e:
-        ax_D.text(0.5,0.5,"ROC unavailable",ha="center",va="center",transform=ax_D.transAxes); ax_D.set_title("(D) ROC Curve",fontsize=10)
-    # Panel E: Top-20 genes
+        ax_D.text(0.5,0.5,"PR curve unavailable",ha="center",va="center",transform=ax_D.transAxes)
+        ax_D.set_title("(D) PR Curve",fontsize=10)
+    # Panel E: Top-20 genes (Step 6 - PU-aware labels)
     ranking = safe_read_csv(config.GENE_RANKINGS_FILE, index_col=0)
+    _pu_fig = getattr(config, "PU_FRAMING", False)
+    known_label_fig = "Known positive" if _pu_fig else "LCGene"
+    novel_label_fig = "High-scoring unlabeled" if _pu_fig else "Novel"
     if ranking is not None:
         top20 = ranking.head(20); genes_e = top20.index.tolist(); probs_e = top20["predicted_prob"].values
-        colors_e = ["tomato" if top20.loc[g].get("is_cgc_gene",False) else "steelblue" for g in genes_e]
+        colors_e = ["tomato" if top20.loc[g].get("is_lcgene_gene",False) else "steelblue" for g in genes_e]
         ax_E.barh(range(len(genes_e)),probs_e,color=colors_e,alpha=0.85)
         ax_E.set_yticks(range(len(genes_e))); ax_E.set_yticklabels(genes_e,fontsize=8); ax_E.invert_yaxis()
-        ax_E.set_xlabel("Predicted Probability",fontsize=9); ax_E.set_title("(E) Top-20 Ranked Genes",fontsize=10); ax_E.set_xlim(0,1.1)
+        ax_E.set_xlabel("Predicted Probability",fontsize=9)
+        ax_E.set_title("(E) Top-20 Ranked Genes",fontsize=10); ax_E.set_xlim(0,1.1)
         from matplotlib.patches import Patch
-        ax_E.legend(handles=[Patch(color="tomato",alpha=0.85,label="CGC"),Patch(color="steelblue",alpha=0.85,label="Novel")],fontsize=7)
+        ax_E.legend(handles=[Patch(color="tomato",alpha=0.85,label=known_label_fig),
+                              Patch(color="steelblue",alpha=0.85,label=novel_label_fig)],fontsize=7)
     # Panel F: Feature importance
     imp = safe_read_csv(config.FEATURE_IMPORTANCE_FILE, index_col=0)
     if imp is not None:
@@ -170,7 +233,8 @@ def build_summary_figure(out_path_prefix):
         ax_F.barh(range(len(feats_f)),imps_f,xerr=stds_f,capsize=3,color=colors_f,alpha=0.85,error_kw={"elinewidth":1.0})
         ax_F.set_yticks(range(len(feats_f))); ax_F.set_yticklabels(feats_f,fontsize=7); ax_F.invert_yaxis()
         ax_F.set_xlabel("Normalised Importance",fontsize=9); ax_F.set_title("(F) Top-15 Feature Importances",fontsize=10)
-    fig.suptitle("LUAD ML Pipeline - Summary Figure",fontsize=13,fontweight="bold",y=1.01)
+    pu_suffix = " [PU framing]" if getattr(config, "PU_FRAMING", False) else ""
+    fig.suptitle(f"LUAD ML Pipeline - Summary Figure{pu_suffix}",fontsize=13,fontweight="bold",y=1.01)
     for ext in ("png","pdf"):
         out = Path(str(out_path_prefix)+f".{ext}")
         fig.savefig(out,dpi=150,bbox_inches="tight",format=ext)
@@ -289,5 +353,5 @@ def run_final_report():
 if __name__ == "__main__":
     r = run_final_report()
     if not r["summary_table"].empty:
-        cols = [c for c in ["rank","predicted_prob","is_cgc_gene","novel_candidate","log2fc","direction"] if c in r["summary_table"].columns]
+        cols = [c for c in ["rank","predicted_prob","is_lcgene_gene","novel_candidate","log2fc","direction"] if c in r["summary_table"].columns]
         print(r["summary_table"].head(10)[cols].round(4).to_string())
