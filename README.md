@@ -169,6 +169,7 @@ flowchart TD
     L --> O[Annotated Network Export]
 ```
 
+---
 <p align="center">
 
   <img src="https://github.com/omicscodeathon/gloom/blob/main/workflow/Simplified Workflow.png" alt="workflow overview" width="700"/>
