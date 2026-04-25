@@ -609,8 +609,8 @@ The tool then produces:
 
 ## 📚 Acknowledgments
 
-If you use GLOOM in your work, please cite the project as:
 We thank the contributors to open biomedical datasets (TCGA) and acknowledge the Python and bioinformatics open-source communities. Special thanks to all collaborators and advisors in LUAD and genomics research.
+
 ---
 
 ## ✅ Summary
