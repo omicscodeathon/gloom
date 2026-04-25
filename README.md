@@ -1,27 +1,17 @@
 # 🌌 GLOOM
 
-> **Gene network Learning and Organization through Optimized Machine intelligence**
-> 
+> **Gene network Learning and Organization through Optimized Machine intelligence**  
 > A reproducible package for **gene prioritization, co-expression network construction, and machine-learning-based candidate gene discovery**.
 
-<p align="center">
-  <img src=  "https://github.com/user-attachments/assets/34d8ddad-94ed-49e0-8c3b-fa7006642db5" alt="new logo" width="500" />
-
-</p>
-
 ![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
-
 ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Gene%20Prioritization-8A2BE2?style=for-the-badge)
-
 ![Network Biology](https://img.shields.io/badge/Network%20Biology-Co--expression-00BFA6?style=for-the-badge)
-
 ![Cancer Genomics](https://img.shields.io/badge/Cancer%20Genomics-Extensible-FF6B6B?style=for-the-badge)
-
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-> 🧪 **Starting workflow:** LUAD
-> 🕸️ **Core idea:** combine expression + network topology + machine learning
-> 📈 **Main output:** ranked known and novel candidate genes
+> 🧪 **Starting workflow:** LUAD  
+> 🕸️ **Core idea:** combine expression + network topology + machine learning  
+> 📈 **Main output:** ranked known and novel candidate genes  
 > 🔬 **Goal:** support biological discovery and downstream validation across disease contexts
 
 ---
