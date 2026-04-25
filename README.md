@@ -43,7 +43,7 @@
 - 🗂️ [Repository Structure](#️-repository-structure)
 - 🎯 [Example Use Case](#-example-use-case)
 - 👥 [Contributors](#-contributors)
-- 📚 [Citation](#-citation)
+- 📚 [Citation](#-Acknowledgments)
 - ✅ [Summary](#-summary)
 
 ---
@@ -593,7 +593,7 @@ The tool then produces:
 
 | Names                       | Affiliation(s) | Role(s) |
 | -------------------------------------- | ------------------ | ----------------- |
-| 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 | Faculty of Computers and Information, Assiut University, Assiut, Egypt                    |                  |
+| 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 | Faculty of Computers and Information, Assiut University, Assiut, Egypt                    |     Team Leader             |  
 | 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       | Department of Bioinformatics, Kalinga University, Raipur, India                   |                   |
 | Rana Hamed Abu-Zeid   | Department of Artificial Intelligence, Badya University, Giza, Egypt                   |                   |
 | Malick Traore         | African Center of Excellence in Bioinformatics and Data Science, USTTB, Mali           |                 |
@@ -607,17 +607,11 @@ The tool then produces:
 
 ---
 
-## 📚 Citation
+## 📚 Acknowledgments
 
 If you use GLOOM in your work, please cite the project as:
 
-```text
-Abdelsalam RY, Abu-Zeid RH, Traore M, Rogo KA, Awe OI.
-GLOOM: Gene network Learning and Organization through Optimized Machine intelligence.
-A reproducible machine-learning package for gene prioritization and co-expression network construction.
-2026.
-```
-
+We thank the contributors to open biomedical datasets (TCGA) and acknowledge the Python and bioinformatics open-source communities. Special thanks to all collaborators and advisors in LUAD and genomics research.
 ---
 
 ## ✅ Summary
