@@ -172,7 +172,7 @@ flowchart TD
 ---
 <p align="center">
 
-  <img src="https://github.com/omicscodeathon/gloom/blob/main/workflow/Simplified Workflow.png" alt="workflow overview" width="700"/>
+  <img src="https://github.com/omicscodeathon/gloom/blob/main/workflow/Simplified Workflow.png" alt="workflow overview" width="900"/>
 
 </p>
 
