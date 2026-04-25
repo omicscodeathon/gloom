@@ -591,11 +591,19 @@ The tool then produces:
 
 ## 👥 Contributors
 
-- Rahma Y. Abdelsalam
-- Rana H. Abu-Zeid
-- Malick Traore
-- Khadija Adam Rogo
-- Olaitan I. Awe
+| Names                       | Affiliation(s) | Role(s) |
+| -------------------------------------- | ------------------ | ----------------- |
+| 𝑅𝑎ℎ𝑚𝑎 𝑌𝑎𝑠𝑠𝑒𝑟 𝑀𝑎ℎ𝑚𝑜𝑢𝑑 | Faculty of Computers and Information, Assiut University, Assiut, Egypt                    |                  |
+| 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       | Department of Bioinformatics, Kalinga University, Raipur, India                   |                   |
+| Rana Hamed Abu-Zeid   | Department of Artificial Intelligence, Badya University, Giza, Egypt                   |                   |
+| Malick Traore         | African Center of Excellence in Bioinformatics and Data Science, USTTB, Mali           |                 |
+| Olaitan I. Awe                         | Institute for Genomic Medicine Research (IGMR); African Society for Bioinformatics and Computational Biology (ASBCB)                 | Project Advisor                  |
+
+<br>📧 **Rahma Yasser Mahmoud**: rahmayasserm@gmail.com
+<br>📧 **Rana Hamed Abu-Zeid**: ranahamed2111@gmail.com
+<br>📧 **Khadija Adam Rogo**: khadijarogo212@gmail.com
+<br>📧 **Malick Traore**: malicktra100@gmail.com
+<br>📧 **Olaitan I. Awe, Ph.D.** : laitanawe@gmail.com
 
 ---
 
