@@ -19,6 +19,14 @@
 > 📈 **Main output:** ranked known and novel candidate genes  
 > 🔬 **Goal:** support biological discovery and downstream validation across disease contexts
 
+## 🌐 Project Landing Page
+
+Explore the interactive GLOOM landing page here:
+
+👉 **[Open GLOOM Landing Page](https://beta.sma-it.com/UI/gloom/)**
+
+---
+
 ---
 
 ## 🧭 Table of Contents
