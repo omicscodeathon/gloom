@@ -171,6 +171,13 @@ flowchart TD
 
 ---
 
+<p align="center">
+
+  <img src="https://github.com/omicscodeathon/gloom/blob/main/workflow/Simplified Workflow.png" alt="workflow overview" width="700"/>
+
+</p>
+
+
 ## 🧬 Data Sources
 
 GLOOM can be adapted to any disease context where the user provides compatible disease/control expression matrices and a disease-related reference gene list.
