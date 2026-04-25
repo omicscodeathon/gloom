@@ -25,7 +25,7 @@ Explore the interactive GLOOM landing page here:
 
 👉 **[Open GLOOM Landing Page](https://beta.sma-it.com/UI/gloom/)**
 
-👉 **[Cheat Sheet]([preview.html](https://github.com/user-attachments/files/27089352/preview.html)**
+👉 **Cheat Sheet [preview.html](https://github.com/user-attachments/files/27089352/preview.html)**
 
 
 ---
