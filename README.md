@@ -1,7 +1,7 @@
 # 🌌 GLOOM
 
 > **Gene network Learning and Organization through Optimized Machine intelligence**
-
+> 
 > A reproducible package for **gene prioritization, co-expression network construction, and machine-learning-based candidate gene discovery**.
 
 <p align="center">
