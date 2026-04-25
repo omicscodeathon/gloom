@@ -25,7 +25,6 @@ Explore the interactive GLOOM landing page here:
 
 👉 **[Open GLOOM Landing Page](https://beta.sma-it.com/UI/gloom/)**
 
----
 
 ---
 
