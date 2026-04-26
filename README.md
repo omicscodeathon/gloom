@@ -606,7 +606,7 @@ The tool then produces:
 | 𝐾ℎ𝑎𝑑𝑖𝑗𝑎 𝐴𝑑𝑎𝑚 𝑅𝑜𝑔𝑜       | Department of Bioinformatics, Kalinga University, Raipur, India                   |                   |
 | Rana Hamed Abu-Zeid   | Department of Artificial Intelligence, Badya University, Giza, Egypt                   |                   |
 | Malick Traore         | African Center of Excellence in Bioinformatics and Data Science, USTTB, Mali           |                 |
-| Olaitan I. Awe                         | Institute for Genomic Medicine Research (IGMR); African Society for Bioinformatics and Computational Biology (ASBCB)                 | Project Advisor                  |
+| Olaitan I. Awe                         | Institute for Genomic Medicine Research (IGMR); African Society for Bioinformatics and Computational Biology (ASBCB)                | Project Advisor                  |
 
 <br>📧 **Rahma Yasser Mahmoud**: rahmayasserm@gmail.com
 <br>📧 **Rana Hamed Abu-Zeid**: ranahamed2111@gmail.com
