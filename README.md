@@ -266,7 +266,7 @@ pip install -r requirements.txt
 ### Install GLOOM locally
 
 ```bash
-pip install -e .
+conda install gloom
 ```
 
 ### Check installation
