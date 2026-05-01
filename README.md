@@ -318,12 +318,6 @@ Available optional groups:
 | `dev` | Developer tools (pytest, black, ruff, mypy) | `pip install -e ".[dev]"` |
 | `all` | Everything (full + dev) | `pip install -e ".[all]"` |
 
-### Option 3: Build the conda package locally
-
-```bash
-conda build conda.recipe/
-conda install --use-local gloom
-```
 
 ### Verify installation
 
