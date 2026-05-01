@@ -47,8 +47,6 @@ Explore the interactive GLOOM landing page here:
 - 🤖 [Model Performance in the LUAD Case Study](#-model-performance-in-the-luad-case-study)
 - 🔬 [Biological Validation](#-biological-validation)
 - ⭐ [Feature Importance](#-feature-importance)
-- ⚠️ [Limitations](#️-limitations)
-- 🔮 [Future Work](#-future-work)
 - 🗂️ [Repository Structure](#️-repository-structure)
 - 🎯 [Example Use Case](#-example-use-case)
 - 👥 [Contributors](#-contributors)
