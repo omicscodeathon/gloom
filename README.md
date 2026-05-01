@@ -661,15 +661,15 @@ In the demonstration run with 100 well-known LUAD genes as query, **zero novel c
 
 **Recommendation:** When studying mutation-driven genes, provide a custom `--labels` file that includes your known driver genes as positives.
 
-### 🛤️ Enriched KEGG pathways
+### Enriched KEGG pathways
 
 KEGG pathway enrichment was performed on high-scoring candidate gene sets. Biologically relevant pathways enriched in the LUAD analysis include:
 
-- 🧱 ECM-receptor interaction
-- 📌 Focal adhesion
-- 🩸 Complement and coagulation cascades
-- 🛡️ Cytokine-cytokine receptor interaction
-- ⚡ PI3K-Akt signaling
+- ECM-receptor interaction
+- Focal adhesion
+- Complement and coagulation cascades
+- Cytokine-cytokine receptor interaction
+- PI3K-Akt signaling
 
 ---
 
@@ -705,38 +705,9 @@ The pipeline selects 21 features after collinearity removal. Grouped feature imp
 
 The LUAD workflow is mainly expression-driven, but network features help refine interpretation and support biologically coherent ranking.
 
----
-
-## ⚠️ Limitations
-
-GLOOM provides a prioritized candidate list, not a final set of validated biomarkers.
-
-| Limitation | Explanation |
-|---|---|
-| Label scope | LCGene captures expression-based biomarkers, not mutation-driven oncogenes. Users should provide custom labels when studying driver genes. |
-| Positive-unlabeled setting | Some genes treated as negative may actually be hidden positives |
-| Class imbalance | Positive rate is ~4.5% — AUROC can appear high while positive-class recall remains challenging |
-| Batch effects | Disease and control datasets from different sources may contain residual technical differences |
-| Network contribution | Network features currently act more as refinement signals than dominant predictors |
-| Gene coverage | Only genes present in both tumor and normal expression matrices are scored |
-| Experimental validation | Novel candidates require laboratory and clinical validation |
 
 ---
 
-## 🔮 Future Work
-
-Planned and recommended extensions include:
-
-- 🌍 Apply GLOOM to additional cancer types and non-cancer disease contexts
-- 🧬 Integrate methylation, mutation, copy-number, and proteomics data
-- 🧠 Add graph neural network embeddings
-- 🔄 Test random-walk and network-diffusion features
-- 📏 Benchmark against other gene prioritization tools
-- 🎯 Improve positive-unlabeled learning strategies
-- 🧫 Experimentally validate selected novel candidates
-- 🎨 Expand visualization and reporting options
-
----
 
 ## 🗂️ Repository Structure
 
