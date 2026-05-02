@@ -1,4 +1,3 @@
-[preview.html](https://github.com/user-attachments/files/27300616/preview.html)
 # 🌌 GLOOM
 
 > **Gene network Learning and Organization through Optimized Machine intelligence**  
@@ -25,8 +24,7 @@ Explore the interactive GLOOM landing page here:
 
 👉 **[Open GLOOM Landing Page](https://beta.sma-it.com/UI/gloom/)**
 
-👉 **Cheat Sheet -> [preview.html]([Uploading preview.html…]()
-)**
+👉 **Cheat Sheet -> [preview.html]([preview.html](https://github.com/user-attachments/files/27300616/preview.html))**
 
 ---
 
