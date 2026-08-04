@@ -1,0 +1,254 @@
+GLOOM OUTPUT SUMMARY
+Generated from current project artifacts on 2026-08-04
+
+This file is a summary of the latest generated outputs.
+
+- results/
+- figures/
+- results/reports/
+- results/network/
+- results/enrichment/
+
+======================================================================
+1. OVERVIEW
+======================================================================
+
+The pipeline produced five main output groups:
+
+1. Differential-expression results for tumor vs normal samples.
+2. Model-evaluation tables for PU-learning based gene prioritization.
+3. Integrated gene-ranking outputs and novel-candidate lists.
+4. Co-expression network exports and network statistics.
+5. Static and interactive figures for QC, evaluation, ranking, and enrichment.
+
+======================================================================
+2. MAIN RESULTS
+======================================================================
+
+Differential expression
+-----------------------
+- Genes tested: 10,986
+- Significant genes: 9,715
+- Upregulated: 9,700
+- Downregulated: 15
+- Non-significant: 1,271
+
+Ranking summary
+---------------
+- PU framing used: True
+- Median LCGene rank: 232.5
+- Known LCGene recovered in top 50: 50
+- Known LCGene recovered in top 100: 98
+- Known LCGene recovered in top 200: 190
+- Known LCGene recovered in top 500: 345
+- Recall at 50: 0.1142
+- Recall at 100: 0.2237
+- Recall at 200: 0.4338
+- Recall at 500: 0.7877
+- Precision at 50: 1.0000
+- Precision at 100: 0.9800
+- Novel candidates identified: 203
+
+Model evaluation
+----------------
+Holdout metrics from results/model_metrics.csv:
+
+Model                  AUROC    AUPRC    F1@0.15  MCC@0.15
+ensemble_soft_vote     0.9330   0.5153   0.4528   0.4295
+extra_trees            0.9281   0.5182   0.4607   0.4351
+xgboost                0.9175   0.4815   0.4632   0.4373
+random_forest          0.9209   0.4743   0.4455   0.4198
+gradient_boosting      0.9277   0.4554   0.4014   0.3959
+logistic_regression    0.8617   0.3940   0.3670   0.3382
+
+Metric leaders
+--------------
+- Best AUROC: ensemble_soft_vote (0.9330)
+- Best AUPRC: extra_trees (0.5182)
+- Best fixed-threshold F1: xgboost (0.4632)
+- Best fixed-threshold MCC: xgboost (0.4373)
+- Best fixed-threshold recall: gradient_boosting (0.6477)
+
+======================================================================
+3. TOP RANKING OUTPUTS
+======================================================================
+
+Top 10 ranked genes from results/gene_rankings.csv
+---------------------------------------------------
+1. SLCO4A1   prob=0.9945  direction=ns
+2. ID1       prob=0.9939  direction=ns
+3. CLDN18    prob=0.9927  direction=ns
+4. PLA2G2A   prob=0.9923  direction=ns
+5. CXCL2     prob=0.9920  direction=ns
+6. MT1G      prob=0.9919  direction=ns
+7. TCF21     prob=0.9908  direction=ns
+8. RRAD      prob=0.9904  direction=ns
+9. S100P     prob=0.9903  direction=up
+10. SAA1     prob=0.9903  direction=ns
+
+Top 10 novel candidates from results/novel_candidates.csv
+----------------------------------------------------------
+1. CDC20     rank=68   prob=0.9736  direction=up
+2. MYBL2     rank=93   prob=0.9685  direction=up
+3. MARCO     rank=104  prob=0.9643  direction=up
+4. RASD1     rank=132  prob=0.9577  direction=up
+5. CTSE      rank=171  prob=0.9475  direction=up
+6. CHI3L2    rank=172  prob=0.9470  direction=up
+7. C15ORF48  rank=183  prob=0.9437  direction=up
+8. TPSAB1    rank=188  prob=0.9426  direction=up
+9. COMP      rank=189  prob=0.9423  direction=up
+10. PKP1     rank=190  prob=0.9422  direction=up
+
+Top 10 feature drivers from results/feature_importance.csv
+-----------------------------------------------------------
+1. tumor_std                mean_importance=0.8396  group=Tumor Expression Stats
+2. normal_std               mean_importance=0.5020  group=Normal Expression Stats
+3. tumor_iqr                mean_importance=0.4147  group=Tumor Expression Stats
+4. neg_log10_padj           mean_importance=0.3609  group=Differential Expression
+5. tumor_cv                 mean_importance=0.2829  group=Tumor Expression Stats
+6. normal_iqr               mean_importance=0.2581  group=Normal Expression Stats
+7. cohens_d                 mean_importance=0.1978  group=Differential Expression
+8. normal_skewness          mean_importance=0.1435  group=Normal Expression Stats
+9. tumor_mean               mean_importance=0.1288  group=Tumor Expression Stats
+10. tumor_normal_mean_ratio mean_importance=0.1082  group=Contrast Features
+
+======================================================================
+4. NETWORK AND ENRICHMENT OUTPUTS
+======================================================================
+
+Network summary from results/network/exports/network_statistics_report.txt
+--------------------------------------------------------------------------
+- Nodes: 10,986
+- Edges: 110,508
+- Density: 0.0018314
+- Connected components: 6,165
+- Largest component size: 4,591
+- Average clustering coefficient: 0.210099
+- Average degree: 20.118
+- Maximum degree: 462
+- Degree assortativity: 0.46266
+- LCGene nodes present: 438
+- Novel-candidate nodes present: 203
+
+Top hub genes
+-------------
+- SASH3
+- CD4
+- CD53
+- WAS
+- IL10RA
+- LCP2
+- NCKAP1L
+- SNX20
+- DOCK2
+- BTK
+
+KEGG enrichment summary from results/enrichment/kegg_summary.csv
+----------------------------------------------------------------
+- All candidates: 2 significant pathways out of 3 tested.
+- All candidates top pathway: ECM-receptor interaction (adjusted p = 0.005509)
+- Upregulated candidates: 3 significant pathways out of 3 tested.
+- Upregulated top pathway: ECM-receptor interaction (adjusted p = 0.004059)
+- Downregulated candidates: 0 significant pathways reported.
+
+======================================================================
+5. FIGURES PRODUCED
+======================================================================
+
+Quality control and preprocessing figures
+-----------------------------------------
+- figures/qc_gene_filter_summary.png
+  Summary of gene filtering during preprocessing.
+- figures/qc_tumor_sample_distributions.png
+  Distribution overview for tumor samples.
+- figures/qc_normal_sample_distributions.png
+  Distribution overview for normal samples.
+- figures/harmonization_venn.png
+  Gene-overlap view after harmonization steps.
+- figures/split_feature_pca.png
+  PCA view of train/validation feature separation.
+- figures/integrated_feature_pca.png
+  PCA view of the integrated feature matrix.
+- figures/label_class_balance.png
+  Class balance plot for known positives vs unlabeled genes.
+
+Differential-expression and feature figures
+-------------------------------------------
+- figures/de_volcano_plot.png
+  Volcano plot of differential-expression significance and effect size.
+- figures/de_log2fc_distribution.png
+  Distribution of log2 fold-change values.
+- figures/expr_feature_correlation_heatmap.png
+  Correlation heatmap of engineered expression features.
+- figures/feature_importance_grouped.png
+  Grouped feature-importance summary.
+- figures/ranking_score_distribution.png
+  Distribution of final ranking or scoring outputs.
+
+Model-evaluation figures
+------------------------
+- figures/cv_auroc_comparison.png
+  Cross-validation AUROC comparison.
+- figures/cv_auroc_auprc_comparison.png
+  Combined AUROC and AUPRC comparison across models.
+- figures/eval_roc_curves.png
+  ROC curves on evaluation data.
+- figures/eval_pr_curves.png
+  Precision-recall curves on evaluation data.
+- figures/eval_confusion_matrices.png
+  Confusion-matrix summary for evaluated classifiers.
+
+Network and enrichment figures
+------------------------------
+- figures/network_degree_distribution.png
+  Distribution of node degree values.
+- figures/network_feature_distributions.png
+  Distribution of network-derived features.
+- figures/annotated_degree_vs_rank.png
+  Relationship between network degree and final gene rank.
+- figures/kegg_overview.png
+  Overview figure for KEGG enrichment results.
+- figures/kegg_barplot_all_candidates.png
+  Enrichment barplot for the broader candidate set.
+- figures/kegg_barplot_upregulated.png
+  Enrichment barplot for upregulated candidates.
+- figures/kegg_dotplot_all_candidates.png
+  Enrichment dotplot for the broader candidate set.
+- figures/kegg_dotplot_upregulated.png
+  Enrichment dotplot for upregulated candidates.
+
+Interactive HTML outputs
+------------------------
+- figures/interactive_dashboard.html
+  Interactive overview dashboard.
+- figures/interactive_feature_importance.html
+  Interactive feature-importance explorer.
+- figures/interactive_network.html
+  Interactive network viewer.
+- figures/interactive_ranking.html
+  Interactive ranked-gene browser.
+- figures/interactive_volcano.html
+  Interactive differential-expression volcano plot.
+
+======================================================================
+6. RECOMMENDED STARTING POINTS
+======================================================================
+
+If you want a quick review of the generated outputs, start here:
+
+1. results/model_metrics.csv
+   Best single file for model-comparison numbers.
+2. results/gene_rankings.csv
+   Main ranked gene output used for prioritization.
+3. results/novel_candidates.csv
+   Curated high-priority unlabeled candidates.
+4. results/reports/pipeline_summary_figure.png
+   Compact visual summary for presentation use.
+5. figures/interactive_dashboard.html
+   Best entry point for interactive exploration.
+6. results/network/exports/network_statistics_report.txt
+   Quick summary of the final network structure.
+
+======================================================================
+END OF SUMMARY
+======================================================================
