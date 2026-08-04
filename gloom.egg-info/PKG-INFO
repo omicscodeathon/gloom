@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: gloom
+Version: 0.1.0
+Summary: Gene prioritization pipeline for lung adenocarcinoma (LUAD)
+Requires-Python: >=3.9
+Requires-Dist: click>=8.0
+Requires-Dist: pandas>=1.5.0
+Requires-Dist: numpy>=1.23.0
+Requires-Dist: scipy>=1.9.0
+Requires-Dist: scikit-learn>=1.1.0
+Requires-Dist: networkx>=2.8.0
+Requires-Dist: matplotlib>=3.6.0
+Requires-Dist: statsmodels>=0.14.0
+Requires-Dist: plotly>=5.10.0
+Requires-Dist: joblib>=1.2.0
+Requires-Dist: openpyxl>=3.0.0
+Requires-Dist: gseapy>=0.10.8
+Requires-Dist: imbalanced-learn>=0.10

@@ -1,0 +1,10 @@
+pyproject.toml
+gloom/__init__.py
+gloom/cli.py
+gloom/output.py
+gloom.egg-info/PKG-INFO
+gloom.egg-info/SOURCES.txt
+gloom.egg-info/dependency_links.txt
+gloom.egg-info/entry_points.txt
+gloom.egg-info/requires.txt
+gloom.egg-info/top_level.txt
