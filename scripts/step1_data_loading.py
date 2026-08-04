@@ -82,7 +82,7 @@ def load_tumor_expression(path: Path) -> pd.DataFrame:
     log.info(f"  Raw shape: {df.shape}")
     if config.TUMOR_GENE_ID_COL not in df.columns:
         raise ValueError(f"Expected gene ID column '{config.TUMOR_GENE_ID_COL}' not found.")
-    # Drop Entrez ID column - not needed downstream
+    # Drop Entrez ID column — not needed downstream
     entrez_col = "Entrez_Gene_Id"
     if entrez_col in df.columns:
         df = df.drop(columns=[entrez_col])
@@ -103,7 +103,7 @@ def load_tumor_expression(path: Path) -> pd.DataFrame:
         log.warning(f"  {nan_count} NaN values detected after numeric coercion.")
     if df.index.duplicated().any():
         n_dup = df.index.duplicated().sum()
-        log.warning(f"  {n_dup} duplicate gene symbols found - keeping highest-mean row.")
+        log.warning(f"  {n_dup} duplicate gene symbols found — keeping highest-mean row.")
         df["_mean"] = df.mean(axis=1)
         df = df.sort_values("_mean", ascending=False)
         df = df[~df.index.duplicated(keep="first")]
@@ -148,7 +148,7 @@ def load_normal_expression(path: Path) -> pd.DataFrame:
     )
     log.info(f"  Raw shape (after preamble skip): {df.shape}")
     gene_col = config.NORMAL_GENE_ID_COL   # "Description"
-    name_col = "Name"                       # Ensembl ID column - drop it
+    name_col = "Name"                       # Ensembl ID column — drop it
     if gene_col not in df.columns:
         raise ValueError(f"Expected gene symbol column '{gene_col}' not found.")
     if name_col in df.columns:
@@ -158,7 +158,7 @@ def load_normal_expression(path: Path) -> pd.DataFrame:
     df = df.apply(pd.to_numeric, errors="coerce")
     if df.index.duplicated().any():
         n_dup = df.index.duplicated().sum()
-        log.warning(f"  {n_dup} duplicate gene symbols - keeping highest-mean row.")
+        log.warning(f"  {n_dup} duplicate gene symbols — keeping highest-mean row.")
         df["_mean"] = df.mean(axis=1)
         df = df.sort_values("_mean", ascending=False)
         df = df[~df.index.duplicated(keep="first")]
@@ -179,24 +179,24 @@ def load_normal_metadata(path: Path) -> pd.DataFrame:
         SAMPIDs match the column names of the GTEx expression matrix.
 
     Filtering steps applied here:
-      1. SMAFRZE == 'RNASEQ'         → keeps bulk RNA-seq, drops small-RNA,
+      1. SMAFRZE == 'RNASEQ'         -> keeps bulk RNA-seq, drops small-RNA,
                                         WGS, WES, DEEPWGS, OMNI, EXCLUDE
-      2. ANALYTE_TYPE == 'RNA:Total RNA' → secondary guard against any
+      2. ANALYTE_TYPE == 'RNA:Total RNA' -> secondary guard against any
                                         non-RNA rows with RNASEQ freeze label
 
     Only a curated subset of columns (NORMAL_META_KEEP_COLS) is retained
     to keep the saved file compact and readable.  Key QC fields kept:
-      SMRIN      - RNA Integrity Number (quality indicator; higher = better)
-      SMATSSCR   - autolysis score (0=none, 3=severe; lower = better)
-      SMMAPRT    - mapping rate
-      SMRRNART   - ribosomal RNA fraction (lower = better)
-      SMRDTTL    - total read count
+      SMRIN      — RNA Integrity Number (quality indicator; higher = better)
+      SMATSSCR   — autolysis score (0=none, 3=severe; lower = better)
+      SMMAPRT    — mapping rate
+      SMRRNART   — ribosomal RNA fraction (lower = better)
+      SMRDTTL    — total read count
     """
     log.info(f"Loading normal metadata from: {path}")
     if not path.exists():
         raise FileNotFoundError(f"Normal metadata file not found: {path}")
 
-    # Plain TSV - NOT Excel
+    # Plain TSV — NOT Excel
     df = pd.read_csv(path, sep="\t", low_memory=False)
     log.info(f"  Raw shape: {df.shape}  (all assay types)")
 
@@ -212,18 +212,18 @@ def load_normal_metadata(path: Path) -> pd.DataFrame:
     if "SMAFRZE" in df.columns:
         n_before = len(df)
         df = df[df["SMAFRZE"] == "RNASEQ"].copy()
-        log.info(f"  SMAFRZE=='RNASEQ'         : {n_before:>4} → {len(df):>4} samples "
+        log.info(f"  SMAFRZE=='RNASEQ'         : {n_before:>4} -> {len(df):>4} samples "
                  f"(dropped small-RNA / WGS / WES / OMNI / EXCLUDE)")
     else:
-        log.warning("  Column 'SMAFRZE' not found - skipping freeze filter.")
+        log.warning("  Column 'SMAFRZE' not found — skipping freeze filter.")
 
     # ---- Filter 2: RNA analyte type guard ----
     if "ANALYTE_TYPE" in df.columns:
         n_before = len(df)
         df = df[df["ANALYTE_TYPE"] == "RNA:Total RNA"].copy()
-        log.info(f"  ANALYTE_TYPE=='RNA:Total RNA': {n_before:>4} → {len(df):>4} samples")
+        log.info(f"  ANALYTE_TYPE=='RNA:Total RNA': {n_before:>4} -> {len(df):>4} samples")
     else:
-        log.warning("  Column 'ANALYTE_TYPE' not found - skipping analyte filter.")
+        log.warning("  Column 'ANALYTE_TYPE' not found — skipping analyte filter.")
 
     # ---- Retain only the useful columns ----
     keep = [c for c in NORMAL_META_KEEP_COLS if c in df.columns]
@@ -307,7 +307,7 @@ def load_cancer_genes(path: Path) -> pd.Series:
 
 def run_data_loading() -> dict:
     log.info("=" * 60)
-    log.info("STEP 1 - DATA LOADING")
+    log.info("STEP 1 — DATA LOADING")
     log.info("=" * 60)
     config.validate_input_files()
     tumor_expr   = load_tumor_expression(config.TUMOR_EXPR_FILE)

@@ -38,11 +38,18 @@ def normalise_importance(values):
     v_min = values.min(); v_max = values.max(); denom = v_max - v_min + 1e-12
     return (values - v_min) / denom
 
+def unwrap_calibrated(model):
+    """Return the base estimator from a CalibratedClassifierCV, or the model itself."""
+    if hasattr(model, "calibrated_classifiers_") and model.calibrated_classifiers_:
+        return model.calibrated_classifiers_[0].estimator
+    return model
+
 def get_native_importance(model, model_name, feature_names):
-    if hasattr(model, "feature_importances_"):
-        raw = model.feature_importances_; label = f"{model_name} (MDI)"
-    elif hasattr(model, "coef_"):
-        raw = np.abs(model.coef_[0]); label = f"{model_name} (|coef|)"
+    inner = unwrap_calibrated(model)
+    if hasattr(inner, "feature_importances_"):
+        raw = inner.feature_importances_; label = f"{model_name} (MDI)"
+    elif hasattr(inner, "coef_"):
+        raw = np.abs(inner.coef_[0]); label = f"{model_name} (|coef|)"
     else:
         return None
     s = pd.Series(normalise_importance(raw), index=feature_names, name=label)
@@ -52,23 +59,24 @@ def get_permutation_importance(model, model_name, use_scaled, X_val, X_val_scale
     X = X_val_scaled if use_scaled else X_val
     log.info(f"  [{model_name}] Permutation importance (n_repeats={n_repeats}) …")
     result = permutation_importance(model, X, y_val, n_repeats=n_repeats,
-                                    random_state=config.RANDOM_STATE, scoring="roc_auc", n_jobs=-1)
+                                    random_state=config.RANDOM_STATE, scoring="roc_auc", n_jobs=1)
     s = pd.Series(normalise_importance(result.importances_mean), index=X.columns, name=f"{model_name} (permutation)")
     log.info(f"  Top 5: {s.nlargest(5).to_dict()}")
     return s
 
 def run_feature_importance():
-    log.info("="*60); log.info("STEP 13 - FEATURE IMPORTANCE"); log.info("="*60)
+    log.info("="*60); log.info("STEP 13 — FEATURE IMPORTANCE"); log.info("="*60)
     X_val        = pd.read_csv(config.VAL_FEATURES_FILE, index_col=0)
     X_val_scaled = pd.read_csv(config.PROCESSED_DIR/"val_features_scaled.csv", index_col=0)
     y_val        = pd.read_csv(config.VAL_LABELS_FILE).set_index("gene")["label"].values
     feature_names = X_val.columns.tolist()
     best_name = (config.MODELS_DIR/"best_model_name.txt").read_text().strip() if (config.MODELS_DIR/"best_model_name.txt").exists() else "random_forest"
     model_registry = {
-        "random_forest":(False,"model_random_forest.joblib"),
-        "gradient_boosting":(False,"model_gradient_boosting.joblib"),
-        "extra_trees":(False,"model_extra_trees.joblib"),
-        "logistic_regression":(True,"model_logistic_regression.joblib"),
+        "random_forest":       (False, "model_random_forest.joblib"),
+        "gradient_boosting":   (False, "model_gradient_boosting.joblib"),
+        "extra_trees":         (False, "model_extra_trees.joblib"),
+        "logistic_regression": (True,  "model_logistic_regression.joblib"),
+        "xgboost":             (False, "model_xgboost.joblib"),
     }
     loaded = {}
     for name,(use_scaled,fname) in model_registry.items():
@@ -79,10 +87,13 @@ def run_feature_importance():
     for name,(model,_) in loaded.items():
         s = get_native_importance(model, name, feature_names)
         if s is not None: all_series.append(s)
-    if best_name in loaded:
-        best_model, best_use_scaled = loaded[best_name]
-        perm = get_permutation_importance(best_model, best_name, best_use_scaled, X_val, X_val_scaled, y_val)
+    perm_name = best_name if best_name in loaded else (list(loaded.keys())[0] if loaded else None)
+    if perm_name:
+        perm_model, perm_scaled = loaded[perm_name]
+        perm = get_permutation_importance(perm_model, perm_name, perm_scaled, X_val, X_val_scaled, y_val)
         all_series.append(perm)
+    else:
+        log.warning("  No model available for permutation importance.")
     # Build table
     df = pd.DataFrame(index=feature_names); df.index.name = "feature"
     for s in all_series:

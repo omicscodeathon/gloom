@@ -13,11 +13,11 @@ from pathlib import Path
 # ROOT PATHS
 # ==================================================
 
-# Project root: directory containing this config.py
-PROJECT_ROOT = Path(__file__).resolve().parent
+# Project root: four levels up from src/gloom/pipeline/config.py
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 
-# Data root: sits one level above the project folder, inside LUML/
-DATA_ROOT = PROJECT_ROOT.parent / "data"
+# Data root: data/ at the project root
+DATA_ROOT = PROJECT_ROOT / "data"
 
 # ==================================================
 # RAW INPUT FILE PATHS
@@ -46,7 +46,7 @@ CANCER_GENE_FILE  = RAW_DIR / "LCGene (Labeled LUAD Data)" / \
 
 PROCESSED_DIR       = DATA_ROOT / "processed"
 
-# All generated outputs live under trial/outputs/ - outside the pipeline code folder
+# All generated outputs live under trial/outputs/ — outside the pipeline code folder
 OUTPUTS_ROOT = PROJECT_ROOT.parent / "outputs"
 RESULTS_DIR  = OUTPUTS_ROOT / "results"
 FIGURES_DIR  = OUTPUTS_ROOT / "figures"
@@ -140,15 +140,21 @@ MIN_SAMPLES_NORMAL = 50
 # DIFFERENTIAL EXPRESSION PARAMETERS
 # ==================================================
 
-DE_LOG2FC_THRESHOLD  = 1.0
-DE_PVALUE_THRESHOLD  = 0.05
+# P2.2 FIX: Tightened from |log2FC|≥1.0 / FDR≤0.05 to reduce the near-total
+# DE significance (~95.3% of genes) caused by cohort/platform batch effects.
+# Rerun from step4 through step14 after changing these values.
+DE_LOG2FC_THRESHOLD  = 2.0
+DE_PVALUE_THRESHOLD  = 0.001
 
 # ==================================================
 # CO-EXPRESSION NETWORK PARAMETERS
 # ==================================================
 
 COEXPR_CORRELATION_METHOD  = "pearson"
-COEXPR_CORRELATION_CUTOFF  = 0.70
+# P2.3 FIX: Lowered from 0.70 to 0.60 to reduce isolated nodes and increase
+# network feature variance. More genes will be connected, improving discriminative
+# power of network features. Rerun from step6 through step14 after changing.
+COEXPR_CORRELATION_CUTOFF  = 0.60
 COEXPR_MIN_SAMPLES         = 30
 
 # ==================================================
@@ -170,28 +176,83 @@ NEGATIVE_LABEL    = 0
 CV_METRIC_PRIMARY = "auprc"
 
 # Threshold strategy for binary classification decisions (Step 4):
-#   "f1"               - maximise F1 on the PR curve (default)
-#   "target_recall"    - smallest threshold reaching THRESHOLD_TARGET_RECALL
-#   "target_precision" - smallest threshold reaching THRESHOLD_TARGET_PRECISION
-#   "top_k"            - flag top-THRESHOLD_TOP_K ranked genes as positive
+#   "f1"               — maximise F1 on the PR curve (default)
+#   "target_recall"    — smallest threshold reaching THRESHOLD_TARGET_RECALL
+#   "target_precision" — smallest threshold reaching THRESHOLD_TARGET_PRECISION
+#   "top_k"            — flag top-THRESHOLD_TOP_K ranked genes as positive
 THRESHOLD_STRATEGY         = "f1"
 THRESHOLD_TARGET_RECALL    = 0.80
 THRESHOLD_TARGET_PRECISION = 0.50
 THRESHOLD_TOP_K            = 200
 
-# SMOTE resampling - applied inside each CV training fold only (Step 5)
+# SMOTE resampling — applied inside each CV training fold only (Step 5)
 # Requires: pip install imbalanced-learn
 USE_SMOTE = False
 
-# Random undersampling - applied inside each CV training fold only (Step 5)
+# Random undersampling — applied inside each CV training fold only (Step 5)
 # Applied after SMOTE when both are True (SMOTE-then-undersample pipeline)
 # Requires: pip install imbalanced-learn
 USE_UNDERSAMPLING = True
+# Only change UNDERSAMPLING_RATIO if USE_SMOTE=False. With SMOTE active, keep at 1.0.
+UNDERSAMPLING_RATIO = 3.0
+
+# REC 3: Hyperparameter tuning — set True for a full tuned run (much slower)
+USE_HYPERPARAMETER_TUNING = True
+HP_N_ITER = 50
+
+USE_FEATURE_SELECTION = True
+FEATURE_SELECTION_TOP_N = 50
 
 # Positive-Unlabeled framing (Step 6)
 # When True: negatives are treated as "unlabeled" (unannotated) rather than
 # confirmed non-cancer genes.  Labels (0/1) are unchanged; only language changes.
 PU_FRAMING = True
+
+# ==================================================
+# PHASE 3 — PU BAGGING (Step 11b)
+# ==================================================
+
+# Mordelet-Vert bagging: number of base classifiers
+PU_N_ESTIMATORS    = 300
+# Ratio of unlabeled subsample size to positive set size per iteration
+PU_SUBSAMPLE_RATIO = 1.0
+# Trees per base RF classifier inside each bagging iteration
+PU_BASE_N_TREES    = 100
+
+# ==================================================
+# PHASE 3 — DIFFERENTIAL CO-EXPRESSION (Steps 6b / 7b)
+# ==================================================
+
+# Normal co-expression network outputs
+NORMAL_NETWORK_GRAPH_FILE         = NETWORK_DIR / "normal_coexpression_network.graphml"
+NORMAL_NETWORK_EDGES_FILE         = NETWORK_DIR / "normal_coexpression_network_edges.csv"
+DIFFERENTIAL_NETWORK_FEATURES_FILE = PROCESSED_DIR / "differential_network_features.csv"
+
+# ==================================================
+# PHASE 3 — INDEPENDENT COHORT VALIDATION (Step 15)
+# ==================================================
+
+# Set these to paths of an external dataset to enable independent validation.
+# EXTERNAL_EXPR_FILE:   CSV file, genes × samples (same gene symbols as pipeline)
+# EXTERNAL_LABELS_FILE: CSV with columns [gene, label] where label ∈ {0, 1}
+EXTERNAL_EXPR_FILE   = None
+EXTERNAL_LABELS_FILE = None
+
+# ==================================================
+# PHASE 3 — BATCH CORRECTION (Step 1b)
+# ==================================================
+
+# Set True and install pyComBat (pip install inmoose) to apply ComBat-seq
+# correction to the combined tumor+normal matrix before differential expression.
+USE_BATCH_CORRECTION        = False
+BATCH_CORRECTED_TUMOR_FILE  = PROCESSED_DIR / "tumor_expression_batch_corrected.csv"
+BATCH_CORRECTED_NORMAL_FILE = PROCESSED_DIR / "normal_expression_batch_corrected.csv"
+
+# Novel candidate probability thresholds (Step 14)
+# NOVEL_PROB_THRESHOLD      — primary high-confidence list (used in paper)
+# NOVEL_PROB_THRESHOLD_SENS — sensitivity/extended list (Supplementary Table)
+NOVEL_PROB_THRESHOLD      = 0.85
+NOVEL_PROB_THRESHOLD_SENS = 0.50
 
 # ==================================================
 # LOGGING
@@ -243,7 +304,7 @@ def validate_input_files() -> None:
 
 
 if __name__ == "__main__":
-    print("=== LUAD ML Pipeline - Configuration ===")
+    print("=== LUAD ML Pipeline — Configuration ===")
     print(f"Project root : {PROJECT_ROOT}")
     print(f"Data root    : {DATA_ROOT}")
     print()
@@ -252,7 +313,7 @@ if __name__ == "__main__":
     try:
         validate_input_files()
     except FileNotFoundError as e:
-        print(f"[config] WARNING - {e}")
+        print(f"[config] WARNING — {e}")
     print()
     print("--- Key paths ---")
     print(f"  Tumor expr        : {TUMOR_EXPR_FILE}")

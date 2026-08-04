@@ -53,7 +53,7 @@ def make_interactive_volcano(de_df, ranking, out_path):
     fig.add_vline(x=config.DE_LOG2FC_THRESHOLD,  line_dash="dash",line_color="black",line_width=1,opacity=0.6)
     fig.add_vline(x=-config.DE_LOG2FC_THRESHOLD, line_dash="dash",line_color="black",line_width=1,opacity=0.6)
     fig.add_hline(y=-np.log10(config.DE_PVALUE_THRESHOLD),line_dash="dot",line_color="black",line_width=1,opacity=0.6)
-    fig.update_layout(title="<b>Volcano Plot - LUAD Tumor vs GTEx Normal</b>",xaxis_title="Log2 Fold-Change",yaxis_title="-log10(adj P)",
+    fig.update_layout(title="<b>Volcano Plot — LUAD Tumor vs GTEx Normal</b>",xaxis_title="Log2 Fold-Change",yaxis_title="-log10(adj P)",
                       hovermode="closest",plot_bgcolor="white",paper_bgcolor="white",width=900,height=650)
     fig.write_html(str(out_path), include_plotlyjs="cdn")
     log.info(f"  Volcano saved: {out_path}")
@@ -72,7 +72,7 @@ def make_interactive_ranking(ranking, out_path):
         fig.add_trace(go.Scatter(x=sub["rank"],y=sub["predicted_prob"],mode="markers",name=f"{cat} (n={len(sub):,})",
                                   marker=dict(color=COLOR_MAP[cat],size=sub["marker_size"],opacity=0.75,line=dict(width=0)),
                                   text=sub["hover"],hovertemplate="%{text}<extra></extra>"))
-    fig.update_layout(title="<b>Gene Ranking - Predicted Probability by Rank</b>",xaxis_title="Rank Position",yaxis_title="Predicted Probability",
+    fig.update_layout(title="<b>Gene Ranking — Predicted Probability by Rank</b>",xaxis_title="Rank Position",yaxis_title="Predicted Probability",
                       hovermode="closest",plot_bgcolor="white",paper_bgcolor="white",width=1000,height=600)
     fig.write_html(str(out_path), include_plotlyjs="cdn")
     log.info(f"  Ranking plot saved: {out_path}")
@@ -107,7 +107,7 @@ def make_interactive_network(node_df, edge_df, out_path, top_n=150):
         fig.add_trace(go.Scatter(x=sub["x"],y=sub["y"],mode="markers",name=f"{cat} (n={len(sub)})",
                                   marker=dict(color=COLOR_MAP[cat],size=sub["size"],opacity=0.88,line=dict(width=0.3,color="white")),
                                   hovertemplate=sub["hover"]+"<extra></extra>"))
-    fig.update_layout(title=f"<b>Co-expression Sub-network - Top {top_n} Ranked Genes</b>",showlegend=True,hovermode="closest",
+    fig.update_layout(title=f"<b>Co-expression Sub-network — Top {top_n} Ranked Genes</b>",showlegend=True,hovermode="closest",
                       plot_bgcolor="white",paper_bgcolor="white",xaxis=dict(showgrid=False,zeroline=False,showticklabels=False),
                       yaxis=dict(showgrid=False,zeroline=False,showticklabels=False),width=1000,height=800)
     fig.write_html(str(out_path), include_plotlyjs="cdn")
@@ -131,26 +131,230 @@ def make_interactive_feature_importance(imp_table, out_path):
         fig.add_trace(go.Bar(y=sub[feat_col],x=sub["mean_importance"],name=group,orientation="h",
                               marker_color=group_color[group],opacity=0.85,
                               error_x=dict(type="data",array=sub["std_importance"].values,visible=True,color="grey",thickness=1.2,width=3)))
-    fig.update_layout(title="<b>Feature Importance - Mean Across Methods</b>",xaxis_title="Normalised Importance",yaxis_title="Feature",
+    fig.update_layout(title="<b>Feature Importance — Mean Across Methods</b>",xaxis_title="Normalised Importance",yaxis_title="Feature",
                       barmode="overlay",plot_bgcolor="white",paper_bgcolor="white",height=max(500,len(df)*22),width=950,margin=dict(l=220,r=40,t=80,b=60))
     fig.write_html(str(out_path), include_plotlyjs="cdn")
     log.info(f"  Feature importance saved: {out_path}")
     return fig
 
-def make_combined_dashboard(fig_volcano, fig_ranking, fig_network, fig_importance, out_path):
-    # Embed Plotly JS inline inside the first div - works offline, no CDN needed,
+def make_kegg_plot(kegg_dfs: dict, out_path):
+    """Interactive horizontal bar chart for KEGG pathway enrichment results.
+
+    kegg_dfs : dict mapping label -> DataFrame (from kegg_all_candidates.csv etc.)
+    """
+    PADJ_CUTOFF = 0.05
+    TOP_N       = 15
+    SUBSET_COLORS = {
+        "All candidates": "#3A7DBF",
+        "Upregulated":    "#E8524A",
+        "Downregulated":  "#2CA07C",
+    }
+
+    subsets = {k: v for k, v in kegg_dfs.items()
+               if v is not None and not v.empty}
+    if not subsets:
+        fig = go.Figure()
+        fig.update_layout(
+            title="KEGG enrichment data not available — run Step 19 first.",
+            height=300,
+        )
+        if out_path:
+            fig.write_html(str(out_path), include_plotlyjs="cdn")
+        return fig
+
+    fig = go.Figure()
+    subset_names = list(subsets.keys())
+
+    for i, (label, df) in enumerate(subsets.items()):
+        sig = df[df["padj"] < PADJ_CUTOFF].head(TOP_N).sort_values("neg_log10_padj")
+        if sig.empty:
+            continue
+
+        color = SUBSET_COLORS.get(label, "#888888")
+
+        def _hover(r):
+            gene_str = str(r.get("genes", ""))
+            gene_preview = gene_str[:80] + "…" if len(gene_str) > 80 else gene_str
+            return (
+                f"<b>{r['pathway']}</b><br>"
+                f"Subset: {label}<br>"
+                f"adj P: {r['padj']:.2e}<br>"
+                f"-log₁₀(padj): {r['neg_log10_padj']:.2f}<br>"
+                f"Overlap: {r.get('overlap_genes','?')}/{r.get('pathway_size','?')}<br>"
+                f"Odds Ratio: {float(r.get('odds_ratio', 0)):.2f}<br>"
+                f"Genes: {gene_preview}"
+            )
+
+        hover_texts = sig.apply(_hover, axis=1).tolist()
+
+        fig.add_trace(go.Bar(
+            x=sig["neg_log10_padj"],
+            y=sig["pathway"],
+            orientation="h",
+            name=label,
+            visible=(i == 0),
+            marker=dict(
+                color=sig["neg_log10_padj"],
+                colorscale=[[0, "lightyellow"], [0.5, color], [1.0, color]],
+                cmin=0,
+                cmax=sig["neg_log10_padj"].max() or 1,
+                showscale=(i == 0),
+                colorbar=dict(title="-log₁₀(padj)", thickness=14, len=0.7),
+            ),
+            text=sig["neg_log10_padj"].round(2),
+            textposition="outside",
+            customdata=hover_texts,
+            hovertemplate="%{customdata}<extra></extra>",
+        ))
+
+    # ── Subset-switching buttons ──────────────────────────────────────────────
+    buttons = []
+    n_traces = len([s for s in subsets if not subsets[s][subsets[s]["padj"] < PADJ_CUTOFF].empty])
+    for i, name in enumerate(subset_names):
+        visible = [j == i for j in range(len(subset_names))]
+        buttons.append(dict(
+            label=name,
+            method="update",
+            args=[{"visible": visible},
+                  {"title.text": f"<b>KEGG Pathway Enrichment — {name}</b>"}],
+        ))
+    buttons.append(dict(
+        label="All subsets",
+        method="update",
+        args=[{"visible": [True] * len(subset_names)},
+              {"title.text": "<b>KEGG Pathway Enrichment — All Subsets</b>"}],
+    ))
+
+    fig.add_vline(
+        x=-np.log10(PADJ_CUTOFF),
+        line_dash="dash", line_color="grey", line_width=1.5,
+        annotation_text=f"padj = {PADJ_CUTOFF}",
+        annotation_position="top right",
+        annotation_font_size=11,
+    )
+
+    first_label = subset_names[0] if subset_names else "Results"
+    fig.update_layout(
+        title=f"<b>KEGG Pathway Enrichment — {first_label}</b>",
+        xaxis_title="-log₁₀(adjusted p-value)",
+        yaxis_title="KEGG Pathway",
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        height=max(520, TOP_N * 36 + 160),
+        width=1000,
+        margin=dict(l=300, r=80, t=110, b=60),
+        updatemenus=[dict(
+            type="buttons",
+            buttons=buttons,
+            direction="right",
+            showactive=True,
+            x=0.0, xanchor="left",
+            y=1.14, yanchor="top",
+            bgcolor="#EEF3FA",
+            bordercolor="#2D6A9F",
+            font=dict(size=12),
+        )],
+        legend=dict(orientation="h", y=-0.18),
+    )
+
+    if out_path:
+        fig.write_html(str(out_path), include_plotlyjs="cdn")
+        log.info(f"  KEGG plot saved: {out_path}")
+    return fig
+
+
+def make_novel_candidates_table(novel_df, out_path):
+    if novel_df is None or len(novel_df) == 0:
+        fig = go.Figure()
+        fig.update_layout(title="No novel candidates found", height=300)
+        fig.write_html(str(out_path), include_plotlyjs="cdn")
+        return fig
+
+    df = novel_df.copy()
+    df.index.name = "gene"
+    df = df.reset_index()
+
+    display_cols = [c for c in ["gene","rank","predicted_prob","log2fc","direction",
+                                 "pvalue_adj","is_lcgene_gene","is_de_significant"] if c in df.columns]
+    df = df[display_cols].sort_values("rank") if "rank" in df.columns else df[display_cols]
+
+    col_labels = {
+        "gene": "Gene", "rank": "Rank", "predicted_prob": "Pred. Prob",
+        "log2fc": "Log2FC", "direction": "Direction", "pvalue_adj": "Adj. P-value",
+        "is_lcgene_gene": "In LCGene", "is_de_significant": "DE Significant",
+    }
+    headers = [col_labels.get(c, c) for c in display_cols]
+
+    def _fmt(col, vals):
+        if col in ("predicted_prob",):
+            return [f"{v:.4f}" if pd.notna(v) else "—" for v in vals]
+        if col in ("log2fc",):
+            return [f"{v:.3f}" if pd.notna(v) else "—" for v in vals]
+        if col in ("pvalue_adj",):
+            return [f"{v:.2e}" if pd.notna(v) else "—" for v in vals]
+        if col in ("is_lcgene_gene","is_de_significant"):
+            return ["Yes" if v else "No" for v in vals]
+        return [str(v) if pd.notna(v) else "—" for v in vals]
+
+    cell_values = [_fmt(c, df[c].tolist()) for c in display_cols]
+
+    # Alternate row colours
+    n = len(df)
+    row_colors = [["#EBF3FB" if i % 2 == 0 else "white" for i in range(n)] for _ in display_cols]
+
+    fig = go.Figure(go.Table(
+        header=dict(
+            values=[f"<b>{h}</b>" for h in headers],
+            fill_color="#1A3A5C", font=dict(color="white", size=13),
+            align="center", height=36,
+        ),
+        cells=dict(
+            values=cell_values,
+            fill_color=row_colors,
+            font=dict(color="#222", size=12),
+            align=["left"] + ["center"] * (len(display_cols) - 1),
+            height=30,
+        ),
+    ))
+    fig.update_layout(
+        title=f"<b>Novel Candidates — {n} genes</b>",
+        margin=dict(l=20, r=20, t=60, b=20),
+        height=max(400, n * 32 + 120),
+    )
+    fig.write_html(str(out_path), include_plotlyjs="cdn")
+    log.info(f"  Novel candidates table saved: {out_path}")
+    return fig
+
+
+def make_combined_dashboard(fig_volcano, fig_ranking, fig_network, fig_importance, fig_novel,
+                             out_path, fig_kegg=None):
+    # Embed Plotly JS inline inside the first div — works offline, no CDN needed,
     # compatible with all Plotly versions (no get_plotlyjs() required)
     def _div(fig, div_id, embed_js=False):
         return pio.to_html(
             fig, full_html=False,
-            include_plotlyjs=embed_js,   # True only for first plot → embeds the JS once
+            include_plotlyjs=embed_js,   # True only for first plot -> embeds the JS once
             div_id=div_id, config={"responsive": True}
         )
 
-    vol_div  = _div(fig_volcano,    "volcano_div",   embed_js=True)   # JS lives here
-    rank_div = _div(fig_ranking,    "ranking_div",   embed_js=False)
-    net_div  = _div(fig_network,    "network_div",   embed_js=False)
-    imp_div  = _div(fig_importance, "importance_div",embed_js=False)
+    vol_div    = _div(fig_volcano,    "volcano_div",    embed_js=True)   # JS lives here
+    rank_div   = _div(fig_ranking,    "ranking_div",    embed_js=False)
+    net_div    = _div(fig_network,    "network_div",    embed_js=False)
+    imp_div    = _div(fig_importance, "importance_div", embed_js=False)
+    novel_div  = _div(fig_novel,      "novel_div",      embed_js=False)
+    kegg_div   = _div(fig_kegg,       "kegg_div",       embed_js=False) if fig_kegg is not None else ""
+
+    kegg_tab_button = '<div class="tab" onclick="showTab(\'kegg\',this)">KEGG Pathways</div>' \
+                      if fig_kegg is not None else ""
+    kegg_tab_content = f"""
+<div id="tab-kegg" class="tab-content">
+  <div class="plot-card">
+    <div class="plot-desc"><b>KEGG Pathway Enrichment</b> — Novel LUAD candidates tested against KEGG_2021_Human
+    via Enrichr. Results filtered to lung/cancer-relevant pathways. Use the buttons above the chart to switch
+    between gene subsets (All candidates / Upregulated / Downregulated). Hover a bar for pathway details and overlapping genes.</div>
+    {kegg_div}
+  </div>
+</div>""" if fig_kegg is not None else ""
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -180,7 +384,7 @@ def make_combined_dashboard(fig_volcano, fig_ranking, fig_network, fig_importanc
 </head>
 <body>
 <header>
-  <h1>LUAD ML Pipeline - Interactive Results Dashboard</h1>
+  <h1>LUAD ML Pipeline — Interactive Results Dashboard</h1>
   <p>Machine Learning Pipeline for Lung Adenocarcinoma Candidate Gene Prioritization</p>
 </header>
 <div class="tab-bar">
@@ -188,31 +392,40 @@ def make_combined_dashboard(fig_volcano, fig_ranking, fig_network, fig_importanc
   <div class="tab"         onclick="showTab('ranking',this)">Gene Ranking</div>
   <div class="tab"         onclick="showTab('network',this)">Network</div>
   <div class="tab"         onclick="showTab('importance',this)">Feature Importance</div>
+  <div class="tab"         onclick="showTab('novel',this)">Novel Candidates</div>
+  {kegg_tab_button}
 </div>
 <div id="tab-volcano" class="tab-content active">
   <div class="plot-card">
-    <div class="plot-desc"><b>Volcano Plot</b> - Differential expression LUAD tumor vs GTEx normal. Hover over a point for gene details.</div>
+    <div class="plot-desc"><b>Volcano Plot</b> — Differential expression LUAD tumor vs GTEx normal. Hover over a point for gene details.</div>
     {vol_div}
   </div>
 </div>
 <div id="tab-ranking" class="tab-content">
   <div class="plot-card">
-    <div class="plot-desc"><b>Gene Ranking</b> - All genes ranked by ML predicted probability. Hover for full annotation.</div>
+    <div class="plot-desc"><b>Gene Ranking</b> — All genes ranked by ML predicted probability. Hover for full annotation.</div>
     {rank_div}
   </div>
 </div>
 <div id="tab-network" class="tab-content">
   <div class="plot-card">
-    <div class="plot-desc"><b>Co-expression Network</b> - Top-150 ranked genes. Node size = predicted probability. Node colour = category.</div>
+    <div class="plot-desc"><b>Co-expression Network</b> — Top-150 ranked genes. Node size = predicted probability. Node colour = category.</div>
     {net_div}
   </div>
 </div>
 <div id="tab-importance" class="tab-content">
   <div class="plot-card">
-    <div class="plot-desc"><b>Feature Importance</b> - Normalised importance across methods. Error bars = std deviation.</div>
+    <div class="plot-desc"><b>Feature Importance</b> — Normalised importance across methods. Error bars = std deviation.</div>
     {imp_div}
   </div>
 </div>
+<div id="tab-novel" class="tab-content">
+  <div class="plot-card">
+    <div class="plot-desc"><b>Novel Candidates</b> — Query genes not in the LCGene known-positive set with predicted probability &ge; 0.50, ranked by model score.</div>
+    {novel_div}
+  </div>
+</div>
+{kegg_tab_content}
 <footer>LUAD ML Pipeline &middot; step17_interactive_visualization.py &middot; Plotly embedded (offline-ready)</footer>
 <script>
 function showTab(name, clickedTab) {{
@@ -228,7 +441,7 @@ function showTab(name, clickedTab) {{
     log.info(f"  Combined dashboard saved: {out_path}")
 
 def run_interactive_visualization():
-    log.info("="*60); log.info("STEP 17 - INTERACTIVE VISUALIZATION"); log.info("="*60)
+    log.info("="*60); log.info("STEP 17 — INTERACTIVE VISUALIZATION"); log.info("="*60)
     if not PLOTLY_AVAILABLE:
         log.error("Plotly not installed. Run: pip install plotly"); return {}
     ranking   = pd.read_csv(config.GENE_RANKINGS_FILE,    index_col=0)
@@ -250,15 +463,33 @@ def run_interactive_visualization():
         fig_i = make_interactive_feature_importance(imp_table, config.FIGURES_DIR/"interactive_feature_importance.html")
     else:
         fig_i = go.Figure(); fig_i.update_layout(title="Feature importance not available",height=400)
-    log.info("[5] Dashboard …")
-    make_combined_dashboard(fig_v, fig_r, fig_n, fig_i, config.FIGURES_DIR/"interactive_dashboard.html")
+    log.info("[5] Novel candidates …")
+    novel_path = config.RESULTS_DIR / "novel_candidates.csv"
+    novel_df = pd.read_csv(novel_path, index_col=0) if novel_path.exists() else None
+    fig_novel = make_novel_candidates_table(novel_df, config.FIGURES_DIR/"interactive_novel_candidates.html")
+    log.info("[6] KEGG pathways …")
+    kegg_dfs = {}
+    for label, attr in [("All candidates", "KEGG_ALL_FILE"),
+                         ("Upregulated",    "KEGG_UP_FILE"),
+                         ("Downregulated",  "KEGG_DOWN_FILE")]:
+        fpath = getattr(config, attr, None)
+        if fpath and Path(fpath).exists():
+            kegg_dfs[label] = pd.read_csv(fpath)
+        else:
+            log.info(f"  KEGG file not found ({label}) — skipped.")
+    fig_kegg = make_kegg_plot(kegg_dfs, config.FIGURES_DIR/"interactive_kegg.html") if kegg_dfs else None
+    log.info("[7] Dashboard …")
+    make_combined_dashboard(fig_v, fig_r, fig_n, fig_i, fig_novel,
+                            config.FIGURES_DIR/"interactive_dashboard.html",
+                            fig_kegg=fig_kegg)
     log.info("STEP 17 COMPLETE")
-    return {"fig_volcano":fig_v,"fig_ranking":fig_r,"fig_network":fig_n,"fig_importance":fig_i}
+    return {"fig_volcano":fig_v,"fig_ranking":fig_r,"fig_network":fig_n,
+            "fig_importance":fig_i,"fig_novel":fig_novel,"fig_kegg":fig_kegg}
 
 if __name__ == "__main__":
     r = run_interactive_visualization()
     if r:
-        for fname in ["interactive_volcano.html","interactive_ranking.html","interactive_network.html","interactive_feature_importance.html","interactive_dashboard.html"]:
+        for fname in ["interactive_volcano.html","interactive_ranking.html","interactive_network.html","interactive_feature_importance.html","interactive_novel_candidates.html","interactive_dashboard.html"]:
             fpath = config.FIGURES_DIR/fname
             if fpath.exists():
                 print(f"  {fname:<45} {fpath.stat().st_size//1024:>6,} KB")

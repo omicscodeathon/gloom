@@ -92,7 +92,7 @@ def extract_component_features(G):
     df = pd.DataFrame.from_dict(records, orient="index"); df.index.name = "gene"; return df
 
 def run_network_feature_extraction():
-    log.info("="*60); log.info("STEP 7 - NETWORK FEATURE EXTRACTION"); log.info("="*60)
+    log.info("="*60); log.info("STEP 7 — NETWORK FEATURE EXTRACTION"); log.info("="*60)
     G = nx.read_graphml(str(config.NETWORK_GRAPH_FILE))
     for u, v, data in G.edges(data=True):
         for attr in ("weight","abs_weight"):

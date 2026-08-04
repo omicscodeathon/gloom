@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a7d065517d063592e535170543a35593ca894a43be5dbfcbb6bae627e0d2984d
-size 175
+pandas>=1.5.0
+numpy>=1.23.0
+scipy>=1.9.0
+scikit-learn>=1.1.0
+networkx>=2.8.0
+matplotlib>=3.6.0
+statsmodels>=0.14.0
+plotly>=5.10.0
+joblib>=1.2.0
+openpyxl>=3.0.0
+gseapy>=0.10.8

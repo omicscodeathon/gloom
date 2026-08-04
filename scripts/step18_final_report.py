@@ -47,18 +47,18 @@ def build_pipeline_summary_table():
 def build_pipeline_report(summary_table):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     sep = "="*70; sep2 = "-"*70
-    lines = [sep,"LUAD ML PIPELINE - FINAL REPORT",f"Generated: {now}",sep,""]
-    lines += ["SECTION 1 - DATA PROVENANCE",sep2,
+    lines = [sep,"LUAD ML PIPELINE — FINAL REPORT",f"Generated: {now}",sep,""]
+    lines += ["SECTION 1 — DATA PROVENANCE",sep2,
               f"  Tumor expression   : {config.TUMOR_EXPR_FILE.name}",
               f"  Normal expression  : {config.NORMAL_EXPR_FILE.name}",
               f"  Cancer gene list   : {config.CANCER_GENE_FILE.name}",""]
     qc = safe_read_csv(config.PROCESSED_DIR/"qc_summary.csv")
-    lines += ["SECTION 2 - QC SUMMARY",sep2]
+    lines += ["SECTION 2 — QC SUMMARY",sep2]
     if qc is not None:
         for _,row in qc.iterrows(): lines.append(f"  [{row['dataset']:<6}] {row['stage']:<35}: {int(row['n_genes']):>7,}")
     lines.append("")
     de_df = safe_read_csv(config.DE_RESULTS_FILE, index_col=0)
-    lines += ["SECTION 3 - DIFFERENTIAL EXPRESSION",sep2]
+    lines += ["SECTION 3 — DIFFERENTIAL EXPRESSION",sep2]
     if de_df is not None:
         n_up = (de_df.get("direction",pd.Series())=="up").sum()
         n_down = (de_df.get("direction",pd.Series())=="down").sum()
@@ -69,7 +69,7 @@ def build_pipeline_report(summary_table):
     primary_metric = getattr(config, "CV_METRIC_PRIMARY", "auprc").upper()
     pu_framing = getattr(config, "PU_FRAMING", False)
     framing_note = " [PU framing: negatives are unlabeled]" if pu_framing else ""
-    lines += [f"SECTION 4 - MODEL PERFORMANCE{framing_note}",sep2]
+    lines += [f"SECTION 4 — MODEL PERFORMANCE{framing_note}",sep2]
     if metrics is not None:
         lines.append(f"  Primary selection metric: {primary_metric}")
         lines.append(f"  Best model: {best_name}")
@@ -86,7 +86,7 @@ def build_pipeline_report(summary_table):
     lines.append("")
     # Classification reports from step12
     clf_rpt_dir = config.RESULTS_DIR / "classification_reports"
-    lines += ["SECTION 4c - CLASSIFICATION REPORTS (per-model)", sep2]
+    lines += ["SECTION 4c — CLASSIFICATION REPORTS (per-model)", sep2]
     if clf_rpt_dir.exists():
         rpt_files = sorted(clf_rpt_dir.glob("classification_report_*.txt"))
         if rpt_files:
@@ -106,7 +106,7 @@ def build_pipeline_report(summary_table):
     # Ranking metrics from step14
     rank_m = safe_read_csv(config.RESULTS_DIR/"ranking_metrics.csv")
     pos_str = "positive (known)" if pu_framing else "LCGene"
-    lines += [f"SECTION 4b - RANKING METRICS (all genes, {pos_str} as ground truth)",sep2]
+    lines += [f"SECTION 4b — RANKING METRICS (all genes, {pos_str} as ground truth)",sep2]
     if rank_m is not None:
         for col in ["recall_at_50","recall_at_100","recall_at_200","recall_at_500",
                     "precision_at_50","precision_at_100","median_lcgene_rank",
@@ -115,7 +115,7 @@ def build_pipeline_report(summary_table):
                 lines.append(f"  {col:<25}: {rank_m[col].iloc[0]}")
     lines.append("")
     imp = safe_read_csv(config.FEATURE_IMPORTANCE_FILE, index_col=0)
-    lines += ["SECTION 5 - TOP 15 FEATURES",sep2]
+    lines += ["SECTION 5 — TOP 15 FEATURES",sep2]
     if imp is not None:
         lines.append(f"  {'Rank':<5} {'Feature':<40} {'Mean Imp':>9} {'Group'}")
         for _,row in imp.head(15).iterrows():
@@ -124,14 +124,14 @@ def build_pipeline_report(summary_table):
     ranking = safe_read_csv(config.GENE_RANKINGS_FILE, index_col=0)
     novel   = safe_read_csv(config.RESULTS_DIR/"novel_candidates.csv", index_col=0)
     known_col = "Known+" if pu_framing else "LCGene"
-    lines += ["SECTION 6 - TOP 20 RANKED GENES",sep2]
+    lines += ["SECTION 6 — TOP 20 RANKED GENES",sep2]
     if ranking is not None:
         lines.append(f"  {'Rank':<6} {'Gene':<15} {'Prob':>7} {'Log2FC':>8} {'Dir':>5} {known_col:>6} {'Novel':>6}")
         for gene,row in ranking.head(20).iterrows():
             lines.append(f"  {int(row['rank']):<6} {gene:<15} {row['predicted_prob']:>7.4f} {row.get('log2fc',0):>8.3f} {row.get('direction','ns'):>5} {'Yes' if row.get('is_lcgene_gene',False) else 'No':>6} {'Yes' if row.get('novel_candidate',False) else 'No':>6}")
     lines.append("")
     novel_label = "high-scoring unlabeled" if pu_framing else "novel"
-    lines += [f"SECTION 7 - {novel_label.upper()} CANDIDATES (top 15)",sep2]
+    lines += [f"SECTION 7 — {novel_label.upper()} CANDIDATES (top 15)",sep2]
     if novel is not None:
         lines.append(f"  Total: {len(novel):,}")
         for gene,row in novel.head(15).iterrows():
@@ -182,7 +182,7 @@ def build_summary_figure(out_path_prefix):
                 ax_sub.set_xticklabels(models_cv,rotation=20,ha="right",fontsize=8)
                 ax_sub.set_ylabel(f"CV {metric.upper()}",fontsize=9)
                 ax_sub.set_title(f"({panel_letter}) Cross-Validation {metric.upper()} ★ primary",fontsize=10)
-    # Panel D: PR curve (Step 3 - more informative than ROC for imbalanced/PU data)
+    # Panel D: PR curve (Step 3 — more informative than ROC for imbalanced/PU data)
     try:
         import joblib
         from sklearn.metrics import precision_recall_curve as _prc, average_precision_score as _aps
@@ -203,12 +203,12 @@ def build_summary_figure(out_path_prefix):
                 ax_D.axhline(baseline, color="black", linestyle="--", lw=0.8, alpha=0.5,
                              label=f"No-skill ({baseline:.3f})")
                 ax_D.set_xlabel("Recall",fontsize=9); ax_D.set_ylabel("Precision",fontsize=9)
-                ax_D.set_title("(D) PR Curve - Validation Set",fontsize=10)
+                ax_D.set_title("(D) PR Curve — Validation Set",fontsize=10)
                 ax_D.legend(fontsize=8)
     except Exception as e:
         ax_D.text(0.5,0.5,"PR curve unavailable",ha="center",va="center",transform=ax_D.transAxes)
         ax_D.set_title("(D) PR Curve",fontsize=10)
-    # Panel E: Top-20 genes (Step 6 - PU-aware labels)
+    # Panel E: Top-20 genes (Step 6 — PU-aware labels)
     ranking = safe_read_csv(config.GENE_RANKINGS_FILE, index_col=0)
     _pu_fig = getattr(config, "PU_FRAMING", False)
     known_label_fig = "Known positive" if _pu_fig else "LCGene"
@@ -234,7 +234,7 @@ def build_summary_figure(out_path_prefix):
         ax_F.set_yticks(range(len(feats_f))); ax_F.set_yticklabels(feats_f,fontsize=7); ax_F.invert_yaxis()
         ax_F.set_xlabel("Normalised Importance",fontsize=9); ax_F.set_title("(F) Top-15 Feature Importances",fontsize=10)
     pu_suffix = " [PU framing]" if getattr(config, "PU_FRAMING", False) else ""
-    fig.suptitle(f"LUAD ML Pipeline - Summary Figure{pu_suffix}",fontsize=13,fontweight="bold",y=1.01)
+    fig.suptitle(f"LUAD ML Pipeline — Summary Figure{pu_suffix}",fontsize=13,fontweight="bold",y=1.01)
     for ext in ("png","pdf"):
         out = Path(str(out_path_prefix)+f".{ext}")
         fig.savefig(out,dpi=150,bbox_inches="tight",format=ext)
@@ -260,29 +260,29 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL),
 log = logging.getLogger("run_pipeline")
 
 STEPS = [
-    ("Step 0  - Config",              "config",                          "create_output_dirs"),
-    ("Step 1  - Data loading",        "step1_data_loading",              "run_data_loading"),
-    ("Step 2  - Preprocessing",       "step2_preprocessing",             "run_preprocessing"),
-    ("Step 3  - Harmonization",       "step3_harmonization",             "run_harmonization"),
-    ("Step 4  - Differential expr",   "step4_differential_expression",   "run_differential_expression"),
-    ("Step 5  - Expr features",       "step5_expression_features",       "run_expression_feature_construction"),
-    ("Step 6  - Co-expr network",     "step6_coexpression_network",      "run_coexpression_network"),
-    ("Step 7  - Network features",    "step7_network_features",          "run_network_feature_extraction"),
-    ("Step 8  - Feature integration", "step8_feature_integration",       "run_feature_integration"),
-    ("Step 9  - Label construction",  "step9_label_construction",        "run_label_construction"),
-    ("Step 10 - Train/val split",     "step10_train_val_split",          "run_train_val_split"),
-    ("Step 11 - Model training",      "step11_model_training",           "run_model_training"),
-    ("Step 12 - Model evaluation",    "step12_model_evaluation",         "run_model_evaluation"),
-    ("Step 13 - Feature importance",  "step13_feature_importance",       "run_feature_importance"),
-    ("Step 14 - Gene ranking",        "step14_gene_ranking",             "run_gene_ranking"),
-    ("Step 15 - Network annotation",  "step15_network_annotation",       "run_network_annotation"),
-    ("Step 16 - Network export",      "step16_network_export",           "run_network_export"),
-    ("Step 17 - Visualization",       "step17_interactive_visualization","run_interactive_visualization"),
-    ("Step 18 - Final report",        "step18_final_report",             "run_final_report"),
+    ("Step 0  — Config",              "config",                          "create_output_dirs"),
+    ("Step 1  — Data loading",        "step1_data_loading",              "run_data_loading"),
+    ("Step 2  — Preprocessing",       "step2_preprocessing",             "run_preprocessing"),
+    ("Step 3  — Harmonization",       "step3_harmonization",             "run_harmonization"),
+    ("Step 4  — Differential expr",   "step4_differential_expression",   "run_differential_expression"),
+    ("Step 5  — Expr features",       "step5_expression_features",       "run_expression_feature_construction"),
+    ("Step 6  — Co-expr network",     "step6_coexpression_network",      "run_coexpression_network"),
+    ("Step 7  — Network features",    "step7_network_features",          "run_network_feature_extraction"),
+    ("Step 8  — Feature integration", "step8_feature_integration",       "run_feature_integration"),
+    ("Step 9  — Label construction",  "step9_label_construction",        "run_label_construction"),
+    ("Step 10 — Train/val split",     "step10_train_val_split",          "run_train_val_split"),
+    ("Step 11 — Model training",      "step11_model_training",           "run_model_training"),
+    ("Step 12 — Model evaluation",    "step12_model_evaluation",         "run_model_evaluation"),
+    ("Step 13 — Feature importance",  "step13_feature_importance",       "run_feature_importance"),
+    ("Step 14 — Gene ranking",        "step14_gene_ranking",             "run_gene_ranking"),
+    ("Step 15 — Network annotation",  "step15_network_annotation",       "run_network_annotation"),
+    ("Step 16 — Network export",      "step16_network_export",           "run_network_export"),
+    ("Step 17 — Visualization",       "step17_interactive_visualization","run_interactive_visualization"),
+    ("Step 18 — Final report",        "step18_final_report",             "run_final_report"),
 ]
 
 def run_pipeline():
-    log.info("="*70); log.info("LUAD ML PIPELINE - FULL RUN"); log.info("="*70)
+    log.info("="*70); log.info("LUAD ML PIPELINE — FULL RUN"); log.info("="*70)
     pipeline_start = time.time(); completed = []; failed_step = None
     for step_label, module_name, func_name in STEPS:
         log.info(f">>> {step_label}"); t0 = time.time()
@@ -315,7 +315,7 @@ if __name__ == "__main__":
     log.info(f"  Master runner saved: {out_path}")
 
 def run_final_report():
-    log.info("="*60); log.info("STEP 18 - FINAL OUTPUTS & REPORTING"); log.info("="*60)
+    log.info("="*60); log.info("STEP 18 — FINAL OUTPUTS & REPORTING"); log.info("="*60)
     reports_dir = config.REPORTS_DIR; reports_dir.mkdir(parents=True, exist_ok=True)
     log.info("[1] Building summary table …")
     try:
@@ -334,14 +334,10 @@ def run_final_report():
     log.info("[3] Building summary figure …")
     try: build_summary_figure(reports_dir/"pipeline_summary_figure")
     except Exception as e: log.error(f"  Figure failed: {e}")
-    log.info("[4] Writing master runner …")
-    runner_path = Path(__file__).resolve().parent/"run_pipeline.py"
-    write_master_runner(runner_path)
     log.info("="*60); log.info("STEP 18 SUMMARY"); log.info("="*60)
     log.info(f"  Summary table: {reports_dir}/pipeline_summary_table.csv")
     log.info(f"  Text report  : {reports_dir}/pipeline_report.txt")
     log.info(f"  Summary fig  : {reports_dir}/pipeline_summary_figure.png")
-    log.info(f"  Master runner: {runner_path}")
     log.info("")
     log.info("  Key deliverables:")
     log.info(f"    Gene rankings    : {config.GENE_RANKINGS_FILE}")

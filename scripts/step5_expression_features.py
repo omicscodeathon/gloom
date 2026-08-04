@@ -82,7 +82,7 @@ def impute_and_validate(features, label="features"):
     return features
 
 def run_expression_feature_construction():
-    log.info("="*60); log.info("STEP 5 - EXPRESSION FEATURE CONSTRUCTION"); log.info("="*60)
+    log.info("="*60); log.info("STEP 5 — EXPRESSION FEATURE CONSTRUCTION"); log.info("="*60)
     tumor_expr  = pd.read_csv(config.TUMOR_EXPR_HARMONIZED,  index_col=0)
     normal_expr = pd.read_csv(config.NORMAL_EXPR_HARMONIZED, index_col=0)
     de_df       = pd.read_csv(config.DE_RESULTS_FILE,         index_col=0)

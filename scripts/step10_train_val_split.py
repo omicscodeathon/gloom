@@ -23,7 +23,7 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL),
 log = logging.getLogger(__name__)
 
 def run_train_val_split():
-    log.info("="*60); log.info("STEP 10 - TRAIN/VALIDATION SPLIT"); log.info("="*60)
+    log.info("="*60); log.info("STEP 10 — TRAIN/VALIDATION SPLIT"); log.info("="*60)
     features  = pd.read_csv(config.INTEGRATED_FEATURES_FILE, index_col=0)
     labels_df = pd.read_csv(config.LABELS_FILE)
     labels_df = labels_df.set_index("gene")["label"]
@@ -43,6 +43,20 @@ def run_train_val_split():
     for fold_idx, (_, val_idx) in enumerate(skf.split(X_train, y_train)):
         fold_assignments[val_idx] = fold_idx + 1
     fold_df = pd.DataFrame({"gene": X_train.index, "cv_fold": fold_assignments, "label": y_train.values})
+
+    # REC 5: Feature selection — keep top-N features by importance (if enabled)
+    if getattr(config, "USE_FEATURE_SELECTION", False):
+        top_n   = getattr(config, "FEATURE_SELECTION_TOP_N", 20)
+        fi_path = getattr(config, "FEATURE_IMPORTANCE_FILE", None)
+        if fi_path and Path(fi_path).exists():
+            fi = pd.read_csv(fi_path).sort_values("rank")
+            top_feats = [f for f in fi["feature"].tolist() if f in X_train.columns][:top_n]
+            X_train = X_train[top_feats]
+            X_val   = X_val[top_feats]
+            log.info(f"  Feature selection: kept top {len(top_feats)} features from {fi_path.name}")
+        else:
+            log.warning("  USE_FEATURE_SELECTION=True but feature_importance.csv not found — "
+                        "skipping. Run step13 first.")
 
     # Scale (fit on train only)
     scaler = RobustScaler()

@@ -58,14 +58,14 @@ def normalize_gene_symbols(df, label):
         n_dup = df.index.duplicated().sum()
         log.warning(
             f"  [{label}] {n_dup} duplicate symbols after normalisation "
-            f"- keeping highest-mean row."
+            f"— keeping highest-mean row."
         )
         df["_mean"] = df.mean(axis=1)
         df = df.sort_values("_mean", ascending=False)
         df = df[~df.index.duplicated(keep="first")]
         df = df.drop(columns=["_mean"])
 
-    log.info(f"  [{label}] Normalised: {n_before} → {len(df)} genes.")
+    log.info(f"  [{label}] Normalised: {n_before} -> {len(df)} genes.")
     return df
 
 
@@ -114,7 +114,7 @@ def plot_venn(tumor_genes, normal_genes, common_genes, out_path):
     ax.text(5.0, 3.0, f"{n_c:,}", ha="center", va="center",
             fontsize=14, fontweight="bold", color="black")
     ax.set_title(
-        f"Gene Set Overlap - Tumor: {n_t:,}  Normal: {n_n:,}  Common: {n_c:,}",
+        f"Gene Set Overlap — Tumor: {n_t:,}  Normal: {n_n:,}  Common: {n_c:,}",
         fontsize=11,
     )
     ax.legend(handles=[ct, cn], loc="upper right", fontsize=9)
@@ -125,7 +125,7 @@ def plot_venn(tumor_genes, normal_genes, common_genes, out_path):
 
 def run_harmonization():
     log.info("=" * 60)
-    log.info("STEP 3 - GENE ID HARMONIZATION")
+    log.info("STEP 3 — GENE ID HARMONIZATION")
     log.info("=" * 60)
 
     tumor_expr   = pd.read_csv(config.TUMOR_EXPR_PROCESSED,  index_col=0)

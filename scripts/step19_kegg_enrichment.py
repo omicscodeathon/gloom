@@ -40,7 +40,7 @@ log = logging.getLogger(__name__)
 
 # ── Parameters ────────────────────────────────────────────────────────────────
 GENE_SET_LIBRARY = "KEGG_2021_Human"
-PROB_THRESHOLD   = 0.80    # min predicted_prob to include
+PROB_THRESHOLD   = 0.70    # min predicted_prob to include
 TOP_N_PLOT       = 20      # max pathways shown per figure
 PADJ_CUTOFF      = 0.05    # significance threshold
 MIN_GENE_OVERLAP = 3       # min genes overlapping a pathway to report
@@ -56,14 +56,14 @@ LUNG_RELEVANT_PATTERNS = [
 
     # ── 2. Core LUAD oncogenic signaling ────────────────────────────────────
     # KRAS, EGFR, STK11, KEAP1, and their downstream cascades dominate LUAD
-    "erbb signaling",           # EGFR family - most common LUAD driver
+    "erbb signaling",           # EGFR family — most common LUAD driver
     "mapk signaling",           # KRAS/BRAF downstream
     "pi3k-akt signaling",       # mTOR/survival axis
     "mtor signaling",
     "ras signaling",
     "jak-stat signaling",       # immune + cytokine crosstalk
     "vegf signaling",           # angiogenesis in tumors
-    "hippo signaling",          # YAP/TAZ - emerging LUAD role
+    "hippo signaling",          # YAP/TAZ — emerging LUAD role
     "wnt signaling",
     "tgf-beta signaling",       # EMT driver
     "notch signaling",
@@ -128,7 +128,7 @@ def _run_enrichr(gene_list: list, label: str) -> pd.DataFrame:
         raise
 
     if len(gene_list) < MIN_GENE_OVERLAP:
-        log.warning(f"  [{label}] Only {len(gene_list)} genes - skipping.")
+        log.warning(f"  [{label}] Only {len(gene_list)} genes — skipping.")
         return pd.DataFrame()
 
     log.info(f"  [{label}] Querying Enrichr ({GENE_SET_LIBRARY}) with {len(gene_list)} genes …")
@@ -176,7 +176,7 @@ def _run_enrichr(gene_list: list, label: str) -> pd.DataFrame:
     df = df[df["pathway"].apply(_matches_lung_pattern)].reset_index(drop=True)
     df = df.sort_values("padj").reset_index(drop=True)
 
-    log.info(f"  [{label}] {total_before} pathways total → {len(df)} after lung/cancer filter")
+    log.info(f"  [{label}] {total_before} pathways total -> {len(df)} after lung/cancer filter")
     return df
 
 
@@ -185,10 +185,10 @@ def _run_enrichr(gene_list: list, label: str) -> pd.DataFrame:
 def _barplot(df: pd.DataFrame, label: str, out_path: Path) -> None:
     sig = df[df["padj"] < PADJ_CUTOFF].head(TOP_N_PLOT).sort_values("neg_log10_padj")
     if sig.empty:
-        log.warning(f"  [{label}] No significant lung/cancer pathways - bar-plot skipped.")
+        log.warning(f"  [{label}] No significant lung/cancer pathways — bar-plot skipped.")
         return
 
-    cmap   = cm.get_cmap("RdYlGn")
+    cmap   = matplotlib.colormaps["RdYlGn"]
     colors = cmap(sig["neg_log10_padj"] / sig["neg_log10_padj"].max())
 
     fig, ax = plt.subplots(figsize=(11, max(4, len(sig) * 0.40)))
@@ -197,7 +197,7 @@ def _barplot(df: pd.DataFrame, label: str, out_path: Path) -> None:
                label=f"padj = {PADJ_CUTOFF}")
     ax.set_xlabel("-log₁₀(adjusted p-value)", fontsize=10)
     ax.set_title(
-        f"KEGG Lung/Cancer Pathways - {label}\n"
+        f"KEGG Lung/Cancer Pathways — {label}\n"
         f"(top {len(sig)} significant, padj < {PADJ_CUTOFF})",
         fontsize=11,
     )
@@ -205,7 +205,7 @@ def _barplot(df: pd.DataFrame, label: str, out_path: Path) -> None:
     plt.tight_layout()
     fig.savefig(out_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    log.info(f"  [{label}] Bar-plot → {out_path.name}")
+    log.info(f"  [{label}] Bar-plot -> {out_path.name}")
 
 
 def _dotplot(df: pd.DataFrame, label: str, out_path: Path) -> None:
@@ -231,14 +231,14 @@ def _dotplot(df: pd.DataFrame, label: str, out_path: Path) -> None:
     plt.colorbar(sc, ax=ax, label="-log₁₀(adjusted p-value)", shrink=0.6)
     ax.set_xlabel("Gene Ratio  (overlap / pathway size)", fontsize=10)
     ax.set_title(
-        f"KEGG Lung/Cancer Pathways - {label}\n"
+        f"KEGG Lung/Cancer Pathways — {label}\n"
         f"(dot size = overlapping genes)",
         fontsize=11,
     )
     plt.tight_layout()
     fig.savefig(out_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    log.info(f"  [{label}] Dot-plot → {out_path.name}")
+    log.info(f"  [{label}] Dot-plot -> {out_path.name}")
 
 
 def _combined_overview(results: dict) -> None:
@@ -247,41 +247,44 @@ def _combined_overview(results: dict) -> None:
         return
 
     n   = len(subsets)
-    fig, axes = plt.subplots(1, n, figsize=(9 * n, 8), squeeze=False)
+    fig, axes = plt.subplots(1, n, figsize=(11 * n, 10), squeeze=False)
 
     for ax, (label, df) in zip(axes[0], subsets.items()):
         sig = df[df["padj"] < PADJ_CUTOFF].head(15).sort_values("neg_log10_padj")
         if sig.empty:
             ax.text(0.5, 0.5, "No significant\npathways",
-                    ha="center", va="center", transform=ax.transAxes, fontsize=11)
-            ax.set_title(label)
+                    ha="center", va="center", transform=ax.transAxes, fontsize=13)
+            ax.set_title(label, fontsize=14)
             continue
-        cmap   = cm.get_cmap("RdYlGn")
+        cmap   = matplotlib.colormaps["RdYlGn"]
         colors = cmap(sig["neg_log10_padj"] / sig["neg_log10_padj"].max())
         ax.barh(sig["pathway"], sig["neg_log10_padj"],
                 color=colors, edgecolor="white", height=0.7)
-        ax.axvline(-np.log10(PADJ_CUTOFF), color="grey", linestyle="--", lw=0.9)
-        ax.set_xlabel("-log₁₀(padj)", fontsize=9)
-        ax.set_title(f"KEGG Lung - {label}", fontsize=10)
-        ax.tick_params(axis="y", labelsize=8)
+        ax.axvline(-np.log10(PADJ_CUTOFF), color="grey", linestyle="--", lw=1.2,
+                   label=f"padj = {PADJ_CUTOFF}")
+        ax.set_xlabel("-log₁₀(padj)", fontsize=13)
+        ax.set_title(f"KEGG Lung — {label}", fontsize=14, fontweight="bold")
+        ax.tick_params(axis="x", labelsize=12)
+        ax.tick_params(axis="y", labelsize=11)
+        ax.legend(fontsize=11)
 
     plt.suptitle(
-        f"KEGG Lung/Cancer Pathway Enrichment - Novel LUAD Candidates\n"
+        f"KEGG Pathway Enrichment of Novel LUAD Candidates\n"
         f"(prob ≥ {PROB_THRESHOLD}, library: {GENE_SET_LIBRARY})",
-        fontsize=12, y=1.01,
+        fontsize=16, fontweight="bold", y=1.02,
     )
     plt.tight_layout()
-    out = config.FIGURES_DIR / "kegg_lung_overview.png"
-    fig.savefig(out, dpi=150, bbox_inches="tight")
+    out = config.FIGURES_DIR / "kegg_overview.png"
+    fig.savefig(out, dpi=220, bbox_inches="tight")
     plt.close(fig)
-    log.info(f"  Combined overview → {out.name}")
+    log.info(f"  Combined overview -> {out.name}")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def run_kegg_enrichment() -> dict:
     log.info("=" * 60)
-    log.info("STEP 19 - KEGG LUNG/CANCER PATHWAY ENRICHMENT")
+    log.info("STEP 19 — KEGG LUNG/CANCER PATHWAY ENRICHMENT")
     log.info("=" * 60)
 
     nc_path = config.RESULTS_DIR / "novel_candidates.csv"
@@ -301,7 +304,7 @@ def run_kegg_enrichment() -> dict:
     ].index.tolist()
 
     log.info(f"  High-confidence (prob ≥ {PROB_THRESHOLD}): {len(high_conf):,} genes")
-    log.info(f"  Gene lists - all: {len(all_genes)}  up: {len(up_genes)}  down: {len(down_genes)}")
+    log.info(f"  Gene lists — all: {len(all_genes)}  up: {len(up_genes)}  down: {len(down_genes)}")
 
     analyses = [
         (all_genes,  "All candidates", config.KEGG_ALL_FILE),
@@ -314,7 +317,7 @@ def run_kegg_enrichment() -> dict:
         df = _run_enrichr(gene_list, label)
         if not df.empty:
             df.to_csv(out_csv, index=False)
-            log.info(f"  [{label}] Saved {len(df)} lung/cancer pathways → {out_csv.name}")
+            log.info(f"  [{label}] Saved {len(df)} lung/cancer pathways -> {out_csv.name}")
             slug = label.lower().replace(" ", "_")
             _barplot(df, label, config.FIGURES_DIR / f"kegg_barplot_{slug}.png")
             _dotplot(df, label, config.FIGURES_DIR / f"kegg_dotplot_{slug}.png")
@@ -325,7 +328,7 @@ def run_kegg_enrichment() -> dict:
     for label, df in results.items():
         if df.empty:
             rows.append({"subset": label, "lung_pathways_tested": 0,
-                         "significant": 0, "top_pathway": "-", "top_padj": np.nan})
+                         "significant": 0, "top_pathway": "—", "top_padj": np.nan})
             continue
         sig = df[df["padj"] < PADJ_CUTOFF]
         top = df.iloc[0]
@@ -339,7 +342,7 @@ def run_kegg_enrichment() -> dict:
 
     summary = pd.DataFrame(rows)
     summary.to_csv(config.KEGG_SUMMARY_FILE, index=False)
-    log.info(f"\n  Summary → {config.KEGG_SUMMARY_FILE.name}")
+    log.info(f"\n  Summary -> {config.KEGG_SUMMARY_FILE.name}")
     log.info("\n" + summary.to_string(index=False))
 
     _combined_overview(results)

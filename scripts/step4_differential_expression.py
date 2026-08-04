@@ -35,7 +35,7 @@ log = logging.getLogger(__name__)
 
 def run_differential_expression():
     log.info("=" * 60)
-    log.info("STEP 4 - DIFFERENTIAL EXPRESSION")
+    log.info("STEP 4 — DIFFERENTIAL EXPRESSION")
     log.info("=" * 60)
 
     tumor_expr  = pd.read_csv(config.TUMOR_EXPR_HARMONIZED,  index_col=0)
@@ -110,8 +110,8 @@ def run_differential_expression():
     de_df.loc[sig_mask & (de_df["log2fc"] >= config.DE_LOG2FC_THRESHOLD),  "direction"] = "up"
     de_df.loc[sig_mask & (de_df["log2fc"] <= -config.DE_LOG2FC_THRESHOLD), "direction"] = "down"
 
-    # FIX: sort explicitly - first by adjusted p-value ascending,
-    #      then by absolute log2FC descending - without relying on a
+    # FIX: sort explicitly — first by adjusted p-value ascending,
+    #      then by absolute log2FC descending — without relying on a
     #      multi-column key lambda that behaves differently across pandas
     #      versions.
     de_df["_abs_log2fc"] = de_df["log2fc"].abs()
@@ -140,7 +140,7 @@ def run_differential_expression():
     ax.axhline(-np.log10(config.DE_PVALUE_THRESHOLD), color="black", linestyle=":", lw=0.8, alpha=0.6)
     ax.set_xlabel("Log2 Fold-Change")
     ax.set_ylabel("-log10(adj P)")
-    ax.set_title("Volcano Plot - LUAD Tumor vs GTEx Normal")
+    ax.set_title("Volcano Plot — LUAD Tumor vs GTEx Normal")
     ax.legend(fontsize=9)
     plt.tight_layout()
     fig.savefig(config.FIGURES_DIR / "de_volcano_plot.png", dpi=150, bbox_inches="tight")

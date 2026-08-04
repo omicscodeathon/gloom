@@ -39,7 +39,7 @@ def sanitise_graph(G):
     return H
 
 def run_network_export():
-    log.info("="*60); log.info("STEP 16 - NETWORK EXPORT"); log.info("="*60)
+    log.info("="*60); log.info("STEP 16 — NETWORK EXPORT"); log.info("="*60)
     EXPORT_DIR.mkdir(parents=True, exist_ok=True)
     G = nx.read_graphml(str(config.ANNOTATED_NETWORK_FILE))
     for u,v,data in G.edges(data=True):
@@ -115,7 +115,7 @@ def run_network_export():
     pd.DataFrame(list(stats.items()),columns=["metric","value"]).to_csv(EXPORT_DIR/"network_statistics_report.csv",index=False)
     degree_series = pd.Series(dict(G_clean.degree()),name="degree")
     top_hubs = degree_series.nlargest(20).reset_index(); top_hubs.columns=["gene","degree"]
-    lines = ["="*60,"LUAD CO-EXPRESSION NETWORK - STATISTICS REPORT","="*60,""]
+    lines = ["="*60,"LUAD CO-EXPRESSION NETWORK — STATISTICS REPORT","="*60,""]
     for k,v in stats.items(): lines.append(f"  {k:<35}: {v}")
     lines += ["","TOP 20 HUB GENES","="*60]
     for _,row in top_hubs.iterrows(): lines.append(f"  {row['gene']:<20} degree={int(row['degree'])}")

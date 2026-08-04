@@ -33,7 +33,7 @@ def assign_node_size(prob, min_size=5.0, max_size=50.0):
     return float(min_size + prob*(max_size-min_size))
 
 def run_network_annotation():
-    log.info("="*60); log.info("STEP 15 - NETWORK ANNOTATION"); log.info("="*60)
+    log.info("="*60); log.info("STEP 15 — NETWORK ANNOTATION"); log.info("="*60)
     G = nx.read_graphml(str(config.NETWORK_GRAPH_FILE))
     for u,v,data in G.edges(data=True):
         for attr in ("weight","abs_weight"):

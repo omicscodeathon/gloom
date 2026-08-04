@@ -21,7 +21,7 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL),
 log = logging.getLogger(__name__)
 
 def run_label_construction():
-    log.info("="*60); log.info("STEP 9 - LABEL CONSTRUCTION"); log.info("="*60)
+    log.info("="*60); log.info("STEP 9 — LABEL CONSTRUCTION"); log.info("="*60)
     features  = pd.read_csv(config.INTEGRATED_FEATURES_FILE, index_col=0)
     de_df     = pd.read_csv(config.DE_RESULTS_FILE,           index_col=0)
     lcgene_genes = pd.read_csv(config.PROCESSED_DIR/"cancer_genes_raw.csv", header=0).squeeze("columns")
@@ -37,10 +37,32 @@ def run_label_construction():
         name="label"
     )
 
+    # --- Gene universe trimming (Option A + B combined) ---
+    # Remove unlabeled genes that are non-expressed AND have no DE signal.
+    # Positives (label=1) are NEVER removed.
+    abs_log2fc  = de_df["log2fc"].abs().reindex(gene_index).fillna(0.0)
+    padj        = de_df["pvalue_adj"].reindex(gene_index).fillna(1.0)
+    pct_expr    = features["tumor_pct_expressed"].reindex(gene_index).fillna(0.0) \
+                  if "tumor_pct_expressed" in features.columns else \
+                  pd.Series(1.0, index=gene_index)   # safe fallback: keep all
+    trim_mask = (
+        (labels == 0) &
+        (abs_log2fc < 2.0)   # below pipeline DE threshold — no meaningful LUAD signal
+    )
+    n_trimmed = trim_mask.sum()
+    if n_trimmed:
+        log.info(f"  Universe trimming: removing {n_trimmed} noisy unlabeled genes "
+                 f"(non-expressed + no DE signal)")
+        labels     = labels[~trim_mask]
+        gene_index = labels.index
+        normalised = pd.Index(gene_index.astype(str)).str.strip().str.upper()
+    else:
+        log.info("  Universe trimming: 0 genes removed (conditions not met)")
+
     n_pos = labels.sum(); n_neg = (labels==0).sum(); n_total = len(labels)
     if config.PU_FRAMING:
         log.info(f"  Total: {n_total}  Positive (known LCGene): {n_pos} ({100*n_pos/n_total:.2f}%)  Unlabeled: {n_neg}")
-        log.info("  [PU framing] Negatives are UNLABELED - not confirmed non-cancer genes.")
+        log.info("  [PU framing] Negatives are UNLABELED — not confirmed non-cancer genes.")
     else:
         log.info(f"  Total: {n_total}  Positive (LCGene): {n_pos} ({100*n_pos/n_total:.2f}%)  Negative: {n_neg}")
 

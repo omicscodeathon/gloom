@@ -74,7 +74,7 @@ def filter_low_expression_genes(df, label,
     expressed_frac = (df > log_threshold).sum(axis=1) / df.shape[1]
     mask           = expressed_frac >= min_fraction
     df_filtered    = df.loc[mask]
-    log.info(f"  [{label}] Low-expr filter: {n_before} → {df_filtered.shape[0]} genes.")
+    log.info(f"  [{label}] Low-expr filter: {n_before} -> {df_filtered.shape[0]} genes.")
     return df_filtered
 
 
@@ -84,7 +84,7 @@ def filter_low_variance_genes(df, label, bottom_percentile=10.0):
     threshold = np.percentile(iqr.dropna(), bottom_percentile)
     mask      = iqr >= threshold
     df_f      = df.loc[mask]
-    log.info(f"  [{label}] Low-var filter: {n_before} → {df_f.shape[0]} genes.")
+    log.info(f"  [{label}] Low-var filter: {n_before} -> {df_f.shape[0]} genes.")
     return df_f
 
 
@@ -99,7 +99,7 @@ def validate_sample_overlap(expr_df, meta_df, label):
     common       = expr_samples & meta_samples
 
     if len(common) == 0:
-        log.warning(f"  [{label}] No common samples - trying TCGA ID truncation.")
+        log.warning(f"  [{label}] No common samples — trying TCGA ID truncation.")
         short_map     = {s: s[:12] for s in expr_df.columns}
         expr_df_short = expr_df.rename(columns=short_map)
         common2 = set(expr_df_short.columns) & meta_samples
@@ -119,7 +119,7 @@ def validate_sample_overlap(expr_df, meta_df, label):
 def check_minimum_samples(df, label, min_n):
     n = df.shape[1]
     if n < min_n:
-        raise ValueError(f"[{label}] Only {n} samples - minimum is {min_n}.")
+        raise ValueError(f"[{label}] Only {n} samples — minimum is {min_n}.")
     log.info(f"  [{label}] Sample count OK: {n} >= {min_n}.")
 
 
@@ -142,7 +142,7 @@ def plot_sample_distributions(df_before, df_after, label, out_path, n_samples=50
     med_after  = _sample_medians(df_after)
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-    fig.suptitle(f"{label.capitalize()} - Sample Median Expression", fontsize=12)
+    fig.suptitle(f"{label.capitalize()} — Sample Median Expression", fontsize=12)
     for ax, medians, title in zip(
         axes,
         [med_before, med_after],
@@ -187,7 +187,7 @@ def plot_gene_filter_summary(stats, out_path):
 
 def run_preprocessing() -> dict:
     log.info("=" * 60)
-    log.info("STEP 2 - DATA PREPROCESSING & QUALITY CONTROL")
+    log.info("STEP 2 — DATA PREPROCESSING & QUALITY CONTROL")
     log.info("=" * 60)
 
     tumor_expr_raw  = pd.read_csv(config.PROCESSED_DIR / "tumor_expression_raw.csv",  index_col=0)
@@ -270,10 +270,10 @@ def run_preprocessing() -> dict:
             except PermissionError:
                 if attempt == 5:
                     raise PermissionError(
-                        f"Cannot write '{path}' - the file is locked by another process "
+                        f"Cannot write '{path}' — the file is locked by another process "
                         f"(e.g. Excel). Close the file and re-run the pipeline."
                     )
-                log.warning(f"  PermissionError writing '{path.name}' - "
+                log.warning(f"  PermissionError writing '{path.name}' — "
                             f"retrying in 3 s (attempt {attempt}/5). "
                             f"Close the file in Excel if it is open.")
                 time.sleep(3)

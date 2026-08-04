@@ -68,7 +68,7 @@ def build_networkx_graph(edges_df):
     return G
 
 def run_coexpression_network():
-    log.info("="*60); log.info("STEP 6 - CO-EXPRESSION NETWORK CONSTRUCTION"); log.info("="*60)
+    log.info("="*60); log.info("STEP 6 — CO-EXPRESSION NETWORK CONSTRUCTION"); log.info("="*60)
     tumor_expr  = pd.read_csv(config.TUMOR_EXPR_HARMONIZED, index_col=0)
     gene_names  = tumor_expr.index.tolist()
     expr_matrix = tumor_expr.values.astype(np.float32)
