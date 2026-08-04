@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f8dbb29b5b469698e796502ec9fbfbc72714ea8f8c8e8cd3e7f83e4c53a9fe0b
-size 273
+metric,value
+n_nodes,10986.0
+n_edges,110508.0
+density,0.0018314
+n_connected_components,6165.0
+largest_component_size,4591.0
+avg_clustering_coeff,0.210099
+avg_degree,20.118
+max_degree,462.0
+degree_assortativity,0.46266
+n_lcgene_nodes,438.0
+n_novel_nodes,203.0

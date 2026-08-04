@@ -1,3 +1,38 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e5bc30e6d2e7598a44734460094b87acf437ca8ba0e5d1678b47cbbae43f6f6e
-size 1465
+============================================================
+LUAD CO-EXPRESSION NETWORK — STATISTICS REPORT
+============================================================
+
+  n_nodes                            : 10986
+  n_edges                            : 110508
+  density                            : 0.0018314
+  n_connected_components             : 6165
+  largest_component_size             : 4591
+  avg_clustering_coeff               : 0.210099
+  avg_degree                         : 20.118
+  max_degree                         : 462
+  degree_assortativity               : 0.46266
+  n_lcgene_nodes                     : 438
+  n_novel_nodes                      : 203
+
+TOP 20 HUB GENES
+============================================================
+  SASH3                degree=462
+  CD4                  degree=441
+  CD53                 degree=440
+  WAS                  degree=440
+  IL10RA               degree=436
+  LCP2                 degree=436
+  NCKAP1L              degree=432
+  SNX20                degree=429
+  DOCK2                degree=427
+  BTK                  degree=426
+  CYTH4                degree=425
+  CD37                 degree=424
+  MYO1F                degree=423
+  PTPRC                degree=421
+  EVI2B                degree=420
+  GIMAP4               degree=418
+  ARHGAP30             degree=416
+  SELPLG               degree=416
+  PLEK                 degree=415
+  FERMT3               degree=412
