@@ -1,0 +1,2 @@
+median_lcgene_rank,lcgene_top50,lcgene_top100,lcgene_top200,lcgene_top500,recall_at_50,recall_at_100,recall_at_200,recall_at_500,precision_at_50,precision_at_100,n_novel,pu_framing
+232.5,50,98,190,345,0.1142,0.2237,0.4338,0.7877,1.0,0.98,203,True
