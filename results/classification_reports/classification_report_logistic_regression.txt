@@ -1,0 +1,12 @@
+Model: logistic_regression
+Fixed threshold: 0.15  Oracle threshold (ref): 0.1921
+Accuracy@fixed: 0.9296
+------------------------------------------------------------
+                     precision    recall  f1-score   support
+
+      Unlabeled (0)       0.97      0.95      0.96      1872
+LCGene/Positive (1)       0.31      0.45      0.37        88
+
+           accuracy                           0.93      1960
+          macro avg       0.64      0.70      0.66      1960
+       weighted avg       0.94      0.93      0.94      1960

@@ -1,0 +1,12 @@
+Model: extra_trees
+Fixed threshold: 0.15  Oracle threshold (ref): 0.2362
+Accuracy@fixed: 0.9510
+------------------------------------------------------------
+                     precision    recall  f1-score   support
+
+      Unlabeled (0)       0.97      0.97      0.97      1872
+LCGene/Positive (1)       0.46      0.47      0.46        88
+
+           accuracy                           0.95      1960
+          macro avg       0.72      0.72      0.72      1960
+       weighted avg       0.95      0.95      0.95      1960

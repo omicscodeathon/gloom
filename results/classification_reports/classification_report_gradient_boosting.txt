@@ -1,0 +1,12 @@
+Model: gradient_boosting
+Fixed threshold: 0.15  Oracle threshold (ref): 0.3653
+Accuracy@fixed: 0.9133
+------------------------------------------------------------
+                     precision    recall  f1-score   support
+
+      Unlabeled (0)       0.98      0.93      0.95      1872
+LCGene/Positive (1)       0.29      0.65      0.40        88
+
+           accuracy                           0.91      1960
+          macro avg       0.64      0.79      0.68      1960
+       weighted avg       0.95      0.91      0.93      1960

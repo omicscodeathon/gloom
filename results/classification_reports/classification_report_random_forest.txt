@@ -1,0 +1,12 @@
+Model: random_forest
+Fixed threshold: 0.15  Oracle threshold (ref): 0.3055
+Accuracy@fixed: 0.9429
+------------------------------------------------------------
+                     precision    recall  f1-score   support
+
+      Unlabeled (0)       0.98      0.96      0.97      1872
+LCGene/Positive (1)       0.39      0.51      0.45        88
+
+           accuracy                           0.94      1960
+          macro avg       0.69      0.74      0.71      1960
+       weighted avg       0.95      0.94      0.95      1960
