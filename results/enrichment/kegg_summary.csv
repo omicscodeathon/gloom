@@ -1,0 +1,4 @@
+subset,lung_pathways_tested,significant,top_pathway,top_padj
+All candidates,3,2,ECM-receptor interaction,0.005509
+Upregulated,3,3,ECM-receptor interaction,0.004059
+Downregulated,0,0,—,
