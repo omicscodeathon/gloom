@@ -1,2 +1,0 @@
-[console_scripts]
-gloom = gloom.cli:main
