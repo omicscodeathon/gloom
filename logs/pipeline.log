@@ -1,0 +1,1030 @@
+2026-08-09 19:34:31,830 [INFO] ======================================================================
+2026-08-09 19:34:31,830 [INFO] LUAD ML PIPELINE — FULL RUN
+2026-08-09 19:34:31,831 [INFO] Running 19 step(s)
+2026-08-09 19:34:31,831 [INFO] Optional steps are excluded for this run.
+2026-08-09 19:34:31,831 [INFO] ======================================================================
+2026-08-09 19:34:31,831 [INFO] >>> Step 0   — Config 
+2026-08-09 19:34:31,831 [INFO] <<< Step 0   — Config DONE (0.0s)
+2026-08-09 19:34:31,831 [INFO] >>> Step 1   — Data loading 
+2026-08-09 19:34:32,387 [INFO] ============================================================
+2026-08-09 19:34:32,387 [INFO] STEP 1 — DATA LOADING
+2026-08-09 19:34:32,387 [INFO] ============================================================
+2026-08-09 19:34:32,387 [INFO] Loading tumor expression from: D:\New folder (9)\gloom updated\trial\data\raw\cBioPortal (RNA Seq Data)\data_mrna_seq_v2_rsem.txt
+2026-08-09 19:34:34,338 [INFO]   Raw shape: (20531, 512)
+2026-08-09 19:34:34,454 [WARNING]   19 duplicate gene symbols found — keeping highest-mean row.
+2026-08-09 19:34:34,571 [INFO]   Final shape: (20512, 510)
+2026-08-09 19:34:34,571 [INFO] Loading tumor metadata from: D:\New folder (9)\gloom updated\trial\data\raw\cBioPortal (RNA Seq Data)\data_clinical_patient.txt
+2026-08-09 19:34:34,578 [INFO]   Raw shape: (566, 38)
+2026-08-09 19:34:34,581 [INFO]   Final shape: (566, 35)
+2026-08-09 19:34:34,582 [INFO] Loading normal expression from: D:\New folder (9)\gloom updated\trial\data\raw\Gtex (normal samples)\gene_tpm_v11_lung.gct.gz
+2026-08-09 19:34:34,583 [INFO]   GCT version line : #1.2
+2026-08-09 19:34:34,583 [INFO]   GCT dimension line: 74628	604
+2026-08-09 19:34:42,062 [INFO]   Raw shape (after preamble skip): (74628, 606)
+2026-08-09 19:34:42,371 [WARNING]   1307 duplicate gene symbols — keeping highest-mean row.
+2026-08-09 19:34:42,901 [INFO]   Final shape: (73321, 604)
+2026-08-09 19:34:42,902 [INFO] Loading normal metadata from: D:\New folder (9)\gloom updated\trial\data\raw\Gtex (normal samples)\GTEx_Analysis_v11_Annotations_SampleAttributesDS - LUAD.txt
+2026-08-09 19:34:42,926 [INFO]   Raw shape: (1892, 119)  (all assay types)
+2026-08-09 19:34:42,931 [INFO]   SMAFRZE=='RNASEQ'         : 1892 →  604 samples (dropped small-RNA / WGS / WES / OMNI / EXCLUDE)
+2026-08-09 19:34:42,931 [INFO]   ANALYTE_TYPE=='RNA:Total RNA':  604 →  604 samples
+2026-08-09 19:34:42,931 [INFO]   Retaining 11 QC columns: ['SAMPID', 'SMTS', 'SMTSD', 'SMRIN', 'SMATSSCR', 'SMRDTTL', 'SMMAPRT', 'SMRRNART', 'SMRDLGTH', 'SMNABTCHT', 'SMGEBTCHT']
+2026-08-09 19:34:42,931 [INFO]   SMRIN  (RNA integrity) : mean=7.17  min=3.5  max=9.7
+2026-08-09 19:34:42,937 [INFO]   SMATSSCR (autolysis)   : {0.0: 43, 1.0: 410, 2.0: 128, 3.0: 10}
+2026-08-09 19:34:42,937 [INFO]   SMMAPRT  (map rate)    : mean=0.9836  min=0.8003
+2026-08-09 19:34:42,937 [INFO]   Final shape: (604, 10)  (604 RNA-seq samples × 10 QC columns)
+2026-08-09 19:34:42,938 [INFO] Loading labeled LUAD gene list from: D:\New folder (9)\gloom updated\trial\data\raw\LCGene (Labeled LUAD Data)\LCGene_human_LUAD_filtered.tsv
+2026-08-09 19:34:42,942 [INFO]   Raw shape: (517, 10)
+2026-08-09 19:34:42,943 [INFO]   Unique labeled LUAD genes loaded: 517
+2026-08-09 19:34:42,951 [INFO]   Full LCGene table saved to: D:\New folder (9)\gloom updated\trial\data\processed\lcgene_luad_full.csv
+2026-08-09 19:34:42,951 [INFO] 
+Saving raw-loaded files to processed directory …
+2026-08-09 19:35:06,343 [INFO] 
+============================================================
+2026-08-09 19:35:06,343 [INFO] STEP 1 SUMMARY
+2026-08-09 19:35:06,343 [INFO] ============================================================
+2026-08-09 19:35:06,343 [INFO]   Tumor expression   :  20512 genes  x  510 samples
+2026-08-09 19:35:06,343 [INFO]   Normal expression  :  73321 genes  x  604 samples
+2026-08-09 19:35:06,343 [INFO]   Normal metadata    :    604 RNA-seq samples  x  10 QC columns
+2026-08-09 19:35:06,343 [INFO]   Labeled LUAD genes :    517 unique gene symbols (LCGene)
+2026-08-09 19:35:06,343 [INFO] STEP 1 COMPLETE
+2026-08-09 19:35:06,365 [INFO] <<< Step 1   — Data loading DONE (34.5s)
+2026-08-09 19:35:06,365 [INFO] >>> Step 2   — Preprocessing 
+2026-08-09 19:35:07,574 [INFO] ============================================================
+2026-08-09 19:35:07,574 [INFO] STEP 2 — DATA PREPROCESSING & QUALITY CONTROL
+2026-08-09 19:35:07,574 [INFO] ============================================================
+2026-08-09 19:35:11,521 [INFO] 
+--- Tumor preprocessing ---
+2026-08-09 19:35:11,622 [INFO]   [tumor] Replaced 1463479 zeros and 0 negatives with NaN.
+2026-08-09 19:35:11,802 [INFO]   [tumor] log2(x+1) applied. Range: [0.004, 20.450]
+2026-08-09 19:35:11,850 [INFO]   [tumor] Low-expr filter: 20512 → 18412 genes.
+2026-08-09 19:35:13,452 [INFO]   [tumor] Low-var filter: 18412 → 16570 genes.
+2026-08-09 19:35:13,452 [WARNING]   [tumor] No common samples — trying TCGA ID truncation.
+2026-08-09 19:35:13,483 [INFO]   [tumor] Retained 510 common samples.
+2026-08-09 19:35:13,494 [INFO]   [tumor] Sample count OK: 510 >= 50.
+2026-08-09 19:35:13,494 [INFO] 
+--- Normal preprocessing ---
+2026-08-09 19:35:13,921 [INFO]   [normal] Replaced 21868568 zeros and 0 negatives with NaN.
+2026-08-09 19:35:14,841 [INFO]   [normal] log2(x+1) applied. Range: [0.000, 16.393]
+2026-08-09 19:35:14,991 [INFO]   [normal] Low-expr filter: 73321 → 23510 genes.
+2026-08-09 19:35:17,224 [INFO]   [normal] Low-var filter: 23510 → 21159 genes.
+2026-08-09 19:35:17,251 [INFO]   [normal] Retained 604 common samples.
+2026-08-09 19:35:17,261 [INFO]   [normal] Sample count OK: 604 >= 50.
+2026-08-09 19:35:17,261 [INFO] 
+Generating QC plots …
+2026-08-09 19:35:34,984 [INFO] 
+============================================================
+2026-08-09 19:35:34,984 [INFO] STEP 2 SUMMARY
+2026-08-09 19:35:34,984 [INFO] ============================================================
+2026-08-09 19:35:34,984 [INFO]   Tumor  expr :  16570 genes x  510 samples
+2026-08-09 19:35:34,984 [INFO]   Normal expr :  21159 genes x  604 samples
+2026-08-09 19:35:34,984 [INFO] STEP 2 COMPLETE
+2026-08-09 19:35:35,017 [INFO] <<< Step 2   — Preprocessing DONE (28.7s)
+2026-08-09 19:35:35,017 [INFO] >>> Step 3   — Harmonization 
+2026-08-09 19:35:35,023 [INFO] ============================================================
+2026-08-09 19:35:35,023 [INFO] STEP 3 — GENE ID HARMONIZATION
+2026-08-09 19:35:35,023 [INFO] ============================================================
+2026-08-09 19:35:37,781 [WARNING]   [tumor] Dropping 1 invalid symbols.
+2026-08-09 19:35:37,801 [INFO]   [tumor] Normalised: 16570 → 16569 genes.
+2026-08-09 19:35:37,818 [INFO]   [normal] Normalised: 21159 → 21159 genes.
+2026-08-09 19:35:37,823 [INFO]   Common genes: 10986
+2026-08-09 19:35:37,830 [INFO]   LCGene retained: 438 / 517 (84.7%)
+2026-08-09 19:35:37,830 [WARNING]   LCGene genes lost: ABCB4, AKR1B10, ASCL1, BCL2L14, BPIFA1, BRINP1, BRSK2, C20ORF85, CA9, CASC1, CCKBR, CDX2, CHGA, CHRNA1, CHRNA5, CHRNA9, CLCA2, CLDN2, CSMD1, CYP2C19, CYP2C9, DLK1, DLX5, DPYSL5, DRD2, DSC3, ECE2, ELAVL2, EPHA7, FAM83A, FUT6, FZD9, GABRA3, GATA4, GPR87, HMGA2, HNF4A, HOXB9, IGF2BP3, INSM1, KCNH1, KCNJ3, KIF14, KIF5A, KLK6, KRT81, LEP, LGSN, MAGEA1, MAGEA6, MAGEC1, MMP13, MYO18B, NOV, NR0B1, NR1I2, NRXN1, OPCML, PAEP, PAX5, PITX2, PRAME, PTPRH, RGS17, SCGN, SERPINB4, SERPINB5, T, TERT, TF, TFAP2A, TFAP2B, TRIM31, TRPM8, UGT1A6, VIL1, VTCN1, WISP1, XDH
+2026-08-09 19:35:47,975 [INFO]   Common genes: 10986
+2026-08-09 19:35:47,975 [INFO] STEP 3 COMPLETE
+2026-08-09 19:35:47,980 [INFO] <<< Step 3   — Harmonization DONE (13.0s)
+2026-08-09 19:35:47,980 [INFO] >>> Step 4   — Differential expr 
+2026-08-09 19:35:48,063 [INFO] ============================================================
+2026-08-09 19:35:48,063 [INFO] STEP 4 — DIFFERENTIAL EXPRESSION
+2026-08-09 19:35:48,063 [INFO] ============================================================
+2026-08-09 19:35:49,681 [INFO]   Tumor: (10986, 510)  Normal: (10986, 604)
+2026-08-09 19:35:49,771 [INFO]   Running Welch t-test for 10986 genes …
+2026-08-09 19:35:52,431 [INFO]   Significant at FDR<=0.001: 10882
+2026-08-09 19:35:53,067 [INFO]   Up: 9700  Down: 15  NS: 1271
+2026-08-09 19:35:53,067 [INFO] STEP 4 COMPLETE
+2026-08-09 19:35:53,073 [INFO] <<< Step 4   — Differential expr DONE (5.1s)
+2026-08-09 19:35:53,073 [INFO] >>> Step 5   — Expr features 
+2026-08-09 19:35:53,079 [INFO] ============================================================
+2026-08-09 19:35:53,079 [INFO] STEP 5 — EXPRESSION FEATURE CONSTRUCTION
+2026-08-09 19:35:53,079 [INFO] ============================================================
+2026-08-09 19:35:54,752 [INFO]   Computing stats for [tumor] ((10986, 510)) …
+2026-08-09 19:36:01,605 [INFO]   Computing stats for [normal] ((10986, 604)) …
+2026-08-09 19:36:08,443 [INFO]   [expression_features] Validated. Shape: (10986, 29)
+2026-08-09 19:36:09,112 [INFO]   Expression features: (10986, 29)
+2026-08-09 19:36:09,118 [INFO] STEP 5 COMPLETE
+2026-08-09 19:36:09,124 [INFO] <<< Step 5   — Expr features DONE (16.1s)
+2026-08-09 19:36:09,124 [INFO] >>> Step 6   — Tumor co-expr network 
+2026-08-09 19:36:09,492 [INFO] ============================================================
+2026-08-09 19:36:09,492 [INFO] STEP 6 — CO-EXPRESSION NETWORK CONSTRUCTION
+2026-08-09 19:36:09,492 [INFO] ============================================================
+2026-08-09 19:36:10,276 [INFO]   Matrix: 10986 genes x 510 samples | cutoff |r|>=0.6
+2026-08-09 19:36:11,033 [INFO]   Chunk 10/22 edges so far: 86,077 (0.7s)
+2026-08-09 19:36:11,821 [INFO]   Chunk 20/22 edges so far: 109,749 (1.5s)
+2026-08-09 19:36:11,971 [INFO]   Chunk 22/22 edges so far: 110,508 (1.7s)
+2026-08-09 19:36:12,013 [INFO]   Total edges: 110,508
+2026-08-09 19:36:15,012 [INFO]   Graph: 4,977 nodes, 110,508 edges
+2026-08-09 19:36:17,631 [INFO]   Runtime: 1.8s
+2026-08-09 19:36:17,631 [INFO] STEP 6 COMPLETE
+2026-08-09 19:36:17,635 [INFO] <<< Step 6   — Tumor co-expr network DONE (8.5s)
+2026-08-09 19:36:17,635 [INFO] >>> Step 7   — Network features 
+2026-08-09 19:36:17,642 [INFO] ============================================================
+2026-08-09 19:36:17,642 [INFO] STEP 7 — NETWORK FEATURE EXTRACTION
+2026-08-09 19:36:17,642 [INFO] ============================================================
+2026-08-09 19:36:19,297 [INFO]   Graph: 10,986 nodes, 110,508 edges
+2026-08-09 19:36:19,302 [INFO]   Extracting degree features …
+2026-08-09 19:36:19,361 [INFO]   Extracting average neighbour degree …
+2026-08-09 19:36:19,392 [INFO]   Betweenness centrality (n=10,986) …
+2026-08-09 19:36:30,250 [INFO]   Closeness centrality …
+2026-08-09 19:37:27,782 [INFO]   Eigenvector centrality …
+2026-08-09 19:37:29,792 [INFO]   Clustering coefficient …
+2026-08-09 19:37:46,786 [INFO]   Edge weight statistics …
+2026-08-09 19:37:47,031 [INFO]   Component features …
+2026-08-09 19:37:47,064 [INFO]   All features extracted in 87.8s
+2026-08-09 19:37:48,021 [INFO]   Network features: (10986, 13)
+2026-08-09 19:37:48,021 [INFO] STEP 7 COMPLETE
+2026-08-09 19:37:48,021 [INFO] <<< Step 7   — Network features DONE (90.4s)
+2026-08-09 19:37:48,021 [INFO] >>> Step 8   — Feature integration 
+2026-08-09 19:37:48,271 [INFO] ============================================================
+2026-08-09 19:37:48,271 [INFO] STEP 8 — FEATURE INTEGRATION
+2026-08-09 19:37:48,271 [INFO] ============================================================
+2026-08-09 19:37:48,332 [INFO]   Expression: (10986, 29)  Network: (10986, 13)
+2026-08-09 19:37:48,341 [INFO]   Concatenated: (10986, 42)
+2026-08-09 19:37:48,348 [INFO]   Removed 21 collinear features: ['weighted_degree', 'component_size', 'min_edge_weight', 'tumor_median', 'normal_median', 't_stat', 'tumor_iqr_rank', 'tumor_mean_rank', 'cohens_d_rank', 'abs_log2fc_rank', 'neg_log10_padj_rank', 'betweenness_centrality', 'clustering_coefficient', 'max_edge_weight', 'std_edge_weight', 'in_largest_component', 'log2fc', 'iqr_ratio', 'std_ratio', 'tumor_kurtosis', 'normal_kurtosis']
+2026-08-09 19:37:48,348 [INFO]   Features after collinearity removal: 21
+2026-08-09 19:37:48,364 [INFO]   Highly correlated pairs (|r|>=0.95): 2
+2026-08-09 19:37:48,670 [INFO]   Differential network features not found — run step6b + step7b to include them.
+2026-08-09 19:37:49,009 [INFO]   Integrated features: (10986, 21)
+2026-08-09 19:37:49,010 [INFO] STEP 8 COMPLETE
+2026-08-09 19:37:49,011 [INFO] <<< Step 8   — Feature integration DONE (1.0s)
+2026-08-09 19:37:49,011 [INFO] >>> Step 9   — Label construction 
+2026-08-09 19:37:49,029 [INFO] ============================================================
+2026-08-09 19:37:49,029 [INFO] STEP 9 — LABEL CONSTRUCTION
+2026-08-09 19:37:49,029 [INFO] ============================================================
+2026-08-09 19:37:49,073 [INFO]   LCGene symbols: 517
+2026-08-09 19:37:49,083 [INFO]   Universe trimming: removing 1190 noisy unlabeled genes (non-expressed + no DE signal)
+2026-08-09 19:37:49,087 [INFO]   Total: 9796  Positive (known LCGene): 438 (4.47%)  Unlabeled: 9358
+2026-08-09 19:37:49,087 [INFO]   [PU framing] Negatives are UNLABELED — not confirmed non-cancer genes.
+2026-08-09 19:37:49,242 [INFO]   LCGene genes unmatched: 79
+2026-08-09 19:37:49,250 [INFO] STEP 9 COMPLETE
+2026-08-09 19:37:49,251 [INFO] <<< Step 9   — Label construction DONE (0.2s)
+2026-08-09 19:37:49,251 [INFO] >>> Step 10  — Train/val split 
+2026-08-09 19:37:49,252 [INFO] ============================================================
+2026-08-09 19:37:49,252 [INFO] STEP 10 — TRAIN/VALIDATION SPLIT
+2026-08-09 19:37:49,252 [INFO] ============================================================
+2026-08-09 19:37:49,301 [INFO]   Features: (9796, 21)  Labels: 9796
+2026-08-09 19:37:49,306 [INFO]   Train: 7836 (pos=350)  Val: 1960 (pos=88)
+2026-08-09 19:37:49,308 [WARNING]   USE_FEATURE_SELECTION=True but feature_importance.csv not found — skipping. Run step13 first.
+2026-08-09 19:37:50,090 [INFO] STEP 10 COMPLETE
+2026-08-09 19:37:50,091 [INFO] <<< Step 10  — Train/val split DONE (0.8s)
+2026-08-09 19:37:50,091 [INFO] >>> Step 11  — Model training 
+2026-08-09 19:37:50,158 [INFO] ============================================================
+2026-08-09 19:37:50,158 [INFO] STEP 11 — MODEL TRAINING
+2026-08-09 19:37:50,158 [INFO] ============================================================
+2026-08-09 19:37:50,211 [INFO]   X_train: (7836, 21)  pos=350
+2026-08-09 19:37:50,244 [INFO]   XGBoost added (scale_pos_weight=21.4)
+2026-08-09 19:37:50,392 [INFO]   Random undersampling enabled (imbalanced-learn found).
+2026-08-09 19:37:50,392 [INFO] 
+  [random_forest] CV ...
+2026-08-09 19:37:51,024 [INFO]     Fold 1 AUROC=0.9458 AUPRC=0.4737 F1=0.4385 MCC=0.4591
+2026-08-09 19:37:51,654 [INFO]     Fold 2 AUROC=0.9271 AUPRC=0.5034 F1=0.4541 MCC=0.4471
+2026-08-09 19:37:52,291 [INFO]     Fold 3 AUROC=0.9305 AUPRC=0.4953 F1=0.4132 MCC=0.4182
+2026-08-09 19:37:52,917 [INFO]     Fold 4 AUROC=0.9447 AUPRC=0.4821 F1=0.4224 MCC=0.4237
+2026-08-09 19:37:53,550 [INFO]     Fold 5 AUROC=0.9373 AUPRC=0.4866 F1=0.4344 MCC=0.4447
+2026-08-09 19:37:53,550 [INFO]   [random_forest] AUROC=0.9371±0.0074  AUPRC=0.4882±0.0103  F1=0.4325±0.0140  MCC=0.4386±0.0153
+2026-08-09 19:37:53,552 [INFO]   [random_forest] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-09 19:38:46,522 [INFO]   [random_forest] Best params: {'n_estimators': 500, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'max_depth': None}  CV-AUPRC=0.5299
+2026-08-09 19:38:46,751 [INFO]   [random_forest] Calibrated (sigmoid, holdout) → model_random_forest.joblib
+2026-08-09 19:38:46,751 [INFO] 
+  [gradient_boosting] CV ...
+2026-08-09 19:38:47,252 [INFO]     Fold 1 AUROC=0.9479 AUPRC=0.4209 F1=0.3926 MCC=0.4392
+2026-08-09 19:38:47,775 [INFO]     Fold 2 AUROC=0.9348 AUPRC=0.4917 F1=0.4234 MCC=0.4488
+2026-08-09 19:38:48,281 [INFO]     Fold 3 AUROC=0.9351 AUPRC=0.5002 F1=0.4028 MCC=0.4308
+2026-08-09 19:38:48,791 [INFO]     Fold 4 AUROC=0.9448 AUPRC=0.4863 F1=0.4225 MCC=0.4538
+2026-08-09 19:38:49,291 [INFO]     Fold 5 AUROC=0.9403 AUPRC=0.4758 F1=0.3741 MCC=0.3971
+2026-08-09 19:38:49,291 [INFO]   [gradient_boosting] AUROC=0.9406±0.0052  AUPRC=0.4750±0.0282  F1=0.4031±0.0186  MCC=0.4339±0.0200
+2026-08-09 19:38:49,291 [INFO]   [gradient_boosting] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-09 19:40:11,812 [INFO]   [gradient_boosting] Best params: {'subsample': 0.8, 'n_estimators': 300, 'max_depth': 4, 'learning_rate': 0.05}  CV-AUPRC=0.5215
+2026-08-09 19:40:11,848 [INFO]   [gradient_boosting] Calibrated (sigmoid, holdout) → model_gradient_boosting.joblib
+2026-08-09 19:40:11,848 [INFO] 
+  [logistic_regression] CV ...
+2026-08-09 19:40:12,813 [INFO]     Fold 1 AUROC=0.8123 AUPRC=0.1123 F1=0.1239 MCC=0.1496
+2026-08-09 19:40:13,769 [INFO]     Fold 2 AUROC=0.7522 AUPRC=0.1544 F1=0.1288 MCC=0.1335
+2026-08-09 19:40:14,720 [INFO]     Fold 3 AUROC=0.8177 AUPRC=0.1193 F1=0.1262 MCC=0.1542
+2026-08-09 19:40:15,714 [INFO]     Fold 4 AUROC=0.7737 AUPRC=0.1669 F1=0.1372 MCC=0.1532
+2026-08-09 19:40:16,681 [INFO]     Fold 5 AUROC=0.7693 AUPRC=0.1963 F1=0.1251 MCC=0.1309
+2026-08-09 19:40:16,681 [INFO]   [logistic_regression] AUROC=0.7850±0.0256  AUPRC=0.1498±0.0310  F1=0.1282±0.0047  MCC=0.1443±0.0100
+2026-08-09 19:40:16,683 [INFO]   [logistic_regression] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-09 19:42:27,743 [INFO]   [logistic_regression] Best params: {'penalty': 'l1', 'C': 0.01}  CV-AUPRC=0.1778
+2026-08-09 19:42:27,750 [INFO]   [logistic_regression] Calibrated (sigmoid, holdout) → model_logistic_regression.joblib
+2026-08-09 19:42:27,750 [INFO] 
+  [extra_trees] CV ...
+2026-08-09 19:42:28,161 [INFO]     Fold 1 AUROC=0.9451 AUPRC=0.4514 F1=0.4672 MCC=0.4840
+2026-08-09 19:42:28,575 [INFO]     Fold 2 AUROC=0.9271 AUPRC=0.4539 F1=0.4476 MCC=0.4413
+2026-08-09 19:42:29,001 [INFO]     Fold 3 AUROC=0.9376 AUPRC=0.4959 F1=0.4454 MCC=0.4543
+2026-08-09 19:42:29,412 [INFO]     Fold 4 AUROC=0.9413 AUPRC=0.4691 F1=0.4405 MCC=0.4423
+2026-08-09 19:42:29,831 [INFO]     Fold 5 AUROC=0.9314 AUPRC=0.4492 F1=0.4000 MCC=0.3940
+2026-08-09 19:42:29,831 [INFO]   [extra_trees] AUROC=0.9365±0.0065  AUPRC=0.4639±0.0174  F1=0.4401±0.0220  MCC=0.4432±0.0290
+2026-08-09 19:42:29,835 [INFO]   [extra_trees] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-09 19:43:09,898 [INFO]   [extra_trees] Best params: {'n_estimators': 800, 'min_samples_leaf': 1, 'max_features': 0.5, 'max_depth': None, 'bootstrap': True}  CV-AUPRC=0.5422
+2026-08-09 19:43:10,201 [INFO]   [extra_trees] Calibrated (sigmoid, holdout) → model_extra_trees.joblib
+2026-08-09 19:43:10,202 [INFO] 
+  [xgboost] CV ...
+2026-08-09 19:43:10,528 [INFO]     Fold 1 AUROC=0.9506 AUPRC=0.4964 F1=0.3284 MCC=0.3898
+2026-08-09 19:43:10,789 [INFO]     Fold 2 AUROC=0.9279 AUPRC=0.4997 F1=0.3399 MCC=0.3803
+2026-08-09 19:43:11,063 [INFO]     Fold 3 AUROC=0.9315 AUPRC=0.4816 F1=0.3398 MCC=0.3830
+2026-08-09 19:43:11,338 [INFO]     Fold 4 AUROC=0.9430 AUPRC=0.4942 F1=0.3684 MCC=0.4147
+2026-08-09 19:43:11,611 [INFO]     Fold 5 AUROC=0.9378 AUPRC=0.5015 F1=0.3380 MCC=0.3813
+2026-08-09 19:43:11,612 [INFO]   [xgboost] AUROC=0.9382±0.0081  AUPRC=0.4947±0.0070  F1=0.3429±0.0134  MCC=0.3898±0.0129
+2026-08-09 19:43:11,615 [INFO]   [xgboost] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-09 19:43:38,851 [INFO]   [xgboost] Best params: {'subsample': 0.9, 'n_estimators': 200, 'max_depth': 5, 'learning_rate': 0.1, 'colsample_bytree': 1.0}  CV-AUPRC=0.5429
+2026-08-09 19:43:38,863 [INFO]   [xgboost] Calibrated (sigmoid, holdout) → model_xgboost.joblib
+2026-08-09 19:43:38,863 [INFO] 
+All models trained in 348.6s
+2026-08-09 19:43:38,864 [INFO]   Best: xgboost (AUPRC=0.4947)
+2026-08-09 19:43:38,892 [INFO]   Best model (xgboost, already calibrated) saved as best_model.joblib
+2026-08-09 19:43:39,121 [INFO] STEP 11 COMPLETE
+2026-08-09 19:43:39,155 [INFO] <<< Step 11  — Model training DONE (349.1s)
+2026-08-09 19:43:39,155 [INFO] >>> Step 12  — Model evaluation 
+2026-08-09 19:43:39,165 [INFO] ============================================================
+2026-08-09 19:43:39,165 [INFO] STEP 12 — MODEL EVALUATION
+2026-08-09 19:43:39,165 [INFO] ============================================================
+2026-08-09 19:43:39,190 [INFO]   Val: 1960 genes  pos=88
+2026-08-09 19:43:39,646 [INFO]   [extra_trees           ] AUROC=0.9318 AUPRC=0.5515 F1@0.50=0.5340 MCC@0.50=0.5121 [oracle F1@0.19=0.5665] R@100=0.5795 P@100=0.5100
+2026-08-09 19:43:39,681 [INFO]   [gradient_boosting     ] AUROC=0.9291 AUPRC=0.5097 F1@0.50=0.4462 MCC@0.50=0.4378 [oracle F1@0.39=0.4898] R@100=0.5000 P@100=0.4400
+2026-08-09 19:43:39,705 [INFO]   [logistic_regression   ] AUROC=0.8473 AUPRC=0.2709 F1@0.50=0.3619 MCC@0.50=0.3317 [oracle F1@0.14=0.3761] R@100=0.3636 P@100=0.3200
+2026-08-09 19:43:39,806 [INFO]   [random_forest         ] AUROC=0.9225 AUPRC=0.5066 F1@0.50=0.4808 MCC@0.50=0.4585 [oracle F1@0.19=0.5217] R@100=0.5455 P@100=0.4800
+2026-08-09 19:43:39,828 [INFO]   [xgboost               ] AUROC=0.9296 AUPRC=0.5210 F1@0.50=0.4976 MCC@0.50=0.4757 [oracle F1@0.18=0.5051] R@100=0.5114 P@100=0.4500
+2026-08-09 19:43:39,831 [INFO]   Ensemble weights (AUPRC): extra_trees=0.224  gradient_boosting=0.229  logistic_regression=0.072  random_forest=0.236  xgboost=0.239
+2026-08-09 19:43:39,855 [INFO]   [ensemble_soft_vote    ] AUROC=0.9308 AUPRC=0.5371 F1@0.50=0.4953 MCC@0.50=0.4756 [oracle F1@0.25=0.5595] R@100=0.5455 P@100=0.4800
+2026-08-09 19:43:39,872 [INFO]   Ensemble probs saved → ensemble_soft_vote_probs.csv
+2026-08-09 19:43:39,876 [INFO]   Classification reports saved to: D:\New folder (9)\gloom updated\trial\outputs\results\classification_reports
+2026-08-09 19:43:40,687 [INFO]   Confusion matrix grid saved: eval_confusion_matrices.png
+2026-08-09 19:43:41,144 [INFO]   Multi-threshold confusion matrices saved: eval_confusion_multithreshold.png
+2026-08-09 19:43:41,488 [INFO] STEP 12 COMPLETE
+2026-08-09 19:43:41,495 [INFO] <<< Step 12  — Model evaluation DONE (2.3s)
+2026-08-09 19:43:41,495 [INFO] >>> Step 13  — Feature importance 
+2026-08-09 19:43:41,514 [INFO] ============================================================
+2026-08-09 19:43:41,514 [INFO] STEP 13 — FEATURE IMPORTANCE
+2026-08-09 19:43:41,515 [INFO] ============================================================
+2026-08-09 19:43:42,053 [INFO]   [xgboost] Permutation importance (n_repeats=10) …
+2026-08-09 19:43:46,781 [INFO]   Top 5: {'tumor_std': 0.9999999999922564, 'normal_std': 0.1684129379179298, 'tumor_mean': 0.15664264662211377, 'abs_log2fc': 0.13907652099413284, 'tumor_skewness': 0.13813405158326547}
+2026-08-09 19:43:47,095 [INFO]   Feature importance shape: (21, 10)
+2026-08-09 19:43:47,096 [INFO]   Top feature: tumor_std (0.8393)
+2026-08-09 19:43:47,096 [INFO] STEP 13 COMPLETE
+2026-08-09 19:43:47,109 [INFO] <<< Step 13  — Feature importance DONE (5.6s)
+2026-08-09 19:43:47,109 [INFO] >>> Step 14  — Gene ranking 
+2026-08-09 19:43:47,120 [INFO] ============================================================
+2026-08-09 19:43:47,121 [INFO] STEP 14 — GENE PREDICTION & RANKING
+2026-08-09 19:43:47,121 [INFO] ============================================================
+2026-08-09 19:43:47,218 [WARNING]   PU bagging scores not found — run step11b first for best results.
+2026-08-09 19:43:47,218 [WARNING]   Falling back to best_model.joblib.
+2026-08-09 19:43:47,297 [INFO]   Score source: xgboost  |  novel threshold: 0.85
+2026-08-09 19:43:47,338 [INFO]   Total: 10,986  Novel candidates (prob>=0.85): 0  Sensitivity list (prob>=0.5): 393
+2026-08-09 19:43:47,339 [INFO]   Median positive (known) rank: 722
+2026-08-09 19:43:47,339 [INFO]   Positive (known) in top-50:  18  top-100: 30  top-200: 48  top-500: 99
+2026-08-09 19:43:47,339 [INFO]   Recall@50=0.0411  Recall@100=0.0685  Recall@200=0.1096  Recall@500=0.2260
+2026-08-09 19:43:47,339 [INFO]   Precision@50=0.3600  Precision@100=0.3000
+2026-08-09 19:43:47,839 [INFO]   High-confidence novel candidates saved: 0 genes (prob>=0.85)
+2026-08-09 19:43:47,840 [INFO]   Sensitivity novel candidates saved:     393 genes (prob>=0.5)
+2026-08-09 19:43:47,841 [INFO]   Query gene rankings saved: 0 genes
+2026-08-09 19:43:47,842 [INFO] STEP 14 COMPLETE
+2026-08-09 19:43:47,846 [INFO] <<< Step 14  — Gene ranking DONE (0.7s)
+2026-08-09 19:43:47,846 [INFO] >>> Step 15  — Network annotation 
+2026-08-09 19:43:47,852 [INFO] ============================================================
+2026-08-09 19:43:47,852 [INFO] STEP 15 — NETWORK ANNOTATION
+2026-08-09 19:43:47,852 [INFO] ============================================================
+2026-08-09 19:43:49,854 [INFO]   Graph: 10,986 nodes, 110,508 edges
+2026-08-09 19:43:51,469 [INFO]   Positive edges: 108,468  Negative: 2,040
+2026-08-09 19:43:58,522 [INFO]   LCGene nodes: 438  Novel: 0
+2026-08-09 19:43:58,522 [INFO] STEP 15 COMPLETE
+2026-08-09 19:43:58,543 [INFO] <<< Step 15  — Network annotation DONE (10.7s)
+2026-08-09 19:43:58,543 [INFO] >>> Step 16  — Network export 
+2026-08-09 19:43:58,590 [INFO] ============================================================
+2026-08-09 19:43:58,590 [INFO] STEP 16 — NETWORK EXPORT
+2026-08-09 19:43:58,591 [INFO] ============================================================
+2026-08-09 19:44:01,892 [INFO]   Graph: 10,986 nodes, 110,508 edges
+2026-08-09 19:44:09,522 [INFO]   GraphML saved: D:\New folder (9)\gloom updated\trial\outputs\results\network\exports/network_full.graphml
+2026-08-09 19:44:14,496 [INFO]   Full network exports complete.
+2026-08-09 19:44:14,533 [INFO]   [top100] 100 nodes, 38 edges
+2026-08-09 19:44:14,624 [INFO]   [lcgene] 438 nodes, 925 edges
+2026-08-09 19:44:14,803 [INFO]   [candidates] 1088 nodes, 1446 edges
+2026-08-09 19:44:19,753 [INFO] 
+  Sub-networks:
+2026-08-09 19:44:19,753 [INFO]     top100               nodes=  100  edges=     38
+2026-08-09 19:44:19,753 [INFO]     lcgene               nodes=  438  edges=    925
+2026-08-09 19:44:19,753 [INFO]     novel                nodes=    0  edges=      0
+2026-08-09 19:44:19,753 [INFO]     candidates           nodes=1,088  edges=  1,446
+2026-08-09 19:44:19,754 [INFO] STEP 16 COMPLETE
+2026-08-09 19:44:19,775 [INFO] <<< Step 16  — Network export DONE (21.2s)
+2026-08-09 19:44:19,775 [INFO] >>> Step 17  — Visualization 
+2026-08-09 19:44:19,972 [INFO] ============================================================
+2026-08-09 19:44:19,972 [INFO] STEP 17 — INTERACTIVE VISUALIZATION
+2026-08-09 19:44:19,972 [INFO] ============================================================
+2026-08-09 19:44:20,159 [INFO] [1] Volcano …
+2026-08-09 19:44:20,676 [INFO]   Volcano saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_volcano.html
+2026-08-09 19:44:20,676 [INFO] [2] Ranking …
+2026-08-09 19:44:20,966 [INFO]   Ranking plot saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_ranking.html
+2026-08-09 19:44:20,967 [INFO] [3] Network …
+2026-08-09 19:44:21,106 [INFO]   Network plot saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_network.html
+2026-08-09 19:44:21,106 [INFO] [4] Feature importance …
+2026-08-09 19:44:21,146 [INFO]   Feature importance saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_feature_importance.html
+2026-08-09 19:44:21,146 [INFO] [5] KEGG pathways …
+2026-08-09 19:44:21,147 [INFO]   KEGG file not found (All candidates) — skipped.
+2026-08-09 19:44:21,147 [INFO]   KEGG file not found (Upregulated) — skipped.
+2026-08-09 19:44:21,147 [INFO]   KEGG file not found (Downregulated) — skipped.
+2026-08-09 19:44:21,147 [INFO] [6] Dashboard …
+2026-08-09 19:44:21,231 [INFO]   Combined dashboard saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_dashboard.html
+2026-08-09 19:44:21,235 [INFO] STEP 17 COMPLETE
+2026-08-09 19:44:21,239 [INFO] <<< Step 17  — Visualization DONE (1.5s)
+2026-08-09 19:44:21,239 [INFO] >>> Step 18  — Final report 
+2026-08-09 19:44:21,254 [INFO] ============================================================
+2026-08-09 19:44:21,255 [INFO] STEP 18 — FINAL OUTPUTS & REPORTING
+2026-08-09 19:44:21,255 [INFO] ============================================================
+2026-08-09 19:44:21,255 [INFO] [1] Building summary table …
+2026-08-09 19:44:21,530 [INFO]   Summary table: (10986, 29)
+2026-08-09 19:44:21,530 [INFO] [2] Building text report …
+2026-08-09 19:44:21,555 [ERROR]   Report failed: 'mcc'
+2026-08-09 19:44:21,556 [INFO] [3] Building summary figure …
+2026-08-09 19:44:22,405 [INFO]   Summary figure (PNG) saved: D:\New folder (9)\gloom updated\trial\outputs\results\reports\pipeline_summary_figure.png
+2026-08-09 19:44:23,174 [INFO]   Summary figure (PDF) saved: D:\New folder (9)\gloom updated\trial\outputs\results\reports\pipeline_summary_figure.pdf
+2026-08-09 19:44:23,176 [INFO] ============================================================
+2026-08-09 19:44:23,176 [INFO] STEP 18 SUMMARY
+2026-08-09 19:44:23,176 [INFO] ============================================================
+2026-08-09 19:44:23,177 [INFO]   Summary table: D:\New folder (9)\gloom updated\trial\outputs\results\reports/pipeline_summary_table.csv
+2026-08-09 19:44:23,177 [INFO]   Text report  : D:\New folder (9)\gloom updated\trial\outputs\results\reports/pipeline_report.txt
+2026-08-09 19:44:23,177 [INFO]   Summary fig  : D:\New folder (9)\gloom updated\trial\outputs\results\reports/pipeline_summary_figure.png
+2026-08-09 19:44:23,177 [INFO] 
+2026-08-09 19:44:23,177 [INFO]   Key deliverables:
+2026-08-09 19:44:23,177 [INFO]     Gene rankings    : D:\New folder (9)\gloom updated\trial\outputs\results\gene_rankings.csv
+2026-08-09 19:44:23,177 [INFO]     Novel candidates : D:\New folder (9)\gloom updated\trial\outputs\results/novel_candidates.csv
+2026-08-09 19:44:23,177 [INFO]     Dashboard        : D:\New folder (9)\gloom updated\trial\outputs\figures/interactive_dashboard.html
+2026-08-09 19:44:23,177 [INFO] STEP 18 COMPLETE
+2026-08-09 19:44:23,178 [INFO] <<< Step 18  — Final report DONE (1.9s)
+2026-08-09 19:44:23,178 [INFO] ======================================================================
+2026-08-09 19:44:23,178 [INFO] EXECUTION SUMMARY
+2026-08-09 19:44:23,178 [INFO] ======================================================================
+2026-08-09 19:44:23,178 [INFO]   [ OK ]       Step 0   — Config                                    0.0s
+2026-08-09 19:44:23,178 [INFO]   [ OK ]       Step 1   — Data loading                             34.5s
+2026-08-09 19:44:23,178 [INFO]   [ OK ]       Step 2   — Preprocessing                            28.7s
+2026-08-09 19:44:23,178 [INFO]   [ OK ]       Step 3   — Harmonization                            13.0s
+2026-08-09 19:44:23,178 [INFO]   [ OK ]       Step 4   — Differential expr                         5.1s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 5   — Expr features                            16.1s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 6   — Tumor co-expr network                     8.5s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 7   — Network features                         90.4s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 8   — Feature integration                       1.0s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 9   — Label construction                        0.2s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 10  — Train/val split                           0.8s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 11  — Model training                          349.1s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 12  — Model evaluation                          2.3s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 13  — Feature importance                        5.6s
+2026-08-09 19:44:23,179 [INFO]   [ OK ]       Step 14  — Gene ranking                              0.7s
+2026-08-09 19:44:23,180 [INFO]   [ OK ]       Step 15  — Network annotation                       10.7s
+2026-08-09 19:44:23,180 [INFO]   [ OK ]       Step 16  — Network export                           21.2s
+2026-08-09 19:44:23,180 [INFO]   [ OK ]       Step 17  — Visualization                             1.5s
+2026-08-09 19:44:23,180 [INFO]   [ OK ]       Step 18  — Final report                              1.9s
+2026-08-09 19:44:23,180 [INFO]   Total: 591.3s (9.9 min)
+2026-08-09 19:44:23,180 [INFO]   Pipeline COMPLETE.
+2026-08-09 19:44:23,180 [INFO] ======================================================================
+2026-08-10 15:02:53,966 [INFO] ======================================================================
+2026-08-10 15:02:53,966 [INFO] LUAD ML PIPELINE — FULL RUN
+2026-08-10 15:02:53,967 [INFO] Running 25 step(s)
+2026-08-10 15:02:53,967 [INFO] ======================================================================
+2026-08-10 15:02:53,967 [INFO] >>> Step 0   — Config 
+2026-08-10 15:02:53,969 [INFO] <<< Step 0   — Config DONE (0.0s)
+2026-08-10 15:02:53,969 [INFO] >>> Step 1   — Data loading 
+2026-08-10 15:02:54,748 [INFO] ============================================================
+2026-08-10 15:02:54,748 [INFO] STEP 1 — DATA LOADING
+2026-08-10 15:02:54,748 [INFO] ============================================================
+2026-08-10 15:02:54,748 [INFO] Loading tumor expression from: D:\New folder (9)\gloom updated\trial\data\raw\cBioPortal (RNA Seq Data)\data_mrna_seq_v2_rsem.txt
+2026-08-10 15:02:56,577 [INFO]   Raw shape: (20531, 512)
+2026-08-10 15:02:56,742 [WARNING]   19 duplicate gene symbols found — keeping highest-mean row.
+2026-08-10 15:02:56,888 [INFO]   Final shape: (20512, 510)
+2026-08-10 15:02:56,888 [INFO] Loading tumor metadata from: D:\New folder (9)\gloom updated\trial\data\raw\cBioPortal (RNA Seq Data)\data_clinical_patient.txt
+2026-08-10 15:02:56,894 [INFO]   Raw shape: (566, 38)
+2026-08-10 15:02:56,897 [INFO]   Final shape: (566, 35)
+2026-08-10 15:02:56,897 [INFO] Loading normal expression from: D:\New folder (9)\gloom updated\trial\data\raw\Gtex (normal samples)\gene_tpm_v11_lung.gct.gz
+2026-08-10 15:02:56,900 [INFO]   GCT version line : #1.2
+2026-08-10 15:02:56,900 [INFO]   GCT dimension line: 74628	604
+2026-08-10 15:03:04,676 [INFO]   Raw shape (after preamble skip): (74628, 606)
+2026-08-10 15:03:05,043 [WARNING]   1307 duplicate gene symbols — keeping highest-mean row.
+2026-08-10 15:03:05,645 [INFO]   Final shape: (73321, 604)
+2026-08-10 15:03:05,645 [INFO] Loading normal metadata from: D:\New folder (9)\gloom updated\trial\data\raw\Gtex (normal samples)\GTEx_Analysis_v11_Annotations_SampleAttributesDS - LUAD.txt
+2026-08-10 15:03:05,682 [INFO]   Raw shape: (1892, 119)  (all assay types)
+2026-08-10 15:03:05,685 [INFO]   SMAFRZE=='RNASEQ'         : 1892 →  604 samples (dropped small-RNA / WGS / WES / OMNI / EXCLUDE)
+2026-08-10 15:03:05,686 [INFO]   ANALYTE_TYPE=='RNA:Total RNA':  604 →  604 samples
+2026-08-10 15:03:05,687 [INFO]   Retaining 11 QC columns: ['SAMPID', 'SMTS', 'SMTSD', 'SMRIN', 'SMATSSCR', 'SMRDTTL', 'SMMAPRT', 'SMRRNART', 'SMRDLGTH', 'SMNABTCHT', 'SMGEBTCHT']
+2026-08-10 15:03:05,688 [INFO]   SMRIN  (RNA integrity) : mean=7.17  min=3.5  max=9.7
+2026-08-10 15:03:05,693 [INFO]   SMATSSCR (autolysis)   : {0.0: 43, 1.0: 410, 2.0: 128, 3.0: 10}
+2026-08-10 15:03:05,693 [INFO]   SMMAPRT  (map rate)    : mean=0.9836  min=0.8003
+2026-08-10 15:03:05,694 [INFO]   Final shape: (604, 10)  (604 RNA-seq samples × 10 QC columns)
+2026-08-10 15:03:05,694 [INFO] Loading labeled LUAD gene list from: D:\New folder (9)\gloom updated\trial\data\raw\LCGene (Labeled LUAD Data)\LCGene_human_LUAD_filtered.tsv
+2026-08-10 15:03:05,698 [INFO]   Raw shape: (517, 10)
+2026-08-10 15:03:05,699 [INFO]   Unique labeled LUAD genes loaded: 517
+2026-08-10 15:03:05,707 [INFO]   Full LCGene table saved to: D:\New folder (9)\gloom updated\trial\data\processed\lcgene_luad_full.csv
+2026-08-10 15:03:05,708 [INFO] 
+Saving raw-loaded files to processed directory …
+2026-08-10 15:03:28,748 [INFO] 
+============================================================
+2026-08-10 15:03:28,748 [INFO] STEP 1 SUMMARY
+2026-08-10 15:03:28,748 [INFO] ============================================================
+2026-08-10 15:03:28,748 [INFO]   Tumor expression   :  20512 genes  x  510 samples
+2026-08-10 15:03:28,748 [INFO]   Normal expression  :  73321 genes  x  604 samples
+2026-08-10 15:03:28,748 [INFO]   Normal metadata    :    604 RNA-seq samples  x  10 QC columns
+2026-08-10 15:03:28,748 [INFO]   Labeled LUAD genes :    517 unique gene symbols (LCGene)
+2026-08-10 15:03:28,748 [INFO] STEP 1 COMPLETE
+2026-08-10 15:03:28,794 [INFO] <<< Step 1   — Data loading DONE (34.8s)
+2026-08-10 15:03:28,794 [INFO] >>> Step 1b  — Batch correction [optional]
+2026-08-10 15:03:28,800 [INFO] ============================================================
+2026-08-10 15:03:28,800 [INFO] STEP 1b — BATCH EFFECT CORRECTION (ComBat-seq)
+2026-08-10 15:03:28,800 [INFO] ============================================================
+2026-08-10 15:03:28,801 [INFO]   USE_BATCH_CORRECTION = False — skipping batch correction.
+2026-08-10 15:03:28,801 [INFO]   To enable: set USE_BATCH_CORRECTION = True in config.py.
+2026-08-10 15:03:28,801 [INFO]   Then install: pip install inmoose  (or rpy2 + R sva)
+2026-08-10 15:03:28,801 [INFO] <<< Step 1b  — Batch correction DONE (0.0s)
+2026-08-10 15:03:28,801 [INFO] >>> Step 2   — Preprocessing 
+2026-08-10 15:03:30,332 [INFO] ============================================================
+2026-08-10 15:03:30,332 [INFO] STEP 2 — DATA PREPROCESSING & QUALITY CONTROL
+2026-08-10 15:03:30,332 [INFO] ============================================================
+2026-08-10 15:03:34,241 [INFO] 
+--- Tumor preprocessing ---
+2026-08-10 15:03:34,354 [INFO]   [tumor] Replaced 1463479 zeros and 0 negatives with NaN.
+2026-08-10 15:03:34,552 [INFO]   [tumor] log2(x+1) applied. Range: [0.004, 20.450]
+2026-08-10 15:03:34,602 [INFO]   [tumor] Low-expr filter: 20512 → 18412 genes.
+2026-08-10 15:03:36,248 [INFO]   [tumor] Low-var filter: 18412 → 16570 genes.
+2026-08-10 15:03:36,266 [WARNING]   [tumor] No common samples — trying TCGA ID truncation.
+2026-08-10 15:03:36,298 [INFO]   [tumor] Retained 510 common samples.
+2026-08-10 15:03:36,308 [INFO]   [tumor] Sample count OK: 510 >= 50.
+2026-08-10 15:03:36,308 [INFO] 
+--- Normal preprocessing ---
+2026-08-10 15:03:36,783 [INFO]   [normal] Replaced 21868568 zeros and 0 negatives with NaN.
+2026-08-10 15:03:37,796 [INFO]   [normal] log2(x+1) applied. Range: [0.000, 16.393]
+2026-08-10 15:03:37,948 [INFO]   [normal] Low-expr filter: 73321 → 23510 genes.
+2026-08-10 15:03:40,206 [INFO]   [normal] Low-var filter: 23510 → 21159 genes.
+2026-08-10 15:03:40,235 [INFO]   [normal] Retained 604 common samples.
+2026-08-10 15:03:40,248 [INFO]   [normal] Sample count OK: 604 >= 50.
+2026-08-10 15:03:40,248 [INFO] 
+Generating QC plots …
+2026-08-10 15:03:58,128 [INFO] 
+============================================================
+2026-08-10 15:03:58,129 [INFO] STEP 2 SUMMARY
+2026-08-10 15:03:58,129 [INFO] ============================================================
+2026-08-10 15:03:58,129 [INFO]   Tumor  expr :  16570 genes x  510 samples
+2026-08-10 15:03:58,129 [INFO]   Normal expr :  21159 genes x  604 samples
+2026-08-10 15:03:58,129 [INFO] STEP 2 COMPLETE
+2026-08-10 15:03:58,176 [INFO] <<< Step 2   — Preprocessing DONE (29.4s)
+2026-08-10 15:03:58,176 [INFO] >>> Step 3   — Harmonization 
+2026-08-10 15:03:58,181 [INFO] ============================================================
+2026-08-10 15:03:58,181 [INFO] STEP 3 — GENE ID HARMONIZATION
+2026-08-10 15:03:58,181 [INFO] ============================================================
+2026-08-10 15:04:00,947 [WARNING]   [tumor] Dropping 1 invalid symbols.
+2026-08-10 15:04:00,964 [INFO]   [tumor] Normalised: 16570 → 16569 genes.
+2026-08-10 15:04:00,981 [INFO]   [normal] Normalised: 21159 → 21159 genes.
+2026-08-10 15:04:00,987 [INFO]   Common genes: 10986
+2026-08-10 15:04:00,991 [INFO]   LCGene retained: 438 / 517 (84.7%)
+2026-08-10 15:04:00,991 [WARNING]   LCGene genes lost: ABCB4, AKR1B10, ASCL1, BCL2L14, BPIFA1, BRINP1, BRSK2, C20ORF85, CA9, CASC1, CCKBR, CDX2, CHGA, CHRNA1, CHRNA5, CHRNA9, CLCA2, CLDN2, CSMD1, CYP2C19, CYP2C9, DLK1, DLX5, DPYSL5, DRD2, DSC3, ECE2, ELAVL2, EPHA7, FAM83A, FUT6, FZD9, GABRA3, GATA4, GPR87, HMGA2, HNF4A, HOXB9, IGF2BP3, INSM1, KCNH1, KCNJ3, KIF14, KIF5A, KLK6, KRT81, LEP, LGSN, MAGEA1, MAGEA6, MAGEC1, MMP13, MYO18B, NOV, NR0B1, NR1I2, NRXN1, OPCML, PAEP, PAX5, PITX2, PRAME, PTPRH, RGS17, SCGN, SERPINB4, SERPINB5, T, TERT, TF, TFAP2A, TFAP2B, TRIM31, TRPM8, UGT1A6, VIL1, VTCN1, WISP1, XDH
+2026-08-10 15:04:10,925 [INFO]   Common genes: 10986
+2026-08-10 15:04:10,925 [INFO] STEP 3 COMPLETE
+2026-08-10 15:04:10,930 [INFO] <<< Step 3   — Harmonization DONE (12.8s)
+2026-08-10 15:04:10,930 [INFO] >>> Step 4   — Differential expr 
+2026-08-10 15:04:11,038 [INFO] ============================================================
+2026-08-10 15:04:11,038 [INFO] STEP 4 — DIFFERENTIAL EXPRESSION
+2026-08-10 15:04:11,038 [INFO] ============================================================
+2026-08-10 15:04:12,686 [INFO]   Tumor: (10986, 510)  Normal: (10986, 604)
+2026-08-10 15:04:12,796 [INFO]   Running Welch t-test for 10986 genes …
+2026-08-10 15:04:15,584 [INFO]   Significant at FDR<=0.001: 10882
+2026-08-10 15:04:16,248 [INFO]   Up: 9700  Down: 15  NS: 1271
+2026-08-10 15:04:16,248 [INFO] STEP 4 COMPLETE
+2026-08-10 15:04:16,255 [INFO] <<< Step 4   — Differential expr DONE (5.3s)
+2026-08-10 15:04:16,255 [INFO] >>> Step 5   — Expr features 
+2026-08-10 15:04:16,260 [INFO] ============================================================
+2026-08-10 15:04:16,260 [INFO] STEP 5 — EXPRESSION FEATURE CONSTRUCTION
+2026-08-10 15:04:16,260 [INFO] ============================================================
+2026-08-10 15:04:17,940 [INFO]   Computing stats for [tumor] ((10986, 510)) …
+2026-08-10 15:04:24,889 [INFO]   Computing stats for [normal] ((10986, 604)) …
+2026-08-10 15:04:31,848 [INFO]   [expression_features] Validated. Shape: (10986, 29)
+2026-08-10 15:04:32,501 [INFO]   Expression features: (10986, 29)
+2026-08-10 15:04:32,501 [INFO] STEP 5 COMPLETE
+2026-08-10 15:04:32,507 [INFO] <<< Step 5   — Expr features DONE (16.3s)
+2026-08-10 15:04:32,507 [INFO] >>> Step 6   — Tumor co-expr network 
+2026-08-10 15:04:32,845 [INFO] ============================================================
+2026-08-10 15:04:32,845 [INFO] STEP 6 — CO-EXPRESSION NETWORK CONSTRUCTION
+2026-08-10 15:04:32,845 [INFO] ============================================================
+2026-08-10 15:04:33,624 [INFO]   Matrix: 10986 genes x 510 samples | cutoff |r|>=0.6
+2026-08-10 15:04:34,388 [INFO]   Chunk 10/22 edges so far: 86,077 (0.7s)
+2026-08-10 15:04:35,099 [INFO]   Chunk 20/22 edges so far: 109,749 (1.4s)
+2026-08-10 15:04:35,248 [INFO]   Chunk 22/22 edges so far: 110,508 (1.6s)
+2026-08-10 15:04:35,296 [INFO]   Total edges: 110,508
+2026-08-10 15:04:38,219 [INFO]   Graph: 4,977 nodes, 110,508 edges
+2026-08-10 15:04:40,834 [INFO]   Runtime: 1.8s
+2026-08-10 15:04:40,835 [INFO] STEP 6 COMPLETE
+2026-08-10 15:04:40,839 [INFO] <<< Step 6   — Tumor co-expr network DONE (8.3s)
+2026-08-10 15:04:40,839 [INFO] >>> Step 6b  — Normal co-expr network [optional]
+2026-08-10 15:04:40,845 [INFO] ============================================================
+2026-08-10 15:04:40,845 [INFO] STEP 6b — NORMAL TISSUE CO-EXPRESSION NETWORK
+2026-08-10 15:04:40,845 [INFO] ============================================================
+2026-08-10 15:04:41,736 [INFO]   Normal expression: 10,986 genes × 604 samples
+2026-08-10 15:04:41,736 [INFO]   Correlation cutoff: |r| >= 0.6
+2026-08-10 15:04:41,736 [INFO]   Matrix: 10986 genes x 604 samples | cutoff |r|>=0.6
+2026-08-10 15:04:42,722 [INFO]   Chunk 10/22 edges so far: 817,242 (1.0s)
+2026-08-10 15:04:43,673 [INFO]   Chunk 20/22 edges so far: 1,240,735 (1.9s)
+2026-08-10 15:04:43,848 [INFO]   Chunk 22/22 edges so far: 1,276,368 (2.1s)
+2026-08-10 15:04:43,917 [INFO]   Total edges: 1,276,368
+2026-08-10 15:05:18,323 [INFO]   Graph: 9,338 nodes, 1,276,368 edges
+2026-08-10 15:05:40,319 [INFO]   Normal network: 10,986 nodes, 1,276,368 edges
+2026-08-10 15:05:40,319 [INFO]   Edges saved  → D:\New folder (9)\gloom updated\trial\outputs\results\network\normal_coexpression_network_edges.csv
+2026-08-10 15:05:40,320 [INFO]   Graph saved  → D:\New folder (9)\gloom updated\trial\outputs\results\network\normal_coexpression_network.graphml
+2026-08-10 15:05:40,320 [INFO] STEP 6b COMPLETE
+2026-08-10 15:05:40,349 [INFO] <<< Step 6b  — Normal co-expr network DONE (59.5s)
+2026-08-10 15:05:40,349 [INFO] >>> Step 7   — Network features 
+2026-08-10 15:05:40,367 [INFO] ============================================================
+2026-08-10 15:05:40,367 [INFO] STEP 7 — NETWORK FEATURE EXTRACTION
+2026-08-10 15:05:40,368 [INFO] ============================================================
+2026-08-10 15:05:42,565 [INFO]   Graph: 10,986 nodes, 110,508 edges
+2026-08-10 15:05:42,580 [INFO]   Extracting degree features …
+2026-08-10 15:05:42,658 [INFO]   Extracting average neighbour degree …
+2026-08-10 15:05:42,684 [INFO]   Betweenness centrality (n=10,986) …
+2026-08-10 15:05:53,048 [INFO]   Closeness centrality …
+2026-08-10 15:06:48,040 [INFO]   Eigenvector centrality …
+2026-08-10 15:06:50,004 [INFO]   Clustering coefficient …
+2026-08-10 15:07:06,848 [INFO]   Edge weight statistics …
+2026-08-10 15:07:07,092 [INFO]   Component features …
+2026-08-10 15:07:07,122 [INFO]   All features extracted in 84.5s
+2026-08-10 15:07:08,095 [INFO]   Network features: (10986, 13)
+2026-08-10 15:07:08,096 [INFO] STEP 7 COMPLETE
+2026-08-10 15:07:08,098 [INFO] <<< Step 7   — Network features DONE (87.7s)
+2026-08-10 15:07:08,098 [INFO] >>> Step 7b  — Diff. network features [optional]
+2026-08-10 15:07:08,116 [INFO] ============================================================
+2026-08-10 15:07:08,116 [INFO] STEP 7b — DIFFERENTIAL CO-EXPRESSION FEATURES
+2026-08-10 15:07:08,116 [INFO] ============================================================
+2026-08-10 15:07:08,116 [INFO]   Loading Tumor network: D:\New folder (9)\gloom updated\trial\outputs\results\network\coexpression_network.graphml
+2026-08-10 15:07:09,909 [INFO]     10,986 nodes, 110,508 edges
+2026-08-10 15:07:09,909 [INFO]   Loading Normal network: D:\New folder (9)\gloom updated\trial\outputs\results\network\normal_coexpression_network.graphml
+2026-08-10 15:07:29,048 [INFO]     10,986 nodes, 1,276,368 edges
+2026-08-10 15:07:29,065 [INFO]   Gene universe (union): 10,986
+2026-08-10 15:07:29,065 [INFO]   Computing degree features …
+2026-08-10 15:07:29,073 [INFO]   Computing clustering coefficients …
+2026-08-10 15:07:46,079 [WARNING]   Skipping clustering coefficient — graph too dense (1,276,368 edges > 300,000 limit). Set to 0.0.
+2026-08-10 15:07:46,080 [INFO]   Computing betweenness centrality …
+2026-08-10 15:08:00,798 [WARNING]   Skipping betweenness centrality — graph too dense (1,276,368 edges > 500,000 limit). Set to 0.0.
+2026-08-10 15:08:00,799 [INFO]   Computing mean edge weight …
+2026-08-10 15:08:02,063 [INFO]   Computing tumor-specific / normal-specific edges …
+2026-08-10 15:08:02,331 [INFO]   All features computed in 33.3s
+2026-08-10 15:08:02,367 [INFO]   Genes gaining connections in tumor: 1,161  losing: 8,400
+2026-08-10 15:08:02,368 [INFO]   Mean rewiring_ratio: 0.8564
+2026-08-10 15:08:02,448 [INFO]   Differential features: (10986, 15)
+2026-08-10 15:08:02,448 [INFO]   Saved → D:\New folder (9)\gloom updated\trial\data\processed\differential_network_features.csv
+2026-08-10 15:08:02,448 [INFO] STEP 7b COMPLETE
+2026-08-10 15:08:02,448 [INFO] <<< Step 7b  — Diff. network features DONE (54.4s)
+2026-08-10 15:08:02,448 [INFO] >>> Step 8   — Feature integration 
+2026-08-10 15:08:02,801 [INFO] ============================================================
+2026-08-10 15:08:02,802 [INFO] STEP 8 — FEATURE INTEGRATION
+2026-08-10 15:08:02,802 [INFO] ============================================================
+2026-08-10 15:08:02,848 [INFO]   Expression: (10986, 29)  Network: (10986, 13)
+2026-08-10 15:08:02,866 [INFO]   Concatenated: (10986, 42)
+2026-08-10 15:08:02,872 [INFO]   Removed 21 collinear features: ['weighted_degree', 'component_size', 'min_edge_weight', 'tumor_median', 'normal_median', 't_stat', 'tumor_iqr_rank', 'tumor_mean_rank', 'cohens_d_rank', 'abs_log2fc_rank', 'neg_log10_padj_rank', 'betweenness_centrality', 'clustering_coefficient', 'max_edge_weight', 'std_edge_weight', 'in_largest_component', 'log2fc', 'iqr_ratio', 'std_ratio', 'tumor_kurtosis', 'normal_kurtosis']
+2026-08-10 15:08:02,872 [INFO]   Features after collinearity removal: 21
+2026-08-10 15:08:02,887 [INFO]   Highly correlated pairs (|r|>=0.95): 2
+2026-08-10 15:08:03,223 [INFO]   Differential network features added: 9 columns (coverage: 10,986/10,986 genes)
+2026-08-10 15:08:03,690 [INFO]   Integrated features: (10986, 30)
+2026-08-10 15:08:03,691 [INFO] STEP 8 COMPLETE
+2026-08-10 15:08:03,692 [INFO] <<< Step 8   — Feature integration DONE (1.2s)
+2026-08-10 15:08:03,692 [INFO] >>> Step 9   — Label construction 
+2026-08-10 15:08:03,696 [INFO] ============================================================
+2026-08-10 15:08:03,696 [INFO] STEP 9 — LABEL CONSTRUCTION
+2026-08-10 15:08:03,696 [INFO] ============================================================
+2026-08-10 15:08:03,748 [INFO]   LCGene symbols: 517
+2026-08-10 15:08:03,748 [INFO]   Universe trimming: removing 1190 noisy unlabeled genes (non-expressed + no DE signal)
+2026-08-10 15:08:03,762 [INFO]   Total: 9796  Positive (known LCGene): 438 (4.47%)  Unlabeled: 9358
+2026-08-10 15:08:03,763 [INFO]   [PU framing] Negatives are UNLABELED — not confirmed non-cancer genes.
+2026-08-10 15:08:04,836 [INFO]   LCGene genes unmatched: 79
+2026-08-10 15:08:04,836 [INFO] STEP 9 COMPLETE
+2026-08-10 15:08:04,838 [INFO] <<< Step 9   — Label construction DONE (1.1s)
+2026-08-10 15:08:04,839 [INFO] >>> Step 10  — Train/val split 
+2026-08-10 15:08:04,843 [INFO] ============================================================
+2026-08-10 15:08:04,843 [INFO] STEP 10 — TRAIN/VALIDATION SPLIT
+2026-08-10 15:08:04,843 [INFO] ============================================================
+2026-08-10 15:08:04,900 [INFO]   Features: (9796, 30)  Labels: 9796
+2026-08-10 15:08:04,908 [INFO]   Train: 7836 (pos=350)  Val: 1960 (pos=88)
+2026-08-10 15:08:04,913 [INFO]   Feature selection: kept top 21 features from feature_importance.csv
+2026-08-10 15:08:05,525 [INFO] STEP 10 COMPLETE
+2026-08-10 15:08:05,526 [INFO] <<< Step 10  — Train/val split DONE (0.7s)
+2026-08-10 15:08:05,526 [INFO] >>> Step 11  — Model training 
+2026-08-10 15:08:05,619 [INFO] ============================================================
+2026-08-10 15:08:05,619 [INFO] STEP 11 — MODEL TRAINING
+2026-08-10 15:08:05,619 [INFO] ============================================================
+2026-08-10 15:08:05,672 [INFO]   X_train: (7836, 21)  pos=350
+2026-08-10 15:08:05,735 [INFO]   XGBoost added (scale_pos_weight=21.4)
+2026-08-10 15:08:05,932 [INFO]   Random undersampling enabled (imbalanced-learn found).
+2026-08-10 15:08:05,932 [INFO] 
+  [random_forest] CV ...
+2026-08-10 15:08:06,583 [INFO]     Fold 1 AUROC=0.9431 AUPRC=0.4658 F1=0.4385 MCC=0.4591
+2026-08-10 15:08:07,209 [INFO]     Fold 2 AUROC=0.9268 AUPRC=0.5068 F1=0.4519 MCC=0.4451
+2026-08-10 15:08:07,833 [INFO]     Fold 3 AUROC=0.9334 AUPRC=0.4878 F1=0.4337 MCC=0.4468
+2026-08-10 15:08:08,461 [INFO]     Fold 4 AUROC=0.9455 AUPRC=0.4768 F1=0.4120 MCC=0.4120
+2026-08-10 15:08:09,086 [INFO]     Fold 5 AUROC=0.9377 AUPRC=0.4813 F1=0.4511 MCC=0.4592
+2026-08-10 15:08:09,086 [INFO]   [random_forest] AUROC=0.9373±0.0067  AUPRC=0.4837±0.0136  F1=0.4374±0.0145  MCC=0.4445±0.0173
+2026-08-10 15:08:09,090 [INFO]   [random_forest] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-10 15:09:01,900 [INFO]   [random_forest] Best params: {'n_estimators': 500, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'max_depth': None}  CV-AUPRC=0.5356
+2026-08-10 15:09:02,141 [INFO]   [random_forest] Calibrated (sigmoid, holdout) → model_random_forest.joblib
+2026-08-10 15:09:02,141 [INFO] 
+  [gradient_boosting] CV ...
+2026-08-10 15:09:02,691 [INFO]     Fold 1 AUROC=0.9483 AUPRC=0.4440 F1=0.3881 MCC=0.4381
+2026-08-10 15:09:03,201 [INFO]     Fold 2 AUROC=0.9281 AUPRC=0.5014 F1=0.4188 MCC=0.4448
+2026-08-10 15:09:03,705 [INFO]     Fold 3 AUROC=0.9315 AUPRC=0.4974 F1=0.4000 MCC=0.4284
+2026-08-10 15:09:04,219 [INFO]     Fold 4 AUROC=0.9457 AUPRC=0.5128 F1=0.4214 MCC=0.4499
+2026-08-10 15:09:04,727 [INFO]     Fold 5 AUROC=0.9431 AUPRC=0.5489 F1=0.3699 MCC=0.3905
+2026-08-10 15:09:04,728 [INFO]   [gradient_boosting] AUROC=0.9393±0.0081  AUPRC=0.5009±0.0337  F1=0.3996±0.0193  MCC=0.4304±0.0212
+2026-08-10 15:09:04,731 [INFO]   [gradient_boosting] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-10 15:10:26,503 [INFO]   [gradient_boosting] Best params: {'subsample': 0.8, 'n_estimators': 200, 'max_depth': 3, 'learning_rate': 0.05}  CV-AUPRC=0.5247
+2026-08-10 15:10:26,531 [INFO]   [gradient_boosting] Calibrated (sigmoid, holdout) → model_gradient_boosting.joblib
+2026-08-10 15:10:26,531 [INFO] 
+  [logistic_regression] CV ...
+2026-08-10 15:10:27,515 [INFO]     Fold 1 AUROC=0.8123 AUPRC=0.1123 F1=0.1239 MCC=0.1496
+2026-08-10 15:10:28,485 [INFO]     Fold 2 AUROC=0.7522 AUPRC=0.1544 F1=0.1288 MCC=0.1335
+2026-08-10 15:10:29,458 [INFO]     Fold 3 AUROC=0.8177 AUPRC=0.1193 F1=0.1262 MCC=0.1542
+2026-08-10 15:10:30,448 [INFO]     Fold 4 AUROC=0.7737 AUPRC=0.1669 F1=0.1372 MCC=0.1532
+2026-08-10 15:10:31,432 [INFO]     Fold 5 AUROC=0.7693 AUPRC=0.1963 F1=0.1251 MCC=0.1309
+2026-08-10 15:10:31,433 [INFO]   [logistic_regression] AUROC=0.7850±0.0256  AUPRC=0.1498±0.0310  F1=0.1282±0.0047  MCC=0.1443±0.0100
+2026-08-10 15:10:31,435 [INFO]   [logistic_regression] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-10 15:12:42,851 [INFO]   [logistic_regression] Best params: {'penalty': 'l1', 'C': 0.01}  CV-AUPRC=0.1778
+2026-08-10 15:12:42,851 [INFO]   [logistic_regression] Calibrated (sigmoid, holdout) → model_logistic_regression.joblib
+2026-08-10 15:12:42,851 [INFO] 
+  [extra_trees] CV ...
+2026-08-10 15:12:43,276 [INFO]     Fold 1 AUROC=0.9458 AUPRC=0.4744 F1=0.4634 MCC=0.4808
+2026-08-10 15:12:43,688 [INFO]     Fold 2 AUROC=0.9257 AUPRC=0.4590 F1=0.4651 MCC=0.4640
+2026-08-10 15:12:44,098 [INFO]     Fold 3 AUROC=0.9383 AUPRC=0.4846 F1=0.4370 MCC=0.4443
+2026-08-10 15:12:44,511 [INFO]     Fold 4 AUROC=0.9416 AUPRC=0.4726 F1=0.4484 MCC=0.4492
+2026-08-10 15:12:44,928 [INFO]     Fold 5 AUROC=0.9310 AUPRC=0.4554 F1=0.4000 MCC=0.3940
+2026-08-10 15:12:44,929 [INFO]   [extra_trees] AUROC=0.9365±0.0073  AUPRC=0.4692±0.0107  F1=0.4428±0.0238  MCC=0.4464±0.0292
+2026-08-10 15:12:44,932 [INFO]   [extra_trees] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-10 15:13:20,846 [INFO]   [extra_trees] Best params: {'n_estimators': 800, 'min_samples_leaf': 1, 'max_features': 0.5, 'max_depth': None, 'bootstrap': True}  CV-AUPRC=0.5433
+2026-08-10 15:13:21,145 [INFO]   [extra_trees] Calibrated (sigmoid, holdout) → model_extra_trees.joblib
+2026-08-10 15:13:21,145 [INFO] 
+  [xgboost] CV ...
+2026-08-10 15:13:21,511 [INFO]     Fold 1 AUROC=0.9488 AUPRC=0.5127 F1=0.3252 MCC=0.3869
+2026-08-10 15:13:21,715 [INFO]     Fold 2 AUROC=0.9272 AUPRC=0.5115 F1=0.3523 MCC=0.3973
+2026-08-10 15:13:21,916 [INFO]     Fold 3 AUROC=0.9297 AUPRC=0.4585 F1=0.3333 MCC=0.3771
+2026-08-10 15:13:22,119 [INFO]     Fold 4 AUROC=0.9439 AUPRC=0.4816 F1=0.3855 MCC=0.4329
+2026-08-10 15:13:22,323 [INFO]     Fold 5 AUROC=0.9416 AUPRC=0.5146 F1=0.3513 MCC=0.3964
+2026-08-10 15:13:22,323 [INFO]   [xgboost] AUROC=0.9382±0.0084  AUPRC=0.4958±0.0223  F1=0.3495±0.0208  MCC=0.3981±0.0189
+2026-08-10 15:13:22,327 [INFO]   [xgboost] Hyperparameter tuning (RandomizedSearchCV n_iter=20, cv=3, scoring=average_precision) ...
+2026-08-10 15:13:44,818 [INFO]   [xgboost] Best params: {'subsample': 0.9, 'n_estimators': 200, 'max_depth': 4, 'learning_rate': 0.1, 'colsample_bytree': 1.0}  CV-AUPRC=0.5412
+2026-08-10 15:13:44,844 [INFO]   [xgboost] Calibrated (sigmoid, holdout) → model_xgboost.joblib
+2026-08-10 15:13:44,844 [INFO] 
+All models trained in 339.1s
+2026-08-10 15:13:44,845 [INFO]   Best: gradient_boosting (AUPRC=0.5009)
+2026-08-10 15:13:44,857 [INFO]   Best model (gradient_boosting, already calibrated) saved as best_model.joblib
+2026-08-10 15:13:45,016 [INFO] STEP 11 COMPLETE
+2026-08-10 15:13:45,034 [INFO] <<< Step 11  — Model training DONE (339.5s)
+2026-08-10 15:13:45,035 [INFO] >>> Step 11b — PU Bagging [optional]
+2026-08-10 15:13:45,043 [INFO] ============================================================
+2026-08-10 15:13:45,043 [INFO] STEP 11b — MORDELET-VERT PU BAGGING
+2026-08-10 15:13:45,043 [INFO]   B=300  subsample_ratio=1.0  base_trees=100
+2026-08-10 15:13:45,043 [INFO] ============================================================
+2026-08-10 15:13:45,094 [INFO]   Scoring universe: 9,796 genes (trimmed universe)
+2026-08-10 15:13:45,139 [INFO]   Training positives (P): 350
+2026-08-10 15:13:45,139 [INFO]   Training unlabeled  (U): 7,486
+2026-08-10 15:13:45,139 [INFO]   Subsample per iteration: 350
+2026-08-10 15:13:46,439 [INFO]   Iter   10/300  elapsed: 1.3s
+2026-08-10 15:13:47,735 [INFO]   Iter   20/300  elapsed: 2.6s
+2026-08-10 15:13:49,112 [INFO]   Iter   30/300  elapsed: 4.0s
+2026-08-10 15:13:50,400 [INFO]   Iter   40/300  elapsed: 5.3s
+2026-08-10 15:13:51,692 [INFO]   Iter   50/300  elapsed: 6.6s
+2026-08-10 15:13:52,982 [INFO]   Iter   60/300  elapsed: 7.8s
+2026-08-10 15:13:54,272 [INFO]   Iter   70/300  elapsed: 9.1s
+2026-08-10 15:13:55,556 [INFO]   Iter   80/300  elapsed: 10.4s
+2026-08-10 15:13:56,825 [INFO]   Iter   90/300  elapsed: 11.7s
+2026-08-10 15:13:58,117 [INFO]   Iter  100/300  elapsed: 13.0s
+2026-08-10 15:13:59,419 [INFO]   Iter  110/300  elapsed: 14.3s
+2026-08-10 15:14:00,705 [INFO]   Iter  120/300  elapsed: 15.6s
+2026-08-10 15:14:01,990 [INFO]   Iter  130/300  elapsed: 16.8s
+2026-08-10 15:14:03,282 [INFO]   Iter  140/300  elapsed: 18.1s
+2026-08-10 15:14:04,589 [INFO]   Iter  150/300  elapsed: 19.4s
+2026-08-10 15:14:05,890 [INFO]   Iter  160/300  elapsed: 20.7s
+2026-08-10 15:14:07,231 [INFO]   Iter  170/300  elapsed: 22.1s
+2026-08-10 15:14:08,503 [INFO]   Iter  180/300  elapsed: 23.4s
+2026-08-10 15:14:09,786 [INFO]   Iter  190/300  elapsed: 24.6s
+2026-08-10 15:14:11,055 [INFO]   Iter  200/300  elapsed: 25.9s
+2026-08-10 15:14:12,364 [INFO]   Iter  210/300  elapsed: 27.2s
+2026-08-10 15:14:13,652 [INFO]   Iter  220/300  elapsed: 28.5s
+2026-08-10 15:14:14,927 [INFO]   Iter  230/300  elapsed: 29.8s
+2026-08-10 15:14:16,205 [INFO]   Iter  240/300  elapsed: 31.1s
+2026-08-10 15:14:17,490 [INFO]   Iter  250/300  elapsed: 32.3s
+2026-08-10 15:14:18,828 [INFO]   Iter  260/300  elapsed: 33.7s
+2026-08-10 15:14:20,113 [INFO]   Iter  270/300  elapsed: 35.0s
+2026-08-10 15:14:21,375 [INFO]   Iter  280/300  elapsed: 36.2s
+2026-08-10 15:14:22,668 [INFO]   Iter  290/300  elapsed: 37.5s
+2026-08-10 15:14:23,955 [INFO]   Iter  300/300  elapsed: 38.8s
+2026-08-10 15:14:23,956 [INFO]   PU bagging complete in 38.8s
+2026-08-10 15:14:23,963 [INFO]   Validation AUROC=0.9290  AUPRC=0.4255
+2026-08-10 15:14:23,964 [INFO]   LCGene in top-50: 50  top-100: 98  top-200: 190
+2026-08-10 15:14:23,964 [INFO]   Recall@50=0.1142  Recall@100=0.2237  Recall@200=0.4338
+2026-08-10 15:14:23,965 [INFO]   Precision@50=1.0000  Precision@100=0.9800
+2026-08-10 15:14:23,965 [INFO]   PU novel candidates (score>=0.85): 203
+2026-08-10 15:14:24,292 [INFO]   Scores saved → D:\New folder (9)\gloom updated\trial\outputs\results\pu_bagging_scores.csv
+2026-08-10 15:14:24,292 [INFO] STEP 11b COMPLETE
+2026-08-10 15:14:24,293 [INFO] <<< Step 11b — PU Bagging DONE (39.3s)
+2026-08-10 15:14:24,293 [INFO] >>> Step 12  — Model evaluation 
+2026-08-10 15:14:24,297 [INFO] ============================================================
+2026-08-10 15:14:24,297 [INFO] STEP 12 — MODEL EVALUATION
+2026-08-10 15:14:24,297 [INFO] ============================================================
+2026-08-10 15:14:24,316 [INFO]   Val: 1960 genes  pos=88
+2026-08-10 15:14:24,699 [INFO]   [extra_trees           ] AUROC=0.9307 AUPRC=0.5517 F1@0.50=0.5436 MCC@0.50=0.5227 [oracle F1@0.15=0.5550] R@100=0.5795 P@100=0.5100
+2026-08-10 15:14:24,719 [INFO]   [gradient_boosting     ] AUROC=0.9324 AUPRC=0.5129 F1@0.50=0.4280 MCC@0.50=0.4216 [oracle F1@0.25=0.5140] R@100=0.5114 P@100=0.4500
+2026-08-10 15:14:24,735 [INFO]   [logistic_regression   ] AUROC=0.8473 AUPRC=0.2709 F1@0.50=0.3619 MCC@0.50=0.3317 [oracle F1@0.14=0.3761] R@100=0.3636 P@100=0.3200
+2026-08-10 15:14:24,823 [INFO]   [random_forest         ] AUROC=0.9294 AUPRC=0.5135 F1@0.50=0.5025 MCC@0.50=0.4805 [oracle F1@0.25=0.5476] R@100=0.5568 P@100=0.4900
+2026-08-10 15:14:24,843 [INFO]   [xgboost               ] AUROC=0.9293 AUPRC=0.5288 F1@0.50=0.4675 MCC@0.50=0.4508 [oracle F1@0.39=0.5195] R@100=0.5227 P@100=0.4600
+2026-08-10 15:14:24,845 [INFO]   Ensemble weights (AUPRC): extra_trees=0.223  gradient_boosting=0.239  logistic_regression=0.071  random_forest=0.230  xgboost=0.236
+2026-08-10 15:14:24,860 [INFO]   [ensemble_soft_vote    ] AUROC=0.9345 AUPRC=0.5473 F1@0.50=0.4848 MCC@0.50=0.4697 [oracle F1@0.22=0.5556] R@100=0.5682 P@100=0.5000
+2026-08-10 15:14:24,874 [INFO]   Ensemble probs saved → ensemble_soft_vote_probs.csv
+2026-08-10 15:14:24,877 [INFO]   Classification reports saved to: D:\New folder (9)\gloom updated\trial\outputs\results\classification_reports
+2026-08-10 15:14:25,603 [INFO]   Confusion matrix grid saved: eval_confusion_matrices.png
+2026-08-10 15:14:25,967 [INFO]   Multi-threshold confusion matrices saved: eval_confusion_multithreshold.png
+2026-08-10 15:14:26,234 [INFO] STEP 12 COMPLETE
+2026-08-10 15:14:26,249 [INFO] <<< Step 12  — Model evaluation DONE (2.0s)
+2026-08-10 15:14:26,249 [INFO] >>> Step 13  — Feature importance 
+2026-08-10 15:14:26,262 [INFO] ============================================================
+2026-08-10 15:14:26,262 [INFO] STEP 13 — FEATURE IMPORTANCE
+2026-08-10 15:14:26,262 [INFO] ============================================================
+2026-08-10 15:14:26,772 [INFO]   [gradient_boosting] Permutation importance (n_repeats=10) …
+2026-08-10 15:14:33,409 [INFO]   Top 5: {'tumor_std': 0.9999999999614165, 'tumor_mean': 0.42943132844511356, 'abs_log2fc': 0.38638279931055575, 'tumor_skewness': 0.2963977890086105, 'tumor_iqr': 0.2873571294623984}
+2026-08-10 15:14:33,530 [INFO]   Feature importance shape: (21, 10)
+2026-08-10 15:14:33,531 [INFO]   Top feature: tumor_std (0.8110)
+2026-08-10 15:14:33,531 [INFO] STEP 13 COMPLETE
+2026-08-10 15:14:33,540 [INFO] <<< Step 13  — Feature importance DONE (7.3s)
+2026-08-10 15:14:33,540 [INFO] >>> Step 14  — Gene ranking 
+2026-08-10 15:14:33,544 [INFO] ============================================================
+2026-08-10 15:14:33,544 [INFO] STEP 14 — GENE PREDICTION & RANKING
+2026-08-10 15:14:33,544 [INFO] ============================================================
+2026-08-10 15:14:33,619 [INFO]   Using PU bagging scores from step11b for gene ranking.
+2026-08-10 15:14:33,628 [INFO]   PU bagging scores loaded: 10,986 genes.
+2026-08-10 15:14:33,629 [INFO]   Score source: pu_bagging  |  novel threshold: 0.85
+2026-08-10 15:14:33,656 [INFO]   Total: 10,986  Novel candidates (prob>=0.85): 203  Sensitivity list (prob>=0.5): 1,569
+2026-08-10 15:14:33,656 [INFO]   Median positive (known) rank: 232
+2026-08-10 15:14:33,657 [INFO]   Positive (known) in top-50:  50  top-100: 98  top-200: 190  top-500: 345
+2026-08-10 15:14:33,657 [INFO]   Recall@50=0.1142  Recall@100=0.2237  Recall@200=0.4338  Recall@500=0.7877
+2026-08-10 15:14:33,657 [INFO]   Precision@50=1.0000  Precision@100=0.9800
+2026-08-10 15:14:34,048 [INFO]   High-confidence novel candidates saved: 203 genes (prob>=0.85)
+2026-08-10 15:14:34,048 [INFO]   Sensitivity novel candidates saved:     1569 genes (prob>=0.5)
+2026-08-10 15:14:34,048 [INFO]   Query gene rankings saved: 0 genes
+2026-08-10 15:14:34,052 [INFO] STEP 14 COMPLETE
+2026-08-10 15:14:34,053 [INFO] <<< Step 14  — Gene ranking DONE (0.5s)
+2026-08-10 15:14:34,053 [INFO] >>> Step 15  — Network annotation 
+2026-08-10 15:14:34,057 [INFO] ============================================================
+2026-08-10 15:14:34,057 [INFO] STEP 15 — NETWORK ANNOTATION
+2026-08-10 15:14:34,057 [INFO] ============================================================
+2026-08-10 15:14:35,731 [INFO]   Graph: 10,986 nodes, 110,508 edges
+2026-08-10 15:14:36,697 [INFO]   Positive edges: 108,468  Negative: 2,040
+2026-08-10 15:14:41,218 [INFO]   LCGene nodes: 438  Novel: 203
+2026-08-10 15:14:41,218 [INFO] STEP 15 COMPLETE
+2026-08-10 15:14:41,234 [INFO] <<< Step 15  — Network annotation DONE (7.2s)
+2026-08-10 15:14:41,234 [INFO] >>> Step 16  — Network export 
+2026-08-10 15:14:41,240 [INFO] ============================================================
+2026-08-10 15:14:41,241 [INFO] STEP 16 — NETWORK EXPORT
+2026-08-10 15:14:41,241 [INFO] ============================================================
+2026-08-10 15:14:43,839 [INFO]   Graph: 10,986 nodes, 110,508 edges
+2026-08-10 15:14:48,734 [INFO]   GraphML saved: D:\New folder (9)\gloom updated\trial\outputs\results\network\exports/network_full.graphml
+2026-08-10 15:14:52,770 [INFO]   Full network exports complete.
+2026-08-10 15:14:52,806 [INFO]   [top100] 100 nodes, 82 edges
+2026-08-10 15:14:52,876 [INFO]   [lcgene] 438 nodes, 925 edges
+2026-08-10 15:14:52,912 [INFO]   [novel] 203 nodes, 443 edges
+2026-08-10 15:14:54,141 [INFO]   [candidates] 2475 nodes, 23112 edges
+2026-08-10 15:14:58,170 [INFO] 
+  Sub-networks:
+2026-08-10 15:14:58,171 [INFO]     top100               nodes=  100  edges=     82
+2026-08-10 15:14:58,171 [INFO]     lcgene               nodes=  438  edges=    925
+2026-08-10 15:14:58,171 [INFO]     novel                nodes=  203  edges=    443
+2026-08-10 15:14:58,171 [INFO]     candidates           nodes=2,475  edges= 23,112
+2026-08-10 15:14:58,171 [INFO] STEP 16 COMPLETE
+2026-08-10 15:14:58,194 [INFO] <<< Step 16  — Network export DONE (17.0s)
+2026-08-10 15:14:58,194 [INFO] >>> Step 17  — Visualization 
+2026-08-10 15:14:58,346 [INFO] ============================================================
+2026-08-10 15:14:58,346 [INFO] STEP 17 — INTERACTIVE VISUALIZATION
+2026-08-10 15:14:58,347 [INFO] ============================================================
+2026-08-10 15:14:58,502 [INFO] [1] Volcano …
+2026-08-10 15:14:58,848 [INFO]   Volcano saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_volcano.html
+2026-08-10 15:14:58,848 [INFO] [2] Ranking …
+2026-08-10 15:14:59,075 [INFO]   Ranking plot saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_ranking.html
+2026-08-10 15:14:59,076 [INFO] [3] Network …
+2026-08-10 15:14:59,215 [INFO]   Network plot saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_network.html
+2026-08-10 15:14:59,216 [INFO] [4] Feature importance …
+2026-08-10 15:14:59,250 [INFO]   Feature importance saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_feature_importance.html
+2026-08-10 15:14:59,250 [INFO] [5] KEGG pathways …
+2026-08-10 15:14:59,250 [INFO]   KEGG file not found (All candidates) — skipped.
+2026-08-10 15:14:59,250 [INFO]   KEGG file not found (Upregulated) — skipped.
+2026-08-10 15:14:59,250 [INFO]   KEGG file not found (Downregulated) — skipped.
+2026-08-10 15:14:59,250 [INFO] [6] Dashboard …
+2026-08-10 15:14:59,334 [INFO]   Combined dashboard saved: D:\New folder (9)\gloom updated\trial\outputs\figures\interactive_dashboard.html
+2026-08-10 15:14:59,337 [INFO] STEP 17 COMPLETE
+2026-08-10 15:14:59,339 [INFO] <<< Step 17  — Visualization DONE (1.1s)
+2026-08-10 15:14:59,339 [INFO] >>> Step 18  — Final report 
+2026-08-10 15:14:59,344 [INFO] ============================================================
+2026-08-10 15:14:59,344 [INFO] STEP 18 — FINAL OUTPUTS & REPORTING
+2026-08-10 15:14:59,344 [INFO] ============================================================
+2026-08-10 15:14:59,345 [INFO] [1] Building summary table …
+2026-08-10 15:14:59,548 [INFO]   Summary table: (10986, 29)
+2026-08-10 15:14:59,548 [INFO] [2] Building text report …
+2026-08-10 15:14:59,579 [ERROR]   Report failed: 'mcc'
+2026-08-10 15:14:59,579 [INFO] [3] Building summary figure …
+2026-08-10 15:15:00,236 [INFO]   Summary figure (PNG) saved: D:\New folder (9)\gloom updated\trial\outputs\results\reports\pipeline_summary_figure.png
+2026-08-10 15:15:00,874 [INFO]   Summary figure (PDF) saved: D:\New folder (9)\gloom updated\trial\outputs\results\reports\pipeline_summary_figure.pdf
+2026-08-10 15:15:00,875 [INFO] ============================================================
+2026-08-10 15:15:00,875 [INFO] STEP 18 SUMMARY
+2026-08-10 15:15:00,875 [INFO] ============================================================
+2026-08-10 15:15:00,875 [INFO]   Summary table: D:\New folder (9)\gloom updated\trial\outputs\results\reports/pipeline_summary_table.csv
+2026-08-10 15:15:00,875 [INFO]   Text report  : D:\New folder (9)\gloom updated\trial\outputs\results\reports/pipeline_report.txt
+2026-08-10 15:15:00,875 [INFO]   Summary fig  : D:\New folder (9)\gloom updated\trial\outputs\results\reports/pipeline_summary_figure.png
+2026-08-10 15:15:00,875 [INFO] 
+2026-08-10 15:15:00,875 [INFO]   Key deliverables:
+2026-08-10 15:15:00,875 [INFO]     Gene rankings    : D:\New folder (9)\gloom updated\trial\outputs\results\gene_rankings.csv
+2026-08-10 15:15:00,875 [INFO]     Novel candidates : D:\New folder (9)\gloom updated\trial\outputs\results/novel_candidates.csv
+2026-08-10 15:15:00,875 [INFO]     Dashboard        : D:\New folder (9)\gloom updated\trial\outputs\figures/interactive_dashboard.html
+2026-08-10 15:15:00,875 [INFO] STEP 18 COMPLETE
+2026-08-10 15:15:00,875 [INFO] <<< Step 18  — Final report DONE (1.5s)
+2026-08-10 15:15:00,875 [INFO] >>> Step 19  — KEGG enrichment [optional]
+2026-08-10 15:15:00,883 [INFO] ============================================================
+2026-08-10 15:15:00,883 [INFO] STEP 19 — KEGG LUNG/CANCER PATHWAY ENRICHMENT
+2026-08-10 15:15:00,883 [INFO] ============================================================
+2026-08-10 15:15:00,886 [INFO]   Loaded 203 novel candidates
+2026-08-10 15:15:00,886 [INFO]   High-confidence (prob >= 0.8): 203 genes
+2026-08-10 15:15:00,887 [INFO]   Gene lists — all: 203  up: 199  down: 4
+2026-08-10 15:15:01,038 [INFO]   [All candidates] Querying Enrichr (KEGG_2021_Human) with 203 genes …
+2026-08-10 15:15:02,993 [INFO]   [All candidates] 45 pathways total -> 13 after lung/cancer filter
+2026-08-10 15:15:02,996 [INFO]   [All candidates] Saved 13 lung/cancer pathways -> kegg_all_candidates.csv
+2026-08-10 15:15:03,090 [INFO]   [All candidates] Bar-plot -> kegg_barplot_all_candidates.png
+2026-08-10 15:15:03,198 [INFO]   [All candidates] Dot-plot -> kegg_dotplot_all_candidates.png
+2026-08-10 15:15:03,198 [INFO]   [Upregulated] Querying Enrichr (KEGG_2021_Human) with 199 genes …
+2026-08-10 15:15:04,598 [INFO]   [Upregulated] 45 pathways total -> 13 after lung/cancer filter
+2026-08-10 15:15:04,613 [INFO]   [Upregulated] Saved 13 lung/cancer pathways -> kegg_upregulated.csv
+2026-08-10 15:15:04,948 [INFO]   [Upregulated] Bar-plot -> kegg_barplot_upregulated.png
+2026-08-10 15:15:05,070 [INFO]   [Upregulated] Dot-plot -> kegg_dotplot_upregulated.png
+2026-08-10 15:15:05,070 [INFO]   [Downregulated] Querying Enrichr (KEGG_2021_Human) with 4 genes …
+2026-08-10 15:15:06,261 [WARNING]   [Downregulated] No pathways with overlap >= 3 — returning empty result.
+2026-08-10 15:15:06,264 [INFO] 
+  Summary -> kegg_summary.csv
+2026-08-10 15:15:06,279 [INFO] 
+        subset  input_genes status  lung_pathways_tested  significant              top_pathway  top_padj                                                                                                                          note
+All candidates          203     ok                    13            4 ECM-receptor interaction  0.000500                                                                                                                              
+   Upregulated          199     ok                    13            5 ECM-receptor interaction  0.000424                                                                                                                              
+ Downregulated            4  empty                     0            0                        -       NaN No KEGG pathways from the downregulated set met the minimum overlap threshold of 3 genes; all detected overlaps were below 3.
+2026-08-10 15:15:06,630 [INFO]   Combined overview -> kegg_overview.png
+2026-08-10 15:15:06,631 [INFO] STEP 19 COMPLETE
+2026-08-10 15:15:06,631 [INFO] <<< Step 19  — KEGG enrichment DONE (5.8s)
+2026-08-10 15:15:06,632 [INFO] >>> Step 20  — Indep. validation [optional]
+2026-08-10 15:15:06,644 [INFO] ============================================================
+2026-08-10 15:15:06,645 [INFO] STEP 20 - INDEPENDENT COHORT VALIDATION
+2026-08-10 15:15:06,645 [INFO] ============================================================
+2026-08-10 15:15:06,645 [WARNING]   EXTERNAL_EXPR_FILE not configured or file not found.
+  Place the external cohort matrix under data/external/<dataset>/processed/
+  and set EXTERNAL_EXPR_FILE in config.py.
+  Step 20 skipped - no external data available.
+2026-08-10 15:15:06,645 [INFO] <<< Step 20  — Indep. validation DONE (0.0s)
+2026-08-10 15:15:06,646 [INFO] ======================================================================
+2026-08-10 15:15:06,646 [INFO] EXECUTION SUMMARY
+2026-08-10 15:15:06,646 [INFO] ======================================================================
+2026-08-10 15:15:06,646 [INFO]   [ OK ]       Step 0   — Config                                    0.0s
+2026-08-10 15:15:06,646 [INFO]   [ OK ]       Step 1   — Data loading                             34.8s
+2026-08-10 15:15:06,646 [INFO]   [ OK ] [opt] Step 1b  — Batch correction                          0.0s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 2   — Preprocessing                            29.4s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 3   — Harmonization                            12.8s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 4   — Differential expr                         5.3s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 5   — Expr features                            16.3s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 6   — Tumor co-expr network                     8.3s
+2026-08-10 15:15:06,647 [INFO]   [ OK ] [opt] Step 6b  — Normal co-expr network                   59.5s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 7   — Network features                         87.7s
+2026-08-10 15:15:06,647 [INFO]   [ OK ] [opt] Step 7b  — Diff. network features                   54.4s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 8   — Feature integration                       1.2s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 9   — Label construction                        1.1s
+2026-08-10 15:15:06,647 [INFO]   [ OK ]       Step 10  — Train/val split                           0.7s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 11  — Model training                          339.5s
+2026-08-10 15:15:06,648 [INFO]   [ OK ] [opt] Step 11b — PU Bagging                               39.3s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 12  — Model evaluation                          2.0s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 13  — Feature importance                        7.3s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 14  — Gene ranking                              0.5s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 15  — Network annotation                        7.2s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 16  — Network export                           17.0s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 17  — Visualization                             1.1s
+2026-08-10 15:15:06,648 [INFO]   [ OK ]       Step 18  — Final report                              1.5s
+2026-08-10 15:15:06,648 [INFO]   [ OK ] [opt] Step 19  — KEGG enrichment                           5.8s
+2026-08-10 15:15:06,648 [INFO]   [ OK ] [opt] Step 20  — Indep. validation                         0.0s
+2026-08-10 15:15:06,648 [INFO]   Total: 732.7s (12.2 min)
+2026-08-10 15:15:06,648 [INFO]   Pipeline COMPLETE.
+2026-08-10 15:15:06,649 [INFO] ======================================================================
+2026-08-10 16:05:22,015 [INFO] ======================================================================
+2026-08-10 16:05:22,015 [INFO] LUAD ML PIPELINE — FULL RUN
+2026-08-10 16:05:22,015 [INFO] Running 1 step(s)
+2026-08-10 16:05:22,016 [INFO] ======================================================================
+2026-08-10 16:05:22,016 [INFO] >>> Step 20  — Indep. validation [optional]
+2026-08-10 16:05:24,729 [INFO] ============================================================
+2026-08-10 16:05:24,729 [INFO] STEP 20 - INDEPENDENT COHORT VALIDATION
+2026-08-10 16:05:24,729 [INFO] ============================================================
+2026-08-10 16:05:24,729 [INFO]   Loading external tumor expression: D:\New folder (9)\gloom updated\trial\data\external\GSE68571\processed\GSE68571_gene_expression.csv
+2026-08-10 16:05:24,802 [INFO]   external tumor expression: 5,543 genes x 86 samples
+2026-08-10 16:05:24,802 [INFO]   Loading external normal reference: D:\New folder (9)\gloom updated\trial\data\external\GSE68571\processed\GSE68571_normal_expression.csv
+2026-08-10 16:05:24,817 [INFO]   external normal reference: 5,543 genes x 10 samples
+2026-08-10 16:05:24,817 [INFO]   Genes shared by external tumor and normal reference: 5,543
+2026-08-10 16:05:24,823 [INFO]   Running external Welch t-test for 5,543 genes
+2026-08-10 16:05:24,901 [INFO]   External DE results saved: external_de_results.csv
+2026-08-10 16:05:24,901 [INFO]   Computing stats for [tumor] ((5543, 86)) …
+2026-08-10 16:05:29,043 [INFO]   Computing stats for [normal] ((5543, 10)) …
+2026-08-10 16:05:33,253 [INFO]   [external_expression_features] Validated. Shape: (5543, 29)
+2026-08-10 16:05:33,410 [INFO]   External expression features saved: external_expression_features.csv
+2026-08-10 16:05:33,412 [INFO]   Matrix: 5543 genes x 86 samples | cutoff |r|>=0.6
+2026-08-10 16:05:34,341 [INFO]   Chunk 10/12 edges so far: 87,139 (0.9s)
+2026-08-10 16:05:34,502 [INFO]   Chunk 12/12 edges so far: 87,650 (1.1s)
+2026-08-10 16:05:34,573 [INFO]   Total edges: 87,650
+2026-08-10 16:05:37,786 [INFO]   Graph: 3,187 nodes, 87,650 edges
+2026-08-10 16:05:39,887 [INFO]   external tumor network saved: external_tumor_network.graphml
+2026-08-10 16:05:39,888 [INFO]   Extracting degree features …
+2026-08-10 16:05:39,947 [INFO]   Extracting average neighbour degree …
+2026-08-10 16:05:39,978 [INFO]   Betweenness centrality (n=5,543) …
+2026-08-10 16:05:53,021 [INFO]   Closeness centrality …
+2026-08-10 16:06:35,152 [INFO]   Eigenvector centrality …
+2026-08-10 16:06:36,148 [INFO]   Clustering coefficient …
+2026-08-10 16:07:05,991 [INFO]   Edge weight statistics …
+2026-08-10 16:07:06,350 [INFO]   Component features …
+2026-08-10 16:07:06,449 [INFO]   External network features saved: external_network_features.csv
+2026-08-10 16:07:06,450 [INFO]   Matrix: 5543 genes x 10 samples | cutoff |r|>=0.6
+2026-08-10 16:07:07,866 [INFO]   Chunk 10/12 edges so far: 1,239,858 (1.4s)
+2026-08-10 16:07:08,082 [INFO]   Chunk 12/12 edges so far: 1,251,232 (1.6s)
+2026-08-10 16:07:08,197 [INFO]   Total edges: 1,251,232
+2026-08-10 16:07:56,194 [INFO]   Graph: 5,543 nodes, 1,251,232 edges
+2026-08-10 16:08:30,578 [INFO]   external normal network saved: external_normal_network.graphml
+2026-08-10 16:09:01,054 [WARNING]   Skipping clustering coefficient — graph too dense (1,251,232 edges > 300,000 limit). Set to 0.0.
+2026-08-10 16:09:14,429 [WARNING]   Skipping betweenness centrality — graph too dense (1,251,232 edges > 500,000 limit). Set to 0.0.
+2026-08-10 16:09:16,780 [INFO]   External differential network features saved: external_differential_network_features.csv
+2026-08-10 16:09:17,144 [INFO]   External integrated features saved: external_integrated_features.csv
+2026-08-10 16:09:17,304 [INFO]   External aligned feature matrix: (5543, 21)
+2026-08-10 16:09:17,520 [INFO]   Scoring 5,543 external genes with gradient_boosting
+2026-08-10 16:09:17,541 [INFO]   Label source: lcgene_fallback | positives in scored genes: 332
+2026-08-10 16:09:17,545 [INFO]   External AUROC=0.5023  AUPRC=0.0616
+2026-08-10 16:09:17,545 [INFO]   External Recall@100=0.0120  Precision@100=0.0400
+2026-08-10 16:09:17,920 [INFO]   External intermediate data: D:\New folder (9)\gloom updated\trial\data\external\GSE68571\processed
+2026-08-10 16:09:17,920 [INFO]   External validation outputs: D:\New folder (9)\gloom updated\trial\outputs\external_validation\GSE68571
+2026-08-10 16:09:17,920 [INFO] STEP 20 COMPLETE
+2026-08-10 16:09:17,924 [INFO] <<< Step 20  — Indep. validation DONE (235.9s)
+2026-08-10 16:09:17,925 [INFO] ======================================================================
+2026-08-10 16:09:17,925 [INFO] EXECUTION SUMMARY
+2026-08-10 16:09:17,925 [INFO] ======================================================================
+2026-08-10 16:09:17,925 [INFO]   [ OK ] [opt] Step 20  — Indep. validation                       235.9s
+2026-08-10 16:09:17,925 [INFO]   Total: 235.9s (3.9 min)
+2026-08-10 16:09:17,926 [INFO]   Pipeline COMPLETE.
+2026-08-10 16:09:17,926 [INFO] ======================================================================
+2026-08-10 16:10:34,360 [INFO] ======================================================================
+2026-08-10 16:10:34,360 [INFO] LUAD ML PIPELINE — FULL RUN
+2026-08-10 16:10:34,360 [INFO] Running 1 step(s)
+2026-08-10 16:10:34,360 [INFO] ======================================================================
+2026-08-10 16:10:34,360 [INFO] >>> Step 20  — Indep. validation [optional]
+2026-08-10 16:10:36,547 [INFO] ============================================================
+2026-08-10 16:10:36,547 [INFO] STEP 20 - INDEPENDENT COHORT VALIDATION
+2026-08-10 16:10:36,548 [INFO] ============================================================
+2026-08-10 16:10:36,548 [INFO]   Loading external tumor expression: D:\New folder (9)\gloom updated\trial\data\external\GSE68571\processed\GSE68571_gene_expression.csv
+2026-08-10 16:10:36,609 [INFO]   external tumor expression: 5,543 genes x 86 samples
+2026-08-10 16:10:36,610 [INFO]   Loading external normal reference: D:\New folder (9)\gloom updated\trial\data\external\GSE68571\processed\GSE68571_normal_expression.csv
+2026-08-10 16:10:36,623 [INFO]   external normal reference: 5,543 genes x 10 samples
+2026-08-10 16:10:36,623 [INFO]   Genes shared by external tumor and normal reference: 5,543
+2026-08-10 16:10:36,628 [INFO]   Running external Welch t-test for 5,543 genes
+2026-08-10 16:10:36,700 [INFO]   External DE results saved: external_de_results.csv
+2026-08-10 16:10:36,700 [INFO]   Computing stats for [tumor] ((5543, 86)) …
+2026-08-10 16:10:39,913 [INFO]   Computing stats for [normal] ((5543, 10)) …
+2026-08-10 16:10:43,030 [INFO]   [external_expression_features] Validated. Shape: (5543, 29)
+2026-08-10 16:10:43,160 [INFO]   External expression features saved: external_expression_features.csv
+2026-08-10 16:10:43,162 [INFO]   Matrix: 5543 genes x 86 samples | cutoff |r|>=0.6
+2026-08-10 16:10:43,732 [INFO]   Chunk 10/12 edges so far: 87,139 (0.6s)
+2026-08-10 16:10:43,848 [INFO]   Chunk 12/12 edges so far: 87,650 (0.7s)
+2026-08-10 16:10:43,900 [INFO]   Total edges: 87,650
+2026-08-10 16:10:46,390 [INFO]   Graph: 3,187 nodes, 87,650 edges
+2026-08-10 16:10:48,002 [INFO]   external tumor network saved: external_tumor_network.graphml
+2026-08-10 16:10:48,003 [INFO]   Extracting degree features …
+2026-08-10 16:10:48,047 [INFO]   Extracting average neighbour degree …
+2026-08-10 16:10:48,069 [INFO]   Betweenness centrality (n=5,543) …
+2026-08-10 16:10:56,798 [INFO]   Closeness centrality …
+2026-08-10 16:11:24,608 [INFO]   Eigenvector centrality …
+2026-08-10 16:11:25,470 [INFO]   Clustering coefficient …
+2026-08-10 16:11:51,097 [INFO]   Edge weight statistics …
+2026-08-10 16:11:51,356 [INFO]   Component features …
+2026-08-10 16:11:51,423 [INFO]   External network features saved: external_network_features.csv
+2026-08-10 16:11:51,432 [INFO]   Matrix: 5543 genes x 10 samples | cutoff |r|>=0.6
+2026-08-10 16:11:52,608 [INFO]   Chunk 10/12 edges so far: 1,239,858 (1.2s)
+2026-08-10 16:11:52,777 [INFO]   Chunk 12/12 edges so far: 1,251,232 (1.3s)
+2026-08-10 16:11:52,853 [INFO]   Total edges: 1,251,232
+2026-08-10 16:12:39,892 [INFO]   Graph: 5,543 nodes, 1,251,232 edges
+2026-08-10 16:13:08,711 [INFO]   external normal network saved: external_normal_network.graphml
+2026-08-10 16:13:33,506 [WARNING]   Skipping clustering coefficient — graph too dense (1,251,232 edges > 300,000 limit). Set to 0.0.
+2026-08-10 16:13:44,509 [WARNING]   Skipping betweenness centrality — graph too dense (1,251,232 edges > 500,000 limit). Set to 0.0.
+2026-08-10 16:13:46,418 [INFO]   External differential network features saved: external_differential_network_features.csv
+2026-08-10 16:13:46,719 [INFO]   External integrated features saved: external_integrated_features.csv
+2026-08-10 16:13:46,844 [INFO]   External aligned feature matrix: (5543, 21)
+2026-08-10 16:13:47,024 [INFO]   Scoring 5,543 external genes with gradient_boosting
+2026-08-10 16:13:47,044 [INFO]   Label source: lcgene_fallback | positives in scored genes: 332
+2026-08-10 16:13:47,050 [INFO]   External AUROC=0.5023  AUPRC=0.0616
+2026-08-10 16:13:47,050 [INFO]   External Recall@100=0.0120  Precision@100=0.0400
+2026-08-10 16:13:47,346 [INFO]   External intermediate data: D:\New folder (9)\gloom updated\trial\data\external\GSE68571\processed
+2026-08-10 16:13:47,347 [INFO]   External validation outputs: D:\New folder (9)\gloom updated\trial\outputs\external_validation\GSE68571
+2026-08-10 16:13:47,347 [INFO] STEP 20 COMPLETE
+2026-08-10 16:13:47,348 [INFO] <<< Step 20  — Indep. validation DONE (193.0s)
+2026-08-10 16:13:47,348 [INFO] ======================================================================
+2026-08-10 16:13:47,348 [INFO] EXECUTION SUMMARY
+2026-08-10 16:13:47,348 [INFO] ======================================================================
+2026-08-10 16:13:47,348 [INFO]   [ OK ] [opt] Step 20  — Indep. validation                       193.0s
+2026-08-10 16:13:47,348 [INFO]   Total: 193.0s (3.2 min)
+2026-08-10 16:13:47,348 [INFO]   Pipeline COMPLETE.
+2026-08-10 16:13:47,348 [INFO] ======================================================================
