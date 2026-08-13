@@ -1,216 +1,239 @@
-# LUAD ML Pipeline Scripts
+# LUAD ML Pipeline
 
-This directory contains the executable LUAD pipeline for data loading, preprocessing, differential expression, network construction, machine learning, reporting, enrichment, and optional external validation.
+Machine learning pipeline for LUAD candidate-gene prioritization, co-expression analysis, and downstream reporting.
 
-The old README described an earlier 18-step version. The current code exposes 20 logical steps through `run_pipeline.py`, including optional modules that were added later:
+## Overview
 
-- `step1b_batch_correction.py`
-- `step6b_normal_network.py`
-- `step7b_differential_network_features.py`
-- `step11b_pu_bagging.py`
-- `step19_kegg_enrichment.py`
-- `step15_independent_validation.py` (used as step 20 by the runner)
+The pipeline currently has 19 numbered steps plus optional branch steps:
 
-## Support files
+- Required path: `0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18`
+- Optional steps: `1b, 6b, 7b, 11b, 19`
 
-- `config.py` - central paths, thresholds, flags, and output locations
-- `run_pipeline.py` - master runner for full runs or selected step ranges
-- `requirements.txt` - base Python dependencies for this folder
-- `__init__.py` - package marker
+Important optional-step behavior:
 
-## Pipeline map
+- Optional means the runner continues if the step fails.
+- Optional outputs can still affect later steps if their files already exist.
+- `step11b` is especially important because `step14` prefers `pu_bagging_scores.csv` when it is present.
 
-| Key | Script | Purpose | Optional |
-|---|---|---|---|
-| `0` | `config.py` | Create output directories and load central settings | No |
-| `1` | `step1_data_loading.py` | Load cBioPortal, GTEx, and LCGene raw inputs into validated CSVs | No |
-| `1b` | `step1b_batch_correction.py` | Apply optional batch correction before QC and DE | Yes |
-| `2` | `step2_preprocessing.py` | Log-transform, filter, QC, and align expression matrices and metadata | No |
-| `3` | `step3_harmonization.py` | Harmonize gene symbols and align tumor and normal matrices | No |
-| `4` | `step4_differential_expression.py` | Run differential expression with Welch t-test, BH FDR, and effect size | No |
-| `5` | `step5_expression_features.py` | Build per-gene expression and contrast features | No |
-| `6` | `step6_coexpression_network.py` | Build the tumor co-expression network | No |
-| `6b` | `step6b_normal_network.py` | Build the normal-tissue co-expression network | Yes |
-| `7` | `step7_network_features.py` | Extract tumor network topology features | No |
-| `7b` | `step7b_differential_network_features.py` | Compute tumor-vs-normal differential network features | Yes |
-| `8` | `step8_feature_integration.py` | Merge, clean, and scale expression and network features | No |
-| `9` | `step9_label_construction.py` | Build LCGene positive vs unlabeled labels and gene annotations | No |
-| `10` | `step10_train_val_split.py` | Create the train/validation split and CV fold assignments | No |
-| `11` | `step11_model_training.py` | Train core ML models and save the calibrated best model | No |
-| `11b` | `step11b_pu_bagging.py` | Run Mordelet-Vert PU bagging for ranking genes in a PU setting | Yes |
-| `12` | `step12_model_evaluation.py` | Evaluate trained models on the held-out validation set | No |
-| `13` | `step13_feature_importance.py` | Compute native and permutation feature importance | No |
-| `14` | `step14_gene_ranking.py` | Score all genes and export ranked novel candidates | No |
-| `15` | `step15_network_annotation.py` | Annotate network nodes and edges with ML and DE results | No |
-| `16` | `step16_network_export.py` | Export annotated network in multiple graph and tabular formats | No |
-| `17` | `step17_interactive_visualization.py` | Build interactive HTML visualizations and a combined dashboard | No |
-| `18` | `step18_final_report.py` | Write summary tables, text report, and summary figures | No |
-| `19` | `step19_kegg_enrichment.py` | Run KEGG enrichment on high-confidence candidate sets | Yes |
-| `20` | `step15_independent_validation.py` | Score an external cohort and report independent validation metrics | Yes |
+## Project Structure
 
-Note: step 20 is implemented in `step15_independent_validation.py`. The filename is older than the current runner numbering.
+```text
+src/gloom/pipeline/
+|-- config.py
+|-- run_pipeline.py
+|-- step1_data_loading.py
+|-- step1b_batch_correction.py          # optional
+|-- step2_preprocessing.py
+|-- step3_harmonization.py
+|-- step4_differential_expression.py
+|-- step5_expression_features.py
+|-- step6_coexpression_network.py
+|-- step6b_normal_network.py            # optional
+|-- step7_network_features.py
+|-- step7b_differential_network_features.py  # optional
+|-- step8_feature_integration.py
+|-- step9_label_construction.py
+|-- step10_train_val_split.py
+|-- step11_model_training.py
+|-- step11b_pu_bagging.py               # optional
+|-- step12_model_evaluation.py
+|-- step13_feature_importance.py
+|-- step14_gene_ranking.py
+|-- step15_network_annotation.py
+|-- step16_network_export.py
+|-- step17_interactive_visualization.py
+|-- step18_final_report.py
+|-- step19_kegg_enrichment.py           # optional
+`-- requirements.txt
+```
 
-## Required input data
+## Required Input Data
 
-The current `config.py` expects these raw inputs:
+Place the raw files under `data/raw/` relative to the `trial/` project root:
 
 ```text
 data/raw/
-  cBioPortal (RNA Seq Data)/
-    data_mrna_seq_v2_rsem.txt
-    data_clinical_patient.txt
-  Gtex (normal samples)/
-    gene_tpm_v11_lung.gct.gz
-    GTEx_Analysis_v11_Annotations_SampleAttributesDS - LUAD.txt
-  LCGene (Labeled LUAD Data)/
-    LCGene_human_LUAD_filtered.tsv
+|-- cBioPortal (RNA Seq Data)/
+|   |-- data_mrna_seq_v2_rsem.txt
+|   `-- data_clinical_patient.txt
+|-- Gtex (normal samples)/
+|   |-- gene_tpm_v11_lung.gct.gz
+|   `-- GTEx_Analysis_v11_Annotations_SampleAttributesDS - LUAD.txt
+`-- LCGene (Labeled LUAD Data)/
+    `-- LCGene_human_LUAD_filtered.tsv
 ```
-
-Optional external validation inputs are configured in `config.py`:
-
-- `EXTERNAL_EXPR_FILE`
-- `EXTERNAL_LABELS_FILE`
 
 ## Installation
 
-From the repository root:
+For package users, install GLOOM from Bioconda:
 
 ```bash
-pip install -r scripts/requirements.txt
+conda install -c bioconda -c conda-forge gloom
 ```
 
-Base requirements include `pandas`, `numpy`, `scipy`, `scikit-learn`, `networkx`, `matplotlib`, `statsmodels`, `plotly`, `joblib`, `openpyxl`, and `gseapy`.
-
-Optional extras used by some paths:
-
-- `pip install xgboost` for the optional XGBoost model in step 11
-- `pip install imbalanced-learn` if `USE_SMOTE` or undersampling is enabled
-- `pip install inmoose` for the Python ComBat-seq path in step 1b
-- `pip install rpy2` plus an R installation with `sva` if you want the R ComBat-seq path instead
-
-## Running the pipeline
-
-From the repository root:
+For direct script usage from the repository root:
 
 ```bash
-python scripts/run_pipeline.py
-python scripts/run_pipeline.py --from 4
-python scripts/run_pipeline.py --from 6 --to 8
-python scripts/run_pipeline.py --only 12
-python scripts/run_pipeline.py --only 11b
-python scripts/run_pipeline.py --only 20
+pip install -r src/gloom/pipeline/requirements.txt
 ```
 
-From inside `scripts/`:
+Optional dependencies:
+
+- `xgboost` for the XGBoost model in step 11
+- `plotly` for step 17 interactive HTML outputs
+- `gseapy` for step 19 KEGG enrichment
+- `inmoose` or `rpy2 + R sva` for step 1b batch correction
+
+## Usage
+
+Run from inside `src/gloom/pipeline/`, or use the full paths from the repository root.
+
+### Full run
 
 ```bash
-cd scripts
 python run_pipeline.py
 ```
 
-All step files also expose a direct entrypoint, so ad hoc reruns are supported:
+### Full run without optional steps
 
 ```bash
-python scripts/step11_model_training.py
-python scripts/step11b_pu_bagging.py
-python scripts/step19_kegg_enrichment.py
+python run_pipeline.py --skip-optional
 ```
 
-## Current defaults worth knowing
+### Resume from a step
 
-These defaults are set in the current `config.py`:
+```bash
+python run_pipeline.py --from 4
+```
 
-- `DE_LOG2FC_THRESHOLD = 2.0`
-- `DE_PVALUE_THRESHOLD = 0.001`
-- `COEXPR_CORRELATION_CUTOFF = 0.60`
-- `CV_FOLDS = 5`
-- `NOVEL_PROB_THRESHOLD = 0.85`
-- `NOVEL_PROB_THRESHOLD_SENS = 0.50`
-- `USE_BATCH_CORRECTION = False`
-- `EXTERNAL_EXPR_FILE = None`
-- `EXTERNAL_LABELS_FILE = None`
+### Run a single step
 
-Labeling is based on the LCGene LUAD file, not the older Cancer Gene Census input referenced by the previous README.
+```bash
+python run_pipeline.py --only 11
+python run_pipeline.py --only 11b
+python run_pipeline.py --only 19
+```
 
-## Models currently trained
+### Run step scripts directly
 
-The implemented model set in `step11_model_training.py` is:
+```bash
+python step11_model_training.py
+python step11b_pu_bagging.py
+python step19_kegg_enrichment.py
+```
+
+Equivalent commands from the repository root:
+
+```bash
+python src/gloom/pipeline/run_pipeline.py
+python src/gloom/pipeline/run_pipeline.py --skip-optional
+python src/gloom/pipeline/run_pipeline.py --from 4
+python src/gloom/pipeline/run_pipeline.py --only 11b
+python src/gloom/pipeline/step11_model_training.py
+```
+
+## Step Summary
+
+- `1b`: optional batch-effect correction before downstream expression analysis
+- `6b`: optional normal-tissue co-expression network
+- `7b`: optional tumor-vs-normal differential network features
+- `11`: supervised model training and best-model selection
+- `11b`: PU bagging over the full gene universe
+- `19`: KEGG enrichment for ranked candidate genes
+
+## Outputs
+
+All generated outputs live outside the code folder under `outputs/` at the `trial/` root:
+
+```text
+outputs/
+|-- figures/
+|-- logs/
+|-- models/
+`-- results/
+    |-- enrichment/
+    |-- network/
+    `-- reports/
+```
+
+Key files:
+
+- `outputs/results/gene_rankings.csv`
+- `outputs/results/novel_candidates.csv`
+- `outputs/results/network/annotated_network.graphml`
+- `outputs/results/enrichment/kegg_all_candidates.csv`
+- `outputs/results/enrichment/kegg_upregulated.csv`
+- `outputs/results/enrichment/kegg_downregulated.csv`
+- `outputs/results/enrichment/kegg_summary.csv`
+- `outputs/results/reports/pipeline_summary_table.csv`
+- `outputs/results/reports/pipeline_report.txt`
+- `outputs/results/reports/pipeline_summary_figure.png`
+- `outputs/figures/interactive_dashboard.html`
+- `outputs/models/best_model.joblib`
+- `outputs/models/cv_results.csv`
+
+Additional optional outputs:
+
+- `outputs/results/pu_bagging_scores.csv`
+- `outputs/results/pu_bagging_metrics.csv`
+- `outputs/figures/pu_bagging_score_distribution.png`
+- `outputs/figures/interactive_kegg.html`
+
+## Models Used
+
+### Step 11: supervised training
 
 - Random Forest
 - Gradient Boosting
 - Logistic Regression
 - Extra Trees
-- XGBoost, only if the package is installed
+- XGBoost, if `xgboost` is installed
 
-`step11_model_training.py` still mentions SVM in its top docstring, but SVM is not present in the active model definitions anymore.
+Hyperparameter tuning uses `RandomizedSearchCV` when enabled in `config.py`.
+The current tuning grid includes:
 
-## Key outputs
+- Random Forest
+- Gradient Boosting
+- Logistic Regression
+- Extra Trees
+- XGBoost
 
-Exact base directories are controlled by `config.py`, but the current scripts write the following logical outputs.
+### Step 11b: PU bagging
 
-Processed and intermediate tables:
+- Random Forest base learners inside a positive-unlabeled bagging ensemble
 
-- `tumor_expression_raw.csv`
-- `normal_expression_raw.csv`
-- `tumor_expression_processed.csv`
-- `normal_expression_processed.csv`
-- `expression_features.csv`
-- `network_features.csv`
-- `differential_network_features.csv` when step `7b` is available
-- `integrated_features.csv`
-- `integrated_features_scaled.csv`
-- `gene_labels.csv`
-- `gene_annotation_table.csv`
+## Current Modeling Notes
 
-Modeling and ranking outputs:
+- `SVM` is not part of the current implemented model list.
+- `step14` prefers `pu_bagging_scores.csv` from `step11b` when available.
+- The primary CV selection metric is currently `AUPRC`, not `AUROC`.
+- Tuning is currently configured in `config.py` with:
+  - `USE_HYPERPARAMETER_TUNING = True`
+  - `HP_N_ITER = 20`
 
-- `models/cv_results.csv`
-- `results/model_metrics.csv`
-- `results/feature_importance.csv`
-- `results/gene_rankings.csv`
-- `results/novel_candidates.csv`
-- `results/novel_candidates_sensitivity.csv`
-- `results/query_gene_rankings.csv`
-- `results/pu_bagging_scores.csv` when step `11b` is run
-- `results/pu_bagging_metrics.csv` when step `11b` is run
+## Configuration Highlights
 
-Network outputs:
+Main settings live in `config.py`.
 
-- `results/network/coexpression_network.graphml`
-- `results/network/normal_coexpression_network.graphml` when step `6b` is run
-- `results/network/annotated_network.graphml`
-- `results/network/annotated_nodes.csv`
-- `results/network/annotated_edges.csv`
-- export files from step 16 including GraphML, GML, TSV, and Cytoscape JSON
+Commonly edited options:
 
-Interactive outputs from step 17:
+- `COEXPR_CORRELATION_CUTOFF`
+- `CV_FOLDS`
+- `DE_LOG2FC_THRESHOLD`
+- `DE_PVALUE_THRESHOLD`
+- `USE_BATCH_CORRECTION`
+- `USE_HYPERPARAMETER_TUNING`
+- `HP_N_ITER`
+- `USE_SMOTE`
+- `USE_UNDERSAMPLING`
+- `PU_FRAMING`
+- `PU_N_ESTIMATORS`
+- `PU_SUBSAMPLE_RATIO`
+- `PU_BASE_N_TREES`
 
-- `figures/interactive_volcano.html`
-- `figures/interactive_ranking.html`
-- `figures/interactive_network.html`
-- `figures/interactive_feature_importance.html`
-- `figures/interactive_novel_candidates.html`
-- `figures/interactive_kegg.html` when KEGG data is present
-- `figures/interactive_dashboard.html`
+## Notes
 
-Reporting and validation outputs:
-
-- `results/reports/pipeline_summary_table.csv`
-- `results/reports/pipeline_report.txt`
-- `results/reports/pipeline_summary_figure.png`
-- `results/reports/pipeline_summary_figure.pdf`
-- `results/enrichment/kegg_all_candidates.csv`
-- `results/enrichment/kegg_upregulated.csv`
-- `results/enrichment/kegg_downregulated.csv`
-- `results/enrichment/kegg_summary.csv`
-- `results/independent_validation_scores.csv`
-- `results/independent_validation_metrics.csv`
-
-## Notes on optional steps
-
-- Step `1b` only does work when `USE_BATCH_CORRECTION=True`.
-- After step `1b`, `run_pipeline.py` checks whether the harmonized expression paths still point at the uncorrected files and warns if you need to reroute them before resuming from step `4`.
-- Step `8` auto-includes differential network features if the `step7b` output file exists.
-- Step `11b` is the main PU-learning path for whole-universe gene ranking.
-- Step `19` depends on `novel_candidates.csv`, so step `14` must run first.
-- Step `20` requires `EXTERNAL_EXPR_FILE`, and uses `EXTERNAL_LABELS_FILE` when provided.
+- On Windows, the pipeline now configures console output to avoid `UnicodeEncodeError` from characters that the active code page cannot encode.
+- Log files are written with UTF-8 encoding.
+- `outputs/results/enrichment/kegg_summary.csv` records subset-specific status and explanatory notes when a KEGG subset returns empty after thresholds or pathway filtering.
+- If you skip optional steps, remove stale optional output files if you want a strictly optional-free run.
