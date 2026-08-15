@@ -953,9 +953,9 @@ Both commands generate:
 | Names | Affiliation(s) | Role(s) |
 |---|---|---|
 | Rahma Yasser Mahmoud | Faculty of Computers and Information, Assiut University, Assiut, Egypt | Team Leader |
-| Khadija Adam Rogo | Department of Bioinformatics, Kalinga University, Raipur, India | |
-| Rana Hamed Abu-Zeid | Department of Artificial Intelligence, Badya University, Giza, Egypt | |
-| Malick Traore | African Center of Excellence in Bioinformatics and Data Science, USTTB, Mali | |
+| Khadija Adam Rogo | Department of Bioinformatics, Kalinga University, Raipur, India | Team Member |
+| Rana Hamed Abu-Zeid | Department of Artificial Intelligence, Badya University, Giza, Egypt | Team Member |
+| Malick Traore | African Center of Excellence in Bioinformatics and Data Science, USTTB, Mali | Team Member |
 | Olaitan I. Awe | Institute for Genomic Medicine Research (IGMR); African Society for Bioinformatics and Computational Biology (ASBCB) | Project Advisor |
 
 <br>📧 **Rahma Yasser Mahmoud**: rahmayasserm@gmail.com
