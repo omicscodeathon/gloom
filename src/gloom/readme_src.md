@@ -134,8 +134,8 @@ These defaults are set in the current `config.py`:
 - `DE_PVALUE_THRESHOLD = 0.001`
 - `COEXPR_CORRELATION_CUTOFF = 0.60`
 - `CV_FOLDS = 5`
-- `NOVEL_PROB_THRESHOLD = 0.85`
-- `NOVEL_PROB_THRESHOLD_SENS = 0.50`
+- `CANDIDATE_PROB_THRESHOLD = 0.85` (alias `NOVEL_PROB_THRESHOLD`, deprecated)
+- `CANDIDATE_PROB_THRESHOLD_SENS = 0.50`
 - `USE_BATCH_CORRECTION = False`
 
 Labeling is based on the LCGene LUAD file, not the older Cancer Gene Census input referenced by previous documentation.
@@ -177,8 +177,8 @@ Modeling and ranking outputs:
 - `results/model_metrics.csv`
 - `results/feature_importance.csv`
 - `results/gene_rankings.csv`
-- `results/novel_candidates.csv`
-- `results/novel_candidates_sensitivity.csv`
+- `results/non_lcgene_candidates.csv`
+- `results/non_lcgene_candidates_sensitivity.csv`
 - `results/query_gene_rankings.csv`
 - `results/pu_bagging_scores.csv` when Step `11b` is run
 - `results/pu_bagging_metrics.csv` when Step `11b` is run
@@ -218,5 +218,5 @@ Reporting outputs:
 - After Step `1b`, `run_pipeline.py` checks whether the harmonized expression paths still point at the uncorrected files and warns if you need to reroute them before resuming from Step `4`.
 - Step `8` auto-includes differential network features if the Step `7b` output file exists.
 - Step `11b` is the main PU-learning refinement path for whole-universe gene ranking.
-- Step `19` depends on `novel_candidates.csv`, so Step `14` must run first.
+- Step `19` depends on `non_lcgene_candidates.csv`, so Step `14` must run first.
 - In the latest local full run on August 14, 2026, Step `18` produced the summary table and figures but the text report failed, so `pipeline_report.txt` should be treated as conditional until that bug is fixed.

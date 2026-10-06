@@ -159,7 +159,7 @@ outputs/
 Key files:
 
 - `outputs/results/gene_rankings.csv`
-- `outputs/results/novel_candidates.csv`
+- `outputs/results/non_lcgene_candidates.csv`
 - `outputs/results/network/annotated_network.graphml`
 - `outputs/results/enrichment/kegg_all_candidates.csv`
 - `outputs/results/enrichment/kegg_upregulated.csv`
@@ -237,3 +237,24 @@ Commonly edited options:
 - Log files are written with UTF-8 encoding.
 - `outputs/results/enrichment/kegg_summary.csv` records subset-specific status and explanatory notes when a KEGG subset returns empty after thresholds or pathway filtering.
 - If you skip optional steps, remove stale optional output files if you want a strictly optional-free run.
+
+## v0.2.0 additions (revision release)
+
+New and changed steps (keys as used by `run_pipeline.py --from/--to/--only`):
+
+| Key | Script | Purpose |
+|---|---|---|
+| 2b | `step2b_qc_report.py` | Sample-level QC (per-sample median/IQR, PCA, global median log2FC, fraction DE, up:down) and `qc_cohort_warning.txt` |
+| 7c | `step7c_network_stability.py` | Threshold sweep and sample-bootstrap stability of the co-expression networks |
+| 11c | `step11c_crossfit_pu.py` | Repeated stratified K-fold PU cross-fitting -> `results/oof_scores.csv` (primary ranking) |
+| 12b | `step12b_oof_metrics.py` | Out-of-fold AUROC/AUPRC/AP/P@K/R@K/EF@K with stratified-bootstrap 95% CIs -> `results/oof_metrics.csv` |
+| 13b | `step13b_ablation.py` | Feature-set ablation under cross-fitting -> `results/ablation_*.csv`, `ablation_verdict.txt` |
+| 20 | `step20_candidate_evidence.py` | Optional Open Targets + Europe PMC evidence for non-LCGene candidates -> `results/candidate_evidence.csv` |
+
+Changed behaviour: step 2 keeps true zeros (`log2(0+1)=0`); step 4 supports `DE_METHOD = welch | paired | limma_voom`;
+step 9 uses a label-independent universe (`LABEL_INDEPENDENT_UNIVERSE`); step 14 ranks by out-of-fold scores
+(`predicted_prob`) and keeps `full_model_score` / `is_training_positive`; step 19 writes a complete unfiltered
+enrichment table with an explicit background; `novel_candidates*` was renamed `non_lcgene_candidates*`.
+All randomness is driven by `config.SEED`. Helper functions shared by the steps live in `gloom_utils.py`
+(unit tests: `pytest test/`). Extra tools: `fetch_gdc_tcga_luad.py` (scripts/ only) downloads TCGA-LUAD GDC STAR counts;
+`benchmark_runtime.py` (scripts/ only) measures run time and peak memory.

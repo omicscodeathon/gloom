@@ -54,8 +54,8 @@ def _candidates(config, out: Path, top_k: int | None = None, fmt: str = "csv") -
 
     files = [
         (primary_rankings, "ranked_candidates"),
-        (Path(config.RESULTS_DIR) / "novel_candidates.csv", "novel_candidates"),
-        (Path(config.RESULTS_DIR) / "novel_candidates_sensitivity.csv", "novel_candidates_sensitivity"),
+        (Path(config.RESULTS_DIR) / "non_lcgene_candidates.csv", "non_lcgene_candidates"),
+        (Path(config.RESULTS_DIR) / "non_lcgene_candidates_sensitivity.csv", "non_lcgene_candidates_sensitivity"),
         (Path(config.GENE_RANKINGS_FILE), "full_gene_rankings"),
     ]
 
@@ -66,8 +66,8 @@ def _candidates(config, out: Path, top_k: int | None = None, fmt: str = "csv") -
         df = pd.read_csv(src_path, index_col=0)
         if top_k is not None and dst_stem in {
             "ranked_candidates",
-            "novel_candidates",
-            "novel_candidates_sensitivity",
+            "non_lcgene_candidates",
+            "non_lcgene_candidates_sensitivity",
         }:
             df = df.head(top_k)
         _save_table(df, d / dst_stem, fmt)
@@ -92,6 +92,28 @@ def _tables(config, out: Path) -> None:
     ]
     for src, dst in table_map:
         _copy(src, dst)
+
+    # v0.2.0 revision outputs (optional steps: copied only when they exist)
+    results = Path(config.RESULTS_DIR)
+    optional_results = [
+        "oof_scores.csv", "oof_metrics.csv",
+        "ablation_metrics.csv", "ablation_paired_comparison.csv", "ablation_verdict.txt",
+        "network_stability_thresholds.csv", "network_stability_density_ratio.csv",
+        "network_stability_bootstrap_summary.csv", "network_stability_bootstrap_replicates.csv",
+        "network_stability_hubs.csv",
+        "candidate_evidence.csv", "qc_cohort_warning.txt",
+        "qc_sample_summary.csv", "qc_group_summary.csv", "qc_sample_pca.csv",
+        "qc_pca_explained_variance.csv", "qc_global_de_summary.csv",
+    ]
+    for name in optional_results:
+        if (results / name).exists():
+            _copy(results / name, d / name)
+    subset = Path(config.ENRICHMENT_DIR) / "kegg_lung_cancer_subset.csv"
+    if subset.exists():
+        _copy(subset, d / "kegg_lung_cancer_subset.csv")
+    kegg_all = getattr(config, "KEGG_ALL_FILE", None)
+    if kegg_all and Path(kegg_all).exists():
+        _copy(kegg_all, d / "kegg_all_candidates.csv")
 
 
 def _models(config, out: Path, disease: str) -> None:
@@ -222,7 +244,7 @@ def _build_model_card(config, dst: Path, disease: str) -> None:
         "threshold_strategy": config.THRESHOLD_STRATEGY,
         "use_smote": config.USE_SMOTE,
         "use_undersampling": config.USE_UNDERSAMPLING,
-        "random_state": config.RANDOM_STATE,
+        "seed": config.SEED,
     }
 
     dst.write_text(json.dumps(card, indent=2))
@@ -453,11 +475,11 @@ def _inject_kegg_tab(report: Path, config) -> None:
 
     tab_button = "  <div class=\"tab\" onclick=\"showTab('kegg',this)\">KEGG Pathways</div>\n"
     old_bar_end = (
-        "  <div class=\"tab\"         onclick=\"showTab('novel',this)\">Novel Candidates</div>\n"
+        "  <div class=\"tab\"         onclick=\"showTab('novel',this)\">Non-LCGene Candidates</div>\n"
         "</div>"
     )
     new_bar_end = (
-        "  <div class=\"tab\"         onclick=\"showTab('novel',this)\">Novel Candidates</div>\n"
+        "  <div class=\"tab\"         onclick=\"showTab('novel',this)\">Non-LCGene Candidates</div>\n"
         + tab_button
         + "</div>"
     )
@@ -469,7 +491,7 @@ def _inject_kegg_tab(report: Path, config) -> None:
     kegg_tab_content = (
         '\n<div id="tab-kegg" class="tab-content">\n'
         '  <div class="plot-card">\n'
-        '    <div class="plot-desc"><b>KEGG Pathway Enrichment</b> - Novel LUAD candidates tested against KEGG_2021_Human via Enrichr, filtered to lung/cancer-relevant pathways. Use the buttons above the chart to switch between subsets. Hover a bar for pathway details and overlapping gene list.</div>\n'
+        '    <div class="plot-desc"><b>KEGG Pathway Enrichment</b> - Non-LCGene candidates tested against KEGG_2021_Human (complete unfiltered table, explicit background = analysis universe, BH-adjusted). Use the buttons above the chart to switch between subsets. Hover a bar for pathway details and overlapping gene list.</div>\n'
         f"    {kegg_div}\n"
         "  </div>\n"
         "</div>"

@@ -5,13 +5,29 @@ Optional batch correction step to be run AFTER step1 (data loading) and
 BEFORE step2 (QC), correcting for systematic cohort/platform differences
 between the TCGA tumor and GTEx normal expression matrices.
 
+!! IMPORTANT LIMITATION — READ BEFORE ENABLING !!
+  Batch correction can only separate a batch effect from a biological effect when each
+  batch (cohort) contains samples from BOTH biological groups.  In the legacy LUAD design
+  every tumor comes from one cohort (TCGA via cBioPortal, RSEM) and every normal from
+  another (GTEx, TPM).  Cohort is then PERFECTLY COLLINEAR with disease status:
+    * ComBat / ComBat-seq with batch = cohort and group as covariate is rank-deficient
+      (the design matrix cannot estimate both), and
+    * without the covariate it removes the disease signal together with the batch signal.
+  Either way, the corrected matrix cannot be interpreted as "disease signal with the cohort
+  effect removed".  step1 therefore runs a COHORT_DESIGN check and writes
+  results/qc_cohort_warning.txt when it detects this situation.  The scientifically sound
+  remedy is a design with uniformly processed tumor AND matched/adjacent-normal samples
+  (config.DATA_SOURCE = "tcga_gdc", see docs/tcga_paired_design.md), where batch correction
+  is usually unnecessary; if several cohorts exist that each contain both groups, enabling
+  this step is appropriate.
+
 Biological context:
   95.3% of genes are DE-significant in the uncorrected TCGA vs GTEx comparison
   (technical review, Issue 3). This strongly indicates that cohort/platform
   differences (library prep, sequencing protocol, normalisation pipeline)
-  dominate the DE signal rather than true LUAD biology. Batch correction
-  reduces this artefact so that DE features in step4 reflect genuine disease
-  differences rather than technical differences between datasets.
+  dominate the DE signal rather than true LUAD biology.  Batch correction is
+  NOT a reliable cure for that in a fully confounded design (see above); it is
+  kept as an optional step for datasets where cohort and group are not collinear.
 
 Method:
   ComBat-seq (Zhang et al. 2020, NAR) applied to the combined log1p-TPM matrix.
@@ -133,6 +149,14 @@ def run_batch_correction():
 
     # ── Combine and define batch labels ───────────────────────────────────────
     # Batch: 0 = GTEx normal, 1 = TCGA tumor
+    # NOTE: here batch and group coincide (perfect collinearity); see the module docstring.
+    # With DATA_SOURCE = "tcga_gdc" all samples share one cohort and this step is not needed.
+    if getattr(config, "DATA_SOURCE", "cbioportal_gtex") == "tcga_gdc":
+        log.warning("  DATA_SOURCE = 'tcga_gdc': tumor and normal share one cohort; "
+                    "batch correction is not meaningful here — skipping.")
+        return {}
+    log.warning("  Batch label == tumor/normal label (perfectly collinear): ComBat-seq cannot "
+                "separate cohort from disease in this design. Interpret results with caution.")
     combined     = pd.concat([normal_expr, tumor_expr], axis=1)
     n_normal     = normal_expr.shape[1]
     n_tumor      = tumor_expr.shape[1]

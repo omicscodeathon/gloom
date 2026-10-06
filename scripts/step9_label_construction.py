@@ -3,6 +3,11 @@ step9_label_construction.py - Label Construction
 Assigns binary labels: 1 = known positive (cancer gene), 0 = unlabeled.
 When config.PU_FRAMING is True the pipeline uses positive-unlabeled (PU)
 language throughout: negatives are *unlabeled*, not confirmed non-cancer.
+
+Analysis universe (config.LABEL_INDEPENDENT_UNIVERSE, default True): the set of genes is
+defined BEFORE labels are assigned, with identical criteria for every gene, and no
+|log2FC| filter is applied to unlabeled genes.  Setting the flag to False restores the
+deprecated v0.1.x behaviour (label-dependent trimming; not recommended).
 Outputs: gene_labels.csv, gene_annotation_table.csv
 """
 import logging, sys
@@ -37,27 +42,38 @@ def run_label_construction():
         name="label"
     )
 
-    # --- Gene universe trimming (Option A + B combined) ---
-    # Remove unlabeled genes that are non-expressed AND have no DE signal.
-    # Positives (label=1) are NEVER removed.
-    abs_log2fc  = de_df["log2fc"].abs().reindex(gene_index).fillna(0.0)
-    padj        = de_df["pvalue_adj"].reindex(gene_index).fillna(1.0)
-    pct_expr    = features["tumor_pct_expressed"].reindex(gene_index).fillna(0.0) \
-                  if "tumor_pct_expressed" in features.columns else \
-                  pd.Series(1.0, index=gene_index)   # safe fallback: keep all
-    trim_mask = (
-        (labels == 0) &
-        (abs_log2fc < 2.0)   # below pipeline DE threshold — no meaningful LUAD signal
-    )
-    n_trimmed = trim_mask.sum()
-    if n_trimmed:
-        log.info(f"  Universe trimming: removing {n_trimmed} noisy unlabeled genes "
-                 f"(non-expressed + no DE signal)")
-        labels     = labels[~trim_mask]
-        gene_index = labels.index
-        normalised = pd.Index(gene_index.astype(str)).str.strip().str.upper()
+    # --- Analysis universe -------------------------------------------------------------------
+    # LABEL_INDEPENDENT_UNIVERSE = True (default, recommended):
+    #   The universe was fixed BEFORE labels were assigned, with criteria identical for every
+    #   gene: detectable expression + variance filter (step2, applied per cohort), intersection
+    #   of the tumor and normal gene sets (step3) and non-missing features (step8).  No
+    #   |log2FC| filter is applied to unlabeled genes, because log2FC-derived variables are
+    #   model features and a label-dependent filter would inflate class separation.
+    # LABEL_INDEPENDENT_UNIVERSE = False (DEPRECATED — label-dependent, NOT recommended):
+    #   v0.1.x behaviour: remove unlabeled genes with |log2FC| < 2 while keeping ALL positives.
+    n_trimmed = 0
+    if getattr(config, "LABEL_INDEPENDENT_UNIVERSE", True):
+        log.info(f"  Analysis universe: {len(labels):,} genes, defined before labelling with "
+                 f"criteria identical for all genes (expression + variance filters, "
+                 f"tumor/normal intersection). No |log2FC| filter on unlabeled genes.")
     else:
-        log.info("  Universe trimming: 0 genes removed (conditions not met)")
+        log.warning("  LABEL_INDEPENDENT_UNIVERSE = False — DEPRECATED label-dependent universe "
+                    "trimming is active (unlabeled genes with |log2FC| < 2 are removed, positives "
+                    "are always kept). This biases class separation; NOT recommended.")
+        abs_log2fc = de_df["log2fc"].abs().reindex(gene_index).fillna(0.0)
+        trim_mask = (
+            (labels == 0) &
+            (abs_log2fc < 2.0)   # below pipeline DE threshold — no meaningful LUAD signal
+        )
+        n_trimmed = int(trim_mask.sum())
+        if n_trimmed:
+            log.info(f"  Universe trimming (deprecated): removing {n_trimmed} unlabeled genes "
+                     f"with |log2FC| < 2")
+            labels     = labels[~trim_mask]
+            gene_index = labels.index
+            normalised = pd.Index(gene_index.astype(str)).str.strip().str.upper()
+        else:
+            log.info("  Universe trimming (deprecated): 0 genes removed (conditions not met)")
 
     n_pos = labels.sum(); n_neg = (labels==0).sum(); n_total = len(labels)
     if config.PU_FRAMING:

@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use GLOOM in your work, please cite it using the metadata below."
+title: "GLOOM: Gene network Learning and Organization through Optimized Machine intelligence"
+abstract: >-
+  A modular, reproducible Python pipeline for disease-gene prioritization that integrates
+  differential expression, disease-conditioned co-expression networks, machine learning and
+  positive-unlabeled learning, with a lung adenocarcinoma (LUAD) case study.
+type: software
+version: 0.2.0
+# TODO: set the real release date when the release is tagged (see docs/RELEASE_CHECKLIST.md).
+date-released: "2026-10-06"
+# TODO: replace the placeholder DOI with the concept/version DOI minted by Zenodo for the tagged release.
+doi: "10.5281/zenodo.XXXXXXX"
+license: MIT
+repository-code: "https://github.com/omicscodeathon/gloom"
+url: "https://github.com/omicscodeathon/gloom"
+keywords:
+  - bioinformatics
+  - machine-learning
+  - lung-adenocarcinoma
+  - gene-prioritization
+  - co-expression-network
+  - positive-unlabeled-learning
+authors:
+  - family-names: "Abdelsalam"
+    given-names: "Rahma Y."
+    email: "rahmayasserm@gmail.com"
+  - family-names: "Abu-Zeid"
+    given-names: "Rana H."
+    email: "ranahamed2111@gmail.com"
+  - family-names: "Traore"
+    given-names: "Malick"
+    email: "malicktra100@gmail.com"
+  - family-names: "Rogo"
+    given-names: "Khadija Adam"
+    email: "khadijarogo212@gmail.com"
+  - family-names: "Awe"
+    given-names: "Olaitan I."
+    email: "laitanawe@gmail.com"

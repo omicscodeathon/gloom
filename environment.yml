@@ -17,6 +17,7 @@ dependencies:
   - joblib>=1.2.0
   - networkx>=2.8.0
   - matplotlib>=3.6.0
+  - xgboost>=1.7.0           # Step 11 — XGBoost benchmark model
 
   # ── Optional pipeline features ────────────────────────────────────────────
   - plotly>=5.10.0          # Step 17 — interactive dashboard
@@ -25,6 +26,7 @@ dependencies:
 
   # ── Build & dev tools ─────────────────────────────────────────────────────
   - pip
+  - git-lfs                 # data files are stored with Git LFS: run `git lfs install && git lfs pull`
   - pytest>=7.0
   - pytest-cov>=4.0
   - black>=23.0

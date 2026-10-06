@@ -115,7 +115,7 @@ def run_feature_integration():
     features_scaled = pd.DataFrame(scaled_arr, index=features_raw.index, columns=features_raw.columns)
 
     # PCA plot
-    pca    = PCA(n_components=3, random_state=config.RANDOM_STATE)
+    pca    = PCA(n_components=3, random_state=config.SEED)
     pcs    = pca.fit_transform(scaled_arr)
     color_vals = features_raw["abs_log2fc"].values if "abs_log2fc" in features_raw.columns else np.zeros(len(features_raw))
     fig, axes = plt.subplots(1,2, figsize=(14,5))

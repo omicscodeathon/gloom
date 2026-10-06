@@ -21,6 +21,17 @@ GTEx metadata filtering strategy (based on actual file contents):
   yields exactly 604 clean RNA-seq samples whose SAMPIDs match the GTEx
   expression matrix columns.
 
+COHORT_DESIGN check (v0.2.0):
+  After loading, the cohort of every sample is compared with its biological group.  If every
+  cohort contains only one group (e.g. all tumors from TCGA/cBioPortal and all normals from
+  GTEx) the design is perfectly collinear: cohort/platform effects cannot be separated from
+  disease effects, and no batch correction (ComBat / ComBat-seq) can fix that.  A loud
+  WARNING is logged and results/qc_cohort_warning.txt is written.
+
+Alternative input (config.DATA_SOURCE = "tcga_gdc"):
+  Uniformly processed TCGA-LUAD primary tumors vs TCGA-LUAD adjacent normals, built by
+  scripts/fetch_gdc_tcga_luad.py (genes x samples matrix + sample sheet with patient_id).
+
 Outputs (saved to data/processed/):
   - tumor_expression_raw.csv
   - tumor_metadata_raw.csv
@@ -40,6 +51,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import config
+from gloom_utils import detect_cohort_collinearity, update_report_section
 
 config.create_output_dirs()
 
@@ -305,16 +317,134 @@ def load_cancer_genes(path: Path) -> pd.Series:
     return genes
 
 
+def load_gdc_design():
+    """
+    Load the uniformly processed TCGA-LUAD design written by scripts/fetch_gdc_tcga_luad.py.
+
+    Reads config.GDC_SAMPLE_SHEET_FILE (columns sample_id, patient_id, group; group is
+    'tumor' or 'normal') and the genes x samples matrix selected by
+    config.GDC_EXPRESSION_MATRIX ('tpm' or 'counts').
+
+    Returns (tumor_expr, tumor_meta, normal_expr, normal_meta); both metadata frames are
+    indexed by sample_id and carry a patient_id column (used by DE_METHOD = 'paired').
+    """
+    sheet_path = Path(config.GDC_SAMPLE_SHEET_FILE)
+    use_counts = str(config.GDC_EXPRESSION_MATRIX).lower() == "counts"
+    expr_path = Path(config.GDC_COUNTS_FILE if use_counts else config.GDC_TPM_FILE)
+    for p, what in [(sheet_path, "GDC sample sheet"), (expr_path, "GDC expression matrix")]:
+        if not p.exists():
+            raise FileNotFoundError(
+                f"{what} not found: {p}. Run scripts/fetch_gdc_tcga_luad.py first "
+                f"(see docs/tcga_paired_design.md)."
+            )
+    log.info(f"Loading GDC TCGA-LUAD design: {expr_path.name} + {sheet_path.name}")
+    sheet = pd.read_csv(sheet_path)
+    missing = {"sample_id", "patient_id", "group"} - set(sheet.columns)
+    if missing:
+        raise ValueError(f"Sample sheet {sheet_path} lacks columns: {sorted(missing)}")
+    sheet["sample_id"] = sheet["sample_id"].astype(str)
+    sheet["group"] = sheet["group"].astype(str).str.strip().str.lower()
+    sheet.loc[sheet["group"].str.contains("normal"), "group"] = "normal"
+    sheet.loc[sheet["group"].str.contains("tumor"), "group"] = "tumor"
+
+    expr = pd.read_csv(expr_path, index_col=0)
+    expr.index.name = "gene"
+    expr = expr.apply(pd.to_numeric, errors="coerce")
+    if expr.index.duplicated().any():
+        n_dup = int(expr.index.duplicated().sum())
+        log.warning(f"  {n_dup} duplicate gene symbols — keeping highest-mean row.")
+        expr["_mean"] = expr.mean(axis=1)
+        expr = expr.sort_values("_mean", ascending=False)
+        expr = expr[~expr.index.duplicated(keep="first")].drop(columns=["_mean"])
+
+    sheet = sheet[sheet["sample_id"].isin(expr.columns)]
+    tumor_sheet  = sheet[sheet["group"] == "tumor"].set_index("sample_id")
+    normal_sheet = sheet[sheet["group"] == "normal"].set_index("sample_id")
+    if tumor_sheet.empty or normal_sheet.empty:
+        raise ValueError("The sample sheet must contain both 'tumor' and 'normal' samples "
+                         "present in the expression matrix.")
+    tumor_expr  = expr[tumor_sheet.index]
+    normal_expr = expr[normal_sheet.index]
+    tumor_meta  = tumor_sheet[["patient_id", "group"]].copy()
+    normal_meta = normal_sheet[["patient_id", "group"]].copy()
+    n_pairs = len(set(tumor_meta["patient_id"]) & set(normal_meta["patient_id"]))
+    log.info(f"  Tumor: {tumor_expr.shape}  Normal: {normal_expr.shape}  "
+             f"patients with both tumor and normal: {n_pairs}")
+    return tumor_expr, tumor_meta, normal_expr, normal_meta
+
+
+def check_cohort_design(tumor_expr, tumor_meta, normal_expr, normal_meta) -> dict:
+    """
+    COHORT_DESIGN check: is the biological group perfectly collinear with the cohort?
+
+    The cohort of a sample is taken from a metadata column listed in
+    config.COHORT_COLUMN_CANDIDATES (e.g. 'cohort', 'batch') when present; otherwise the
+    declared cohort of the data source (config.TUMOR_COHORT_NAME / NORMAL_COHORT_NAME, or a
+    single shared cohort for DATA_SOURCE = 'tcga_gdc') is used.
+
+    Emits a loud WARNING and writes results/qc_cohort_warning.txt when tumor and normal
+    samples come from disjoint cohorts.  Never raises: it is a diagnostic.
+    """
+    shared = "TCGA-LUAD (GDC STAR)"
+    default_t = shared if config.DATA_SOURCE == "tcga_gdc" else config.TUMOR_COHORT_NAME
+    default_n = shared if config.DATA_SOURCE == "tcga_gdc" else config.NORMAL_COHORT_NAME
+
+    def _cohorts(meta, samples, default):
+        for col in config.COHORT_COLUMN_CANDIDATES:
+            if col in meta.columns:
+                s = meta[col].reindex(list(samples)).astype(object)
+                return s.where(s.notna(), default)
+        return pd.Series(default, index=list(samples), dtype=object)
+
+    cohorts = pd.concat([_cohorts(tumor_meta, tumor_expr.columns, default_t),
+                         _cohorts(normal_meta, normal_expr.columns, default_n)])
+    groups = pd.Series(
+        ["tumor"] * tumor_expr.shape[1] + ["normal"] * normal_expr.shape[1], index=cohorts.index
+    )
+    res = detect_cohort_collinearity(groups, cohorts)
+    report_path = Path(config.RESULTS_DIR) / "qc_cohort_warning.txt"
+
+    if res["confounded"]:
+        lines = [
+            "WARNING: tumor status is PERFECTLY COLLINEAR with cohort (every cohort contains",
+            "samples of a single group).  Cohort/platform/processing effects therefore cannot be",
+            "separated from disease effects, and no batch correction (ComBat / ComBat-seq) can",
+            "resolve this.  Differential-expression and network results of this design must NOT",
+            "be interpreted as LUAD-specific biology.",
+            "",
+            "Cohort x group sample counts:",
+            res["table"].to_string(),
+            "",
+            "Recommended: repeat the analysis with uniformly processed tumor and adjacent-normal",
+            "samples (config.DATA_SOURCE = 'tcga_gdc'; docs/tcga_paired_design.md).",
+        ]
+        if getattr(config, "USE_BATCH_CORRECTION", False):
+            lines += ["", "NOTE: USE_BATCH_CORRECTION = True does NOT fix this confounding."]
+        banner = "!" * 70
+        log.warning("\n" + banner + "\n  COHORT_DESIGN WARNING\n" + "\n".join("  " + l for l in lines)
+                    + "\n" + banner)
+        update_report_section(report_path, "COHORT_DESIGN (step1)", lines)
+    else:
+        log.info(f"  COHORT_DESIGN check passed: {res['n_cohorts']} cohort(s), "
+                 f"{res['n_groups']} group(s), not perfectly collinear.")
+        update_report_section(report_path, "COHORT_DESIGN (step1)", None)
+    return res
+
+
 def run_data_loading() -> dict:
     log.info("=" * 60)
     log.info("STEP 1 — DATA LOADING")
     log.info("=" * 60)
     config.validate_input_files()
-    tumor_expr   = load_tumor_expression(config.TUMOR_EXPR_FILE)
-    tumor_meta   = load_tumor_metadata(config.TUMOR_META_FILE)
-    normal_expr  = load_normal_expression(config.NORMAL_EXPR_FILE)
-    normal_meta  = load_normal_metadata(config.NORMAL_META_FILE)
+    if config.DATA_SOURCE == "tcga_gdc":
+        tumor_expr, tumor_meta, normal_expr, normal_meta = load_gdc_design()
+    else:
+        tumor_expr   = load_tumor_expression(config.TUMOR_EXPR_FILE)
+        tumor_meta   = load_tumor_metadata(config.TUMOR_META_FILE)
+        normal_expr  = load_normal_expression(config.NORMAL_EXPR_FILE)
+        normal_meta  = load_normal_metadata(config.NORMAL_META_FILE)
     cancer_genes = load_cancer_genes(config.CANCER_GENE_FILE)
+    check_cohort_design(tumor_expr, tumor_meta, normal_expr, normal_meta)
     log.info("\nSaving raw-loaded files to processed directory …")
     tumor_expr.to_csv(config.PROCESSED_DIR / "tumor_expression_raw.csv")
     tumor_meta.to_csv(config.PROCESSED_DIR / "tumor_metadata_raw.csv")

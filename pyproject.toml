@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gloom"
-version = "0.1.0"
+version = "0.2.0"
 description = "GLOOM: Gene network Learning and Organization through Optimized Machine intelligence — a modular ML pipeline for LUAD candidate gene prioritization and co-expression network analysis"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -61,6 +61,7 @@ dependencies = [
     "joblib>=1.2.0",           # model serialization (.joblib)
     "networkx>=2.8.0",         # co-expression network + centrality measures
     "matplotlib>=3.6.0",       # static PNG figures
+    "xgboost>=1.7.0",          # XGBoost benchmark model (Step 11)
 ]
 
 # ── Optional feature groups ────────────────────────────────────────────────
@@ -85,6 +86,12 @@ excel = [
 # SMOTE + random undersampling (Step 11 class-imbalance handling)
 resampling = [
     "imbalanced-learn>=0.11.0",
+]
+
+# limma-voom differential expression (DE_METHOD = "limma_voom" in step 4).
+# Optional: needs a working R installation with the limma and edgeR packages.
+limma = [
+    "rpy2>=3.5.0",
 ]
 
 # Convenience: every optional pipeline feature
@@ -147,13 +154,13 @@ ignore = ["E501"]
 
 # ── Pytest ─────────────────────────────────────────────────────────────────
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["test"]
 addopts = "-v --tb=short"
 
 # ── Coverage ───────────────────────────────────────────────────────────────
 [tool.coverage.run]
 source = ["gloom"]
-omit = ["tests/*"]
+omit = ["test/*"]
 
 [tool.coverage.report]
 show_missing = true

@@ -15,8 +15,17 @@
 
 > 🧪 **Starting workflow:** LUAD  
 > 🕸️ **Core idea:** combine expression + network topology + machine learning  
-> 📈 **Main output:** ranked known and novel candidate genes  
+> 📈 **Main output:** ranked known genes and non-LCGene candidate genes  
 > 🔬 **Goal:** support biological discovery and downstream validation across disease contexts
+
+> **Version 0.2.0 (revision release).** Following peer review, the LUAD case study is being re-run with
+> (i) true zeros kept as zeros, (ii) a label-independent gene universe, (iii) out-of-fold (cross-fitted)
+> ranking and bootstrap confidence intervals, (iv) a feature-set ablation, (v) network-stability analyses,
+> (vi) a complete unfiltered enrichment table, and (vii) a uniformly processed TCGA tumor vs adjacent-normal design.
+> **All performance numbers and candidate lists shown further down in this README were produced by the
+> pre-0.2.0 pipeline on the original TCGA/cBioPortal-vs-GTEx design (whose tumor/normal status is confounded with
+> cohort). They are kept only as a historical record, are being regenerated, and should not be cited.**
+> See [CHANGELOG.md](CHANGELOG.md) and [docs/revision/](docs/revision/).
 
 ## 🌐 Project Landing Page
 
@@ -37,6 +46,7 @@ Explore the interactive GLOOM landing page here:
 - 🔄 [Workflow](#-workflow)
 - 🧬 [Data Sources](#-data-sources)
 - 🛠️ [Pipeline Stages](#️-pipeline-stages)
+- 🧪 [Evaluation, Reproducibility and Cohort Design (v0.2.0)](#-evaluation-reproducibility-and-cohort-design-v020)
 - 📦 [Installation](#-installation)
 - 💻 [CLI Commands Reference](#-cli-commands-reference)
 - 🚀 [Quick Start: gloom prioritize](#-quick-start-gloom-prioritize)
@@ -71,7 +81,7 @@ Traditional differential expression analysis identifies genes whose average expr
 - 🤖 Supervised machine-learning classification (PU learning framework)
 - 🧬 Gene-level ranking and biological validation
 
-The final output is a ranked list of known and novel candidate genes supported by model scores, feature importance, pathway enrichment, and annotated network exports.
+The final output is a ranked list of known genes and non-LCGene candidate genes (genes absent from the reference set — absence from the reference set does **not** establish biological novelty) supported by model scores, feature importance, pathway enrichment, and annotated network exports.
 
 ---
 
@@ -105,7 +115,7 @@ flowchart LR
     F --> G[Feature Integration]
     G --> H[Machine Learning]
     H --> I[Gene Ranking]
-    I --> J[Novel Candidate Genes]
+    I --> J[Non-LCGene Candidate Genes]
     J --> K[Pathway Enrichment & Reports]
 ```
 
@@ -113,22 +123,25 @@ flowchart LR
 
 - 📥 Load disease and control expression matrices
 - 🧹 Clean and harmonize gene identifiers
-- 📊 Perform differential expression analysis (Welch t-test with BH correction)
+- 📊 Perform differential expression analysis (Welch t-test with BH correction; paired t-test or limma-voom for matched tumor/adjacent-normal designs)
 - 🕸️ Construct a Pearson-correlation co-expression network
 - 🔗 Extract graph-theoretic features (degree, centrality, clustering, components)
 - 🧩 Integrate expression and network evidence into a unified feature matrix
 - 🤖 Train and compare machine-learning models (Random Forest, Gradient Boosting, Extra Trees, Logistic Regression, and XGBoost when installed)
 - 🏆 Build a calibrated soft-voting ensemble
-- 📈 Rank genes by predicted disease relevance
-- ✨ Identify high-confidence novel candidates
-- 🛤️ Run KEGG pathway enrichment analysis
+- 📈 Rank genes by out-of-fold (cross-fitted) predicted disease relevance, with bootstrap confidence intervals
+- 🧪 Test whether network features add predictive value (feature-set ablation) and whether the networks are stable (threshold sweep, resampling)
+- ✨ Flag high-confidence non-LCGene candidates and check them against Open Targets / Europe PMC (optional, needs internet)
+- 🛤️ Run KEGG pathway enrichment analysis (complete, unfiltered table with an explicit background)
 - 📤 Export interactive dashboards and network files (GraphML, Cytoscape)
 
 ---
 
 ## 📊 Key Results from the LUAD Case Study
 
-The current workflow starts with lung adenocarcinoma as the first disease setting. The latest full local LUAD run in this repository (completed on August 14, 2026) produced the following results:
+> ⚠️ **Superseded results.** The table below is the **v0.1.x** run (August 14, 2026) on TCGA/cBioPortal tumors vs GTEx normals, in which zeros were treated as missing, unlabeled genes with |log2FC| < 2 were removed while all positives were kept, and the ranking included the training positives (so "98 LCGene genes in the top 100" measured recovery of training labels, not independent performance). The extreme up/down asymmetry (9,700 vs 15) is a warning sign of cohort/pipeline confounding. These numbers are being regenerated with the v0.2.0 pipeline (see [docs/revision/RERUN_GUIDE.md](docs/revision/RERUN_GUIDE.md)) and are shown for transparency only.
+
+The v0.1.x workflow started with lung adenocarcinoma as the first disease setting; its results were:
 
 | Result | Value |
 |---|--:|
@@ -141,7 +154,7 @@ The current workflow starts with lung adenocarcinoma as the first disease settin
 | Upregulated genes | **9,700** |
 | Downregulated genes | **15** |
 | Ranked genes | **10,986** |
-| High-confidence novel candidates | **203** |
+| High-confidence non-LCGene candidates | **203** |
 | Co-expression network nodes (annotated) | **10,986** |
 | Co-expression network edges | **110,508** |
 | Largest connected component | **4,591 nodes** |
@@ -149,7 +162,7 @@ The current workflow starts with lung adenocarcinoma as the first disease settin
 | Best CV model (XGBoost) Mean AUPRC | **0.4951** |
 | Best held-out model (Extra Trees) Val AUPRC | **0.5443** |
 | Ensemble Val AUROC | **0.9347** |
-| LCGene genes recovered in top 100 ranks | **98** |
+| LCGene genes in top 100 ranks (includes training positives; not an independent estimate) | **98** |
 | Total pipeline runtime | **~12.2 min** |
 
 ---
@@ -181,7 +194,7 @@ flowchart TD
 
     I --> J[Model Training & Validation]
     J --> K[Gene Ranking]
-    K --> L[Novel Candidate Detection]
+    K --> L[Non-LCGene Candidate Detection]
     L --> M[Pathway Enrichment]
     L --> N[Interactive Dashboard]
     L --> O[Annotated Network Export]
@@ -216,6 +229,12 @@ After harmonization:
 - **604 normal lung samples**
 - **438 LCGene genes** retained in the shared gene universe (84.7%)
 
+### ⚠️ Cohort confounding in the TCGA-vs-GTEx design
+
+When **all tumors come from one cohort (TCGA/cBioPortal, RSEM) and all normals from another (GTEx, TPM)**, tumor status is perfectly collinear with cohort, quantification pipeline and normalization. Batch-correction methods such as ComBat / ComBat-seq **cannot** separate the cohort effect from the disease effect in that situation (the batch variable equals the group variable), so step 1b is *not* a remedy and is off by default (`USE_BATCH_CORRECTION = False`). GLOOM now (a) runs a `COHORT_DESIGN` check in step 1 and writes `results/qc_cohort_warning.txt` when it detects this, and (b) writes sample-level QC (step 2b: per-sample median/IQR, sample PCA, global median log2FC, fraction of DE genes, up:down ratio) with a warning when the pattern looks like a cohort artefact.
+
+The recommended design is **uniformly processed TCGA-LUAD primary tumors vs TCGA-LUAD adjacent normals** (`DATA_SOURCE = "tcga_gdc"`, `DE_METHOD = "paired"` or `"limma_voom"`). `scripts/fetch_gdc_tcga_luad.py` downloads the GDC STAR counts and builds the matrices; see [docs/tcga_paired_design.md](docs/tcga_paired_design.md).
+
 ### ⚠️ Important note about LCGene
 
 LCGene is a curated database of **expression-based LUAD biomarkers** (297 upregulated, 220 downregulated). It does **not** include many well-known mutation-driven oncogenes/tumor suppressors (e.g., EGFR, KRAS, TP53, BRAF, MET). The model therefore learns expression-signature patterns, not mutation-driven oncogenesis. Users studying mutation-driven genes should provide a custom `--labels` file that includes their genes of interest as known positives.
@@ -230,24 +249,24 @@ GLOOM runs 20 core stages (0-19) in sequence. Each stage caches its outputs so t
 |--:|---|---|
 | 0 | Config | Create output directories and validate configuration |
 | 1 | Data loading | Load disease, control, metadata, and label files |
-| 2 | Preprocessing | Clean values, log2-transform, remove low-expression/low-variance genes |
+| 2 | Preprocessing | Audit values (true zeros stay zeros; NaN stays missing; negative/inf are flagged invalid), log2(x+1), remove low-expression/low-variance genes |
 | 3 | Gene harmonization | Standardize gene symbols and intersect to shared genes |
-| 4 | Differential expression | Welch t-test with Benjamini-Hochberg FDR correction |
+| 4 | Differential expression | Welch t-test (default), paired t-test, or limma-voom (optional, via rpy2) with Benjamini-Hochberg FDR correction (`DE_METHOD`) |
 | 5 | Expression features | Generate 29 per-gene expression statistics (mean, std, CV, skewness, kurtosis, ranks) |
 | 6 | Co-expression network | Build Pearson-correlation network (default cutoff \|r\| >= 0.6) |
 | 7 | Network features | Extract 13 topology features (degree, centrality, clustering, components) |
 | 8 | Feature integration | Merge expression + network features, remove collinear features (30 final) |
-| 9 | Label construction | Assign PU labels using reference gene list, trim noisy unlabeled genes |
+| 9 | Label construction | Assign PU labels using the reference gene list on a label-independent gene universe (no \|log2FC\| filtering of unlabeled genes; `LABEL_INDEPENDENT_UNIVERSE`) |
 | 10 | Train/validation split | Stratified 80/20 split with feature selection (top 21 features) |
 | 11 | Model training | Train core models with CV, hyperparameter tuning, and calibration (XGBoost is included when installed) |
 | 12 | Model evaluation | Compute AUROC, AUPRC, F1, MCC, Brier score; build calibrated ensemble |
 | 13 | Feature importance | Model-based and permutation importance analysis |
-| 14 | Gene ranking | Score all genes, flag novel candidates based on probability thresholds |
+| 14 | Gene ranking | Rank all genes by out-of-fold scores (primary); keep the full-model score in `full_model_score`; flag non-LCGene candidates by probability threshold |
 | 15 | Network annotation | Add ranking and biological metadata to graph nodes |
 | 16 | Network export | Export annotated network as GraphML, Cytoscape XML, edge/node tables |
 | 17 | Interactive visualization | Generate volcano plots, ROC/PR curves, dashboards (Plotly HTML) |
 | 18 | Final report | Generate final reporting artifacts (summary table, text report, summary figure) for the completed run |
-| 19 | KEGG enrichment | Pathway enrichment analysis for candidate gene sets |
+| 19 | KEGG enrichment | Complete, unfiltered over-representation table (explicit background = analysis universe, BH correction); a lung/cancer keyword subset is written separately for reading only |
 
 ### Optional refinement steps
 
@@ -258,7 +277,27 @@ Beyond the core 0-19 flow, GLOOM also includes optional supplemental steps that 
 | 1b | Batch correction | Adjust tumor and control matrices for cross-cohort technical effects before downstream analysis |
 | 6b | Normal co-expression network | Build a control-network reference that supports stronger tumor-vs-normal comparison |
 | 7b | Differential network features | Add network rewiring features derived from tumor and normal graphs |
-| 11b | PU bagging | Add a supplemental positive-unlabeled scoring pass to strengthen candidate ranking robustness |
+| 11b | PU bagging | Positive-unlabeled (Mordelet-Vert) scoring with the full-data model; its held-out and training-positive top-K are reported separately |
+| 2b | Sample QC | Per-sample median/IQR, sample PCA, global median log2FC, fraction of DE genes, up:down ratio; writes a cohort-artefact warning |
+| 7c | Network stability | Threshold sweep (\|r\| 0.50-0.70) and sample-bootstrap stability of edges and hubs (equal-N option) |
+| 11c | Cross-fitting | Repeated stratified K-fold PU cross-fitting; out-of-fold scores are the primary ranking (`USE_CROSSFIT`) |
+| 12b | Out-of-fold metrics | AUROC, AUPRC, average precision, Precision/Recall/EF@K with stratified-bootstrap 95% CIs |
+| 13b | Ablation | \|log2FC\| / adjusted-p baselines, expression-only, network-only, combined, combined-without-DE-statistics and full models under the same cross-fitting, with paired-bootstrap comparison and a plain-text verdict |
+| 20 | Candidate evidence | Open Targets + Europe PMC check of non-LCGene candidates; only `no_association_found` genes may be called "potentially novel" (needs internet; never breaks the pipeline) |
+
+---
+
+## 🧪 Evaluation, Reproducibility and Cohort Design (v0.2.0)
+
+**Out-of-sample evaluation.** The primary ranking uses **out-of-fold** scores: all genes are split into stratified folds (default 5, repeated 5 times with different seeds); a model is trained on the other folds' positives and unlabeled genes and predicts *only* the held-out fold. Every reported top-K statistic therefore comes from models that never saw the gene. The model fitted on all data is kept in `full_model_score`, and `is_training_positive` marks the positives it was trained on (their scores are resubstitution, not evidence of generalisation).
+
+**Ablation.** `results/ablation_metrics.csv` compares |log2FC|, adjusted p-value, expression-only, network-only, expression+network, combined-without-DE-statistics and the full model; `results/ablation_verdict.txt` states whether network features add a measurable gain (with the CI of the paired difference). Note that `tumor_mean` and `normal_mean` still encode fold change implicitly even when explicit log2FC-derived columns are removed.
+
+**Seeds.** A single `SEED` in `config.py` (default 42; `RANDOM_STATE` is an alias) drives every estimator, split, bootstrap and layout; `config.set_global_seed()` also pins Python's and NumPy's global generators.
+
+**Tests.** `pip install -e ".[dev]"` then `pytest` runs the synthetic-data unit tests in `test/` (zero handling, cross-fitting, metrics and bootstrap, enrichment).
+
+**Performance and scalability.** GLOOM is *modular* and designed for reproducible execution; we do not claim it is "scalable" beyond the sizes that have been measured. Measured run time and peak memory for several gene/sample sizes can be generated with `python scripts/benchmark_runtime.py` (writes `results/runtime_benchmark.csv` with machine information).
 
 ---
 
@@ -271,37 +310,40 @@ Beyond the core 0-19 flow, GLOOM also includes optional supplemental steps that 
 | Python | 3.12+ |
 | Conda | Latest Anaconda or Miniconda |
 | pip | Latest stable version |
+| Git + Git LFS | Required to fetch the bundled data (`git lfs install && git lfs pull`) |
 
-### Option 1: Install from Bioconda (recommended)
+> **Bioconda status.** A Bioconda recipe for GLOOM has **not been published yet**; `conda install -c bioconda gloom` does **not** work at present. Please install from source with `pip install -e .` or with the conda environment file below. (A recipe skeleton exists in `conda.recipe/`; this note will be updated when the package is actually available on Bioconda.)
 
-Install GLOOM directly from Bioconda using the Anaconda Prompt or terminal:
+### Git LFS (required for a fresh clone)
 
-```bash
-conda install -c bioconda -c conda-forge gloom
-```
-
-This installs GLOOM and all core dependencies (click, pandas, numpy, scipy, statsmodels, scikit-learn, joblib, networkx, matplotlib).
-
-After installation, install the optional features for the full pipeline experience:
+The bundled raw data files and some result tables are stored with **Git LFS**. A clone made without it contains small pointer files instead of data, and the pipeline will fail. Install Git LFS once, then fetch the files:
 
 ```bash
-conda install -c conda-forge plotly openpyxl imbalanced-learn
-pip install gseapy>=0.10.8
-```
-
-If you use `mamba`, the equivalent command is:
-
-```bash
-mamba install -c bioconda -c conda-forge gloom
-```
-
-### Option 2: Install from source (development)
-
-Clone the repository and install locally:
-
-```bash
+git lfs install
 git clone https://github.com/omicscodeathon/gloom.git
 cd gloom
+git lfs pull
+```
+
+(If you already cloned the repository, run `git lfs install && git lfs pull` inside it. Git LFS is also available from conda: `mamba install -c conda-forge git-lfs`.)
+
+### Option 1: Conda / mamba environment file (recommended)
+
+```bash
+mamba env create -f environment.yml      # or: conda env create -f environment.yml
+mamba activate gloom                     # or: conda activate gloom
+pip install -e .
+```
+
+This installs all core dependencies, including **XGBoost** (used in the Step 11 model benchmark), and the optional plotting / resampling packages.
+
+### Option 2: Install from source with pip
+
+```bash
+git lfs install
+git clone https://github.com/omicscodeathon/gloom.git
+cd gloom
+git lfs pull
 ```
 
 **Using conda environment file (installs all dependencies at once):**
@@ -334,16 +376,19 @@ Available optional groups:
 | `kegg` | KEGG pathway enrichment (Step 19) | `pip install -e ".[kegg]"` |
 | `excel` | Excel output (`--format excel`) | `pip install -e ".[excel]"` |
 | `resampling` | SMOTE / undersampling (Step 11) | `pip install -e ".[resampling]"` |
+| `limma` | limma-voom differential expression (`DE_METHOD = "limma_voom"`; needs R with `limma` and `edgeR`) | `pip install -e ".[limma]"` |
 | `full` | All optional features | `pip install -e ".[full]"` |
 | `dev` | Developer tools (pytest, black, ruff, mypy) | `pip install -e ".[dev]"` |
 | `all` | Everything (full + dev) | `pip install -e ".[all]"` |
 
-### Option 3: Build the conda package locally
+### Option 3: Build the conda package locally (experimental)
 
 ```bash
 conda build conda.recipe/
 conda install --use-local gloom
 ```
+
+(This builds the *local* recipe only; it is not the same as a published Bioconda package.)
 
 ### Verify installation
 
@@ -376,11 +421,11 @@ GLOOM provides the following CLI commands:
 | `--labels FILE` | Custom positive gene list (CSV/TSV with GeneSymbol column) | bundled LCGene |
 | `--fdr FLOAT` | FDR cutoff for differential expression | 0.05 |
 | `--log2fc FLOAT` | Log2 fold-change threshold for DE | 1.0 |
-| `--prob-threshold FLOAT` | Minimum probability to flag novel candidates | 0.50 |
+| `--prob-threshold FLOAT` | Minimum probability to flag non-LCGene candidates | 0.50 |
 | `--top-k N` | Keep only the top N candidates in output | all |
 | `--format {csv,excel,json}` | Output file format for candidate tables | csv |
 | `--from-step STEP` | Resume pipeline from this step key | `0` (`prioritize`) / `2` (`run`) |
-| `--to-step STEP` | Stop after this step key | `19` |
+| `--to-step STEP` | Stop after this step key (`20` = optional external-evidence step, needs internet) | `19` |
 | `--skip-optional` | Exclude optional refinement steps from the selected run | off |
 | `--skip-step STEP` | Skip one specific step key (may be repeated) | none |
 | `--verbose` | Enable DEBUG-level logging | off |
@@ -523,7 +568,7 @@ gloom run \
 | **`--genes` file** | Tags query genes in final ranking | Tags query genes in final ranking |
 | **When to use** | Quick analysis using LUAD reference cohort | When you have your own expression data |
 
-**Important:** Both commands train the model from scratch every time. The `--genes` file does **not** influence model training in either command — it only marks which genes are flagged as "query genes" for the novel candidate check at Step 14.
+**Important:** Both commands train the model from scratch every time. The `--genes` file does **not** influence model training in either command — it only marks which genes are flagged as "query genes" for the non-LCGene candidate check at Step 14.
 
 To train on your own data, use `gloom run`. To use the built-in LUAD reference cohort, use `gloom prioritize`.
 
@@ -613,8 +658,17 @@ outputs/
     |-- model_metrics.csv
     |-- feature_importance.csv
     |-- gene_rankings.csv
-    |-- novel_candidates.csv
-    |-- novel_candidates_sensitivity.csv
+    |-- non_lcgene_candidates.csv
+    |-- non_lcgene_candidates_sensitivity.csv
+    |-- oof_scores.csv                  # step 11c: out-of-fold scores (primary ranking)
+    |-- oof_metrics.csv                 # step 12b: out-of-fold metrics + bootstrap 95% CIs
+    |-- ablation_metrics.csv            # step 13b
+    |-- ablation_paired_comparison.csv
+    |-- ablation_verdict.txt
+    |-- network_stability_*.csv         # step 7c
+    |-- candidate_evidence.csv          # step 20 (optional)
+    |-- qc_cohort_warning.txt           # written only when a cohort / global-artefact warning fires
+    |-- qc_sample_summary.csv, qc_group_summary.csv, qc_sample_pca.csv, qc_pca_explained_variance.csv, qc_global_de_summary.csv   # step 2b
     |-- query_gene_rankings.csv
     |-- ensemble_soft_vote_probs.csv
     |-- pu_bagging_scores.csv
@@ -623,8 +677,10 @@ outputs/
     |-- classification_reports/
     |   `-- classification_report_*.txt
     |-- enrichment/
-    |   |-- kegg_all_candidates.csv
+    |   |-- kegg_all_candidates.csv      # complete, UNFILTERED table (explicit background, BH)
     |   |-- kegg_upregulated.csv
+    |   |-- kegg_downregulated.csv
+    |   |-- kegg_lung_cancer_subset.csv  # keyword subset, interpretive only
     |   `-- kegg_summary.csv
     |-- network/
     |   |-- coexpression_network.graphml
@@ -638,7 +694,7 @@ outputs/
     |       |-- network_full_edgelist.tsv
     |       |-- network_cytoscape.json
     |       |-- subnetwork_candidates.graphml
-    |       |-- subnetwork_novel.graphml
+    |       |-- subnetwork_non_lcgene.graphml
     |       `-- network_statistics_report.{txt,csv}
     `-- reports/
         |-- pipeline_summary_table.csv
@@ -654,8 +710,13 @@ If you use the packaged CLI, these raw artifacts can also be reorganized into cl
 |---|---|
 | `outputs/figures/interactive_dashboard.html` | Consolidated HTML dashboard with ranking, network, enrichment, and evaluation views |
 | `outputs/results/gene_rankings.csv` | Genome-wide ranking across all 10,986 scored genes |
-| `outputs/results/novel_candidates.csv` | High-confidence non-LCGene candidates (`predicted_prob >= 0.70` with DE support) |
-| `outputs/results/novel_candidates_sensitivity.csv` | Broader sensitivity candidate list (`predicted_prob >= 0.50`) |
+| `outputs/results/non_lcgene_candidates.csv` | High-confidence non-LCGene candidates (`predicted_prob >= CANDIDATE_PROB_THRESHOLD` with DE support). Formerly `novel_candidates.csv` — absence from LCGene does not establish novelty |
+| `outputs/results/non_lcgene_candidates_sensitivity.csv` | Broader sensitivity candidate list (`predicted_prob >= CANDIDATE_PROB_THRESHOLD_SENS`) |
+| `outputs/results/oof_scores.csv`, `oof_metrics.csv` | Out-of-fold scores (primary ranking) and metrics with stratified-bootstrap 95% CIs |
+| `outputs/results/ablation_metrics.csv`, `ablation_verdict.txt` | Feature-set ablation under cross-fitting and the plain-text verdict on network value |
+| `outputs/results/network_stability_*.csv` | Threshold-sweep and bootstrap stability of the co-expression networks |
+| `outputs/results/candidate_evidence.csv` | Open Targets / Europe PMC evidence class of each non-LCGene candidate (optional step 20) |
+| `outputs/results/qc_cohort_warning.txt` | Present only when the cohort-confounding or global-artefact checks raised a warning |
 | `outputs/results/query_gene_rankings.csv` | Query-only ranking when a gene list is supplied; empty in the latest full run |
 | `outputs/results/model_metrics.csv` | Held-out AUROC, AUPRC, Brier, fixed-threshold classification metrics, and top-k retrieval metrics |
 | `outputs/models/cv_results.csv` | Five-fold CV model comparison used for primary model selection |
@@ -670,7 +731,11 @@ If you use the packaged CLI, these raw artifacts can also be reorganized into cl
 | Column | Description |
 |---|---|
 | `gene` | Gene symbol |
-| `predicted_prob` | ML-predicted probability of disease association |
+| `predicted_prob` | PRIMARY score: out-of-fold (cross-fitted) PU-bagging score when `USE_CROSSFIT = True`, otherwise the full-model score |
+| `oof_score` | Out-of-fold score (mean over repeats); the gene was never in the training data of the models that produced it |
+| `full_model_score` | Score of the model fitted on all training data (resubstitution for training positives) |
+| `is_training_positive` | LCGene positive that was used to fit the full-data model |
+| `score_source` | Which score produced `predicted_prob` |
 | `rank` | Rank by predicted probability (1 = highest) |
 | `percentile` | Percentile rank across all scored genes |
 | `predicted_label` | Binary prediction (1 = predicted positive) |
@@ -681,12 +746,14 @@ If you use the packaged CLI, these raw artifacts can also be reorganized into cl
 | `direction` | DE direction: `up`, `down`, or `ns` (not significant) |
 | `is_de_significant` | Whether the gene passed the configured DE significance rule |
 | `is_query_gene` | Whether the gene was in the user's `--genes` file |
-| `novel_candidate` | High-confidence novel-candidate flag. If no query list is supplied, this is evaluated across the whole ranked universe |
-| `novel_candidate_sens` | Sensitivity novel-candidate flag using the broader probability cutoff |
+| `non_lcgene_candidate` | High-confidence flag for genes absent from the reference set (formerly `novel_candidate`). If no query list is supplied, this is evaluated across the whole ranked universe |
+| `non_lcgene_candidate_sens` | Sensitivity flag using the broader probability cutoff (formerly `novel_candidate_sens`) |
 
 ---
 
 ## 🤖 Model Performance in the LUAD Case Study
+
+> ⚠️ The tables in this section are **v0.1.x results** (confounded TCGA-vs-GTEx design, label-dependent universe, single 80/20 split) and are being regenerated; see `results/oof_metrics.csv` (out-of-fold metrics with bootstrap 95% CIs) and `results/ablation_*.csv` after a v0.2.0 run.
 
 Five machine-learning models plus a calibrated ensemble were compared in the LUAD workflow.
 
@@ -727,7 +794,9 @@ Five machine-learning models plus a calibrated ensemble were compared in the LUA
 
 ### LCGene gene recovery
 
-In the starting LUAD workflow, 438 out of 517 LCGene genes were retained after gene harmonization (84.7%). In the latest full ranking:
+> ⚠️ **v0.1.x numbers, superseded.** The counts below include LCGene positives that were used to train the model, so they show recovery of training labels, not independent performance. v0.2.0 reports top-K statistics from out-of-fold scores only.
+
+In the starting LUAD workflow, 438 out of 517 LCGene genes were retained after gene harmonization (84.7%). In the v0.1.x ranking:
 
 - Median LCGene rank was **232.5**
 - **50** LCGene genes appeared in the top 50 ranks
@@ -748,17 +817,19 @@ The top-ranked known genes in the latest run include:
 | TCF21 | 0.9908 | 7 | 99.95 | 0.47 | ns |
 | RRAD | 0.9904 | 8 | 99.94 | 1.61 | ns |
 
-### Novel candidate detection
+### Non-LCGene candidate detection
 
-Novel candidates are defined as genes that:
+> **Terminology.** Absence from LCGene does **not** establish biological novelty — several genes below (e.g. CDC20, MYBL2, MARCO) have published associations with lung cancer or LUAD. GLOOM therefore reports **non-LCGene candidates**. Step 20 (optional, needs internet) queries Open Targets and Europe PMC and assigns each candidate to `already_LUAD`, `lung_cancer_unspecified`, `other_cancer`, `indirect_only` or `no_association_found`; **only `no_association_found` may be called "potentially novel"**, and only with respect to those sources.
+
+Non-LCGene candidates are defined as genes that:
 1. **Are not** in the reference label set (LCGene)
-2. Have `predicted_prob >= 0.70` for the high-confidence list (`>= 0.50` for the sensitivity list)
-3. Show minimum DE signal (`|log2FC| >= 1.0`)
+2. Have `predicted_prob >= 0.85` for the high-confidence list (`>= 0.50` for the sensitivity list; configurable, `CANDIDATE_PROB_THRESHOLD*`)
+3. Show minimum DE signal (`|log2FC| >= 1.0`, a reporting filter that does not affect training)
 4. Must also be in the query set if a query gene list is supplied
 
-The latest full run was executed **without** a query gene list, so `query_gene_rankings.csv` is empty and novel-candidate detection was applied across the full ranked universe. This produced **203** high-confidence candidates, of which **199** were upregulated and **4** were downregulated.
+The v0.1.x run was executed **without** a query gene list, so `query_gene_rankings.csv` was empty and detection was applied across the full ranked universe. That run produced **203** high-confidence candidates (v0.1.x numbers, superseded), of which **199** were upregulated and **4** were downregulated.
 
-Top examples from `novel_candidates.csv` include:
+Top examples from the v0.1.x `novel_candidates.csv` (now `non_lcgene_candidates.csv`) were:
 
 | Gene | Predicted Prob | Rank | Percentile | log2FC | Direction |
 |---|--:|--:|--:|--:|---|
@@ -773,7 +844,7 @@ Top examples from `novel_candidates.csv` include:
 
 ### 🛤️ Enriched KEGG pathways
 
-KEGG pathway enrichment was performed on high-scoring candidate gene sets. The latest run produced the following summary:
+KEGG enrichment is now reported as a **complete, unfiltered table** (`kegg_all_candidates.csv`: every KEGG term, hypergeometric test against an explicit background = the genes actually analysed, Benjamini-Hochberg correction, columns `term`, `n_query`, `n_term_in_background`, `n_overlap`, `p_raw`, `p_adj`). A lung/cancer keyword subset (`kegg_lung_cancer_subset.csv`) is written separately **for reading only** and is not used for significance. The v0.1.x summary below was filtered to lung/cancer-relevant pathways *before* reporting (circular) and is superseded:
 
 | Subset | Input genes | Significant lung/cancer pathways | Top pathway | Top adjusted p-value |
 |---|--:|--:|---|--:|
@@ -823,7 +894,7 @@ The pipeline selects 21 features after collinearity removal. Grouped feature imp
 | Network edge weight statistics | Supplementary co-expression context |
 | Differential network features | Tumor-vs-normal network rewiring |
 
-The LUAD workflow is mainly expression-driven, but network features help refine interpretation and support biologically coherent ranking.
+The v0.1.x LUAD workflow was mainly expression-driven. Whether network features improve *prediction* is now tested directly by the ablation (step 13b, `results/ablation_verdict.txt`); until that result is available, network features should be regarded as supporting interpretation rather than as a demonstrated source of predictive gain.
 
 ---
 
@@ -836,10 +907,13 @@ GLOOM provides a prioritized candidate list, not a final set of validated biomar
 | Label scope | LCGene captures expression-based biomarkers, not mutation-driven oncogenes. Users should provide custom labels when studying driver genes. |
 | Positive-unlabeled setting | Some genes treated as negative may actually be hidden positives |
 | Class imbalance | Positive rate is ~4.5% — AUROC can appear high while positive-class recall remains challenging |
-| Batch effects | Disease and control datasets from different sources may contain residual technical differences |
-| Network contribution | Network features currently act more as refinement signals than dominant predictors |
+| Cohort confounding | In the TCGA(cBioPortal)-vs-GTEx design, tumor status is perfectly collinear with cohort/pipeline; batch correction cannot resolve it. Use a uniformly processed design (`DATA_SOURCE = "tcga_gdc"`) |
+| Network contribution | Network features may act more as interpretation aids than as predictive drivers; see the ablation verdict. Network density differences between tumor and normal are only interpretable after the stability analysis (step 7c) |
+| PU evaluation | "Unlabeled" genes include undiscovered positives, so precision/AUROC from LCGene labels are conservative and depend on LCGene completeness |
+| Novelty | Absence from LCGene is not novelty; only genes classified `no_association_found` by step 20 may be called potentially novel |
 | Gene coverage | Only genes present in both tumor and normal expression matrices are scored |
-| Experimental validation | Novel candidates require laboratory and clinical validation |
+| Benchmarking | No head-to-head quantitative comparison with Endeavour, ToppGene, GeneMANIA or BioRank has been performed; GLOOM differs from these tools in workflow architecture and is not claimed to outperform them |
+| Experimental validation | Non-LCGene candidates require laboratory and clinical validation |
 
 ---
 
@@ -851,9 +925,9 @@ Planned and recommended extensions include:
 - 🧬 Integrate methylation, mutation, copy-number, and proteomics data
 - 🧠 Add graph neural network embeddings
 - 🔄 Test random-walk and network-diffusion features
-- 📏 Benchmark against other gene prioritization tools
+- 📏 Quantitatively benchmark against other gene prioritization tools (same universe, same training set, same held-out positives)
 - 🎯 Improve positive-unlabeled learning strategies
-- 🧫 Experimentally validate selected novel candidates
+- 🧫 Experimentally validate selected non-LCGene candidates
 - 🎨 Expand visualization and reporting options
 
 ---
@@ -877,7 +951,9 @@ gloom/
 │           ├── run_pipeline.py                    # Step registry and pipeline runner
 │           ├── step1_data_loading.py
 │           ├── step1b_batch_correction.py         # Optional batch-correction refinement
+│           ├── gloom_utils.py                     # Pure helpers (metrics, cross-fitting, enrichment, QC) — unit-tested
 │           ├── step2_preprocessing.py
+│           ├── step2b_qc_report.py                # Optional sample-level QC / cohort-artefact diagnostics
 │           ├── step3_harmonization.py
 │           ├── step4_differential_expression.py
 │           ├── step5_expression_features.py
@@ -885,21 +961,31 @@ gloom/
 │           ├── step6b_normal_network.py           # Optional normal-network reference
 │           ├── step7_network_features.py
 │           ├── step7b_differential_network_features.py  # Optional tumor-vs-normal rewiring features
+│           ├── step7c_network_stability.py        # Optional threshold sweep + bootstrap network stability
 │           ├── step8_feature_integration.py
 │           ├── step9_label_construction.py
 │           ├── step10_train_val_split.py
 │           ├── step11_model_training.py
-│           ├── step11b_pu_bagging.py              # Optional PU bagging refinement
+│           ├── step11b_pu_bagging.py              # Optional PU bagging refinement (full-data model)
+│           ├── step11c_crossfit_pu.py             # Cross-fitted (out-of-fold) PU bagging — primary ranking
 │           ├── step12_model_evaluation.py
+│           ├── step12b_oof_metrics.py             # Out-of-fold metrics with bootstrap CIs
 │           ├── step13_feature_importance.py
+│           ├── step13b_ablation.py                # Optional feature-set ablation
 │           ├── step14_gene_ranking.py
 │           ├── step15_network_annotation.py
 │           ├── step16_network_export.py
 │           ├── step17_interactive_visualization.py
 │           ├── step18_final_report.py
-│           └── step19_kegg_enrichment.py
-├── tests/
-│   └── genes.txt                                  # Example query gene list
+│           ├── step19_kegg_enrichment.py
+│           └── step20_candidate_evidence.py       # Optional Open Targets / Europe PMC evidence (internet)
+├── scripts/                                       # Same step scripts + fetch_gdc_tcga_luad.py, benchmark_runtime.py
+├── test/                                          # pytest unit tests (synthetic data) + example query gene list
+├── docs/
+│   ├── tcga_paired_design.md                      # TCGA-LUAD tumor vs adjacent-normal design (GDC)
+│   ├── RELEASE_CHECKLIST.md                       # Tag, Zenodo archive, DOI
+│   └── revision/                                  # Response-to-reviewers drafts and re-run guide
+├── CITATION.cff
 ├── pyproject.toml
 ├── environment.yml
 ├── LICENSE
@@ -941,7 +1027,7 @@ Both commands generate:
 3. Integrated feature matrix (expression + network)
 4. Trained and calibrated ML models (core models, optional XGBoost when available, and ensemble outputs)
 5. Ranked gene list with predicted probabilities
-6. Novel candidate list (high-confidence genes not in reference set)
+6. Non-LCGene candidate list (high-confidence genes absent from the reference set; not necessarily novel)
 7. KEGG pathway enrichment
 8. Interactive HTML report and dashboard
 9. Annotated network files for visualization
@@ -976,7 +1062,7 @@ We thank the contributors to open biomedical datasets (TCGA, GTEx, LCGene) and a
 
 GLOOM provides a transparent and reusable package for moving from gene expression data to biologically meaningful candidate-gene rankings. The current workflow supports optional batch correction, normal-network comparison, PU bagging, KEGG enrichment, and interactive reporting.
 
-In the latest full LUAD run in this repository (August 14, 2026), the pipeline ranked **10,986** genes, recovered **98** LCGene genes within the top 100 positions, and surfaced **203** high-confidence novel candidates in about **12.2 minutes**.
+The v0.1.x LUAD run (August 14, 2026; superseded, see the notice at the top of this README) ranked **10,986** genes in about **12.2 minutes**. Updated, out-of-fold results for the revised design will replace those numbers after the v0.2.0 re-run.
 
 It offers two main modes of operation:
 

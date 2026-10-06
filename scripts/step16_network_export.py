@@ -78,7 +78,7 @@ def run_network_export():
     subdefs = [
         ("top100",     None,               None, 100),
         ("lcgene",     "is_lcgene_gene",       True, None),
-        ("novel",      "novel_candidate",  True, None),
+        ("non_lcgene",  "non_lcgene_candidate",  True, None),
         ("candidates", "predicted_label",  1,    None),
     ]
     for label, mask_col, mask_val, top_n in subdefs:
@@ -111,7 +111,7 @@ def run_network_export():
              "avg_degree":round(float(np.mean(degrees)),4),"max_degree":int(np.max(degrees)),
              "degree_assortativity":round(assortativity,6)}
     if "is_lcgene_gene" in node_df.columns:   stats["n_lcgene_nodes"] = int(node_df["is_lcgene_gene"].sum())
-    if "novel_candidate" in node_df.columns: stats["n_novel_nodes"] = int(node_df["novel_candidate"].sum())
+    if "non_lcgene_candidate" in node_df.columns: stats["n_non_lcgene_candidate_nodes"] = int(node_df["non_lcgene_candidate"].sum())
     pd.DataFrame(list(stats.items()),columns=["metric","value"]).to_csv(EXPORT_DIR/"network_statistics_report.csv",index=False)
     degree_series = pd.Series(dict(G_clean.degree()),name="degree")
     top_hubs = degree_series.nlargest(20).reset_index(); top_hubs.columns=["gene","degree"]

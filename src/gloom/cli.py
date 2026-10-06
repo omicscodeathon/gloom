@@ -60,10 +60,10 @@ def _normalize_step_key(
     if value is None:
         return None
     raw = str(value).strip().lower()
-    match = re.fullmatch(r"(\d+)(b?)", raw)
+    match = re.fullmatch(r"(\d+)([a-z]?)", raw)
     if not match:
         raise click.BadParameter(
-            f"Invalid step key '{value}'. Use keys like 4, 6b, 11, or 11b."
+            f"Invalid step key '{value}'. Use keys like 4, 6b, 11, 11b, or 11c."
         )
     number = int(match.group(1))
     suffix = match.group(2)
@@ -75,10 +75,10 @@ def _normalize_step_key(
 
 
 def _step_order_key(step_key: str) -> tuple[int, int]:
-    match = re.fullmatch(r"(\d+)(b?)", step_key.lower())
+    match = re.fullmatch(r"(\d+)([a-z]?)", step_key.lower())
     if not match:
         raise ValueError(f"Unsupported step key: {step_key}")
-    return int(match.group(1)), 1 if match.group(2) else 0
+    return int(match.group(1)), (ord(match.group(2)) - 96) if match.group(2) else 0
 
 
 def _select_steps(
@@ -156,14 +156,14 @@ def main():
     default="0",
     show_default=True,
     metavar="STEP",
-    help="Resume pipeline from this step key (examples: 4, 6b, 11b).",
+    help="Resume pipeline from this step key (examples: 4, 6b, 11b, 11c).",
 )
 @click.option(
     "--to-step",
     default="19",
     show_default=True,
     metavar="STEP",
-    help="Stop after this step key (examples: 8, 11, 19).",
+    help="Stop after this step key (examples: 8, 11, 19; 20 = optional external-evidence step).",
 )
 @click.option(
     "--skip-optional",
@@ -213,7 +213,7 @@ def main():
     default=None,
     type=click.FloatRange(0.0, 1.0),
     metavar="FLOAT",
-    help="Minimum ML probability to flag a gene as a novel candidate (default: 0.5).",
+    help="Minimum ML probability to flag a gene as a non-LCGene candidate (default: 0.5).",
 )
 @click.option(
     "--no-cache",
@@ -288,11 +288,11 @@ def prioritize(
 
     steps = _select_steps(
         _load_pipeline_steps(),
-        from_key=_normalize_step_key(from_step, minimum=0, maximum=19),
-        to_key=_normalize_step_key(to_step, minimum=0, maximum=19),
+        from_key=_normalize_step_key(from_step, minimum=0, maximum=20),
+        to_key=_normalize_step_key(to_step, minimum=0, maximum=20),
         skip_optional=skip_optional,
         skip_keys=tuple(
-            _normalize_step_key(step, minimum=0, maximum=19) for step in skip_steps
+            _normalize_step_key(step, minimum=0, maximum=20) for step in skip_steps
         ),
     )
 
@@ -303,7 +303,7 @@ def prioritize(
             output_path,
             skip_optional=skip_optional,
             skip_step_keys=tuple(
-                _normalize_step_key(step, minimum=0, maximum=19) for step in skip_steps
+                _normalize_step_key(step, minimum=0, maximum=20) for step in skip_steps
             ),
         )
         return
@@ -398,7 +398,7 @@ def info():
         click.echo(f"  FDR (adj p-value)  : {config.DE_PVALUE_THRESHOLD}  (override: --fdr)")
         click.echo(f"  Log2 fold-change   : {config.DE_LOG2FC_THRESHOLD}  (override: --log2fc)")
         click.echo(f"  Correlation cutoff : {config.COEXPR_CORRELATION_CUTOFF}")
-        click.echo("  Novel prob cutoff  : 0.50  (override: --prob-threshold)")
+        click.echo("  Candidate prob cutoff: 0.50  (override: --prob-threshold)")
         click.echo(f"  CV folds           : {config.CV_FOLDS}")
         click.echo(f"  CV primary metric  : {config.CV_METRIC_PRIMARY.upper()}")
     except Exception as exc:
@@ -562,7 +562,7 @@ def cache_clear(output_dir):
     default=None,
     type=click.FloatRange(0.0, 1.0),
     metavar="FLOAT",
-    help="Minimum ML probability to flag a gene as a novel candidate (default: 0.5).",
+    help="Minimum ML probability to flag a gene as a non-LCGene candidate (default: 0.5).",
 )
 @click.option(
     "--top-k",
@@ -638,11 +638,11 @@ def run(
 
     steps = _select_steps(
         _load_pipeline_steps(),
-        from_key=_normalize_step_key(from_step, minimum=2, maximum=19),
-        to_key=_normalize_step_key(to_step, minimum=2, maximum=19),
+        from_key=_normalize_step_key(from_step, minimum=2, maximum=20),
+        to_key=_normalize_step_key(to_step, minimum=2, maximum=20),
         skip_optional=skip_optional,
         skip_keys=tuple(
-            _normalize_step_key(step, minimum=2, maximum=19) for step in skip_steps
+            _normalize_step_key(step, minimum=2, maximum=20) for step in skip_steps
         ),
     )
 
@@ -718,7 +718,8 @@ def _patch_config(
     if log2fc_threshold is not None:
         config.DE_LOG2FC_THRESHOLD = log2fc_threshold
     if prob_threshold is not None:
-        config.NOVEL_PROB_THRESHOLD = prob_threshold
+        config.CANDIDATE_PROB_THRESHOLD = prob_threshold
+        config.NOVEL_PROB_THRESHOLD = prob_threshold  # deprecated alias
 
     if genes_file is not None:
         if genes_file.suffix.lower() == ".txt":
@@ -831,7 +832,7 @@ def _print_dry_run(
     click.echo("\nEffective thresholds:")
     click.echo(f"  FDR (adj p-value)   : {config.DE_PVALUE_THRESHOLD}")
     click.echo(f"  Log2 fold-change    : {config.DE_LOG2FC_THRESHOLD}")
-    click.echo(f"  Novel prob cutoff   : {getattr(config, 'NOVEL_PROB_THRESHOLD', 0.50)}")
+    click.echo(f"  Candidate prob cutoff : {getattr(config, 'CANDIDATE_PROB_THRESHOLD', 0.50)}")
 
     click.echo("\nSelected steps:")
     if skip_optional:

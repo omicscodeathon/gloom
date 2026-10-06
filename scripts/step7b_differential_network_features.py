@@ -83,7 +83,7 @@ def _betweenness_dict(G, k=500):
         return {node: 0.0 for node in G.nodes()}
     n = G.number_of_nodes()
     if n > 3000:
-        return nx.betweenness_centrality(G, k=k, normalized=True, seed=config.RANDOM_STATE)
+        return nx.betweenness_centrality(G, k=k, normalized=True, seed=config.SEED)
     return nx.betweenness_centrality(G, normalized=True)
 
 

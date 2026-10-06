@@ -27,24 +27,24 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL),
     handlers=[logging.FileHandler(config.LOG_FILE, encoding="utf-8"), logging.StreamHandler(sys.stdout)])
 log = logging.getLogger(__name__)
 
-COLOR_LCGENE="#E8524A"; COLOR_NOVEL="#3A7DBF"; COLOR_DE_ONLY="#F0882A"; COLOR_NS="#AAAAAA"
-COLOR_MAP = {"LCGene gene":COLOR_LCGENE,"Novel candidate":COLOR_NOVEL,"DE significant":COLOR_DE_ONLY,"Not significant":COLOR_NS}
+COLOR_LCGENE="#E8524A"; COLOR_NONLCGENE="#3A7DBF"; COLOR_DE_ONLY="#F0882A"; COLOR_NS="#AAAAAA"
+COLOR_MAP = {"LCGene gene":COLOR_LCGENE,"Non-LCGene candidate":COLOR_NONLCGENE,"DE significant":COLOR_DE_ONLY,"Not significant":COLOR_NS}
 
 def assign_category(row):
     if row.get("is_lcgene_gene",False): return "LCGene gene"
-    if row.get("novel_candidate",False): return "Novel candidate"
+    if row.get("non_lcgene_candidate",False): return "Non-LCGene candidate"
     if row.get("is_de_significant",False): return "DE significant"
     return "Not significant"
 
 def make_interactive_volcano(de_df, ranking, out_path):
     merged = de_df[["log2fc","pvalue_adj","neg_log10_padj","direction","significant"]].copy()
-    merged = merged.join(ranking[["predicted_prob","rank","is_lcgene_gene","novel_candidate","is_de_significant"]], how="left")
+    merged = merged.join(ranking[["predicted_prob","rank","is_lcgene_gene","non_lcgene_candidate","is_de_significant"]], how="left")
     merged["category"] = merged.apply(assign_category, axis=1)
     merged["gene"]     = merged.index
     merged["neg_log10_padj"] = merged["neg_log10_padj"].replace([np.inf,-np.inf],np.nan).fillna(merged["neg_log10_padj"].quantile(0.999))
     merged["hover"] = merged.apply(lambda r: f"<b>{r['gene']}</b><br>Log2FC: {r['log2fc']:.3f}<br>Adj.P: {r['pvalue_adj']:.2e}<br>Dir: {r['direction']}<br>Prob: {r.get('predicted_prob',0):.4f}<br>Category: {r['category']}", axis=1)
     fig = go.Figure()
-    for cat in ["LCGene gene","Novel candidate","DE significant","Not significant"]:
+    for cat in ["LCGene gene","Non-LCGene candidate","DE significant","Not significant"]:
         sub = merged[merged["category"]==cat]
         if not len(sub): continue
         fig.add_trace(go.Scatter(x=sub["log2fc"],y=sub["neg_log10_padj"],mode="markers",name=f"{cat} (n={len(sub):,})",
@@ -66,7 +66,7 @@ def make_interactive_ranking(ranking, out_path):
     df["marker_size"] = (df["abs_log2fc"].clip(0,8)*2+4).round(1)
     df["hover"] = df.apply(lambda r: f"<b>{r['gene']}</b><br>Rank: {int(r['rank'])}<br>Prob: {r['predicted_prob']:.4f}<br>Log2FC: {r['log2fc']:.3f}<br>Dir: {r['direction']}<br>Category: {r['category']}", axis=1)
     fig = go.Figure()
-    for cat in ["LCGene gene","Novel candidate","DE significant","Not significant"]:
+    for cat in ["LCGene gene","Non-LCGene candidate","DE significant","Not significant"]:
         sub = df[df["category"]==cat]
         if not len(sub): continue
         fig.add_trace(go.Scatter(x=sub["rank"],y=sub["predicted_prob"],mode="markers",name=f"{cat} (n={len(sub):,})",
@@ -86,7 +86,7 @@ def make_interactive_network(node_df, edge_df, out_path, top_n=150):
     SG = nx.Graph(); SG.add_nodes_from(top_nodes)
     for _,row in sub_edges.iterrows(): SG.add_edge(row["gene_a"],row["gene_b"],weight=float(row["abs_weight"]))
     import networkx as nx2
-    pos = nx.spring_layout(SG, k=1.8, iterations=80, seed=config.RANDOM_STATE, weight="weight")
+    pos = nx.spring_layout(SG, k=1.8, iterations=80, seed=config.SEED, weight="weight")
     fig = go.Figure()
     for _,row in sub_edges.iterrows():
         ga,gb = row["gene_a"],row["gene_b"]
@@ -101,7 +101,7 @@ def make_interactive_network(node_df, edge_df, out_path, top_n=150):
     df_plot["category"] = df_plot.apply(assign_category, axis=1)
     df_plot["size"]     = (df_plot["predicted_prob"]*25+6).clip(6,31)
     df_plot["hover"]    = df_plot.apply(lambda r: f"<b>{r.name}</b><br>Rank: {int(r.get('rank',0))}<br>Prob: {r['predicted_prob']:.4f}<br>Dir: {r.get('direction','ns')}<br>Degree: {int(r.get('degree',0))}<br>Cat: {r['category']}", axis=1)
-    for cat in ["Not significant","DE significant","Novel candidate","LCGene gene"]:
+    for cat in ["Not significant","DE significant","Non-LCGene candidate","LCGene gene"]:
         sub = df_plot[df_plot["category"]==cat]
         if not len(sub): continue
         fig.add_trace(go.Scatter(x=sub["x"],y=sub["y"],mode="markers",name=f"{cat} (n={len(sub)})",
@@ -281,8 +281,8 @@ def make_combined_dashboard(fig_volcano, fig_ranking, fig_network, fig_importanc
     kegg_tab_content = f"""
 <div id="tab-kegg" class="tab-content">
   <div class="plot-card">
-    <div class="plot-desc"><b>KEGG Pathway Enrichment</b> — Novel LUAD candidates tested against KEGG_2021_Human
-    via Enrichr. Results filtered to lung/cancer-relevant pathways. Use the buttons above the chart to switch
+    <div class="plot-desc"><b>KEGG Pathway Enrichment</b> — Non-LCGene candidates tested against KEGG_2021_Human (explicit background = analysis universe; BH-adjusted)
+    — complete, unfiltered over-representation analysis (no lung/cancer keyword filtering). Use the buttons above the chart to switch
     between gene subsets (All candidates / Upregulated / Downregulated). Hover a bar for pathway details and overlapping genes.</div>
     {kegg_div}
   </div>
@@ -374,7 +374,7 @@ def run_interactive_visualization():
     node_df   = pd.read_csv(config.ANNOTATED_NODES_FILE,   index_col=0)
     edge_df   = pd.read_csv(config.ANNOTATED_EDGES_FILE)
     imp_table = pd.read_csv(config.FEATURE_IMPORTANCE_FILE, index_col=0) if config.FEATURE_IMPORTANCE_FILE.exists() else None
-    for col in ["is_lcgene_gene","novel_candidate","is_de_significant","predicted_prob","rank"]:
+    for col in ["is_lcgene_gene","non_lcgene_candidate","is_de_significant","predicted_prob","rank"]:
         if col not in de_df.columns and col in ranking.columns:
             de_df[col] = ranking[col].reindex(de_df.index)
     log.info("[1] Volcano …")

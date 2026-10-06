@@ -5,10 +5,17 @@ Performs preprocessing and quality control on the raw-loaded
 tumor and normal expression matrices.
 
 Operations:
-  1. Replace non-positive values with NaN
+  1. Audit every value (gloom_utils.sanitize_expression):
+       - true zero      -> kept as 0   (log2(0 + 1) = 0; a zero is an observation, NOT missing)
+       - NaN            -> kept as NaN (missing); counted and logged
+       - negative / inf -> invalid: set to NaN and a WARNING with the counts is logged
+     (v0.1.x converted every value <= 0 to NaN before the log transform, which silently
+      removed true zeros from group means, DE statistics and correlations.)
   2. Log2-transform expression values (log2(x + 1))
-  3. Filter low-expression genes
-  4. Filter low-variance genes (bottom 10% IQR)
+  3. Filter low-expression genes (fraction of OBSERVED samples above the threshold;
+     zeros count as "not expressed", NaN cells are excluded from the denominator)
+  4. Filter low-variance genes (bottom 10% IQR; IQR is computed over observed values,
+     zeros included)
   5. Validate sample overlap between expression matrix and metadata
      (FIX: now applied to BOTH tumor AND normal cohorts)
   6. Generate QC summary statistics and plots
@@ -35,6 +42,7 @@ from scipy.stats import skew, kurtosis
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import config
+from gloom_utils import sanitize_expression
 
 config.create_output_dirs()
 
@@ -49,12 +57,14 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-def replace_nonpositive_with_nan(df, label):
-    n_zero = (df == 0).sum().sum()
-    n_neg  = (df  < 0).sum().sum()
-    df = df.where(df > 0, other=np.nan)
-    log.info(f"  [{label}] Replaced {n_zero} zeros and {n_neg} negatives with NaN.")
-    return df
+def audit_expression_values(df, label):
+    """
+    Keep true zeros, keep NaN as NaN, and mark negative / infinite values as invalid
+    (set to NaN with a warning).  Replaces the v0.1.x ``df.where(df > 0, NaN)`` call,
+    which converted genuine zeros into missing values.
+    """
+    clean, report = sanitize_expression(df, label)
+    return clean
 
 
 def log2_transform(df, label):
@@ -71,7 +81,11 @@ def filter_low_expression_genes(df, label,
                                  min_value=config.MIN_EXPRESSION_VALUE):
     log_threshold  = np.log2(min_value + 1)
     n_before       = df.shape[0]
-    expressed_frac = (df > log_threshold).sum(axis=1) / df.shape[1]
+    # Fraction of OBSERVED samples above the threshold.  Zeros are observed values and count
+    # as "not expressed"; genuine NaN cells are excluded from the denominator.  Genes with no
+    # observed value get NaN and are dropped (NaN >= x is False).
+    n_observed     = df.notna().sum(axis=1).replace(0, np.nan)
+    expressed_frac = (df > log_threshold).sum(axis=1) / n_observed
     mask           = expressed_frac >= min_fraction
     df_filtered    = df.loc[mask]
     log.info(f"  [{label}] Low-expr filter: {n_before} → {df_filtered.shape[0]} genes.")
@@ -129,7 +143,7 @@ def plot_sample_distributions(df_before, df_after, label, out_path, n_samples=50
     FIX: fills NaN medians with 0 before plotting to avoid violinplot crash
     when a randomly chosen subset column is all-NaN in the raw matrix.
     """
-    rng = np.random.default_rng(config.RANDOM_STATE)
+    rng = np.random.default_rng(config.SEED)
 
     def _sample_medians(df):
         cols    = rng.choice(df.columns, size=min(n_samples, df.shape[1]), replace=False)
@@ -204,7 +218,7 @@ def run_preprocessing() -> dict:
     # Tumor preprocessing
     # ------------------------------------------------------------------
     log.info("\n--- Tumor preprocessing ---")
-    tumor_expr = replace_nonpositive_with_nan(tumor_expr_raw.copy(), "tumor")
+    tumor_expr = audit_expression_values(tumor_expr_raw.copy(), "tumor")
     tumor_expr = log2_transform(tumor_expr, "tumor")
     tumor_expr = filter_low_expression_genes(tumor_expr, "tumor")
     gene_stats["tumor"]["After low-expr filter"] = tumor_expr.shape[0]
@@ -222,7 +236,7 @@ def run_preprocessing() -> dict:
     #      true post-alignment gene count rather than the post-variance count.
     # ------------------------------------------------------------------
     log.info("\n--- Normal preprocessing ---")
-    normal_expr = replace_nonpositive_with_nan(normal_expr_raw.copy(), "normal")
+    normal_expr = audit_expression_values(normal_expr_raw.copy(), "normal")
     normal_expr = log2_transform(normal_expr, "normal")
     normal_expr = filter_low_expression_genes(normal_expr, "normal")
     gene_stats["normal"]["After low-expr filter"] = normal_expr.shape[0]

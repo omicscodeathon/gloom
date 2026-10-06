@@ -9,3 +9,4 @@ plotly>=5.10.0
 joblib>=1.2.0
 openpyxl>=3.0.0
 gseapy>=0.10.8
+xgboost>=1.7.0

@@ -34,11 +34,11 @@ def run_train_val_split():
     # Split
     X_train, X_val, y_train, y_val = train_test_split(
         features, labels_df, test_size=config.TEST_SIZE,
-        random_state=config.RANDOM_STATE, stratify=labels_df)
+        random_state=config.SEED, stratify=labels_df)
     log.info(f"  Train: {len(y_train)} (pos={y_train.sum()})  Val: {len(y_val)} (pos={y_val.sum()})")
 
     # CV folds
-    skf = StratifiedKFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.RANDOM_STATE)
+    skf = StratifiedKFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.SEED)
     fold_assignments = np.zeros(len(X_train), dtype=int)
     for fold_idx, (_, val_idx) in enumerate(skf.split(X_train, y_train)):
         fold_assignments[val_idx] = fold_idx + 1
@@ -64,7 +64,7 @@ def run_train_val_split():
     X_val_scaled   = pd.DataFrame(scaler.transform(X_val.values),       index=X_val.index,   columns=X_val.columns)
 
     # PCA plot
-    pca = PCA(n_components=2, random_state=config.RANDOM_STATE)
+    pca = PCA(n_components=2, random_state=config.SEED)
     pca.fit(X_train_scaled.values)
     train_pcs = pca.transform(X_train_scaled.values)
     val_pcs   = pca.transform(X_val_scaled.values)

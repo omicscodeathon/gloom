@@ -12,8 +12,10 @@ Usage:
 Step numbering:
   0   Config / output dirs
   1   Data loading
-  1b  Batch correction (optional — requires USE_BATCH_CORRECTION=True)
+  1b  Batch correction (optional — requires USE_BATCH_CORRECTION=True; see its docstring:
+      cannot fix a design where cohort == tumor/normal status)
   2   Preprocessing / QC
+  2b  Sample-level QC + cohort-artefact diagnostics (optional)
   3   Harmonization
   4   Differential expression
   5   Expression features
@@ -21,26 +23,32 @@ Step numbering:
   6b  Normal co-expression network
   7   Tumor network features
   7b  Differential network features
+  7c  Network stability: threshold sweep + sample bootstrap (optional)
   8   Feature integration
   9   Label construction
   10  Train / validation split
   11  Model training
-  11b PU Bagging (Mordelet-Vert)
+  11b PU Bagging (Mordelet-Vert), full-data model
+  11c Cross-fitted (out-of-fold) PU bagging — PRIMARY ranking (USE_CROSSFIT)
   12  Model evaluation
+  12b Out-of-fold metrics with bootstrap 95% CIs
   13  Feature importance
-  14  Gene ranking
+  13b Feature-set ablation under cross-fitting (optional)
+  14  Gene ranking (out-of-fold scores are the primary ranking)
   15  Network annotation
   16  Network export
   17  Interactive visualization
   18  Final report
-  19  KEGG enrichment
+  19  KEGG enrichment (complete unfiltered table, explicit background)
+  20  External evidence for non-LCGene candidates (optional, needs internet)
 """
-import argparse, importlib, sys, time, logging
+import argparse, importlib, re, sys, time, logging
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import config
 config.create_output_dirs()
+config.set_global_seed()   # one central seed (config.SEED) for every step
 
 logging.basicConfig(
     level=getattr(logging, config.LOG_LEVEL),
@@ -62,6 +70,8 @@ STEPS = [
              "run_batch_correction",                                        True),
     ("02",  "Step 2   — Preprocessing",         "step2_preprocessing",
              "run_preprocessing",                                           False),
+    ("02b", "Step 2b  — Sample QC / cohort diagnostics", "step2b_qc_report",
+             "run_qc_report",                                               True),
     ("03",  "Step 3   — Harmonization",         "step3_harmonization",
              "run_harmonization",                                           False),
     ("04",  "Step 4   — Differential expr",     "step4_differential_expression",
@@ -76,6 +86,8 @@ STEPS = [
              "run_network_feature_extraction",                              False),
     ("07b", "Step 7b  — Diff. network features","step7b_differential_network_features",
              "run_differential_network_features",                           True),
+    ("07c", "Step 7c  — Network stability",     "step7c_network_stability",
+             "run_network_stability",                                       True),
     ("08",  "Step 8   — Feature integration",   "step8_feature_integration",
              "run_feature_integration",                                     False),
     ("09",  "Step 9   — Label construction",    "step9_label_construction",
@@ -86,10 +98,16 @@ STEPS = [
              "run_model_training",                                          False),
     ("11b", "Step 11b — PU Bagging",            "step11b_pu_bagging",
              "run_pu_bagging",                                              True),
+    ("11c", "Step 11c — Cross-fit PU (OOF)",    "step11c_crossfit_pu",
+             "run_crossfit_pu",                                             False),
     ("12",  "Step 12  — Model evaluation",      "step12_model_evaluation",
              "run_model_evaluation",                                        False),
+    ("12b", "Step 12b — OOF metrics + CIs",     "step12b_oof_metrics",
+             "run_oof_metrics",                                             False),
     ("13",  "Step 13  — Feature importance",    "step13_feature_importance",
              "run_feature_importance",                                      False),
+    ("13b", "Step 13b — Feature ablation",      "step13b_ablation",
+             "run_ablation",                                                True),
     ("14",  "Step 14  — Gene ranking",          "step14_gene_ranking",
              "run_gene_ranking",                                            False),
     ("15",  "Step 15  — Network annotation",    "step15_network_annotation",
@@ -102,7 +120,17 @@ STEPS = [
              "run_final_report",                                            False),
     ("19",  "Step 19  — KEGG enrichment",       "step19_kegg_enrichment",
              "run_kegg_enrichment",                                         True),
+    ("20",  "Step 20  — Candidate evidence",    "step20_candidate_evidence",
+             "run_candidate_evidence",                                      True),
 ]
+
+
+def _normalize_key(key):
+    """'4' -> '04', '6B' -> '06b', '11c' -> '11c' (step keys are zero-padded in STEPS)."""
+    if key is None:
+        return None
+    m = re.fullmatch(r"(\d+)([a-z]?)", str(key).strip().lower())
+    return f"{int(m.group(1)):02d}{m.group(2)}" if m else str(key)
 
 
 def _batch_correction_redirect_check():
@@ -128,6 +156,7 @@ def _batch_correction_redirect_check():
 
 
 def _filter_steps(steps, from_key=None, to_key=None, only_key=None, skip_optional=False):
+    from_key, to_key, only_key = (_normalize_key(k) for k in (from_key, to_key, only_key))
     if only_key:
         filtered = [s for s in steps if s[0] == only_key]
         if skip_optional:
@@ -217,8 +246,8 @@ if __name__ == "__main__":
         description="LUAD ML Pipeline runner",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
-            "Step keys:  0, 1, 1b, 2, 3, 4, 5, 6, 6b, 7, 7b, 8, 9, 10,\n"
-            "            11, 11b, 12, 13, 14, 15, 16, 17, 18, 19\n\n"
+            "Step keys:  0, 1, 1b, 2, 2b, 3, 4, 5, 6, 6b, 7, 7b, 7c, 8, 9, 10,\n"
+            "            11, 11b, 11c, 12, 12b, 13, 13b, 14, 15, 16, 17, 18, 19, 20\n\n"
             "Examples:\n"
             "  python run_pipeline.py                  # full run\n"
             "  python run_pipeline.py --skip-optional  # full run without optional steps\n"

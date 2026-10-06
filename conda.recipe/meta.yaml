@@ -31,6 +31,7 @@ requirements:
     - joblib >=1.2.0
     - networkx >=2.8.0
     - matplotlib-base >=3.6.0
+    - xgboost >=1.7.0
 
 test:
   imports:
@@ -54,7 +55,7 @@ about:
     GLOOM (Gene network Learning and Organization through Optimized Machine intelligence)
     is a modular Python framework for LUAD candidate gene prioritization. It integrates
     TCGA tumor expression, GTEx normal expression, co-expression network analysis, and
-    positive-unlabeled machine learning to rank novel cancer gene candidates.
+    positive-unlabeled machine learning to rank candidate cancer genes absent from the reference set.
   doc_url: https://github.com/omicscodeathon/gloom#readme
   dev_url: https://github.com/omicscodeathon/gloom
 

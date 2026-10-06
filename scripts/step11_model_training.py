@@ -66,10 +66,10 @@ HP_PARAM_GRIDS = {
 
 def get_model_definitions(y_train=None):
     defs = {
-        "random_forest":       (RandomForestClassifier(n_estimators=500, max_features="sqrt", class_weight="balanced", n_jobs=-1, random_state=config.RANDOM_STATE, oob_score=True), False),
-        "gradient_boosting":   (GradientBoostingClassifier(n_estimators=300, learning_rate=0.05, max_depth=4, subsample=0.8, max_features="sqrt", random_state=config.RANDOM_STATE), False),
-        "logistic_regression": (LogisticRegression(penalty="l2", C=1.0, class_weight="balanced", solver="saga", max_iter=5000, random_state=config.RANDOM_STATE, n_jobs=-1), True),
-        "extra_trees":         (ExtraTreesClassifier(n_estimators=500, max_features="sqrt", class_weight="balanced", n_jobs=-1, random_state=config.RANDOM_STATE), False),
+        "random_forest":       (RandomForestClassifier(n_estimators=500, max_features="sqrt", class_weight="balanced", n_jobs=-1, random_state=config.SEED, oob_score=True), False),
+        "gradient_boosting":   (GradientBoostingClassifier(n_estimators=300, learning_rate=0.05, max_depth=4, subsample=0.8, max_features="sqrt", random_state=config.SEED), False),
+        "logistic_regression": (LogisticRegression(penalty="l2", C=1.0, class_weight="balanced", solver="saga", max_iter=5000, random_state=config.SEED, n_jobs=-1), True),
+        "extra_trees":         (ExtraTreesClassifier(n_estimators=500, max_features="sqrt", class_weight="balanced", n_jobs=-1, random_state=config.SEED), False),
     }
     # REC 6: XGBoost — handles class imbalance natively via scale_pos_weight
     try:
@@ -85,7 +85,7 @@ def get_model_definitions(y_train=None):
                 colsample_bytree=0.8,
                 scale_pos_weight=n_neg / n_pos,
                 eval_metric="aucpr",
-                random_state=config.RANDOM_STATE,
+                random_state=config.SEED,
                 n_jobs=1,
                 verbosity=0,
             ), False
@@ -108,7 +108,7 @@ def run_model_training():
     X_train_scaled = pd.read_csv(config.PROCESSED_DIR/"train_features_scaled.csv", index_col=0)
     y_train        = pd.read_csv(config.TRAIN_LABELS_FILE).set_index("gene")["label"]
     log.info(f"  X_train: {X_train.shape}  pos={y_train.sum()}")
-    skf = StratifiedKFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.RANDOM_STATE)
+    skf = StratifiedKFold(n_splits=config.CV_FOLDS, shuffle=True, random_state=config.SEED)
     model_defs = get_model_definitions(y_train)
     cv_results = []; trained_models = {}
     total_start = time.time()
@@ -145,7 +145,7 @@ def run_model_training():
             # First: SMOTE oversampling (if enabled)
             if _smote_cls is not None:
                 try:
-                    sm = _smote_cls(random_state=config.RANDOM_STATE)
+                    sm = _smote_cls(random_state=config.SEED)
                     Xf_arr, yf = sm.fit_resample(Xf.values, yf)
                     Xf = pd.DataFrame(Xf_arr, columns=Xf.columns)
                 except Exception as smote_err:
@@ -157,7 +157,7 @@ def run_model_training():
                     # sampling_strategy = minority/majority; UNDERSAMPLING_RATIO = majority/minority
                     _ss = min(1.0, 1.0 / _ratio) if _ratio > 1.0 else _ratio
                     rus = _undersample_cls(sampling_strategy=_ss,
-                                          random_state=config.RANDOM_STATE)
+                                          random_state=config.SEED)
                     Xf_arr, yf = rus.fit_resample(Xf.values, yf)
                     Xf = pd.DataFrame(Xf_arr, columns=Xf.columns)
                 except Exception as rus_err:
@@ -194,7 +194,7 @@ def run_model_training():
         # function is fitted on data the model has NOT seen — prevents overfitting
         # the sigmoid curve to memorised training scores (critical for RF/ET).
         X_fit, X_cal, y_fit, y_cal = train_test_split(
-            X, y, test_size=0.20, stratify=y, random_state=config.RANDOM_STATE
+            X, y, test_size=0.20, stratify=y, random_state=config.SEED
         )
         # REC 3: optional hyperparameter tuning on the 80% fit split
         use_tuning = getattr(config, "USE_HYPERPARAMETER_TUNING", False)
@@ -207,7 +207,7 @@ def run_model_training():
                 n_iter=n_iter, cv=3,
                 scoring="average_precision",
                 n_jobs=1,
-                random_state=config.RANDOM_STATE,
+                random_state=config.SEED,
                 refit=True,
             )
             if model_name == "gradient_boosting":

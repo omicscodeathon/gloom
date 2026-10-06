@@ -79,9 +79,11 @@ def build_pipeline_report(summary_table):
             m = " *" if row["model_name"]==best_name else ""
             r100 = row.get("recall_at_100", float("nan"))
             p100 = row.get("precision_at_100", float("nan"))
-            acc  = row.get("accuracy", float("nan"))
+            acc  = row.get("accuracy_fixed", row.get("accuracy", float("nan")))
+            mcc  = row.get("mcc_fixed", row.get("mcc", float("nan")))
+            f1v  = row.get("f1_fixed", row.get("f1_opt", float("nan")))
             lines.append(f"  {row['model_name']:<25} {row['auroc']:>7.4f} {row['auprc']:>7.4f} "
-                         f"{acc:>7.4f} {row['mcc']:>7.4f} {row['f1_opt']:>7.4f} "
+                         f"{acc:>7.4f} {mcc:>7.4f} {f1v:>7.4f} "
                          f"{r100:>7.4f} {p100:>7.4f}{m}")
     lines.append("")
     # Classification reports from step12
@@ -106,11 +108,12 @@ def build_pipeline_report(summary_table):
     # Ranking metrics from step14
     rank_m = safe_read_csv(config.RESULTS_DIR/"ranking_metrics.csv")
     pos_str = "positive (known)" if pu_framing else "LCGene"
-    lines += [f"SECTION 4b — RANKING METRICS (all genes, {pos_str} as ground truth)",sep2]
+    lines += [f"SECTION 4b — RANKING METRICS ({pos_str} as ground truth; basis = out-of-fold or held-out genes only, see metric_basis)",sep2]
     if rank_m is not None:
         for col in ["recall_at_50","recall_at_100","recall_at_200","recall_at_500",
                     "precision_at_50","precision_at_100","median_lcgene_rank",
-                    "lcgene_top50","lcgene_top100","lcgene_top200","n_novel"]:
+                    "lcgene_top50","lcgene_top100","lcgene_top200","n_non_lcgene_candidates",
+                    "metric_basis","score_source","n_eval_positives"]:
             if col in rank_m.columns:
                 lines.append(f"  {col:<25}: {rank_m[col].iloc[0]}")
     lines.append("")
@@ -122,20 +125,54 @@ def build_pipeline_report(summary_table):
             lines.append(f"  {int(row['rank']):<5} {row.name:<40} {row['mean_importance']:>9.4f}  {row['feature_group']}")
     lines.append("")
     ranking = safe_read_csv(config.GENE_RANKINGS_FILE, index_col=0)
-    novel   = safe_read_csv(config.RESULTS_DIR/"novel_candidates.csv", index_col=0)
+    novel   = safe_read_csv(config.RESULTS_DIR/"non_lcgene_candidates.csv", index_col=0)
     known_col = "Known+" if pu_framing else "LCGene"
     lines += ["SECTION 6 — TOP 20 RANKED GENES",sep2]
     if ranking is not None:
-        lines.append(f"  {'Rank':<6} {'Gene':<15} {'Prob':>7} {'Log2FC':>8} {'Dir':>5} {known_col:>6} {'Novel':>6}")
+        lines.append(f"  {'Rank':<6} {'Gene':<15} {'Prob':>7} {'Log2FC':>8} {'Dir':>5} {known_col:>6} {'NonLCG':>6}")
         for gene,row in ranking.head(20).iterrows():
-            lines.append(f"  {int(row['rank']):<6} {gene:<15} {row['predicted_prob']:>7.4f} {row.get('log2fc',0):>8.3f} {row.get('direction','ns'):>5} {'Yes' if row.get('is_lcgene_gene',False) else 'No':>6} {'Yes' if row.get('novel_candidate',False) else 'No':>6}")
+            lines.append(f"  {int(row['rank']):<6} {gene:<15} {row['predicted_prob']:>7.4f} {row.get('log2fc',0):>8.3f} {row.get('direction','ns'):>5} {'Yes' if row.get('is_lcgene_gene',False) else 'No':>6} {'Yes' if row.get('non_lcgene_candidate',False) else 'No':>6}")
     lines.append("")
-    novel_label = "high-scoring unlabeled" if pu_framing else "novel"
-    lines += [f"SECTION 7 — {novel_label.upper()} CANDIDATES (top 15)",sep2]
+    lines += ["SECTION 7 — NON-LCGENE CANDIDATES (top 15; absence from LCGene does not establish novelty)",sep2]
     if novel is not None:
         lines.append(f"  Total: {len(novel):,}")
         for gene,row in novel.head(15).iterrows():
             lines.append(f"  {int(row['rank']):<6} {gene:<15} prob={row['predicted_prob']:.4f}  log2fc={row.get('log2fc',0):.3f}  dir={row.get('direction','ns')}")
+    lines.append("")
+
+    # ── v0.2.0 revision outputs (each section is skipped silently when its step was not run) ──
+    lines += ["SECTION 8 — OUT-OF-FOLD EVALUATION (step11c / step12b)",sep2]
+    oof_m = safe_read_csv(config.RESULTS_DIR/"oof_metrics.csv")
+    if oof_m is not None:
+        for _,r in oof_m.iterrows():
+            if pd.notna(r.get("ci_low", np.nan)):
+                lines.append(f"  {r['metric']:<22}: {r['estimate']:.4f}  (95% CI {r['ci_low']:.4f} - {r['ci_high']:.4f})")
+            else:
+                lines.append(f"  {r['metric']:<22}: {r['estimate']:.0f}")
+    else:
+        lines.append("  oof_metrics.csv not found (run steps 11c and 12b).")
+    lines.append("")
+    lines += ["SECTION 9 — FEATURE-SET ABLATION VERDICT (step13b)",sep2]
+    verdict_path = config.RESULTS_DIR/"ablation_verdict.txt"
+    lines.append("  " + (verdict_path.read_text(encoding="utf-8").strip() if verdict_path.exists()
+                         else "ablation_verdict.txt not found (run step13b)."))
+    lines.append("")
+    lines += ["SECTION 10 — COHORT / SAMPLE QC WARNINGS (step1 / step2b)",sep2]
+    warn_path = config.RESULTS_DIR/"qc_cohort_warning.txt"
+    if warn_path.exists():
+        lines += ["  " + ln for ln in warn_path.read_text(encoding="utf-8").splitlines()]
+    else:
+        lines.append("  No cohort-confounding or global-artefact warning was raised.")
+    lines.append("")
+    lines += ["SECTION 11 — EXTERNAL EVIDENCE FOR NON-LCGENE CANDIDATES (step20, optional)",sep2]
+    ev = safe_read_csv(config.RESULTS_DIR/"candidate_evidence.csv")
+    if ev is not None and "evidence_class" in ev.columns:
+        for cls, n in ev["evidence_class"].value_counts().items():
+            lines.append(f"  {cls:<28}: {n}")
+        lines.append("  Only 'no_association_found' genes may be called potentially novel "
+                     "(automated search of Open Targets + Europe PMC only).")
+    else:
+        lines.append("  candidate_evidence.csv not found (step20 needs internet; run it separately).")
     lines += ["",sep,"END OF REPORT",sep]
     return lines
 
@@ -212,7 +249,7 @@ def build_summary_figure(out_path_prefix):
     ranking = safe_read_csv(config.GENE_RANKINGS_FILE, index_col=0)
     _pu_fig = getattr(config, "PU_FRAMING", False)
     known_label_fig = "Known positive" if _pu_fig else "LCGene"
-    novel_label_fig = "High-scoring unlabeled" if _pu_fig else "Novel"
+    novel_label_fig = "Non-LCGene candidate"
     if ranking is not None:
         top20 = ranking.head(20); genes_e = top20.index.tolist(); probs_e = top20["predicted_prob"].values
         colors_e = ["tomato" if top20.loc[g].get("is_lcgene_gene",False) else "steelblue" for g in genes_e]
@@ -341,7 +378,7 @@ def run_final_report():
     log.info("")
     log.info("  Key deliverables:")
     log.info(f"    Gene rankings    : {config.GENE_RANKINGS_FILE}")
-    log.info(f"    Novel candidates : {config.RESULTS_DIR}/novel_candidates.csv")
+    log.info(f"    Non-LCGene cand.  : {config.RESULTS_DIR}/non_lcgene_candidates.csv")
     log.info(f"    Dashboard        : {config.FIGURES_DIR}/interactive_dashboard.html")
     log.info("STEP 18 COMPLETE")
     return {"summary_table":summary_table,"report_lines":report_lines}
@@ -349,5 +386,5 @@ def run_final_report():
 if __name__ == "__main__":
     r = run_final_report()
     if not r["summary_table"].empty:
-        cols = [c for c in ["rank","predicted_prob","is_lcgene_gene","novel_candidate","log2fc","direction"] if c in r["summary_table"].columns]
+        cols = [c for c in ["rank","predicted_prob","is_lcgene_gene","non_lcgene_candidate","log2fc","direction"] if c in r["summary_table"].columns]
         print(r["summary_table"].head(10)[cols].round(4).to_string())

@@ -22,39 +22,50 @@ logging.basicConfig(level=getattr(logging, config.LOG_LEVEL),
 log = logging.getLogger(__name__)
 
 def _zscore_matrix(X):
-    mean = X.mean(axis=1, keepdims=True)
-    std  = X.std(axis=1, keepdims=True, ddof=1)
-    std  = np.where(std == 0, 1.0, std)
-    return (X - mean) / std
+    # NaN-safe: statistics ignore missing values and missing cells are set to the gene mean
+    # (z = 0), so a few missing observations no longer turn a whole gene into NaN.
+    mean = np.nanmean(X, axis=1, keepdims=True)
+    std  = np.nanstd(X, axis=1, keepdims=True, ddof=1)
+    std  = np.where((std == 0) | np.isnan(std), 1.0, std)
+    Z = (X - mean) / std
+    return np.where(np.isnan(Z), 0.0, Z)
 
 def compute_pearson_correlation_chunked(expr_matrix, gene_names, cutoff, chunk_size=500):
     n_genes, n_samples = expr_matrix.shape
     log.info(f"  Matrix: {n_genes} genes x {n_samples} samples | cutoff |r|>={cutoff}")
     Z = _zscore_matrix(expr_matrix.astype(np.float32))
     n_chunks   = int(np.ceil(n_genes / chunk_size))
-    edges_list = []
+    idx_a_parts, idx_b_parts, corr_parts = [], [], []
+    n_edges    = 0
     denom      = n_samples - 1
     t0 = time.time()
     for chunk_idx in range(n_chunks):
         start = chunk_idx * chunk_size
         end   = min(start + chunk_size, n_genes)
         corr_block = (Z[start:end] @ Z.T) / denom
-        for local_i, global_i in enumerate(range(start, end)):
-            row = corr_block[local_i]
-            j_indices = np.where((np.arange(n_genes) > global_i) & (np.abs(row) >= cutoff))[0]
-            for j in j_indices:
-                edges_list.append((global_i, j, float(row[j])))
+        # Vectorised edge extraction: upper triangle only (column index > global row index)
+        rows, cols = np.nonzero(np.abs(corr_block) >= cutoff)
+        keep = cols > (rows + start)
+        rows, cols = rows[keep], cols[keep]
+        if len(rows):
+            idx_a_parts.append(rows + start)
+            idx_b_parts.append(cols)
+            corr_parts.append(corr_block[rows, cols].astype(np.float64))
+            n_edges += len(rows)
         if (chunk_idx + 1) % 10 == 0 or chunk_idx == n_chunks - 1:
-            log.info(f"  Chunk {chunk_idx+1}/{n_chunks} edges so far: {len(edges_list):,} ({time.time()-t0:.1f}s)")
+            log.info(f"  Chunk {chunk_idx+1}/{n_chunks} edges so far: {n_edges:,} ({time.time()-t0:.1f}s)")
         del corr_block; gc.collect()
-    log.info(f"  Total edges: {len(edges_list):,}")
-    if not edges_list:
+    log.info(f"  Total edges: {n_edges:,}")
+    if not n_edges:
         return pd.DataFrame(columns=["gene_a","gene_b","correlation"])
-    df = pd.DataFrame(edges_list, columns=["idx_a","idx_b","correlation"])
     gene_arr = np.array(gene_names)
-    df["gene_a"] = gene_arr[df["idx_a"].values]
-    df["gene_b"] = gene_arr[df["idx_b"].values]
-    return df[["gene_a","gene_b","correlation"]].reset_index(drop=True)
+    idx_a = np.concatenate(idx_a_parts)
+    idx_b = np.concatenate(idx_b_parts)
+    return pd.DataFrame({
+        "gene_a": gene_arr[idx_a],
+        "gene_b": gene_arr[idx_b],
+        "correlation": np.concatenate(corr_parts),
+    })
 
 def build_networkx_graph(edges_df):
     G = nx.Graph()

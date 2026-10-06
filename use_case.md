@@ -59,7 +59,7 @@ Use:
 
 - `step14_gene_ranking.py`
 - `results/gene_rankings.csv`
-- `results/novel_candidates.csv`
+- `results/non_lcgene_candidates.csv`
 
 ### Best for
 

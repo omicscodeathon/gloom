@@ -43,7 +43,7 @@ def extract_betweenness_centrality(G):
     n = G.number_of_nodes()
     log.info(f"  Betweenness centrality (n={n:,}) …")
     if n > BETWEENNESS_EXACT_LIMIT:
-        bc = nx.betweenness_centrality(G, k=BETWEENNESS_K_SAMPLES, normalized=True, seed=config.RANDOM_STATE)
+        bc = nx.betweenness_centrality(G, k=BETWEENNESS_K_SAMPLES, normalized=True, seed=config.SEED)
     else:
         bc = nx.betweenness_centrality(G, normalized=True)
     s = pd.Series(bc, name="betweenness_centrality"); s.index.name = "gene"; return s
