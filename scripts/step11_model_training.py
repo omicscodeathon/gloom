@@ -223,7 +223,13 @@ def run_model_training():
             else:
                 model.fit(X_fit, y_fit)
         # Sigmoid calibration on held-out 20% — sigmoid is stable with small cal sets
-        calibrated = CalibratedClassifierCV(model, cv="prefit", method="sigmoid")
+        # scikit-learn >= 1.6 deprecates (and 1.8 removes) cv="prefit": wrap the fitted model in a
+        # FrozenEstimator instead; fall back to cv="prefit" on older scikit-learn.
+        try:
+            from sklearn.frozen import FrozenEstimator
+            calibrated = CalibratedClassifierCV(FrozenEstimator(model), method="sigmoid")
+        except ImportError:
+            calibrated = CalibratedClassifierCV(model, cv="prefit", method="sigmoid")
         calibrated.fit(X_cal, y_cal)
         trained_models[model_name] = (calibrated, use_scaled)
         joblib.dump(calibrated, config.MODELS_DIR/f"model_{model_name}.joblib")

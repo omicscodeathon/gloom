@@ -1,0 +1,3202 @@
+{
+ "C15ORF48": {
+  "ot": {
+   "status": "no_target_in_open_targets",
+   "ensembl_id": null,
+   "luad": 0.0,
+   "lung_carcinoma": 0.0,
+   "cancer": 0.0
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 7,
+   "cancer": 24
+  },
+  "fetched": "2026-10-07"
+ },
+ "AGR3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000173467",
+   "luad": 0.015959646309247427,
+   "lung_carcinoma": 0.02744500000888596,
+   "cancer": 0.3755478012907911
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 43
+  },
+  "fetched": "2026-10-07"
+ },
+ "ALOX15B": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000179593",
+   "luad": 0.005543697820270528,
+   "lung_carcinoma": 0.04465263804300567,
+   "cancer": 0.05754683043434056
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 5,
+   "cancer": 38
+  },
+  "fetched": "2026-10-07"
+ },
+ "RASD1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000108551",
+   "luad": 0.008759658522451906,
+   "lung_carcinoma": 0.008759658522451906,
+   "cancer": 0.08138810936928828
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 29
+  },
+  "fetched": "2026-10-07"
+ },
+ "CX3CL1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000006210",
+   "luad": 0.08020238561659118,
+   "lung_carcinoma": 0.10382289119186772,
+   "cancer": 0.1070743497684026
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 10,
+   "lung_cancer": 36,
+   "cancer": 290
+  },
+  "fetched": "2026-10-07"
+ },
+ "DMBT1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000187908",
+   "luad": 0.019360870798237846,
+   "lung_carcinoma": 0.04056850626323643,
+   "cancer": 0.11826555349910459
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 15,
+   "cancer": 106
+  },
+  "fetched": "2026-10-07"
+ },
+ "KRT17": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000128422",
+   "luad": 0.032122194385972254,
+   "lung_carcinoma": 0.0860160288953033,
+   "cancer": 0.11130604526858555
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 9,
+   "lung_cancer": 13,
+   "cancer": 156
+  },
+  "fetched": "2026-10-07"
+ },
+ "PPP1R14D": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000166143",
+   "luad": 0.08705111212648425,
+   "lung_carcinoma": 0.08705111212648425,
+   "cancer": 0.005756822203138704
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 1,
+   "cancer": 6
+  },
+  "fetched": "2026-10-07"
+ },
+ "CST6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000175315",
+   "luad": 0.022007765350558164,
+   "lung_carcinoma": 0.0404024697141316,
+   "cancer": 0.0874766233124573
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 1,
+   "cancer": 61
+  },
+  "fetched": "2026-10-07"
+ },
+ "QPCT": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000115828",
+   "luad": 0.0017839996794955621,
+   "lung_carcinoma": 0.010383660633338895,
+   "cancer": 0.031458226586478844
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 28
+  },
+  "fetched": "2026-10-07"
+ },
+ "CCL13": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000181374",
+   "luad": 0.005361577080767565,
+   "lung_carcinoma": 0.026998206458257096,
+   "cancer": 0.08402562253969888
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 6,
+   "cancer": 40
+  },
+  "fetched": "2026-10-07"
+ },
+ "SPINK1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000164266",
+   "luad": 0.022632545683089887,
+   "lung_carcinoma": 0.10043035532302085,
+   "cancer": 0.10703281088467882
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 10,
+   "lung_cancer": 13,
+   "cancer": 302
+  },
+  "fetched": "2026-10-07"
+ },
+ "PODXL2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000114631",
+   "luad": 0.009301093009564996,
+   "lung_carcinoma": 0.01626151360612688,
+   "cancer": 0.07563308000623377
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 2,
+   "cancer": 10
+  },
+  "fetched": "2026-10-07"
+ },
+ "COMP": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000105664",
+   "luad": 0.06289248472608909,
+   "lung_carcinoma": 0.07928555558122609,
+   "cancer": 0.11287179437572124
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 6,
+   "lung_cancer": 29,
+   "cancer": 289
+  },
+  "fetched": "2026-10-07"
+ },
+ "STEAP1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000164647",
+   "luad": 0.10413333858674204,
+   "lung_carcinoma": 0.10413333858674204,
+   "cancer": 0.21865725432850605
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 6,
+   "lung_cancer": 12,
+   "cancer": 150
+  },
+  "fetched": "2026-10-07"
+ },
+ "FGFBP1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000137440",
+   "luad": 0.009095770868073495,
+   "lung_carcinoma": 0.05469781849333586,
+   "cancer": 0.0404492664957091
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 4,
+   "cancer": 34
+  },
+  "fetched": "2026-10-07"
+ },
+ "GFRA3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000146013",
+   "luad": 0.019587732298289195,
+   "lung_carcinoma": 0.03531705091367011,
+   "cancer": 0.11087395640541053
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 15
+  },
+  "fetched": "2026-10-07"
+ },
+ "SYT7": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000011347",
+   "luad": 0.025131430118559724,
+   "lung_carcinoma": 0.08985818975693288,
+   "cancer": 0.08063000496371245
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 4,
+   "cancer": 23
+  },
+  "fetched": "2026-10-07"
+ },
+ "CXCL8": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000169429",
+   "luad": 0.10673228193718184,
+   "lung_carcinoma": 0.13177407504454755,
+   "cancer": 0.12673355697733704
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 30,
+   "lung_cancer": 105,
+   "cancer": 1180
+  },
+  "fetched": "2026-10-07"
+ },
+ "MEX3A": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000254726",
+   "luad": 0.0885853286098766,
+   "lung_carcinoma": 0.0885853286098766,
+   "cancer": 0.10746184921500875
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 9,
+   "cancer": 75
+  },
+  "fetched": "2026-10-07"
+ },
+ "DNAJC12": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000108176",
+   "luad": 0.010904954203244837,
+   "lung_carcinoma": 0.09189302688061014,
+   "cancer": 0.08295998805461464
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 2,
+   "cancer": 19
+  },
+  "fetched": "2026-10-07"
+ },
+ "KCNN4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000104783",
+   "luad": 0.03613338552032853,
+   "lung_carcinoma": 0.10400514600020534,
+   "cancer": 0.18487453865528164
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 4,
+   "cancer": 64
+  },
+  "fetched": "2026-10-07"
+ },
+ "SPDEF": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000124664",
+   "luad": 0.04033401886875929,
+   "lung_carcinoma": 0.04033401886875929,
+   "cancer": 0.11222680745561814
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 8,
+   "lung_cancer": 12,
+   "cancer": 115
+  },
+  "fetched": "2026-10-07"
+ },
+ "PKP1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000081277",
+   "luad": 0.008315546730405791,
+   "lung_carcinoma": 0.05019498403792741,
+   "cancer": 0.07391597093694036
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 13,
+   "cancer": 37
+  },
+  "fetched": "2026-10-07"
+ },
+ "PHLDA2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000181649",
+   "luad": 0.0375301488861478,
+   "lung_carcinoma": 0.06706898079967005,
+   "cancer": 0.08521245462789152
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 5,
+   "cancer": 42
+  },
+  "fetched": "2026-10-07"
+ },
+ "PI3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000124102",
+   "luad": 0.011621233208418956,
+   "lung_carcinoma": 0.0353848072203623,
+   "cancer": 0.10098947833225429
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 13,
+   "lung_cancer": 112,
+   "cancer": 1623
+  },
+  "fetched": "2026-10-07"
+ },
+ "NRGN": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000154146",
+   "luad": 0.006440246074504176,
+   "lung_carcinoma": 0.01607302788023768,
+   "cancer": 0.04620819775272512
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 5
+  },
+  "fetched": "2026-10-07"
+ },
+ "ABCA3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000167972",
+   "luad": 0.0862958841630343,
+   "lung_carcinoma": 0.4527353219887597,
+   "cancer": 0.11087395640541053
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 20,
+   "cancer": 57
+  },
+  "fetched": "2026-10-07"
+ },
+ "GCNT3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000140297",
+   "luad": 0.06244257480969085,
+   "lung_carcinoma": 0.06244257480969085,
+   "cancer": 0.0540997139607109
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 3,
+   "cancer": 34
+  },
+  "fetched": "2026-10-07"
+ },
+ "C1ORF116": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000182795",
+   "luad": 0.0049252051534057996,
+   "lung_carcinoma": 0.042908730177451344,
+   "cancer": 0.03491790467061063
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 4
+  },
+  "fetched": "2026-10-07"
+ },
+ "PGC": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000096088",
+   "luad": 0.044780794003041614,
+   "lung_carcinoma": 0.044780794003041614,
+   "cancer": 0.0938075017079209
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 16,
+   "lung_cancer": 52,
+   "cancer": 911
+  },
+  "fetched": "2026-10-07"
+ },
+ "ANLN": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000011426",
+   "luad": 0.11590233916061068,
+   "lung_carcinoma": 0.11590233916061068,
+   "cancer": 0.11548305518406894
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 65,
+   "lung_cancer": 39,
+   "cancer": 244
+  },
+  "fetched": "2026-10-07"
+ },
+ "MUC21": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000204544",
+   "luad": 0.05420198963460676,
+   "lung_carcinoma": 0.05420198963460676,
+   "cancer": 0.08310231266692623
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 13,
+   "lung_cancer": 10,
+   "cancer": 21
+  },
+  "fetched": "2026-10-07"
+ },
+ "CFD": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000197766",
+   "luad": 0.027062487961211815,
+   "lung_carcinoma": 0.03177396777939353,
+   "cancer": 0.08119400001684103
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 24,
+   "cancer": 193
+  },
+  "fetched": "2026-10-07"
+ },
+ "LRRK2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000188906",
+   "luad": 0.06098042201688169,
+   "lung_carcinoma": 0.34240731715757505,
+   "cancer": 0.10053399605484077
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 11,
+   "lung_cancer": 17,
+   "cancer": 137
+  },
+  "fetched": "2026-10-07"
+ },
+ "THBS2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000186340",
+   "luad": 0.0981645212433709,
+   "lung_carcinoma": 0.10606922049010688,
+   "cancer": 0.11066814040706476
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 11,
+   "lung_cancer": 17,
+   "cancer": 244
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLC26A9": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000174502",
+   "luad": 0.0,
+   "lung_carcinoma": 0.02721689380261461,
+   "cancer": 0.07640817109036417
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 13
+  },
+  "fetched": "2026-10-07"
+ },
+ "PCSK1N": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000102109",
+   "luad": 0.0024795948975352205,
+   "lung_carcinoma": 0.0100377888532365,
+   "cancer": 0.02587058982792912
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 5
+  },
+  "fetched": "2026-10-07"
+ },
+ "SCNN1B": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000168447",
+   "luad": 0.02989883507541988,
+   "lung_carcinoma": 0.02989883507541988,
+   "cancer": 0.07654409434803157
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 15
+  },
+  "fetched": "2026-10-07"
+ },
+ "CHRDL1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000101938",
+   "luad": 0.1108643306253288,
+   "lung_carcinoma": 0.1108643306253288,
+   "cancer": 0.1008920518580416
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 7,
+   "lung_cancer": 3,
+   "cancer": 38
+  },
+  "fetched": "2026-10-07"
+ },
+ "SCEL": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000136155",
+   "luad": 0.020403261157409446,
+   "lung_carcinoma": 0.044467620968900716,
+   "cancer": 0.069785916878811
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 30
+  },
+  "fetched": "2026-10-07"
+ },
+ "CDC20": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000117399",
+   "luad": 0.10443451134677162,
+   "lung_carcinoma": 0.11516719243262817,
+   "cancer": 0.11330689896987585
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 48,
+   "lung_cancer": 82,
+   "cancer": 691
+  },
+  "fetched": "2026-10-07"
+ },
+ "GDF15": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000130513",
+   "luad": 0.06024736672260063,
+   "lung_carcinoma": 0.10792299206163108,
+   "cancer": 0.12396592239829451
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 9,
+   "lung_cancer": 48,
+   "cancer": 577
+  },
+  "fetched": "2026-10-07"
+ },
+ "AOC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000002726",
+   "luad": 0.01812067191260721,
+   "lung_carcinoma": 0.08033016184287517,
+   "cancer": 0.08384048924482966
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 24
+  },
+  "fetched": "2026-10-07"
+ },
+ "KIF2C": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000142945",
+   "luad": 0.03828629796289485,
+   "lung_carcinoma": 0.08903951007700021,
+   "cancer": 0.11182259464452013
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 23,
+   "lung_cancer": 24,
+   "cancer": 200
+  },
+  "fetched": "2026-10-07"
+ },
+ "MYH11": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000133392",
+   "luad": 0.19003761162795657,
+   "lung_carcinoma": 0.20405994597327276,
+   "cancer": 0.1847899273423509
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 5,
+   "cancer": 162
+  },
+  "fetched": "2026-10-07"
+ },
+ "PDLIM4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000131435",
+   "luad": 0.02476185026387502,
+   "lung_carcinoma": 0.02476185026387502,
+   "cancer": 0.0668374631806137
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 37
+  },
+  "fetched": "2026-10-07"
+ },
+ "ITGA11": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000137809",
+   "luad": 0.04626643237010997,
+   "lung_carcinoma": 0.08451860359650151,
+   "cancer": 0.09074951409426722
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 6,
+   "lung_cancer": 16,
+   "cancer": 62
+  },
+  "fetched": "2026-10-07"
+ },
+ "ACKR1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000213088",
+   "luad": 0.01414492982946084,
+   "lung_carcinoma": 0.036720522070256896,
+   "cancer": 0.09111152920987921
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 2,
+   "cancer": 65
+  },
+  "fetched": "2026-10-07"
+ },
+ "FNDC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000164694",
+   "luad": 0.07637763173138569,
+   "lung_carcinoma": 0.11136321770409788,
+   "cancer": 0.112079999549779
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 3,
+   "cancer": 44
+  },
+  "fetched": "2026-10-07"
+ },
+ "NDNF": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000173376",
+   "luad": 0.015323821581974525,
+   "lung_carcinoma": 0.04788916027906195,
+   "cancer": 0.02578840650245391
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 1,
+   "cancer": 10
+  },
+  "fetched": "2026-10-07"
+ },
+ "PROM2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000155066",
+   "luad": 0.0153042838467447,
+   "lung_carcinoma": 0.09665567070602171,
+   "cancer": 0.09102610119428094
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 7,
+   "cancer": 35
+  },
+  "fetched": "2026-10-07"
+ },
+ "MUC13": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000173702",
+   "luad": 0.02497294960602915,
+   "lung_carcinoma": 0.07525260550730668,
+   "cancer": 0.09905119719059022
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 4,
+   "cancer": 92
+  },
+  "fetched": "2026-10-07"
+ },
+ "PRSS21": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000007038",
+   "luad": 0.0,
+   "lung_carcinoma": 0.0,
+   "cancer": 0.014393082118554222
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 16
+  },
+  "fetched": "2026-10-07"
+ },
+ "OR2I1P": {
+  "ot": {
+   "status": "no_target_in_open_targets",
+   "ensembl_id": null,
+   "luad": 0.0,
+   "lung_carcinoma": 0.0,
+   "cancer": 0.0
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 3
+  },
+  "fetched": "2026-10-07"
+ },
+ "IGFBP6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000167779",
+   "luad": 0.007694060262799949,
+   "lung_carcinoma": 0.02318857210895646,
+   "cancer": 0.11045110321351553
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 6,
+   "cancer": 80
+  },
+  "fetched": "2026-10-07"
+ },
+ "SFRP2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000145423",
+   "luad": 0.015020777147861842,
+   "lung_carcinoma": 0.07878786784630763,
+   "cancer": 0.11689186465180917
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 14,
+   "cancer": 349
+  },
+  "fetched": "2026-10-07"
+ },
+ "HS6ST2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000171004",
+   "luad": 0.04999618812706224,
+   "lung_carcinoma": 0.04999618812706224,
+   "cancer": 0.07963593063281169
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 3,
+   "cancer": 18
+  },
+  "fetched": "2026-10-07"
+ },
+ "FOSB": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000125740",
+   "luad": 0.0551156709865576,
+   "lung_carcinoma": 0.11058474392207483,
+   "cancer": 0.09501816291820059
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 19,
+   "cancer": 187
+  },
+  "fetched": "2026-10-07"
+ },
+ "CPA3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000163751",
+   "luad": 0.02222652963320461,
+   "lung_carcinoma": 0.02222652963320461,
+   "cancer": 0.05759989799080661
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 4,
+   "cancer": 31
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLC6A14": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000268104",
+   "luad": 0.014151518404555995,
+   "lung_carcinoma": 0.08063049420591961,
+   "cancer": 0.10089529038378563
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 2,
+   "cancer": 68
+  },
+  "fetched": "2026-10-07"
+ },
+ "MUC15": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000169550",
+   "luad": 0.036935185649752816,
+   "lung_carcinoma": 0.036935185649752816,
+   "cancer": 0.07587433352248629
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 3,
+   "cancer": 30
+  },
+  "fetched": "2026-10-07"
+ },
+ "PCP4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000183036",
+   "luad": 0.011890940605687683,
+   "lung_carcinoma": 0.0545813099129937,
+   "cancer": 0.31149954881512304
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 1,
+   "cancer": 19
+  },
+  "fetched": "2026-10-07"
+ },
+ "MT1A": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000205362",
+   "luad": 0.012175602990446007,
+   "lung_carcinoma": 0.0164159831332846,
+   "cancer": 0.06477276652230125
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 4,
+   "cancer": 39
+  },
+  "fetched": "2026-10-07"
+ },
+ "ITGA2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000164171",
+   "luad": 0.05705099414868638,
+   "lung_carcinoma": 0.08734095986289493,
+   "cancer": 0.1082501116343513
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 10,
+   "lung_cancer": 14,
+   "cancer": 220
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLAMF7": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000026751",
+   "luad": 0.011916032061924023,
+   "lung_carcinoma": 0.024166416053549668,
+   "cancer": 0.08818004125677258
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 72
+  },
+  "fetched": "2026-10-07"
+ },
+ "ADGRF1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000153292",
+   "luad": 0.02195984752788278,
+   "lung_carcinoma": 0.07600265986091849,
+   "cancer": 0.09002048038158235
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 11
+  },
+  "fetched": "2026-10-07"
+ },
+ "CRTAC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000095713",
+   "luad": 0.09086473183916023,
+   "lung_carcinoma": 0.09086473183916023,
+   "cancer": 0.0768144910376325
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 10,
+   "lung_cancer": 8,
+   "cancer": 26
+  },
+  "fetched": "2026-10-07"
+ },
+ "DPT": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000143196",
+   "luad": 0.006652437384324632,
+   "lung_carcinoma": 0.01422882440536102,
+   "cancer": 0.0832344038321875
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 19,
+   "cancer": 153
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLC22A3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000146477",
+   "luad": 0.0036957985468470188,
+   "lung_carcinoma": 0.014783194187388075,
+   "cancer": 0.355619202576017
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 2,
+   "cancer": 58
+  },
+  "fetched": "2026-10-07"
+ },
+ "METTL7B": {
+  "ot": {
+   "status": "no_target_in_open_targets",
+   "ensembl_id": null,
+   "luad": 0.0,
+   "lung_carcinoma": 0.0,
+   "cancer": 0.0
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 6,
+   "lung_cancer": 7,
+   "cancer": 39
+  },
+  "fetched": "2026-10-07"
+ },
+ "CHI3L2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000064886",
+   "luad": 0.008583958461688006,
+   "lung_carcinoma": 0.0240835475770273,
+   "cancer": 0.10390401700754191
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 18
+  },
+  "fetched": "2026-10-07"
+ },
+ "CDC45": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000093009",
+   "luad": 0.048609665397167344,
+   "lung_carcinoma": 0.048609665397167344,
+   "cancer": 0.0865363484849924
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 15,
+   "lung_cancer": 20,
+   "cancer": 165
+  },
+  "fetched": "2026-10-07"
+ },
+ "MMP11": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000099953",
+   "luad": 0.10434018366404556,
+   "lung_carcinoma": 0.10434018366404556,
+   "cancer": 0.11491239776571063
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 7,
+   "lung_cancer": 18,
+   "cancer": 239
+  },
+  "fetched": "2026-10-07"
+ },
+ "CEMIP": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000103888",
+   "luad": 0.0820942513309353,
+   "lung_carcinoma": 0.09184797833539614,
+   "cancer": 0.11263617778142623
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 8,
+   "cancer": 93
+  },
+  "fetched": "2026-10-07"
+ },
+ "PDK4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000004799",
+   "luad": 0.03985494454127946,
+   "lung_carcinoma": 0.052121139629107235,
+   "cancer": 0.13025151783817565
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 12,
+   "lung_cancer": 23,
+   "cancer": 223
+  },
+  "fetched": "2026-10-07"
+ },
+ "ADAMDEC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000134028",
+   "luad": 0.01861645161372401,
+   "lung_carcinoma": 0.08040776772944658,
+   "cancer": 0.10399205895722581
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 2,
+   "cancer": 35
+  },
+  "fetched": "2026-10-07"
+ },
+ "CALB2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000172137",
+   "luad": 0.01944700153938262,
+   "lung_carcinoma": 0.07886974148651192,
+   "cancer": 0.08812248378312491
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 3,
+   "cancer": 38
+  },
+  "fetched": "2026-10-07"
+ },
+ "KIF20A": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000112984",
+   "luad": 0.10755269218658661,
+   "lung_carcinoma": 0.10755269218658661,
+   "cancer": 0.1203952601513175
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 21,
+   "lung_cancer": 22,
+   "cancer": 310
+  },
+  "fetched": "2026-10-07"
+ },
+ "CXCL6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000124875",
+   "luad": 0.00895717842256673,
+   "lung_carcinoma": 0.09241898921652185,
+   "cancer": 0.03670347610334811
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 16,
+   "cancer": 115
+  },
+  "fetched": "2026-10-07"
+ },
+ "DLGAP5": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000126787",
+   "luad": 0.11108648446469047,
+   "lung_carcinoma": 0.11108648446469047,
+   "cancer": 0.11142414837633684
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 33,
+   "lung_cancer": 29,
+   "cancer": 163
+  },
+  "fetched": "2026-10-07"
+ },
+ "BPIFB1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000125999",
+   "luad": 0.0036957985468470188,
+   "lung_carcinoma": 0.045280923795969666,
+   "cancer": 0.23526958552543356
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 5,
+   "cancer": 14
+  },
+  "fetched": "2026-10-07"
+ },
+ "VSIG1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000101842",
+   "luad": 0.04410998177821998,
+   "lung_carcinoma": 0.04410998177821998,
+   "cancer": 0.07799988431198297
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 4,
+   "cancer": 15
+  },
+  "fetched": "2026-10-07"
+ },
+ "CILP": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000138615",
+   "luad": 0.005291415119097778,
+   "lung_carcinoma": 0.005291415119097778,
+   "cancer": 0.07632604223376759
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 13
+  },
+  "fetched": "2026-10-07"
+ },
+ "MELK": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000165304",
+   "luad": 0.10953496730491954,
+   "lung_carcinoma": 0.10953496730491954,
+   "cancer": 0.11826555349910459
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 22,
+   "lung_cancer": 33,
+   "cancer": 350
+  },
+  "fetched": "2026-10-07"
+ },
+ "TMEM130": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000166448",
+   "luad": 0.0,
+   "lung_carcinoma": 0.008869916512432843,
+   "cancer": 0.05432823863865116
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 6
+  },
+  "fetched": "2026-10-07"
+ },
+ "C2CD4A": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000198535",
+   "luad": 0.0024744335828031697,
+   "lung_carcinoma": 0.028532847460148846,
+   "cancer": 0.02126649858463826
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 12
+  },
+  "fetched": "2026-10-07"
+ },
+ "CSF3R": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000119535",
+   "luad": 0.29174770855030524,
+   "lung_carcinoma": 0.37272678605963455,
+   "cancer": 0.6010373944588068
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 5,
+   "cancer": 60
+  },
+  "fetched": "2026-10-07"
+ },
+ "FOXQ1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000164379",
+   "luad": 0.027133320998101857,
+   "lung_carcinoma": 0.10155966426538508,
+   "cancer": 0.10911890033511062
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 9,
+   "cancer": 159
+  },
+  "fetched": "2026-10-07"
+ },
+ "ELAPOR1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000116299",
+   "luad": 0.011604843244798999,
+   "lung_carcinoma": 0.034681373563612415,
+   "cancer": 0.0689421234143637
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 7
+  },
+  "fetched": "2026-10-07"
+ },
+ "TNFRSF18": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000186891",
+   "luad": 0.011038566553415239,
+   "lung_carcinoma": 0.030534071627625593,
+   "cancer": 0.09094172756934263
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 9,
+   "lung_cancer": 14,
+   "cancer": 73
+  },
+  "fetched": "2026-10-07"
+ },
+ "CHIT1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000133063",
+   "luad": 0.026030929233840764,
+   "lung_carcinoma": 0.0721006591913189,
+   "cancer": 0.05435676290924952
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 19
+  },
+  "fetched": "2026-10-07"
+ },
+ "CD79A": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000105369",
+   "luad": 0.29151128144126737,
+   "lung_carcinoma": 0.29151128144126737,
+   "cancer": 0.2777392607955534
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 26,
+   "lung_cancer": 18,
+   "cancer": 161
+  },
+  "fetched": "2026-10-07"
+ },
+ "NT5E": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000135318",
+   "luad": 0.11212493491739724,
+   "lung_carcinoma": 0.32922204566505564,
+   "cancer": 0.13298610160548235
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 21,
+   "lung_cancer": 19,
+   "cancer": 214
+  },
+  "fetched": "2026-10-07"
+ },
+ "TNNT1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000105048",
+   "luad": 0.02272402800957187,
+   "lung_carcinoma": 0.02272402800957187,
+   "cancer": 0.07602052288722821
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 3,
+   "cancer": 30
+  },
+  "fetched": "2026-10-07"
+ },
+ "KRT6A": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000205420",
+   "luad": 0.10368982470927399,
+   "lung_carcinoma": 0.10368982470927399,
+   "cancer": 0.16702749197687045
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 34,
+   "lung_cancer": 36,
+   "cancer": 99
+  },
+  "fetched": "2026-10-07"
+ },
+ "RND1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000172602",
+   "luad": 0.0,
+   "lung_carcinoma": 0.03277022551759881,
+   "cancer": 0.0776015033767128
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 3,
+   "cancer": 20
+  },
+  "fetched": "2026-10-07"
+ },
+ "MSMB": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000263639",
+   "luad": 0.0036957985468470188,
+   "lung_carcinoma": 0.3812752138883914,
+   "cancer": 0.5395398440316513
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 134
+  },
+  "fetched": "2026-10-07"
+ },
+ "PKP2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000057294",
+   "luad": 0.08719921039906497,
+   "lung_carcinoma": 0.08719921039906497,
+   "cancer": 0.07607965566397777
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 16,
+   "lung_cancer": 12,
+   "cancer": 38
+  },
+  "fetched": "2026-10-07"
+ },
+ "TESC": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000088992",
+   "luad": 0.013036491151250378,
+   "lung_carcinoma": 0.013036491151250378,
+   "cancer": 0.053869621182948906
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 19
+  },
+  "fetched": "2026-10-07"
+ },
+ "HABP2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000148702",
+   "luad": 0.027188643519047696,
+   "lung_carcinoma": 0.05687423319314578,
+   "cancer": 0.17345094922476595
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 5,
+   "cancer": 47
+  },
+  "fetched": "2026-10-07"
+ },
+ "SHISA3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000178343",
+   "luad": 0.02876563202295929,
+   "lung_carcinoma": 0.02876563202295929,
+   "cancer": 0.07891666831505192
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 6,
+   "cancer": 12
+  },
+  "fetched": "2026-10-07"
+ },
+ "C7": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000112936",
+   "luad": 0.019727563190504477,
+   "lung_carcinoma": 0.03591955975472122,
+   "cancer": 0.03764725189745715
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 7,
+   "lung_cancer": 44,
+   "cancer": 577
+  },
+  "fetched": "2026-10-07"
+ },
+ "NCCRP1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000188505",
+   "luad": 0.0,
+   "lung_carcinoma": 0.0,
+   "cancer": 0.04599215969409622
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 6
+  },
+  "fetched": "2026-10-07"
+ },
+ "SHISA2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000180730",
+   "luad": 0.002582638944306875,
+   "lung_carcinoma": 0.002582638944306875,
+   "cancer": 0.013273826709149067
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 4
+  },
+  "fetched": "2026-10-07"
+ },
+ "PKIB": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000135549",
+   "luad": 0.01829420280689274,
+   "lung_carcinoma": 0.02288109944781287,
+   "cancer": 0.08467182602498541
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 1,
+   "cancer": 21
+  },
+  "fetched": "2026-10-07"
+ },
+ "HLA-DQB2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000232629",
+   "luad": 0.02087612873614837,
+   "lung_carcinoma": 0.02087612873614837,
+   "cancer": 0.04028283418239817
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 5,
+   "cancer": 16
+  },
+  "fetched": "2026-10-07"
+ },
+ "MYBL2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000101057",
+   "luad": 0.11396889344429537,
+   "lung_carcinoma": 0.11396889344429537,
+   "cancer": 0.12480566293775756
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 15,
+   "lung_cancer": 27,
+   "cancer": 296
+  },
+  "fetched": "2026-10-07"
+ },
+ "CLDN9": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000213937",
+   "luad": 0.009239496367117545,
+   "lung_carcinoma": 0.01150911474842124,
+   "cancer": 0.08180865217191975
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 29
+  },
+  "fetched": "2026-10-07"
+ },
+ "SPAG5": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000076382",
+   "luad": 0.10301530406942594,
+   "lung_carcinoma": 0.10301530406942594,
+   "cancer": 0.11048418550295433
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 11,
+   "lung_cancer": 10,
+   "cancer": 92
+  },
+  "fetched": "2026-10-07"
+ },
+ "HLA-DQA2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000237541",
+   "luad": 0.002751316695986113,
+   "lung_carcinoma": 0.02311208685699081,
+   "cancer": 0.05175094800714359
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 5,
+   "cancer": 14
+  },
+  "fetched": "2026-10-07"
+ },
+ "COL17A1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000065618",
+   "luad": 0.07972381328044795,
+   "lung_carcinoma": 0.07972381328044795,
+   "cancer": 0.11023828643506688
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 3,
+   "cancer": 57
+  },
+  "fetched": "2026-10-07"
+ },
+ "CYP4B1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000142973",
+   "luad": 0.10636668076541674,
+   "lung_carcinoma": 0.10636668076541674,
+   "cancer": 0.08088824597727909
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 24,
+   "lung_cancer": 18,
+   "cancer": 58
+  },
+  "fetched": "2026-10-07"
+ },
+ "DDIT4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000168209",
+   "luad": 0.103400067309306,
+   "lung_carcinoma": 0.103400067309306,
+   "cancer": 0.09919595325605453
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 22,
+   "lung_cancer": 20,
+   "cancer": 193
+  },
+  "fetched": "2026-10-07"
+ },
+ "UHRF1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000276043",
+   "luad": 0.05687547365928092,
+   "lung_carcinoma": 0.10251020363287064,
+   "cancer": 0.11590022077332446
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 15,
+   "lung_cancer": 32,
+   "cancer": 365
+  },
+  "fetched": "2026-10-07"
+ },
+ "BCAS1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000064787",
+   "luad": 0.0,
+   "lung_carcinoma": 0.06870489498588607,
+   "cancer": 0.23395830656055872
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 31
+  },
+  "fetched": "2026-10-07"
+ },
+ "MT1M": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000205364",
+   "luad": 0.0418803974751489,
+   "lung_carcinoma": 0.048153057355383444,
+   "cancer": 0.060246123491046584
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 33
+  },
+  "fetched": "2026-10-07"
+ },
+ "KRT80": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000167767",
+   "luad": 0.1027131529187535,
+   "lung_carcinoma": 0.1027131529187535,
+   "cancer": 0.10143165137551331
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 9,
+   "lung_cancer": 7,
+   "cancer": 51
+  },
+  "fetched": "2026-10-07"
+ },
+ "GGTLC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000149435",
+   "luad": 0.0022174791281082107,
+   "lung_carcinoma": 0.03499182064154757,
+   "cancer": 0.07685207756026882
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 5
+  },
+  "fetched": "2026-10-07"
+ },
+ "CCN4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000104415",
+   "luad": 0.042137605462189975,
+   "lung_carcinoma": 0.09439414241450793,
+   "cancer": 0.1114338618857062
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 2,
+   "cancer": 38
+  },
+  "fetched": "2026-10-07"
+ },
+ "ID4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000172201",
+   "luad": 0.05685454789267727,
+   "lung_carcinoma": 0.07850900086448906,
+   "cancer": 0.1147119426215728
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 6,
+   "lung_cancer": 7,
+   "cancer": 184
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLC7A11": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000151012",
+   "luad": 0.11566874110425196,
+   "lung_carcinoma": 0.1207250802924023,
+   "cancer": 0.1469064470577228
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 98,
+   "lung_cancer": 210,
+   "cancer": 1708
+  },
+  "fetched": "2026-10-07"
+ },
+ "EDN2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000127129",
+   "luad": 0.025870589827929127,
+   "lung_carcinoma": 0.03543901226571606,
+   "cancer": 0.01805686974427124
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 21
+  },
+  "fetched": "2026-10-07"
+ },
+ "CENPF": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000117724",
+   "luad": 0.1162213283561829,
+   "lung_carcinoma": 0.1162213283561829,
+   "cancer": 0.10983742928810447
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 38,
+   "lung_cancer": 39,
+   "cancer": 257
+  },
+  "fetched": "2026-10-07"
+ },
+ "GNLY": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000115523",
+   "luad": 0.013120075725851945,
+   "lung_carcinoma": 0.019015499489952382,
+   "cancer": 0.05682164981715724
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 7,
+   "cancer": 70
+  },
+  "fetched": "2026-10-07"
+ },
+ "RCN3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000142552",
+   "luad": 0.0036957985468470188,
+   "lung_carcinoma": 0.08637467068673782,
+   "cancer": 0.0860469286939742
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 3,
+   "cancer": 17
+  },
+  "fetched": "2026-10-07"
+ },
+ "SPINK5": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000133710",
+   "luad": 0.0022174791281082107,
+   "lung_carcinoma": 0.07774875082811539,
+   "cancer": 0.07696041361767592
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 3,
+   "cancer": 35
+  },
+  "fetched": "2026-10-07"
+ },
+ "MRC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000260314",
+   "luad": 0.049916376934342956,
+   "lung_carcinoma": 0.0998790792586275,
+   "cancer": 0.11126116188282856
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 8,
+   "cancer": 120
+  },
+  "fetched": "2026-10-07"
+ },
+ "LIFR": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000113594",
+   "luad": 0.19196252917054724,
+   "lung_carcinoma": 0.2198635326718985,
+   "cancer": 0.1847899273423509
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 6,
+   "lung_cancer": 13,
+   "cancer": 223
+  },
+  "fetched": "2026-10-07"
+ },
+ "ANOS1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000011201",
+   "luad": 0.030051790434075527,
+   "lung_carcinoma": 0.030051790434075527,
+   "cancer": 0.08311378015279078
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 0,
+   "cancer": 12
+  },
+  "fetched": "2026-10-07"
+ },
+ "ALG1L": {
+  "ot": {
+   "status": "no_target_in_open_targets",
+   "ensembl_id": null,
+   "luad": 0.0,
+   "lung_carcinoma": 0.0,
+   "cancer": 0.0
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 2
+  },
+  "fetched": "2026-10-07"
+ },
+ "CES1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000198848",
+   "luad": 0.019325187104223318,
+   "lung_carcinoma": 0.04261070934587269,
+   "cancer": 0.07136942473029628
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 9,
+   "cancer": 89
+  },
+  "fetched": "2026-10-07"
+ },
+ "APOH": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000091583",
+   "luad": 0.030305548084145546,
+   "lung_carcinoma": 0.25714970008941773,
+   "cancer": 0.042746630511875675
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 8,
+   "cancer": 49
+  },
+  "fetched": "2026-10-07"
+ },
+ "PLEK2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000100558",
+   "luad": 0.09067970607782538,
+   "lung_carcinoma": 0.09067970607782538,
+   "cancer": 0.0993143197615951
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 20,
+   "lung_cancer": 19,
+   "cancer": 51
+  },
+  "fetched": "2026-10-07"
+ },
+ "GPX2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000176153",
+   "luad": 0.10343599560202557,
+   "lung_carcinoma": 0.11780472417750346,
+   "cancer": 0.09314249805073782
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 13,
+   "lung_cancer": 26,
+   "cancer": 172
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLC6A20": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000163817",
+   "luad": 0.014783194187388075,
+   "lung_carcinoma": 0.014783194187388075,
+   "cancer": 0.06704794530404966
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 9
+  },
+  "fetched": "2026-10-07"
+ },
+ "FLRT3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000125848",
+   "luad": 0.021137957279463084,
+   "lung_carcinoma": 0.028568902900709656,
+   "cancer": 0.05774116965378103
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 3,
+   "cancer": 30
+  },
+  "fetched": "2026-10-07"
+ },
+ "FDCSP": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000181617",
+   "luad": 0.011931800468680412,
+   "lung_carcinoma": 0.03904437331572038,
+   "cancer": 0.025014300101570817
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 1,
+   "cancer": 22
+  },
+  "fetched": "2026-10-07"
+ },
+ "AADAC": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000114771",
+   "luad": 0.019671395360750202,
+   "lung_carcinoma": 0.019671395360750202,
+   "cancer": 0.0445385677320484
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 30
+  },
+  "fetched": "2026-10-07"
+ },
+ "SERPINE2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000135919",
+   "luad": 0.029693589604723746,
+   "lung_carcinoma": 0.03108097517364313,
+   "cancer": 0.10154253597088596
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 15,
+   "cancer": 101
+  },
+  "fetched": "2026-10-07"
+ },
+ "TPSAB1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000172236",
+   "luad": 0.0,
+   "lung_carcinoma": 0.018848572588919792,
+   "cancer": 0.021731295455460466
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 2,
+   "cancer": 7
+  },
+  "fetched": "2026-10-07"
+ },
+ "AK4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000162433",
+   "luad": 0.08917569418079899,
+   "lung_carcinoma": 0.08917569418079899,
+   "cancer": 0.08569337614537331
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 8,
+   "lung_cancer": 8,
+   "cancer": 39
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLC1A1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000106688",
+   "luad": 0.04187079598488463,
+   "lung_carcinoma": 0.052256329490440255,
+   "cancer": 0.04755281329157313
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 32
+  },
+  "fetched": "2026-10-07"
+ },
+ "ARSL": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000157399",
+   "luad": 0.004206760123273547,
+   "lung_carcinoma": 0.013463679090815093,
+   "cancer": 0.005674693346542105
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 2
+  },
+  "fetched": "2026-10-07"
+ },
+ "VCAN": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000038427",
+   "luad": 0.03442294916852674,
+   "lung_carcinoma": 0.07846050391073103,
+   "cancer": 0.15195560028105587
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 12,
+   "lung_cancer": 17,
+   "cancer": 272
+  },
+  "fetched": "2026-10-07"
+ },
+ "ANKRD22": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000152766",
+   "luad": 0.08395116092189998,
+   "lung_carcinoma": 0.08395116092189998,
+   "cancer": 0.07978572031789938
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 4,
+   "cancer": 30
+  },
+  "fetched": "2026-10-07"
+ },
+ "EPHB2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000133216",
+   "luad": 0.0790130678123583,
+   "lung_carcinoma": 0.38414017947937995,
+   "cancer": 0.47742539949407614
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 10,
+   "lung_cancer": 16,
+   "cancer": 266
+  },
+  "fetched": "2026-10-07"
+ },
+ "HMMR": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000072571",
+   "luad": 0.11173824162717574,
+   "lung_carcinoma": 0.11300133215985814,
+   "cancer": 0.3421529219912968
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 49,
+   "lung_cancer": 42,
+   "cancer": 250
+  },
+  "fetched": "2026-10-07"
+ },
+ "CST2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000170369",
+   "luad": 0.008315546730405791,
+   "lung_carcinoma": 0.021498254824867617,
+   "cancer": 0.08385982547575808
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 2,
+   "cancer": 37
+  },
+  "fetched": "2026-10-07"
+ },
+ "AKAP12": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000131016",
+   "luad": 0.08509180074612603,
+   "lung_carcinoma": 0.08509180074612603,
+   "cancer": 0.22269420745527416
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 9,
+   "lung_cancer": 18,
+   "cancer": 133
+  },
+  "fetched": "2026-10-07"
+ },
+ "ARNTL2": {
+  "ot": {
+   "status": "no_target_in_open_targets",
+   "ensembl_id": null,
+   "luad": 0.0,
+   "lung_carcinoma": 0.0,
+   "cancer": 0.0
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 16,
+   "lung_cancer": 9,
+   "cancer": 56
+  },
+  "fetched": "2026-10-07"
+ },
+ "ATOH8": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000168874",
+   "luad": 0.050703070908477234,
+   "lung_carcinoma": 0.06308522797326369,
+   "cancer": 0.06793944147166238
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 1,
+   "cancer": 26
+  },
+  "fetched": "2026-10-07"
+ },
+ "IL4I1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000104951",
+   "luad": 0.08940993698618094,
+   "lung_carcinoma": 0.08940993698618094,
+   "cancer": 0.09510216272241949
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 3,
+   "cancer": 71
+  },
+  "fetched": "2026-10-07"
+ },
+ "TMPRSS2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000184012",
+   "luad": 0.21327521422330661,
+   "lung_carcinoma": 0.2810779683698087,
+   "cancer": 0.5275960272160263
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 31,
+   "lung_cancer": 63,
+   "cancer": 1434
+  },
+  "fetched": "2026-10-07"
+ },
+ "GJB3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000188910",
+   "luad": 0.10283656649949241,
+   "lung_carcinoma": 0.10283656649949241,
+   "cancer": 0.08524381366363738
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 13,
+   "lung_cancer": 7,
+   "cancer": 29
+  },
+  "fetched": "2026-10-07"
+ },
+ "MZB1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000170476",
+   "luad": 0.010337148535531108,
+   "lung_carcinoma": 0.04802484889486208,
+   "cancer": 0.0915586331968895
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 5,
+   "cancer": 37
+  },
+  "fetched": "2026-10-07"
+ },
+ "CXCL9": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000138755",
+   "luad": 0.08696696612004941,
+   "lung_carcinoma": 0.08696696612004941,
+   "cancer": 0.10919005849740936
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 27,
+   "lung_cancer": 121,
+   "cancer": 1055
+  },
+  "fetched": "2026-10-07"
+ },
+ "SMPDL3B": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000130768",
+   "luad": 0.036322859963411884,
+   "lung_carcinoma": 0.036322859963411884,
+   "cancer": 0.07602052288722821
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 14
+  },
+  "fetched": "2026-10-07"
+ },
+ "INAVA": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000163362",
+   "luad": 0.011420955936624243,
+   "lung_carcinoma": 0.018941490314751296,
+   "cancer": 0.07990192007924025
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 9
+  },
+  "fetched": "2026-10-07"
+ },
+ "WFDC3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000124116",
+   "luad": 0.006650940687093432,
+   "lung_carcinoma": 0.03151037841041768,
+   "cancer": 0.02270862884896001
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 6
+  },
+  "fetched": "2026-10-07"
+ },
+ "APOC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000130208",
+   "luad": 0.011812393978385703,
+   "lung_carcinoma": 0.09274448165820945,
+   "cancer": 0.24966662589051555
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 3,
+   "cancer": 111
+  },
+  "fetched": "2026-10-07"
+ },
+ "MAB21L4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000172478",
+   "luad": 0.0,
+   "lung_carcinoma": 0.0029566388374776143,
+   "cancer": 0.007761176948378739
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 1
+  },
+  "fetched": "2026-10-07"
+ },
+ "HGD": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000113924",
+   "luad": 0.009149716266199454,
+   "lung_carcinoma": 0.009149716266199454,
+   "cancer": 0.029196808520091447
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 10,
+   "cancer": 695
+  },
+  "fetched": "2026-10-07"
+ },
+ "DES": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000175084",
+   "luad": 0.030018029100699294,
+   "lung_carcinoma": 0.04834289289203242,
+   "cancer": 0.061773456116391096
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 17,
+   "lung_cancer": 1157,
+   "cancer": 15630
+  },
+  "fetched": "2026-10-07"
+ },
+ "CDC6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000094804",
+   "luad": 0.07124379022857043,
+   "lung_carcinoma": 0.0797505968076212,
+   "cancer": 0.11034456762784445
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 14,
+   "lung_cancer": 40,
+   "cancer": 307
+  },
+  "fetched": "2026-10-07"
+ },
+ "ADM2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000128165",
+   "luad": 0.009054706439775195,
+   "lung_carcinoma": 0.009054706439775195,
+   "cancer": 0.06015959277915129
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 14
+  },
+  "fetched": "2026-10-07"
+ },
+ "HAS3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000103044",
+   "luad": 0.008726191013388791,
+   "lung_carcinoma": 0.04851105172591396,
+   "cancer": 0.07976856334834148
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 7,
+   "cancer": 107
+  },
+  "fetched": "2026-10-07"
+ },
+ "GPC6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000183098",
+   "luad": 0.0036957985468470188,
+   "lung_carcinoma": 0.04269386481317675,
+   "cancer": 0.07569415077258415
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 24
+  },
+  "fetched": "2026-10-07"
+ },
+ "CPXM1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000088882",
+   "luad": 0.0036957985468470188,
+   "lung_carcinoma": 0.007319075574285267,
+   "cancer": 0.07968819230069094
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 16
+  },
+  "fetched": "2026-10-07"
+ },
+ "LRRC15": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000172061",
+   "luad": 0.009224917503512222,
+   "lung_carcinoma": 0.021080180416757292,
+   "cancer": 0.0960194793879416
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 3,
+   "cancer": 79
+  },
+  "fetched": "2026-10-07"
+ },
+ "FIBIN": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000176971",
+   "luad": 0.01811126077882381,
+   "lung_carcinoma": 0.021960434965364983,
+   "cancer": 0.11292756209833942
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 3
+  },
+  "fetched": "2026-10-07"
+ },
+ "CH25H": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000138135",
+   "luad": 0.05892745460806079,
+   "lung_carcinoma": 0.05892745460806079,
+   "cancer": 0.02780794865583815
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 5,
+   "cancer": 47
+  },
+  "fetched": "2026-10-07"
+ },
+ "CP": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000047457",
+   "luad": 0.04230195928529508,
+   "lung_carcinoma": 0.09816006812442567,
+   "cancer": 0.10424313807318726
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 40,
+   "lung_cancer": 408,
+   "cancer": 4148
+  },
+  "fetched": "2026-10-07"
+ },
+ "RAMP1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000132329",
+   "luad": 0.01264643371244119,
+   "lung_carcinoma": 0.07391597093694036,
+   "cancer": 0.04924464888134806
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 45
+  },
+  "fetched": "2026-10-07"
+ },
+ "TPPP": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000171368",
+   "luad": 0.008561933300195591,
+   "lung_carcinoma": 0.031421645556398634,
+   "cancer": 0.026609749537298527
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 3,
+   "cancer": 19
+  },
+  "fetched": "2026-10-07"
+ },
+ "NUF2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000143228",
+   "luad": 0.11067780064472622,
+   "lung_carcinoma": 0.11067780064472622,
+   "cancer": 0.10178048471549375
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 9,
+   "lung_cancer": 16,
+   "cancer": 120
+  },
+  "fetched": "2026-10-07"
+ },
+ "TUBB2B": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000137285",
+   "luad": 0.36844789543819717,
+   "lung_carcinoma": 0.6131225475456743,
+   "cancer": 0.6153821617361128
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 26
+  },
+  "fetched": "2026-10-07"
+ },
+ "PRRX2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000167157",
+   "luad": 0.07581459349075527,
+   "lung_carcinoma": 0.07581459349075527,
+   "cancer": 0.03956186613721071
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 22
+  },
+  "fetched": "2026-10-07"
+ },
+ "SLITRK6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000184564",
+   "luad": 0.035089553980897525,
+   "lung_carcinoma": 0.035089553980897525,
+   "cancer": 0.20961827178139789
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 0,
+   "cancer": 14
+  },
+  "fetched": "2026-10-07"
+ },
+ "AURKA": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000087586",
+   "luad": 0.09756239803053254,
+   "lung_carcinoma": 0.1404949843194345,
+   "cancer": 0.21961873220216935
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 63,
+   "lung_cancer": 124,
+   "cancer": 1229
+  },
+  "fetched": "2026-10-07"
+ },
+ "RBP4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000138207",
+   "luad": 0.01334271402093656,
+   "lung_carcinoma": 0.08325639598245221,
+   "cancer": 0.10303618200271789
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 3,
+   "cancer": 85
+  },
+  "fetched": "2026-10-07"
+ },
+ "ERN2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000134398",
+   "luad": 0.010717815785856354,
+   "lung_carcinoma": 0.010717815785856354,
+   "cancer": 0.009926902326087735
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 2,
+   "cancer": 8
+  },
+  "fetched": "2026-10-07"
+ },
+ "LAMP3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000078081",
+   "luad": 0.045051538785015395,
+   "lung_carcinoma": 0.3695798546847018,
+   "cancer": 0.08760359720106303
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 9,
+   "lung_cancer": 13,
+   "cancer": 134
+  },
+  "fetched": "2026-10-07"
+ },
+ "OLR1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000173391",
+   "luad": 0.02231698383475598,
+   "lung_carcinoma": 0.10080357443849874,
+   "cancer": 0.10294008964127013
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 8,
+   "cancer": 96
+  },
+  "fetched": "2026-10-07"
+ },
+ "FAXDC2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000170271",
+   "luad": 0.014986463107464657,
+   "lung_carcinoma": 0.014986463107464657,
+   "cancer": 0.07835092919315678
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 10
+  },
+  "fetched": "2026-10-07"
+ },
+ "LRRN4": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000125872",
+   "luad": 0.00993715912272262,
+   "lung_carcinoma": 0.01671979262593591,
+   "cancer": 0.26342682541136636
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 1,
+   "cancer": 7
+  },
+  "fetched": "2026-10-07"
+ },
+ "CAPN6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000077274",
+   "luad": 0.0,
+   "lung_carcinoma": 0.0073915970936940375,
+   "cancer": 0.11087395640541053
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 10
+  },
+  "fetched": "2026-10-07"
+ },
+ "NLRP2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000022556",
+   "luad": 0.029565578021823184,
+   "lung_carcinoma": 0.029565578021823184,
+   "cancer": 0.008818585977059966
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 1,
+   "cancer": 22
+  },
+  "fetched": "2026-10-07"
+ },
+ "FCN3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000142748",
+   "luad": 0.06955638748984568,
+   "lung_carcinoma": 0.06955638748984568,
+   "cancer": 0.08131559947397443
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 6,
+   "lung_cancer": 6,
+   "cancer": 35
+  },
+  "fetched": "2026-10-07"
+ },
+ "SERPINA1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000197249",
+   "luad": 0.08348762165327613,
+   "lung_carcinoma": 0.5245220281709367,
+   "cancer": 0.10828946930976807
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 16,
+   "cancer": 176
+  },
+  "fetched": "2026-10-07"
+ },
+ "TSPAN8": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000127324",
+   "luad": 0.019937274982333154,
+   "lung_carcinoma": 0.07763578313058926,
+   "cancer": 0.20092564610632418
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 3,
+   "lung_cancer": 6,
+   "cancer": 114
+  },
+  "fetched": "2026-10-07"
+ },
+ "BMP3": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000152785",
+   "luad": 0.025157902463732146,
+   "lung_carcinoma": 0.025157902463732146,
+   "cancer": 0.05456003476565171
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 1,
+   "cancer": 73
+  },
+  "fetched": "2026-10-07"
+ },
+ "SCTR": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000080293",
+   "luad": 0.0,
+   "lung_carcinoma": 0.007761176948378739,
+   "cancer": 0.012168234391042332
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 0,
+   "cancer": 22
+  },
+  "fetched": "2026-10-07"
+ },
+ "MAMDC2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000165072",
+   "luad": 0.026181036905864274,
+   "lung_carcinoma": 0.04066136484661717,
+   "cancer": 0.11087395640541053
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 1,
+   "lung_cancer": 2,
+   "cancer": 18
+  },
+  "fetched": "2026-10-07"
+ },
+ "ST6GALNAC1": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000070526",
+   "luad": 0.09118544564137676,
+   "lung_carcinoma": 0.09118544564137676,
+   "cancer": 0.057505564242356116
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 2,
+   "lung_cancer": 5,
+   "cancer": 40
+  },
+  "fetched": "2026-10-07"
+ },
+ "NKG7": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000105374",
+   "luad": 0.01619376106044546,
+   "lung_carcinoma": 0.018077639278154575,
+   "cancer": 0.06356295294941185
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 4,
+   "lung_cancer": 7,
+   "cancer": 47
+  },
+  "fetched": "2026-10-07"
+ },
+ "HSD17B6": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000025423",
+   "luad": 0.10181102485692271,
+   "lung_carcinoma": 0.10181102485692271,
+   "cancer": 0.03488176797370812
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 5,
+   "lung_cancer": 4,
+   "cancer": 12
+  },
+  "fetched": "2026-10-07"
+ },
+ "COL5A2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000204262",
+   "luad": 0.09890299080380291,
+   "lung_carcinoma": 0.09890299080380291,
+   "cancer": 0.22862831385630616
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 12,
+   "lung_cancer": 9,
+   "cancer": 165
+  },
+  "fetched": "2026-10-07"
+ },
+ "SCG5": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000166922",
+   "luad": 0.007715398326913377,
+   "lung_carcinoma": 0.08088770724290335,
+   "cancer": 0.06730459798091402
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 0,
+   "lung_cancer": 2,
+   "cancer": 24
+  },
+  "fetched": "2026-10-07"
+ },
+ "AHNAK2": {
+  "ot": {
+   "status": "ok",
+   "ensembl_id": "ENSG00000185567",
+   "luad": 0.10971841207468012,
+   "lung_carcinoma": 0.10971841207468012,
+   "cancer": 0.0826991931089096
+  },
+  "epmc": {
+   "status": "ok",
+   "luad": 7,
+   "lung_cancer": 8,
+   "cancer": 73
+  },
+  "fetched": "2026-10-07"
+ }
+}

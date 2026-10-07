@@ -82,37 +82,19 @@ query SearchTarget($q: String!) {
 }
 """
 
+# Open Targets now indexes diseases by MONDO ids (the LUAD EFO id used in v0.2.0-draft returned score 0 for
+# every gene), so we filter by NAME with the "BFilter" argument and match disease names ourselves.
+# Verified live against api.platform.opentargets.org (CDC20 -> "lung adenocarcinoma" score 0.10).
 Q_ASSOC_VARIANTS = [
-    # current API: Bs filter + enableIndirect + page
     """
-    query Assoc($id: String!, $bs: [String!]) {
+    query Assoc($id: String!) {
       target(ensemblId: $id) {
         id approvedSymbol
-        associatedDiseases(Bs: $bs, enableIndirect: true, page: {index: 0, size: 50}) {
+        lung: associatedDiseases(BFilter: "lung", page: {index: 0, size: 25}) {
           count
           rows { disease { id name } score }
         }
-      }
-    }
-    """,
-    # same without paging arguments
-    """
-    query Assoc($id: String!, $bs: [String!]) {
-      target(ensemblId: $id) {
-        id approvedSymbol
-        associatedDiseases(Bs: $bs, enableIndirect: true) {
-          count
-          rows { disease { id name } score }
-        }
-      }
-    }
-    """,
-    # older API: index/size arguments
-    """
-    query Assoc($id: String!, $bs: [String!]) {
-      target(ensemblId: $id) {
-        id approvedSymbol
-        associatedDiseases(Bs: $bs, enableIndirect: true, index: 0, size: 50) {
+        cancer: associatedDiseases(BFilter: "cancer", page: {index: 0, size: 5}) {
           count
           rows { disease { id name } score }
         }
@@ -177,28 +159,28 @@ def _resolve_ensembl(symbol, timeout, retries):
 
 
 def _ot_scores(ensembl_id, timeout, retries):
-    """Association scores for LUAD, lung carcinoma and generic cancer (max over cancer ids)."""
-    variables = {"id": ensembl_id, "bs": DISEASE_FILTER}
-    with _variant_lock:
-        order = list(range(len(Q_ASSOC_VARIANTS)))
-        if _working_variant["idx"] is not None:
-            order.remove(_working_variant["idx"])
-            order.insert(0, _working_variant["idx"])
+    """Association scores: LUAD (lung + adenocarcinoma in the disease name), any lung disease, generic cancer."""
+    variables = {"id": ensembl_id}
     last_err = None
-    for idx in order:
-        resp = _graphql(Q_ASSOC_VARIANTS[idx], variables, timeout, retries)
-        if resp.get("errors") or not (resp.get("data") or {}).get("target"):
+    for idx, q in enumerate(Q_ASSOC_VARIANTS):
+        resp = _graphql(q, variables, timeout, retries)
+        tgt = (resp.get("data") or {}).get("target")
+        if resp.get("errors") or not tgt:
             last_err = (resp.get("errors") or [{"message": "empty target"}])[0].get("message")
             continue
-        with _variant_lock:
-            _working_variant["idx"] = idx
-        rows = (resp["data"]["target"].get("associatedDiseases") or {}).get("rows") or []
-        by_id = {r["disease"]["id"]: float(r["score"]) for r in rows if r.get("disease")}
-        return {
-            "luad": by_id.get(EFO_LUAD, 0.0),
-            "lung_carcinoma": by_id.get(EFO_LUNG_CARCINOMA, 0.0),
-            "cancer": max([by_id.get(i, 0.0) for i in EFO_CANCER_IDS] or [0.0]),
-        }
+        lung_rows = (tgt.get("lung") or {}).get("rows") or []
+        cancer_rows = (tgt.get("cancer") or {}).get("rows") or []
+        luad = 0.0
+        lung = 0.0
+        for r in lung_rows:
+            name = (r.get("disease") or {}).get("name", "").lower()
+            sc = float(r.get("score", 0.0))
+            if "lung" in name:
+                lung = max(lung, sc)
+                if "adenocarcinoma" in name:
+                    luad = max(luad, sc)
+        cancer = max([float(r.get("score", 0.0)) for r in cancer_rows] or [0.0])
+        return {"luad": luad, "lung_carcinoma": lung, "cancer": cancer}
     raise RuntimeError(f"associatedDiseases query rejected by the server: {last_err}")
 
 
@@ -218,7 +200,13 @@ def query_open_targets(symbol, timeout, retries):
 # ── Europe PMC ────────────────────────────────────────────────────────────────────────────────────
 
 def _epmc_hits(symbol, phrase, timeout, retries):
-    q = f'"{symbol}" AND "{phrase}"'
+    """Records whose TITLE or ABSTRACT mention the gene symbol together with the phrase (full-text matching,
+    used in the draft, counted incidental mentions and classified every gene as already associated)."""
+    if isinstance(phrase, (list, tuple)):
+        ph = "(" + " OR ".join(f'TITLE_ABS:"{p}"' for p in phrase) + ")"
+    else:
+        ph = f'TITLE_ABS:"{phrase}"'
+    q = f'TITLE_ABS:"{symbol}" AND {ph}'
     url = (f"{EPMC_URL}?query={urllib.parse.quote(q)}&format=json&resultType=lite&pageSize=1")
     resp = _http_json(url, None, timeout, retries)
     return int(resp.get("hitCount", 0))
@@ -226,7 +214,7 @@ def _epmc_hits(symbol, phrase, timeout, retries):
 
 def query_europe_pmc(symbol, timeout, retries):
     out = {"status": "ok"}
-    for key, phrase in (("luad", "lung adenocarcinoma"), ("lung_cancer", "lung cancer"), ("cancer", "cancer")):
+    for key, phrase in (("luad", "lung adenocarcinoma"), ("lung_cancer", ("lung cancer", "lung carcinoma", "NSCLC")), ("cancer", "cancer")):
         try:
             out[key] = _epmc_hits(symbol, phrase, timeout, retries)
         except Exception as exc:

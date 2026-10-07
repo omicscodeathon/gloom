@@ -1,0 +1,151 @@
+query_set,term,n_query,n_term_in_background,n_term_total,n_background,n_overlap,fold_enrichment,p_raw,p_adj,genes,odds_ratio,neg_log10_padj,pathway,pvalue,padj,overlap_genes,pathway_size,subset
+All candidates,ECM-receptor interaction,316,72,88,12222,5,2.6859177215189876,0.03837412606088227,0.9258124994180037,COMP;HMMR;ITGA11;ITGA2;THBS2,3.0969502407704654,0.03347696009282663,ECM-receptor interaction,0.03837412606088227,0.9258124994180037,5,72,All candidates
+All candidates,Cytokine-cytokine receptor interaction,316,205,295,12222,10,1.8866934238962645,0.040504296849537665,0.9258124994180037,BMP5;BMP6;CCL7;CSF3R;CX3CL1;IL37;LIFR;PPBP;TGFB2;TNFRSF18,2.052223144737007,0.03347696009282663,Cytokine-cytokine receptor interaction,0.040504296849537665,0.9258124994180037,10,205,All candidates
+All candidates,Cell cycle,316,101,124,12222,6,2.2976563479132723,0.04683475754316202,0.9366951508632404,BUB1;BUB1B;CDC20;CDC45;CDC6;TGFB2,2.5891274839601723,0.028401728044508964,Cell cycle,0.04683475754316202,0.9366951508632404,6,101,All candidates
+All candidates,TGF-beta signaling pathway,316,77,94,12222,4,2.009205983889528,0.1382384088021196,1.0,BMP5;BMP6;ID4;TGFB2,2.3184,-0.0,TGF-beta signaling pathway,0.1382384088021196,1.0,4,77,All candidates
+All candidates,Complement and coagulation cascades,316,63,85,12222,3,1.8417721518987342,0.22256566520563512,1.0,C7;CFD;SERPINA1,2.186075632356624,-0.0,Complement and coagulation cascades,0.22256566520563512,1.0,3,63,All candidates
+All candidates,Focal adhesion,316,166,201,12222,5,1.1649763611407657,0.42909113483062694,1.0,COMP;ITGA11;ITGA2;THBS2;VEGFD,1.2841141187403406,-0.0,Focal adhesion,0.42909113483062694,1.0,5,166,All candidates
+All candidates,PI3K-Akt signaling pathway,316,255,354,12222,7,1.061727475800447,0.490231190421436,1.0,COMP;CSF3R;DDIT4;ITGA11;ITGA2;THBS2;VEGFD,1.1368859359712393,-0.0,PI3K-Akt signaling pathway,0.490231190421436,1.0,7,255,All candidates
+All candidates,JAK-STAT signaling pathway,316,109,162,12222,3,1.0645105098130299,0.5382687636655306,1.0,CSF3R;LIFR;SOCS2,1.237033043556394,-0.0,JAK-STAT signaling pathway,0.5382687636655306,1.0,3,109,All candidates
+All candidates,IL-17 signaling pathway,316,75,94,12222,2,1.0313924050632912,0.5814923098244105,1.0,CCL7;FOSB,1.2798092209856915,-0.0,IL-17 signaling pathway,0.5814923098244105,1.0,2,75,All candidates
+All candidates,Hippo signaling pathway,316,131,163,12222,3,0.8857377524398493,0.6627084122006803,1.0,BMP5;BMP6;TGFB2,1.0233338918573405,-0.0,Hippo signaling pathway,0.6627084122006803,1.0,3,131,All candidates
+All candidates,Glycolysis / Gluconeogenesis,316,43,67,12222,1,0.8994701206947306,0.6764353158557885,1.0,HK3,1.3272489978558777,-0.0,Glycolysis / Gluconeogenesis,0.6764353158557885,1.0,1,43,All candidates
+All candidates,MicroRNAs in cancer,316,136,310,12222,3,0.8531738644825019,0.6873472292826477,1.0,DDIT4;FSCN1;TGFB2,0.984588642187696,-0.0,MicroRNAs in cancer,0.6873472292826477,1.0,3,136,All candidates
+All candidates,TNF signaling pathway,316,100,112,12222,2,0.7735443037974683,0.7350976237960533,1.0,CX3CL1;VEGFD,0.952967001041053,-0.0,TNF signaling pathway,0.7350976237960533,1.0,2,100,All candidates
+All candidates,Ubiquitin mediated proteolysis,316,100,140,12222,2,0.7735443037974683,0.7350976237960533,1.0,CBLC;CDC20,0.952967001041053,-0.0,Ubiquitin mediated proteolysis,0.7350976237960533,1.0,2,100,All candidates
+All candidates,FoxO signaling pathway,316,101,131,12222,2,0.765885449304424,0.7401089126832021,1.0,FBXO32;TGFB2,0.943309552532136,-0.0,FoxO signaling pathway,0.7401089126832021,1.0,2,101,All candidates
+All candidates,Central carbon metabolism in cancer,316,54,70,12222,1,0.7162447257383966,0.7577182288945349,1.0,HK3,1.053379148955078,-0.0,Central carbon metabolism in cancer,0.7577182288945349,1.0,1,54,All candidates
+All candidates,Chemokine signaling pathway,316,155,192,12222,3,0.7485912617394855,0.76868304092591,1.0,CCL7;CX3CL1;PPBP,0.8605276230815488,-0.0,Chemokine signaling pathway,0.76868304092591,1.0,3,155,All candidates
+All candidates,Adherens junction,316,58,71,12222,1,0.6668485377564383,0.781925544889495,1.0,PTPRB,0.9797698615034797,-0.0,Adherens junction,0.781925544889495,1.0,1,58,All candidates
+All candidates,Regulation of actin cytoskeleton,316,165,218,12222,3,0.7032220943613349,0.8040786894487058,1.0,ITGA11;ITGA2;MYH11,0.8068850447797816,-0.0,Regulation of actin cytoskeleton,0.8040786894487058,1.0,3,165,All candidates
+All candidates,B cell receptor signaling pathway,316,70,81,12222,1,0.5525316455696203,0.8410115717414051,1.0,CD79A,0.8097800681800044,-0.0,B cell receptor signaling pathway,0.8410115717414051,1.0,1,70,All candidates
+All candidates,Cellular senescence,316,127,156,12222,2,0.6090900029901326,0.8445035397427417,1.0,MYBL2;TGFB2,0.7462360415254721,-0.0,Cellular senescence,0.8445035397427417,1.0,2,127,All candidates
+All candidates,Cell adhesion molecules,316,128,148,12222,2,0.6043314873417722,0.8476342885994086,1.0,LRRC4;VCAN,0.740274103445459,-0.0,Cell adhesion molecules,0.8476342885994086,1.0,2,128,All candidates
+All candidates,Wnt signaling pathway,316,128,166,12222,2,0.6043314873417722,0.8476342885994086,1.0,CCN4;SFRP2,0.740274103445459,-0.0,Wnt signaling pathway,0.8476342885994086,1.0,2,128,All candidates
+All candidates,Small cell lung cancer,316,80,92,12222,1,0.4834651898734177,0.8778497071036235,1.0,ITGA2,0.7073229076338845,-0.0,Small cell lung cancer,0.8778497071036235,1.0,1,80,All candidates
+All candidates,Transcriptional misregulation in cancer,316,143,192,12222,2,0.5409400725856421,0.8881909156458339,1.0,NR4A3;TMPRSS2,0.6609571533703731,-0.0,Transcriptional misregulation in cancer,0.8881909156458339,1.0,2,143,All candidates
+All candidates,Ras signaling pathway,316,167,232,12222,2,0.4632001819146517,0.9328695774617165,1.0,PLA2G1B;VEGFD,0.5639556385957666,-0.0,Ras signaling pathway,0.9328695774617165,1.0,2,167,All candidates
+All candidates,Proteoglycans in cancer,316,168,205,12222,2,0.46044303797468356,0.9343044911135783,1.0,ITGA2;TGFB2,0.5605207751471663,-0.0,Proteoglycans in cancer,0.9343044911135783,1.0,2,168,All candidates
+All candidates,MAPK signaling pathway,316,231,294,12222,3,0.502301495972382,0.940801163013655,1.0,CACNG4;TGFB2;VEGFD,0.5705994646453013,-0.0,MAPK signaling pathway,0.940801163013655,1.0,3,231,All candidates
+All candidates,mTOR signaling pathway,316,116,154,12222,1,0.33342426887821913,0.9527929936702954,1.0,DDIT4,0.4853767468664458,-0.0,mTOR signaling pathway,0.9527929936702954,1.0,1,116,All candidates
+All candidates,Tight junction,316,126,169,12222,1,0.3069620253164557,0.9637678150856874,1.0,MYH11,0.44632247554946614,-0.0,Tight junction,0.9637678150856874,1.0,1,126,All candidates
+All candidates,Pathways in cancer,316,421,531,12222,4,0.3674794792387023,0.9955455850835664,1.0,CSF3R;ITGA2;TGFB2;VEGFD,0.3962845508982036,-0.0,Pathways in cancer,0.9955455850835664,1.0,4,421,All candidates
+All candidates,AMPK signaling pathway,316,84,120,12222,0,0.0,1.0,1.0,,0.2210288192789104,-0.0,AMPK signaling pathway,1.0,1.0,0,84,All candidates
+All candidates,Apoptosis,316,114,142,12222,0,0.0,1.0,1.0,,0.16270342239422725,-0.0,Apoptosis,1.0,1.0,0,114,All candidates
+All candidates,Base excision repair,316,26,33,12222,0,0.0,1.0,1.0,,0.7082476377835405,-0.0,Base excision repair,1.0,1.0,0,26,All candidates
+All candidates,DNA replication,316,29,36,12222,0,0.0,1.0,1.0,,0.6360617988057943,-0.0,DNA replication,1.0,1.0,0,29,All candidates
+All candidates,ErbB signaling pathway,316,68,85,12222,0,0.0,1.0,1.0,,0.27302498818048687,-0.0,ErbB signaling pathway,1.0,1.0,0,68,All candidates
+All candidates,Hedgehog signaling pathway,316,48,56,12222,0,0.0,1.0,1.0,,0.3862640673604664,-0.0,Hedgehog signaling pathway,1.0,1.0,0,48,All candidates
+All candidates,Homologous recombination,316,26,41,12222,0,0.0,1.0,1.0,,0.7082476377835405,-0.0,Homologous recombination,1.0,1.0,0,26,All candidates
+All candidates,Mismatch repair,316,18,23,12222,0,0.0,1.0,1.0,,1.0152000341573801,-0.0,Mismatch repair,1.0,1.0,0,18,All candidates
+All candidates,NF-kappa B signaling pathway,316,87,104,12222,0,0.0,1.0,1.0,,0.21339652448657187,-0.0,NF-kappa B signaling pathway,1.0,1.0,0,87,All candidates
+All candidates,Natural killer cell mediated cytotoxicity,316,85,131,12222,0,0.0,1.0,1.0,,0.21842520994429201,-0.0,Natural killer cell mediated cytotoxicity,1.0,1.0,0,85,All candidates
+All candidates,Non-small cell lung cancer,316,59,72,12222,0,0.0,1.0,1.0,,0.31456184369482393,-0.0,Non-small cell lung cancer,1.0,1.0,0,59,All candidates
+All candidates,Notch signaling pathway,316,51,59,12222,0,0.0,1.0,1.0,,0.3636712219512569,-0.0,Notch signaling pathway,1.0,1.0,0,51,All candidates
+All candidates,Nucleotide excision repair,316,32,47,12222,0,0.0,1.0,1.0,,0.5772025762547089,-0.0,Nucleotide excision repair,1.0,1.0,0,32,All candidates
+All candidates,Oxidative phosphorylation,316,62,133,12222,0,0.0,1.0,1.0,,0.2993870458135861,-0.0,Oxidative phosphorylation,1.0,1.0,0,62,All candidates
+All candidates,PD-L1 expression and PD-1 checkpoint pathway in cancer,316,67,89,12222,0,0.0,1.0,1.0,,0.27709320695102685,-0.0,PD-L1 expression and PD-1 checkpoint pathway in cancer,1.0,1.0,0,67,All candidates
+All candidates,T cell receptor signaling pathway,316,83,104,12222,0,0.0,1.0,1.0,,0.2236947905137592,-0.0,T cell receptor signaling pathway,1.0,1.0,0,83,All candidates
+All candidates,Toll-like receptor signaling pathway,316,69,104,12222,0,0.0,1.0,1.0,,0.26907384045370336,-0.0,Toll-like receptor signaling pathway,1.0,1.0,0,69,All candidates
+All candidates,VEGF signaling pathway,316,45,59,12222,0,0.0,1.0,1.0,,0.4118361890873739,-0.0,VEGF signaling pathway,1.0,1.0,0,45,All candidates
+All candidates,p53 signaling pathway,316,67,73,12222,0,0.0,1.0,1.0,,0.27709320695102685,-0.0,p53 signaling pathway,1.0,1.0,0,67,All candidates
+Upregulated,ECM-receptor interaction,66,72,88,12222,4,10.287878787878789,0.0006056822768196807,0.09690916429114892,COMP;HMMR;ITGA11;THBS2,12.706160583941605,1.013635151608836,ECM-receptor interaction,0.0006056822768196807,0.09690916429114892,4,72,Upregulated
+Upregulated,Cell cycle,66,101,124,12222,4,7.333933393339334,0.002138552926816975,0.22811231219381067,BUB1B;CDC20;CDC45;CDC6,8.905476923076924,0.6418512733663758,Cell cycle,0.002138552926816975,0.22811231219381067,4,101,Upregulated
+Upregulated,Focal adhesion,66,166,201,12222,3,3.346659364731654,0.06053400256252956,1.0,COMP;ITGA11;THBS2,4.04317464904043,-0.0,Focal adhesion,0.06053400256252956,1.0,3,166,Upregulated
+Upregulated,Ubiquitin mediated proteolysis,66,100,140,12222,2,3.7036363636363636,0.1015714792895168,1.0,CBLC;CDC20,4.745012395230788,-0.0,Ubiquitin mediated proteolysis,0.1015714792895168,1.0,2,100,Upregulated
+Upregulated,PI3K-Akt signaling pathway,66,255,354,12222,3,2.1786096256684493,0.15896706356907447,1.0,COMP;ITGA11;THBS2,2.5986278942854915,-0.0,PI3K-Akt signaling pathway,0.15896706356907447,1.0,3,255,Upregulated
+Upregulated,Cellular senescence,66,127,156,12222,1,1.4581245526127418,0.4990505014749341,1.0,MYBL2,2.1779259572157015,-0.0,Cellular senescence,0.4990505014749341,1.0,1,127,Upregulated
+Upregulated,Regulation of actin cytoskeleton,66,165,218,12222,1,1.122314049586777,0.5932252919242943,1.0,ITGA11,1.669528295320077,-0.0,Regulation of actin cytoskeleton,0.5932252919242943,1.0,1,165,Upregulated
+Upregulated,AMPK signaling pathway,66,84,120,12222,0,0.0,1.0,1.0,,1.0742091916180985,-0.0,AMPK signaling pathway,1.0,1.0,0,84,Upregulated
+Upregulated,Adherens junction,66,58,71,12222,0,0.0,1.0,1.0,,1.554977186556134,-0.0,Adherens junction,1.0,1.0,0,58,Upregulated
+Upregulated,Apoptosis,66,114,142,12222,0,0.0,1.0,1.0,,0.7907870111961125,-0.0,Apoptosis,1.0,1.0,0,114,Upregulated
+Upregulated,B cell receptor signaling pathway,66,70,81,12222,0,0.0,1.0,1.0,,1.2890204233989229,-0.0,B cell receptor signaling pathway,1.0,1.0,0,70,Upregulated
+Upregulated,Base excision repair,66,26,33,12222,0,0.0,1.0,1.0,,3.44176478933182,-0.0,Base excision repair,1.0,1.0,0,26,Upregulated
+Upregulated,Cell adhesion molecules,66,128,148,12222,0,0.0,1.0,1.0,,0.7038120593312074,-0.0,Cell adhesion molecules,1.0,1.0,0,128,Upregulated
+Upregulated,Central carbon metabolism in cancer,66,54,70,12222,0,0.0,1.0,1.0,,1.66965579085328,-0.0,Central carbon metabolism in cancer,1.0,1.0,0,54,Upregulated
+Upregulated,Chemokine signaling pathway,66,155,192,12222,0,0.0,1.0,1.0,,0.5803012354036216,-0.0,Chemokine signaling pathway,1.0,1.0,0,155,Upregulated
+Upregulated,Complement and coagulation cascades,66,63,85,12222,0,0.0,1.0,1.0,,1.4319460067491563,-0.0,Complement and coagulation cascades,1.0,1.0,0,63,Upregulated
+Upregulated,Cytokine-cytokine receptor interaction,66,205,295,12222,0,0.0,1.0,1.0,,0.43727932971113914,-0.0,Cytokine-cytokine receptor interaction,1.0,1.0,0,205,Upregulated
+Upregulated,DNA replication,66,29,36,12222,0,0.0,1.0,1.0,,3.090990187332739,-0.0,DNA replication,1.0,1.0,0,29,Upregulated
+Upregulated,ErbB signaling pathway,66,68,85,12222,0,0.0,1.0,1.0,,1.3268755831183798,-0.0,ErbB signaling pathway,1.0,1.0,0,68,Upregulated
+Upregulated,FoxO signaling pathway,66,101,131,12222,0,0.0,1.0,1.0,,0.8930330752990852,-0.0,FoxO signaling pathway,1.0,1.0,0,101,Upregulated
+Upregulated,Glycolysis / Gluconeogenesis,66,43,67,12222,0,0.0,1.0,1.0,,2.0937689050211734,-0.0,Glycolysis / Gluconeogenesis,1.0,1.0,0,43,Upregulated
+Upregulated,Hedgehog signaling pathway,66,48,56,12222,0,0.0,1.0,1.0,,1.8771413068754361,-0.0,Hedgehog signaling pathway,1.0,1.0,0,48,Upregulated
+Upregulated,Hippo signaling pathway,66,131,163,12222,0,0.0,1.0,1.0,,0.6875839789588039,-0.0,Hippo signaling pathway,1.0,1.0,0,131,Upregulated
+Upregulated,Homologous recombination,66,26,41,12222,0,0.0,1.0,1.0,,3.44176478933182,-0.0,Homologous recombination,1.0,1.0,0,26,Upregulated
+Upregulated,IL-17 signaling pathway,66,75,94,12222,0,0.0,1.0,1.0,,1.2031568988696908,-0.0,IL-17 signaling pathway,1.0,1.0,0,75,Upregulated
+Upregulated,JAK-STAT signaling pathway,66,109,162,12222,0,0.0,1.0,1.0,,0.8272393312047241,-0.0,JAK-STAT signaling pathway,1.0,1.0,0,109,Upregulated
+Upregulated,MAPK signaling pathway,66,231,294,12222,0,0.0,1.0,1.0,,0.38732360057811915,-0.0,MAPK signaling pathway,1.0,1.0,0,231,Upregulated
+Upregulated,MicroRNAs in cancer,66,136,310,12222,0,0.0,1.0,1.0,,0.6621223388140681,-0.0,MicroRNAs in cancer,1.0,1.0,0,136,Upregulated
+Upregulated,Mismatch repair,66,18,23,12222,0,0.0,1.0,1.0,,4.933346880715302,-0.0,Mismatch repair,1.0,1.0,0,18,Upregulated
+Upregulated,NF-kappa B signaling pathway,66,87,104,12222,0,0.0,1.0,1.0,,1.0371213748657357,-0.0,NF-kappa B signaling pathway,1.0,1.0,0,87,Upregulated
+Upregulated,Natural killer cell mediated cytotoxicity,66,85,131,12222,0,0.0,1.0,1.0,,1.061557402277624,-0.0,Natural killer cell mediated cytotoxicity,1.0,1.0,0,85,Upregulated
+Upregulated,Non-small cell lung cancer,66,59,72,12222,0,0.0,1.0,1.0,,1.5287167498578378,-0.0,Non-small cell lung cancer,1.0,1.0,0,59,Upregulated
+Upregulated,Notch signaling pathway,66,51,59,12222,0,0.0,1.0,1.0,,1.767355281407402,-0.0,Notch signaling pathway,1.0,1.0,0,51,Upregulated
+Upregulated,Nucleotide excision repair,66,32,47,12222,0,0.0,1.0,1.0,,2.804973973395026,-0.0,Nucleotide excision repair,1.0,1.0,0,32,Upregulated
+Upregulated,Oxidative phosphorylation,66,62,133,12222,0,0.0,1.0,1.0,,1.4549774436090226,-0.0,Oxidative phosphorylation,1.0,1.0,0,62,Upregulated
+Upregulated,PD-L1 expression and PD-1 checkpoint pathway in cancer,66,67,89,12222,0,0.0,1.0,1.0,,1.346644388749652,-0.0,PD-L1 expression and PD-1 checkpoint pathway in cancer,1.0,1.0,0,67,Upregulated
+Upregulated,Pathways in cancer,66,421,531,12222,0,0.0,1.0,1.0,,0.20934007616907035,-0.0,Pathways in cancer,1.0,1.0,0,421,Upregulated
+Upregulated,Proteoglycans in cancer,66,168,205,12222,0,0.0,1.0,1.0,,0.5349501349813703,-0.0,Proteoglycans in cancer,1.0,1.0,0,168,Upregulated
+Upregulated,Ras signaling pathway,66,167,232,12222,0,0.0,1.0,1.0,,0.5381887554707665,-0.0,Ras signaling pathway,1.0,1.0,0,167,Upregulated
+Upregulated,Small cell lung cancer,66,80,92,12222,0,0.0,1.0,1.0,,1.1279596506794938,-0.0,Small cell lung cancer,1.0,1.0,0,80,Upregulated
+Upregulated,T cell receptor signaling pathway,66,83,104,12222,0,0.0,1.0,1.0,,1.0871640178290036,-0.0,T cell receptor signaling pathway,1.0,1.0,0,83,Upregulated
+Upregulated,TGF-beta signaling pathway,66,77,94,12222,0,0.0,1.0,1.0,,1.1719136551055056,-0.0,TGF-beta signaling pathway,1.0,1.0,0,77,Upregulated
+Upregulated,TNF signaling pathway,66,100,112,12222,0,0.0,1.0,1.0,,0.9019937904462649,-0.0,TNF signaling pathway,1.0,1.0,0,100,Upregulated
+Upregulated,Tight junction,66,126,169,12222,0,0.0,1.0,1.0,,0.7150583969805938,-0.0,Tight junction,1.0,1.0,0,126,Upregulated
+Upregulated,Toll-like receptor signaling pathway,66,69,104,12222,0,0.0,1.0,1.0,,1.3076756639800942,-0.0,Toll-like receptor signaling pathway,1.0,1.0,0,69,Upregulated
+Upregulated,Transcriptional misregulation in cancer,66,143,192,12222,0,0.0,1.0,1.0,,0.629456917555212,-0.0,Transcriptional misregulation in cancer,1.0,1.0,0,143,Upregulated
+Upregulated,VEGF signaling pathway,66,45,59,12222,0,0.0,1.0,1.0,,2.001404610427167,-0.0,VEGF signaling pathway,1.0,1.0,0,45,Upregulated
+Upregulated,Wnt signaling pathway,66,128,166,12222,0,0.0,1.0,1.0,,0.7038120593312074,-0.0,Wnt signaling pathway,1.0,1.0,0,128,Upregulated
+Upregulated,mTOR signaling pathway,66,116,154,12222,0,0.0,1.0,1.0,,0.7770821904546774,-0.0,mTOR signaling pathway,1.0,1.0,0,116,Upregulated
+Upregulated,p53 signaling pathway,66,67,73,12222,0,0.0,1.0,1.0,,1.346644388749652,-0.0,p53 signaling pathway,1.0,1.0,0,67,Upregulated
+Downregulated,Complement and coagulation cascades,69,63,85,12222,2,5.6231884057971016,0.04920222439510717,1.0,C7;CFD,7.282445046672689,-0.0,Complement and coagulation cascades,0.04920222439510717,1.0,2,63,Downregulated
+Downregulated,Ras signaling pathway,69,167,232,12222,2,2.1213225722468105,0.24298677804252078,1.0,PLA2G1B;VEGFD,2.6828913505650664,-0.0,Ras signaling pathway,0.24298677804252078,1.0,2,167,Downregulated
+Downregulated,Adherens junction,69,58,71,12222,1,3.0539730134932537,0.2804580260352288,1.0,PTPRB,4.606728022849889,-0.0,Adherens junction,0.2804580260352288,1.0,1,58,Downregulated
+Downregulated,IL-17 signaling pathway,69,75,94,12222,1,2.3617391304347826,0.34682545967518563,1.0,FOSB,3.550531524028805,-0.0,IL-17 signaling pathway,0.34682545967518563,1.0,1,75,Downregulated
+Downregulated,TGF-beta signaling pathway,69,77,94,12222,1,2.300395256916996,0.3542252921629719,1.0,ID4,3.457134678688994,-0.0,TGF-beta signaling pathway,0.3542252921629719,1.0,1,77,Downregulated
+Downregulated,TNF signaling pathway,69,100,112,12222,1,1.7713043478260868,0.43360718672965504,1.0,VEGFD,2.6529362139162966,-0.0,TNF signaling pathway,0.43360718672965504,1.0,1,100,Downregulated
+Downregulated,Focal adhesion,69,166,201,12222,1,1.0670508119434259,0.6118013014070878,1.0,VEGFD,1.5862350320859153,-0.0,Focal adhesion,0.6118013014070878,1.0,1,166,Downregulated
+Downregulated,MAPK signaling pathway,69,231,294,12222,1,0.766798418972332,0.7329494270778499,1.0,VEGFD,1.1327485472710863,-0.0,MAPK signaling pathway,0.7329494270778499,1.0,1,231,Downregulated
+Downregulated,PI3K-Akt signaling pathway,69,255,354,12222,1,0.6946291560102302,0.7675204631057359,1.0,VEGFD,1.0238624467612178,-0.0,PI3K-Akt signaling pathway,0.7675204631057359,1.0,1,255,Downregulated
+Downregulated,Pathways in cancer,69,421,531,12222,1,0.4207373747805432,0.9115708743011774,1.0,VEGFD,0.6110296223647552,-0.0,Pathways in cancer,0.9115708743011774,1.0,1,421,Downregulated
+Downregulated,AMPK signaling pathway,69,84,120,12222,0,0.0,1.0,1.0,,1.0275850325656635,-0.0,AMPK signaling pathway,1.0,1.0,0,84,Downregulated
+Downregulated,Apoptosis,69,114,142,12222,0,0.0,1.0,1.0,,0.7564638245735289,-0.0,Apoptosis,1.0,1.0,0,114,Downregulated
+Downregulated,B cell receptor signaling pathway,69,70,81,12222,0,0.0,1.0,1.0,,1.2330731159753048,-0.0,B cell receptor signaling pathway,1.0,1.0,0,70,Downregulated
+Downregulated,Base excision repair,69,26,33,12222,0,0.0,1.0,1.0,,3.292384959956563,-0.0,Base excision repair,1.0,1.0,0,26,Downregulated
+Downregulated,Cell adhesion molecules,69,128,148,12222,0,0.0,1.0,1.0,,0.6732637236514291,-0.0,Cell adhesion molecules,1.0,1.0,0,128,Downregulated
+Downregulated,Cell cycle,69,101,124,12222,0,0.0,1.0,1.0,,0.854272247226849,-0.0,Cell cycle,1.0,1.0,0,101,Downregulated
+Downregulated,Cellular senescence,69,127,156,12222,0,0.0,1.0,1.0,,0.6786006488926506,-0.0,Cellular senescence,1.0,1.0,0,127,Downregulated
+Downregulated,Central carbon metabolism in cancer,69,54,70,12222,0,0.0,1.0,1.0,,1.5971883044023496,-0.0,Central carbon metabolism in cancer,1.0,1.0,0,54,Downregulated
+Downregulated,Chemokine signaling pathway,69,155,192,12222,0,0.0,1.0,1.0,,0.5551134654976984,-0.0,Chemokine signaling pathway,1.0,1.0,0,155,Downregulated
+Downregulated,Cytokine-cytokine receptor interaction,69,205,295,12222,0,0.0,1.0,1.0,,0.41829893749234187,-0.0,Cytokine-cytokine receptor interaction,1.0,1.0,0,205,Downregulated
+Downregulated,DNA replication,69,29,36,12222,0,0.0,1.0,1.0,,2.9568345323741005,-0.0,DNA replication,1.0,1.0,0,29,Downregulated
+Downregulated,ECM-receptor interaction,69,72,88,12222,0,0.0,1.0,1.0,,1.1988588439593153,-0.0,ECM-receptor interaction,1.0,1.0,0,72,Downregulated
+Downregulated,ErbB signaling pathway,69,68,85,12222,0,0.0,1.0,1.0,,1.2692853016856587,-0.0,ErbB signaling pathway,1.0,1.0,0,68,Downregulated
+Downregulated,FoxO signaling pathway,69,101,131,12222,0,0.0,1.0,1.0,,0.854272247226849,-0.0,FoxO signaling pathway,1.0,1.0,0,101,Downregulated
+Downregulated,Glycolysis / Gluconeogenesis,69,43,67,12222,0,0.0,1.0,1.0,,2.0028942363350697,-0.0,Glycolysis / Gluconeogenesis,1.0,1.0,0,43,Downregulated
+Downregulated,Hedgehog signaling pathway,69,48,56,12222,0,0.0,1.0,1.0,,1.7956686197433807,-0.0,Hedgehog signaling pathway,1.0,1.0,0,48,Downregulated
+Downregulated,Hippo signaling pathway,69,131,163,12222,0,0.0,1.0,1.0,,0.6577399677216402,-0.0,Hippo signaling pathway,1.0,1.0,0,131,Downregulated
+Downregulated,Homologous recombination,69,26,41,12222,0,0.0,1.0,1.0,,3.292384959956563,-0.0,Homologous recombination,1.0,1.0,0,26,Downregulated
+Downregulated,JAK-STAT signaling pathway,69,109,162,12222,0,0.0,1.0,1.0,,0.7913340560428369,-0.0,JAK-STAT signaling pathway,1.0,1.0,0,109,Downregulated
+Downregulated,MicroRNAs in cancer,69,136,310,12222,0,0.0,1.0,1.0,,0.6333834031675758,-0.0,MicroRNAs in cancer,1.0,1.0,0,136,Downregulated
+Downregulated,Mismatch repair,69,18,23,12222,0,0.0,1.0,1.0,,4.719230021388295,-0.0,Mismatch repair,1.0,1.0,0,18,Downregulated
+Downregulated,NF-kappa B signaling pathway,69,87,104,12222,0,0.0,1.0,1.0,,0.9921068859198355,-0.0,NF-kappa B signaling pathway,1.0,1.0,0,87,Downregulated
+Downregulated,Natural killer cell mediated cytotoxicity,69,85,131,12222,0,0.0,1.0,1.0,,1.0154823509613362,-0.0,Natural killer cell mediated cytotoxicity,1.0,1.0,0,85,Downregulated
+Downregulated,Non-small cell lung cancer,69,59,72,12222,0,0.0,1.0,1.0,,1.4623662414606131,-0.0,Non-small cell lung cancer,1.0,1.0,0,59,Downregulated
+Downregulated,Notch signaling pathway,69,51,59,12222,0,0.0,1.0,1.0,,1.6906474820143884,-0.0,Notch signaling pathway,1.0,1.0,0,51,Downregulated
+Downregulated,Nucleotide excision repair,69,32,47,12222,0,0.0,1.0,1.0,,2.6832318760376315,-0.0,Nucleotide excision repair,1.0,1.0,0,32,Downregulated
+Downregulated,Oxidative phosphorylation,69,62,133,12222,0,0.0,1.0,1.0,,1.3918273381294963,-0.0,Oxidative phosphorylation,1.0,1.0,0,62,Downregulated
+Downregulated,PD-L1 expression and PD-1 checkpoint pathway in cancer,69,67,89,12222,0,0.0,1.0,1.0,,1.2881961097788437,-0.0,PD-L1 expression and PD-1 checkpoint pathway in cancer,1.0,1.0,0,67,Downregulated
+Downregulated,Proteoglycans in cancer,69,168,205,12222,0,0.0,1.0,1.0,,0.5117306748073351,-0.0,Proteoglycans in cancer,1.0,1.0,0,168,Downregulated
+Downregulated,Regulation of actin cytoskeleton,69,165,218,12222,0,0.0,1.0,1.0,,0.5211371688147971,-0.0,Regulation of actin cytoskeleton,1.0,1.0,0,165,Downregulated
+Downregulated,Small cell lung cancer,69,80,92,12222,0,0.0,1.0,1.0,,1.0790026364001966,-0.0,Small cell lung cancer,1.0,1.0,0,80,Downregulated
+Downregulated,T cell receptor signaling pathway,69,83,104,12222,0,0.0,1.0,1.0,,1.0399775987593158,-0.0,T cell receptor signaling pathway,1.0,1.0,0,83,Downregulated
+Downregulated,Tight junction,69,126,169,12222,0,0.0,1.0,1.0,,0.6840219523985555,-0.0,Tight junction,1.0,1.0,0,126,Downregulated
+Downregulated,Toll-like receptor signaling pathway,69,69,104,12222,0,0.0,1.0,1.0,,1.2509186895088247,-0.0,Toll-like receptor signaling pathway,1.0,1.0,0,69,Downregulated
+Downregulated,Transcriptional misregulation in cancer,69,143,192,12222,0,0.0,1.0,1.0,,0.6021357130323616,-0.0,Transcriptional misregulation in cancer,1.0,1.0,0,143,Downregulated
+Downregulated,Ubiquitin mediated proteolysis,69,100,140,12222,0,0.0,1.0,1.0,,0.8628440531157164,-0.0,Ubiquitin mediated proteolysis,1.0,1.0,0,100,Downregulated
+Downregulated,VEGF signaling pathway,69,45,59,12222,0,0.0,1.0,1.0,,1.9145386987113606,-0.0,VEGF signaling pathway,1.0,1.0,0,45,Downregulated
+Downregulated,Wnt signaling pathway,69,128,166,12222,0,0.0,1.0,1.0,,0.6732637236514291,-0.0,Wnt signaling pathway,1.0,1.0,0,128,Downregulated
+Downregulated,mTOR signaling pathway,69,116,154,12222,0,0.0,1.0,1.0,,0.7433538148022355,-0.0,mTOR signaling pathway,1.0,1.0,0,116,Downregulated
+Downregulated,p53 signaling pathway,69,67,73,12222,0,0.0,1.0,1.0,,1.2881961097788437,-0.0,p53 signaling pathway,1.0,1.0,0,67,Downregulated

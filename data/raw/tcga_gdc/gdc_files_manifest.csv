@@ -1,0 +1,123 @@
+file_id,file_name,file_size,patient_id,sample_id,sample_type,group
+242a2880-95da-453f-892d-fafd49a4865e,9301f86d-9d6f-4aa6-a640-a543b5aea5db.rna_seq.augmented_star_gene_counts.tsv,4261912,TCGA-38-4625,TCGA-38-4625-01A,Primary Tumor,tumor
+661b6fed-d56a-452b-adaa-4b48ee9f4dbb,bc46dd0e-3136-4d9b-8fc3-dee56d6e39cf.rna_seq.augmented_star_gene_counts.tsv,4242369,TCGA-38-4625,TCGA-38-4625-11A,Solid Tissue Normal,normal
+d1a18468-9c02-4d61-8e3e-43a6d23d402e,9bfd464b-419a-43c0-929a-c1d219713a6f.rna_seq.augmented_star_gene_counts.tsv,4260792,TCGA-38-4626,TCGA-38-4626-01A,Primary Tumor,tumor
+e6e83fd4-2f80-44e1-8dce-588a37308dbb,f4a76e18-60fa-4ef2-91ef-e2d7a1d11c8d.rna_seq.augmented_star_gene_counts.tsv,4244009,TCGA-38-4626,TCGA-38-4626-11A,Solid Tissue Normal,normal
+08971a88-cb64-4030-93e5-08d77d2ed654,978fb63c-dae9-4037-81c9-598e87341931.rna_seq.augmented_star_gene_counts.tsv,4243850,TCGA-38-4627,TCGA-38-4627-01A,Primary Tumor,tumor
+5a37129a-9672-4fda-8576-e7de1db7b2c2,be000bb2-fe39-4153-b000-df89033d412a.rna_seq.augmented_star_gene_counts.tsv,4229178,TCGA-38-4627,TCGA-38-4627-11A,Solid Tissue Normal,normal
+665a7af8-9c2d-4a31-9a22-da89fc7107b2,6f53a60f-3be2-48df-a15a-4675e99efba1.rna_seq.augmented_star_gene_counts.tsv,4220068,TCGA-38-4632,TCGA-38-4632-01A,Primary Tumor,tumor
+54a00dd0-503f-471f-88e4-8d6fcdcf8483,1b22e14e-321b-4609-9aa2-9df6285ca948.rna_seq.augmented_star_gene_counts.tsv,4213927,TCGA-38-4632,TCGA-38-4632-11A,Solid Tissue Normal,normal
+eac5ebd0-d788-4908-8eb7-976d6b611667,b8e8f06f-a5a9-4d16-b39f-585dcee31087.rna_seq.augmented_star_gene_counts.tsv,4258148,TCGA-44-2655,TCGA-44-2655-01A,Primary Tumor,tumor
+d4778869-f3f2-481b-ab02-65a654128766,11d52676-7017-48b4-872a-cefb91b8651c.rna_seq.augmented_star_gene_counts.tsv,4251071,TCGA-44-2655,TCGA-44-2655-11A,Solid Tissue Normal,normal
+93db566e-8ff9-45b0-afa2-0fbe82b8f580,ab589a7b-7cc9-4257-8fd7-241d2e3658da.rna_seq.augmented_star_gene_counts.tsv,4232282,TCGA-44-2657,TCGA-44-2657-01A,Primary Tumor,tumor
+e39f6bf6-2206-45f2-a1c0-81fc1d858fd2,1bd869a0-98a7-4e19-994f-41a1ce2c7b2d.rna_seq.augmented_star_gene_counts.tsv,4235070,TCGA-44-2657,TCGA-44-2657-11A,Solid Tissue Normal,normal
+c3e2e99a-537a-4263-a835-fef5ed2c3588,6906b453-44ef-404a-9fe6-2b4d5fa65110.rna_seq.augmented_star_gene_counts.tsv,4242191,TCGA-44-2661,TCGA-44-2661-01A,Primary Tumor,tumor
+359d07bf-89e3-49fd-8237-723ffb299cfb,dd012e44-f2ef-4bd4-92ac-7403ec383b6d.rna_seq.augmented_star_gene_counts.tsv,4238981,TCGA-44-2661,TCGA-44-2661-11A,Solid Tissue Normal,normal
+2bf191f1-b880-427e-996c-0e75df13d738,33e0a8b2-3e7e-46da-b5ef-76463308d3b9.rna_seq.augmented_star_gene_counts.tsv,4249593,TCGA-44-2662,TCGA-44-2662-01A,Primary Tumor,tumor
+1ab1279d-7ccd-4450-8de8-9987bf6627dd,3d11905a-16eb-40b2-a36b-e37dca6359d3.rna_seq.augmented_star_gene_counts.tsv,4225469,TCGA-44-2662,TCGA-44-2662-01B,Primary Tumor,tumor
+a4377fa6-f7e2-4289-ac2d-3cc87b6cc289,6d614e24-5a82-409e-bb6e-c52c5f53efd5.rna_seq.augmented_star_gene_counts.tsv,4235819,TCGA-44-2662,TCGA-44-2662-11A,Solid Tissue Normal,normal
+ba8aebd8-07de-46c0-a28f-b2408c36f07f,77b82c3f-e20c-4e3b-a55c-08af359bbb6e.rna_seq.augmented_star_gene_counts.tsv,4248160,TCGA-44-2665,TCGA-44-2665-01A,Primary Tumor,tumor
+fc732523-d387-4a1d-ab81-34e44e869bac,f7beaa9b-98ae-40bd-aadc-e69688499170.rna_seq.augmented_star_gene_counts.tsv,4195970,TCGA-44-2665,TCGA-44-2665-01B,Primary Tumor,tumor
+56e9a740-ee72-4c10-a90d-921034141b42,2b4652fb-eef5-427e-b4f0-24164c042e52.rna_seq.augmented_star_gene_counts.tsv,4243623,TCGA-44-2665,TCGA-44-2665-11A,Solid Tissue Normal,normal
+f47927c5-e1e9-4152-9817-79aa6e64111a,58e4f0e6-3b0f-4370-8abf-0b4d533672c5.rna_seq.augmented_star_gene_counts.tsv,4252751,TCGA-44-2668,TCGA-44-2668-01A,Primary Tumor,tumor
+3e6105ba-3a23-4ac6-bf0d-1193fb2e679e,812033b2-3784-44bf-8913-56307b267ea9.rna_seq.augmented_star_gene_counts.tsv,4231014,TCGA-44-2668,TCGA-44-2668-01B,Primary Tumor,tumor
+55831884-c907-457d-bb2c-7c7b3f7c4cd1,c7fd0bf8-753e-45d6-b987-51ec7559f728.rna_seq.augmented_star_gene_counts.tsv,4237695,TCGA-44-2668,TCGA-44-2668-11A,Solid Tissue Normal,normal
+bbb70a6e-a91c-4c67-9ec0-b33185ab4f8d,1f7293ad-85b2-4d42-afcc-88cf1027cf5f.rna_seq.augmented_star_gene_counts.tsv,4263814,TCGA-44-3396,TCGA-44-3396-01A,Primary Tumor,tumor
+f8cee5c6-bfd7-439d-8ba7-20ee2dfa5d68,d03bc7a9-49d4-48f4-8a3a-00197325cde2.rna_seq.augmented_star_gene_counts.tsv,4253400,TCGA-44-3396,TCGA-44-3396-11A,Solid Tissue Normal,normal
+f73807f5-edf8-4a4d-8550-048d9c5413e5,1890feb6-9f7f-4437-9828-198ff43e16b0.rna_seq.augmented_star_gene_counts.tsv,4247285,TCGA-44-3398,TCGA-44-3398-01A,Primary Tumor,tumor
+5d65e761-0cb3-4e52-b14f-79be5850dba4,8f55fdd2-25cb-40dc-809e-2ddbdadd34c3.rna_seq.augmented_star_gene_counts.tsv,4251316,TCGA-44-3398,TCGA-44-3398-11B,Solid Tissue Normal,normal
+1c9ada61-d900-4498-9ef1-14a91212faf6,9e504ab4-85a0-465d-be52-0c28ed83e5f8.rna_seq.augmented_star_gene_counts.tsv,4224362,TCGA-44-5645,TCGA-44-5645-01A,Primary Tumor,tumor
+091d2c9e-a8cb-4212-a434-7c7d4fd75f7b,26fdaa75-cea5-4355-b3b1-6b5c2c75e542.rna_seq.augmented_star_gene_counts.tsv,4239205,TCGA-44-5645,TCGA-44-5645-01B,Primary Tumor,tumor
+df86c451-62c7-43bc-9b11-463181a5a98a,6af2f60a-15cf-401e-8e3b-e44637fbd92e.rna_seq.augmented_star_gene_counts.tsv,4239307,TCGA-44-5645,TCGA-44-5645-11A,Solid Tissue Normal,normal
+895ca581-915e-4057-b66a-dc2d5213d7e4,df2ac75d-208d-4cc1-867b-aea3e36117c6.rna_seq.augmented_star_gene_counts.tsv,4226858,TCGA-44-6145,TCGA-44-6145-01A,Primary Tumor,tumor
+bd98b566-f179-4be8-8b4d-672149eedcba,32ff57d1-3fde-461b-be45-e49365149543.rna_seq.augmented_star_gene_counts.tsv,4226192,TCGA-44-6145,TCGA-44-6145-11A,Solid Tissue Normal,normal
+7a2e7511-e77e-4805-82a3-cb9f5939ed26,735e3d15-4df3-4162-b819-1ebc1991bfce.rna_seq.augmented_star_gene_counts.tsv,4233266,TCGA-44-6146,TCGA-44-6146-01A,Primary Tumor,tumor
+e21fc8e8-1f42-4c08-a54b-0bcc0f70d816,6338619f-470c-4ae1-8b45-959b5f9ad3da.rna_seq.augmented_star_gene_counts.tsv,4224395,TCGA-44-6146,TCGA-44-6146-01B,Primary Tumor,tumor
+efb3bf8d-7d14-42d6-8845-e81af909d47f,21893490-77c4-4bc8-b8ea-0a5f16762f6b.rna_seq.augmented_star_gene_counts.tsv,4223315,TCGA-44-6146,TCGA-44-6146-11A,Solid Tissue Normal,normal
+9a64a124-9787-4378-ba01-b79aa183f25f,9a5e0fa6-a785-4d8e-bca5-43e02a3965bf.rna_seq.augmented_star_gene_counts.tsv,4244281,TCGA-44-6147,TCGA-44-6147-01A,Primary Tumor,tumor
+9a6d8661-241e-4a3e-a6fa-e2eb1962b758,ee030015-242a-4dd1-b43c-2c97d5d365d9.rna_seq.augmented_star_gene_counts.tsv,4220334,TCGA-44-6147,TCGA-44-6147-01B,Primary Tumor,tumor
+bdae198f-aedf-46cc-8156-c1ec37eac88f,9c36a1ac-944e-49d4-888c-bfffc20a4ba6.rna_seq.augmented_star_gene_counts.tsv,4232524,TCGA-44-6147,TCGA-44-6147-11A,Solid Tissue Normal,normal
+4a5c811e-d5d9-48d7-9bcc-4c9dc72df8f4,3f79d678-e5d5-443e-a7df-187c2acd2b2c.rna_seq.augmented_star_gene_counts.tsv,4242633,TCGA-44-6148,TCGA-44-6148-01A,Primary Tumor,tumor
+4756b201-87c2-4428-b2cd-f933422fe8cf,b4dff9fc-6dab-42bc-8d32-7143e0d94043.rna_seq.augmented_star_gene_counts.tsv,4248192,TCGA-44-6148,TCGA-44-6148-11A,Solid Tissue Normal,normal
+736227d9-3cee-40ed-bdec-0e88968ef179,7623e22f-3401-47b3-be94-23f5da20ee0d.rna_seq.augmented_star_gene_counts.tsv,4217863,TCGA-44-6776,TCGA-44-6776-01A,Primary Tumor,tumor
+a5c19494-731c-4519-b8a7-b7307aea2f9c,cb3c7090-d221-4c88-896f-6199118ae5d2.rna_seq.augmented_star_gene_counts.tsv,4225403,TCGA-44-6776,TCGA-44-6776-11A,Solid Tissue Normal,normal
+5f4fa91b-489e-4ac9-b685-53952f77bd7a,0bb88c14-58c0-45d8-a8f3-f41840f62d37.rna_seq.augmented_star_gene_counts.tsv,4229070,TCGA-44-6777,TCGA-44-6777-01A,Primary Tumor,tumor
+a6298ad5-dd68-44f6-85cf-f1d2c7673aa3,a126e83e-3907-487d-901a-4cfb91d5807a.rna_seq.augmented_star_gene_counts.tsv,4220942,TCGA-44-6777,TCGA-44-6777-11A,Solid Tissue Normal,normal
+c5a1245e-f3c5-4f42-afd6-9b12f01a6445,facd5609-e5f0-4993-bd84-049447d60d32.rna_seq.augmented_star_gene_counts.tsv,4236370,TCGA-44-6778,TCGA-44-6778-01A,Primary Tumor,tumor
+2d99f93c-797e-49a5-8892-a4e31e17b9c3,290ad2c0-6aeb-4eba-b3e7-fc47e8bfbdce.rna_seq.augmented_star_gene_counts.tsv,4233745,TCGA-44-6778,TCGA-44-6778-11A,Solid Tissue Normal,normal
+2f2cc9dc-1d0a-4302-b674-02d56c259ff3,8dc8ccd2-a842-4a48-a8db-007855733fc0.rna_seq.augmented_star_gene_counts.tsv,4222485,TCGA-49-4490,TCGA-49-4490-01A,Primary Tumor,tumor
+eac45bfd-6795-47a4-8d6b-5a7c8bc76cd1,a3069465-cb5b-43ef-aad9-73af4534b795.rna_seq.augmented_star_gene_counts.tsv,4223174,TCGA-49-4490,TCGA-49-4490-11A,Solid Tissue Normal,normal
+e20ecad8-f22d-4e2d-99af-bc1be98c5128,085fd4df-27f7-4680-a0b5-8726f9eab370.rna_seq.augmented_star_gene_counts.tsv,4222449,TCGA-49-4512,TCGA-49-4512-01A,Primary Tumor,tumor
+09fb135f-1c19-45d6-ae31-a8c32a0e06bf,36280315-a32b-4743-8a78-82bbfd116b82.rna_seq.augmented_star_gene_counts.tsv,4215958,TCGA-49-4512,TCGA-49-4512-11A,Solid Tissue Normal,normal
+a03c9de0-7526-4942-8a7a-5fe03ea191f6,3ce23908-d2b9-42b0-a409-5fbd767496c2.rna_seq.augmented_star_gene_counts.tsv,4225761,TCGA-49-6742,TCGA-49-6742-01A,Primary Tumor,tumor
+0d1f21df-73b3-4dd0-9ad4-fd5c7a5d2424,bcc5593d-3d16-4d6f-a1b9-854423ede69e.rna_seq.augmented_star_gene_counts.tsv,4228987,TCGA-49-6742,TCGA-49-6742-11A,Solid Tissue Normal,normal
+e9d3cac1-3a16-4e21-8fe8-a4944ce82cb8,e127acf3-0757-4f24-aff7-0fbe7283b9ed.rna_seq.augmented_star_gene_counts.tsv,4236769,TCGA-49-6743,TCGA-49-6743-01A,Primary Tumor,tumor
+c48eecc3-0099-4dd4-b319-f13ad65bdc7e,888e2a67-2478-4680-9b48-163789783c7b.rna_seq.augmented_star_gene_counts.tsv,4223984,TCGA-49-6743,TCGA-49-6743-11A,Solid Tissue Normal,normal
+1876b908-e911-464f-be23-2b4eae0a43b6,6efebff1-f165-415e-9001-45a782638785.rna_seq.augmented_star_gene_counts.tsv,4237227,TCGA-49-6744,TCGA-49-6744-01A,Primary Tumor,tumor
+9c7f6057-8225-4447-adb3-aed12aa974ad,b277d25a-5485-465a-bef3-db30dc75caa8.rna_seq.augmented_star_gene_counts.tsv,4227744,TCGA-49-6744,TCGA-49-6744-11A,Solid Tissue Normal,normal
+9db8b103-5f3a-439b-993c-14879744c30a,7f9b4506-b00b-4b6f-8469-d0e4a73df1d4.rna_seq.augmented_star_gene_counts.tsv,4231950,TCGA-49-6745,TCGA-49-6745-01A,Primary Tumor,tumor
+24079217-3899-4843-81fc-638293771d93,c6bc9e5e-4116-4179-9a22-b75fc6bea73e.rna_seq.augmented_star_gene_counts.tsv,4226782,TCGA-49-6745,TCGA-49-6745-11A,Solid Tissue Normal,normal
+5b99d571-43d2-4d26-9a3b-0a299a0ce048,60cc41cd-a0af-4cad-a4be-253781e2f0b8.rna_seq.augmented_star_gene_counts.tsv,4222207,TCGA-49-6761,TCGA-49-6761-01A,Primary Tumor,tumor
+ca8dc4e0-e8d2-4574-b3a0-74b058bd2b96,d3c4d6a0-ae8f-416d-93b5-2f7143f0f857.rna_seq.augmented_star_gene_counts.tsv,4215686,TCGA-49-6761,TCGA-49-6761-11A,Solid Tissue Normal,normal
+df504497-a30e-4a11-a62f-dcb46e741dfb,22c48da7-f220-43f4-a1b0-fd57358f7ae7.rna_seq.augmented_star_gene_counts.tsv,4206146,TCGA-50-5930,TCGA-50-5930-01A,Primary Tumor,tumor
+94913b2f-256e-4487-90ed-2c9b3869ca6b,bbb551fa-5173-4987-8de4-d596bf56897a.rna_seq.augmented_star_gene_counts.tsv,4217436,TCGA-50-5930,TCGA-50-5930-11A,Solid Tissue Normal,normal
+69933ac8-e7a7-43b6-8231-2ecb35f88d52,c9d8385a-9f73-48f9-bca4-1c0647881bfd.rna_seq.augmented_star_gene_counts.tsv,4235050,TCGA-50-5931,TCGA-50-5931-01A,Primary Tumor,tumor
+94613d97-0a68-4212-beef-3c97a0b363ef,b7837fd0-426f-49dd-9de0-4e648b78f896.rna_seq.augmented_star_gene_counts.tsv,4220201,TCGA-50-5931,TCGA-50-5931-11A,Solid Tissue Normal,normal
+b080156e-0711-42f5-83c7-a34de25cbba9,fe3a5a49-7744-4336-a4b6-0e88f23e21d8.rna_seq.augmented_star_gene_counts.tsv,4233140,TCGA-50-5932,TCGA-50-5932-01A,Primary Tumor,tumor
+75473987-65e2-43eb-a5bb-04cb7a40c902,06f0836c-ae3f-4c83-bb20-a5a74796bb11.rna_seq.augmented_star_gene_counts.tsv,4220778,TCGA-50-5932,TCGA-50-5932-11A,Solid Tissue Normal,normal
+a412b415-0692-4adf-8447-067ad69913d7,fcb42a31-a716-430f-a0a1-001766fc62b5.rna_seq.augmented_star_gene_counts.tsv,4228758,TCGA-50-5933,TCGA-50-5933-01A,Primary Tumor,tumor
+a71c722c-3483-4910-926d-c79b6c9a4e7d,87bac569-d647-4a76-8e33-6ce085888138.rna_seq.augmented_star_gene_counts.tsv,4230739,TCGA-50-5933,TCGA-50-5933-11A,Solid Tissue Normal,normal
+d3d249ab-0483-4e9c-99f3-07afb5b6dabc,73babed8-f934-42c7-9020-30f7c3e1766d.rna_seq.augmented_star_gene_counts.tsv,4229288,TCGA-50-5935,TCGA-50-5935-01A,Primary Tumor,tumor
+2ff24c33-39c6-4171-af42-f54e4ee8b021,2f93d52a-e8ab-454b-ae76-74b35cd561da.rna_seq.augmented_star_gene_counts.tsv,4224352,TCGA-50-5935,TCGA-50-5935-11A,Solid Tissue Normal,normal
+055fcce9-7448-4a16-ad18-d235dac7ce97,b95a1889-2ef5-4da3-b5e9-14b678c4d71a.rna_seq.augmented_star_gene_counts.tsv,4220504,TCGA-50-5936,TCGA-50-5936-01A,Primary Tumor,tumor
+ad62355a-f287-49b2-84a9-64c0f5847c20,6a8d149a-963f-4e36-a031-aef7b057452b.rna_seq.augmented_star_gene_counts.tsv,4224921,TCGA-50-5936,TCGA-50-5936-11A,Solid Tissue Normal,normal
+8148f34c-1ddd-454a-8761-8b76e97e8534,4a39a182-e583-4ff0-a8f0-f73b0f5c4f20.rna_seq.augmented_star_gene_counts.tsv,4221589,TCGA-50-5939,TCGA-50-5939-01A,Primary Tumor,tumor
+81152340-ffac-4122-8b21-bef3a474a18e,a84ef848-a790-4e90-96b4-45b24c3aaaf4.rna_seq.augmented_star_gene_counts.tsv,4226172,TCGA-50-5939,TCGA-50-5939-11A,Solid Tissue Normal,normal
+0e9c2659-4131-4274-b0b4-3e191239f5f3,29000c50-6667-4281-a97a-5f02cb24a8f4.rna_seq.augmented_star_gene_counts.tsv,4223489,TCGA-50-6595,TCGA-50-6595-01A,Primary Tumor,tumor
+f700b996-2ccf-4f59-9249-da7f087054ba,8885b4e5-f8e7-4198-b7ce-bc5c754f504d.rna_seq.augmented_star_gene_counts.tsv,4248467,TCGA-50-6595,TCGA-50-6595-11A,Solid Tissue Normal,normal
+883bbed6-0216-48c2-9694-5dba83ce65c7,af407c3f-2dad-4fb9-850e-4a79b361589b.rna_seq.augmented_star_gene_counts.tsv,4233751,TCGA-55-6968,TCGA-55-6968-01A,Primary Tumor,tumor
+29dd3ad7-f2c6-4abf-8e81-6734e4bd8a6a,aa85d7ef-5884-4eb4-a78b-3023d2e01a8b.rna_seq.augmented_star_gene_counts.tsv,4221503,TCGA-55-6968,TCGA-55-6968-11A,Solid Tissue Normal,normal
+45d4b468-9089-46fd-8b5e-ad80a5148abd,6e2e3178-73ad-4590-a56b-bb7fd9984acd.rna_seq.augmented_star_gene_counts.tsv,4251058,TCGA-55-6969,TCGA-55-6969-01A,Primary Tumor,tumor
+9ad544f6-b684-4a97-8d05-f812267962bb,f8a748c2-91e5-49a2-9095-229476dc9ce5.rna_seq.augmented_star_gene_counts.tsv,4224341,TCGA-55-6969,TCGA-55-6969-11A,Solid Tissue Normal,normal
+9bf51961-c60a-43df-87eb-a64dae9e4e10,52beaa60-92f3-48cf-a695-78bb66ccd4f6.rna_seq.augmented_star_gene_counts.tsv,4245175,TCGA-55-6970,TCGA-55-6970-01A,Primary Tumor,tumor
+89bdfb20-8991-4bc4-b112-6e9be096b566,4f332295-b93c-48bf-8125-3a1539a03742.rna_seq.augmented_star_gene_counts.tsv,4225793,TCGA-55-6970,TCGA-55-6970-11A,Solid Tissue Normal,normal
+d72c21fe-ff33-4f1e-a138-420968f1daf4,89bcf4e2-f855-4035-bf0d-fe4917248223.rna_seq.augmented_star_gene_counts.tsv,4226217,TCGA-55-6971,TCGA-55-6971-01A,Primary Tumor,tumor
+c36f84e5-8c59-46fe-af32-7f70684383b2,07a66ae7-6b95-4d57-b308-dcb30672b6b9.rna_seq.augmented_star_gene_counts.tsv,4228907,TCGA-55-6971,TCGA-55-6971-11A,Solid Tissue Normal,normal
+68b00cb6-4335-4c64-a3e0-0c29ed574480,5418228b-cfd0-4580-87c6-3ebf6282ad73.rna_seq.augmented_star_gene_counts.tsv,4211769,TCGA-55-6972,TCGA-55-6972-01A,Primary Tumor,tumor
+a4b8b2f2-6a56-4999-bd95-c2c8e4aa3bd0,5c5dec6e-b6ee-44af-a42e-485bdf54bde4.rna_seq.augmented_star_gene_counts.tsv,4224243,TCGA-55-6972,TCGA-55-6972-11A,Solid Tissue Normal,normal
+385d903b-bab4-4c2e-8334-3a304d1a56fa,f05d253b-7b64-4ecc-8249-55392326a91d.rna_seq.augmented_star_gene_counts.tsv,4217558,TCGA-55-6975,TCGA-55-6975-01A,Primary Tumor,tumor
+8dbb93bd-bf45-4148-acdb-6609d5c4a1e3,ce9e3b71-b907-4c30-bbc9-fd929a6df15b.rna_seq.augmented_star_gene_counts.tsv,4217876,TCGA-55-6975,TCGA-55-6975-11A,Solid Tissue Normal,normal
+deddc259-f962-468a-bfcf-60da1e695833,d34f0d3c-a058-4569-a8c8-380ada182e76.rna_seq.augmented_star_gene_counts.tsv,4248771,TCGA-55-6978,TCGA-55-6978-01A,Primary Tumor,tumor
+bbb426a9-806b-4417-a3cd-4dd1b0c87792,ad73d464-c21b-4d07-9f89-a322f9366f1c.rna_seq.augmented_star_gene_counts.tsv,4227111,TCGA-55-6978,TCGA-55-6978-11A,Solid Tissue Normal,normal
+765f26d4-120a-459d-90c7-74a8532b407c,fa7777c7-e04a-41db-9ade-0c875c62411f.rna_seq.augmented_star_gene_counts.tsv,4228472,TCGA-55-6979,TCGA-55-6979-01A,Primary Tumor,tumor
+3ce6800e-9df0-45a7-9e18-7e141911e4e9,0c73a12d-b6a0-4ee0-9364-6744964e3526.rna_seq.augmented_star_gene_counts.tsv,4214329,TCGA-55-6979,TCGA-55-6979-11A,Solid Tissue Normal,normal
+4b11527c-fb98-4ad4-aaac-6f0c6c1d185c,78e95f3e-1067-48a8-9429-dfdd6f587066.rna_seq.augmented_star_gene_counts.tsv,4219964,TCGA-55-6980,TCGA-55-6980-01A,Primary Tumor,tumor
+a8252e2f-1dbd-4f3c-9e11-599a33d6fd24,a43440a1-25e9-4841-8cc0-b5c5ebc4a8b7.rna_seq.augmented_star_gene_counts.tsv,4220412,TCGA-55-6980,TCGA-55-6980-11A,Solid Tissue Normal,normal
+a777fb14-4498-4f32-bccb-1e8521567302,96780e00-b519-4bec-a49b-c2cc2d19a744.rna_seq.augmented_star_gene_counts.tsv,4216161,TCGA-55-6981,TCGA-55-6981-01A,Primary Tumor,tumor
+aab3583f-37ca-4f2f-8428-aa8eda2c2274,a7517dae-ab9e-42eb-a512-eb0ca6f89166.rna_seq.augmented_star_gene_counts.tsv,4224070,TCGA-55-6981,TCGA-55-6981-11A,Solid Tissue Normal,normal
+5c32fbb8-55ee-4bc9-a0db-d8ac0b04bdc4,4966ebc7-b3d5-49d1-885d-f6ae4a8781e6.rna_seq.augmented_star_gene_counts.tsv,4220045,TCGA-55-6982,TCGA-55-6982-01A,Primary Tumor,tumor
+1a06f92b-21c5-4666-b666-8b9135a4482a,602ac1fc-c8ad-4e47-988b-1e9e1aa3ce26.rna_seq.augmented_star_gene_counts.tsv,4230154,TCGA-55-6982,TCGA-55-6982-11A,Solid Tissue Normal,normal
+26c96b62-02b6-4108-9a2d-bec3d880db2a,b573a788-d117-48b0-9cab-c4ecbde82706.rna_seq.augmented_star_gene_counts.tsv,4254025,TCGA-55-6983,TCGA-55-6983-01A,Primary Tumor,tumor
+46ef57a2-e2ce-4ffe-9ce8-c043c6065863,31a238a8-4238-4d56-aac5-4769ce173664.rna_seq.augmented_star_gene_counts.tsv,4218631,TCGA-55-6983,TCGA-55-6983-11A,Solid Tissue Normal,normal
+09296d1f-9877-438d-96d8-7b4cc52940dd,49932944-ad54-4c6c-affc-08a4b76de933.rna_seq.augmented_star_gene_counts.tsv,4217774,TCGA-55-6984,TCGA-55-6984-01A,Primary Tumor,tumor
+53b14fb6-9f29-412a-921b-49e270fa2039,5511e816-3ce5-4d0c-80a7-71ee42ba8fc9.rna_seq.augmented_star_gene_counts.tsv,4246905,TCGA-55-6984,TCGA-55-6984-11A,Solid Tissue Normal,normal
+40dba5d9-ce2e-483b-b4a7-19fbca8158e5,dc3ac0d3-d862-4761-ac12-60bb4d6758c1.rna_seq.augmented_star_gene_counts.tsv,4228652,TCGA-55-6985,TCGA-55-6985-01A,Primary Tumor,tumor
+6c20a899-c806-46d0-b744-a26e53a9cb45,80ef527d-5511-4944-a1b3-1426d98294b7.rna_seq.augmented_star_gene_counts.tsv,4249184,TCGA-55-6985,TCGA-55-6985-11A,Solid Tissue Normal,normal
+ad6ae9d2-c6f5-4686-9b3c-45ea130493f3,2fde57cd-97d2-492d-b37d-a4e2d43239cf.rna_seq.augmented_star_gene_counts.tsv,4223654,TCGA-55-6986,TCGA-55-6986-01A,Primary Tumor,tumor
+3f474548-c7b2-4d5e-9f8d-03c800a094fe,3db0576d-969f-4cb6-9e5d-51407b953ef4.rna_seq.augmented_star_gene_counts.tsv,4266272,TCGA-55-6986,TCGA-55-6986-11A,Solid Tissue Normal,normal
+4320b770-69f3-4dd2-afea-8b7f7cdf44c2,32e5ef2b-4387-4d2c-8e62-d18b5106414f.rna_seq.augmented_star_gene_counts.tsv,4227980,TCGA-73-4676,TCGA-73-4676-01A,Primary Tumor,tumor
+e4988cad-67b9-41a6-9640-2226d6b7424a,050f4ef1-e774-490e-9450-8f2d473b1a21.rna_seq.augmented_star_gene_counts.tsv,4214340,TCGA-73-4676,TCGA-73-4676-11A,Solid Tissue Normal,normal
+afdf58d1-5814-4e78-a92e-26fbcc97da32,0a5dab01-33ff-41d1-8842-7b7f18a6efe0.rna_seq.augmented_star_gene_counts.tsv,4219971,TCGA-91-6828,TCGA-91-6828-01A,Primary Tumor,tumor
+2fe6f165-3396-4abd-a0cd-07968d826828,b3c9ca27-6b77-4abd-92d5-45d48d34ba42.rna_seq.augmented_star_gene_counts.tsv,4228926,TCGA-91-6828,TCGA-91-6828-11A,Solid Tissue Normal,normal
+ffec28dd-cc44-4057-bcc3-ccc0cd2331c2,d21d91e9-6e19-4c5f-aa2e-cdd41d98e542.rna_seq.augmented_star_gene_counts.tsv,4236967,TCGA-91-6829,TCGA-91-6829-01A,Primary Tumor,tumor
+3f441cc8-98bd-4650-b5ad-19ae8542b666,a27393cf-e1e1-427f-9a96-40e2ab1af0d1.rna_seq.augmented_star_gene_counts.tsv,4227666,TCGA-91-6829,TCGA-91-6829-11A,Solid Tissue Normal,normal
+14d76abd-84f2-4875-8d03-5a27b4505715,56d7d6b5-33c0-4551-967c-afce1f970395.rna_seq.augmented_star_gene_counts.tsv,4230456,TCGA-91-6831,TCGA-91-6831-01A,Primary Tumor,tumor
+7671d2c4-d6da-46d5-8ef0-baab496456d2,0c09f267-c052-4208-83f3-9acbad0867d5.rna_seq.augmented_star_gene_counts.tsv,4210042,TCGA-91-6831,TCGA-91-6831-11A,Solid Tissue Normal,normal
+8e14dba9-6132-483c-892b-b244704fdc38,9343d3bd-0f60-49c3-8625-31a8a7a846c4.rna_seq.augmented_star_gene_counts.tsv,4245632,TCGA-91-6835,TCGA-91-6835-01A,Primary Tumor,tumor
+b6d704be-2e8f-40cc-9c09-ffde6be5c814,9ef1e12b-70d8-482c-b75f-6c69afd6e2ff.rna_seq.augmented_star_gene_counts.tsv,4235174,TCGA-91-6835,TCGA-91-6835-11A,Solid Tissue Normal,normal
+e7ae9253-4c2d-41bd-9d3a-c37e9841f479,186b7ed8-cc25-45b6-bf7d-25d7a3a2154a.rna_seq.augmented_star_gene_counts.tsv,4233633,TCGA-91-6836,TCGA-91-6836-01A,Primary Tumor,tumor
+e1a4e922-876b-45d1-8fb6-5d39dbf6ff60,3dbeacde-e4f1-443a-b34e-28c44acce88c.rna_seq.augmented_star_gene_counts.tsv,4221708,TCGA-91-6836,TCGA-91-6836-11A,Solid Tissue Normal,normal
+32046abb-8476-4e4f-8090-1ce003107490,905e32cb-a5bd-46a4-ac0f-32585e042695.rna_seq.augmented_star_gene_counts.tsv,4243351,TCGA-91-6847,TCGA-91-6847-01A,Primary Tumor,tumor
+9f01664c-19be-4841-afb4-297483d22ec8,e3955555-9663-49da-bb98-f6593eb74d7f.rna_seq.augmented_star_gene_counts.tsv,4223044,TCGA-91-6847,TCGA-91-6847-11A,Solid Tissue Normal,normal
+ad8bf3fe-2831-4c1c-81f9-c65e09b2d45e,34d64c67-b35b-418e-a7b2-759804876762.rna_seq.augmented_star_gene_counts.tsv,4213808,TCGA-91-6849,TCGA-91-6849-01A,Primary Tumor,tumor
+bb64143e-c48a-45c7-914b-4ec5bcea9e27,de6f3bfe-6e91-4894-a826-67ebf147a6f0.rna_seq.augmented_star_gene_counts.tsv,4227951,TCGA-91-6849,TCGA-91-6849-11A,Solid Tissue Normal,normal

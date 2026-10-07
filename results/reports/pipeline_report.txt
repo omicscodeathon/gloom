@@ -1,6 +1,6 @@
 ======================================================================
 LUAD ML PIPELINE — FINAL REPORT
-Generated: 2026-04-07 03:49:14
+Generated: 2026-10-07 00:10:28
 ======================================================================
 
 SECTION 1 — DATA PROVENANCE
@@ -11,166 +11,229 @@ SECTION 1 — DATA PROVENANCE
 
 SECTION 2 — QC SUMMARY
 ----------------------------------------------------------------------
-  [tumor ] Raw loaded                         :  20,512
-  [tumor ] After low-expr filter              :  18,412
-  [tumor ] After low-var filter               :  16,570
-  [tumor ] After sample alignment             :  16,570
-  [normal] Raw loaded                         :  73,321
-  [normal] After low-expr filter              :  23,510
-  [normal] After low-var filter               :  21,159
-  [normal] After sample alignment             :  21,159
-  [tumor ] Final samples                      :     510
-  [normal] Final samples                      :     604
+  [tumor ] Raw loaded                         :  19,938
+  [tumor ] After low-expr filter              :  15,612
+  [tumor ] After low-var filter               :  14,050
+  [tumor ] After sample alignment             :  14,050
+  [normal] Raw loaded                         :  19,938
+  [normal] After low-expr filter              :  14,741
+  [normal] After low-var filter               :  13,267
+  [normal] After sample alignment             :  13,267
+  [tumor ] Final samples                      :      64
+  [normal] Final samples                      :      58
 
 SECTION 3 — DIFFERENTIAL EXPRESSION
 ----------------------------------------------------------------------
-  Genes tested: 10,986  Significant: 10,472  Up: 10,425  Down: 47
+  Genes tested: 12,222  Significant: 523  Up: 171  Down: 352
 
 SECTION 4 — MODEL PERFORMANCE [PU framing: negatives are unlabeled]
 ----------------------------------------------------------------------
   Primary selection metric: AUPRC
-  Best model: logistic_regression
+  Best model: random_forest
   Model                       AUROC   AUPRC     Acc     MCC      F1   R@100   P@100
   --------------------------------------------------------------------------------
-  logistic_regression        0.9192  0.4023  0.9495  0.3809  0.4064  0.4318  0.3800 *
-  gradient_boosting          0.9130  0.3579  0.9063  0.3932  0.3795  0.3750  0.3300
-  extra_trees                0.9077  0.3513  0.9327  0.3834  0.3984  0.3750  0.3300
-  random_forest              0.9091  0.3301  0.9249  0.3895  0.3956  0.3636  0.3200
+  ensemble_soft_vote         0.9428  0.4124  0.9382  0.4090  0.4125  0.4186  0.3600
+  extra_trees                0.9419  0.3935  0.9411  0.3705  0.3846  0.3953  0.3400
+  logistic_regression        0.9253  0.3920  0.9542  0.4020  0.4227  0.4302  0.3700
+  xgboost                    0.9316  0.3623  0.9444  0.3766  0.3929  0.4070  0.3500
+  random_forest              0.9417  0.3580  0.9358  0.4124  0.4120  0.4070  0.3500 *
+  gradient_boosting          0.9397  0.3402  0.9211  0.3812  0.3713  0.3953  0.3400
 
 SECTION 4c — CLASSIFICATION REPORTS (per-model)
 ----------------------------------------------------------------------
 
-  --- extra_trees ---
-  Model: extra_trees
-  Threshold strategy: f1  Threshold: 0.18
-  Accuracy: 0.9327
+  --- ensemble_soft_vote ---
+  Model: ensemble_soft_vote
+  Fixed threshold: 0.15  Oracle threshold (ref): 0.1555
+  Accuracy@fixed: 0.9382
   ------------------------------------------------------------
                        precision    recall  f1-score   support
   
-        Unlabeled (0)       0.98      0.95      0.96      2110
-  LCGene/Positive (1)       0.31      0.56      0.40        88
+        Unlabeled (0)       0.99      0.95      0.97      2359
+  LCGene/Positive (1)       0.31      0.62      0.41        86
   
-             accuracy                           0.93      2198
-            macro avg       0.65      0.75      0.68      2198
-         weighted avg       0.95      0.93      0.94      2198
+             accuracy                           0.94      2445
+            macro avg       0.65      0.78      0.69      2445
+         weighted avg       0.96      0.94      0.95      2445
+
+  --- extra_trees ---
+  Model: extra_trees
+  Fixed threshold: 0.15  Oracle threshold (ref): 0.0803
+  Accuracy@fixed: 0.9411
+  ------------------------------------------------------------
+                       precision    recall  f1-score   support
+  
+        Unlabeled (0)       0.98      0.96      0.97      2359
+  LCGene/Positive (1)       0.30      0.52      0.38        86
+  
+             accuracy                           0.94      2445
+            macro avg       0.64      0.74      0.68      2445
+         weighted avg       0.96      0.94      0.95      2445
 
   --- gradient_boosting ---
   Model: gradient_boosting
-  Threshold strategy: f1  Threshold: 0.4794
-  Accuracy: 0.9063
+  Fixed threshold: 0.15  Oracle threshold (ref): 0.2703
+  Accuracy@fixed: 0.9211
   ------------------------------------------------------------
                        precision    recall  f1-score   support
   
-        Unlabeled (0)       0.99      0.91      0.95      2110
-  LCGene/Positive (1)       0.26      0.72      0.38        88
+        Unlabeled (0)       0.99      0.93      0.96      2359
+  LCGene/Positive (1)       0.26      0.66      0.37        86
   
-             accuracy                           0.91      2198
-            macro avg       0.62      0.82      0.66      2198
-         weighted avg       0.96      0.91      0.93      2198
+             accuracy                           0.92      2445
+            macro avg       0.62      0.80      0.66      2445
+         weighted avg       0.96      0.92      0.94      2445
 
   --- logistic_regression ---
   Model: logistic_regression
-  Threshold strategy: f1  Threshold: 0.8954
-  Accuracy: 0.9495
+  Fixed threshold: 0.15  Oracle threshold (ref): 0.1331
+  Accuracy@fixed: 0.9542
   ------------------------------------------------------------
                        precision    recall  f1-score   support
   
-        Unlabeled (0)       0.98      0.97      0.97      2110
-  LCGene/Positive (1)       0.38      0.43      0.41        88
+        Unlabeled (0)       0.98      0.97      0.98      2359
+  LCGene/Positive (1)       0.38      0.48      0.42        86
   
-             accuracy                           0.95      2198
-            macro avg       0.68      0.70      0.69      2198
-         weighted avg       0.95      0.95      0.95      2198
+             accuracy                           0.95      2445
+            macro avg       0.68      0.72      0.70      2445
+         weighted avg       0.96      0.95      0.96      2445
 
   --- random_forest ---
   Model: random_forest
-  Threshold strategy: f1  Threshold: 0.14
-  Accuracy: 0.9249
+  Fixed threshold: 0.15  Oracle threshold (ref): 0.1214
+  Accuracy@fixed: 0.9358
   ------------------------------------------------------------
                        precision    recall  f1-score   support
   
-        Unlabeled (0)       0.98      0.94      0.96      2110
-  LCGene/Positive (1)       0.29      0.61      0.40        88
+        Unlabeled (0)       0.99      0.95      0.97      2359
+  LCGene/Positive (1)       0.30      0.64      0.41        86
   
-             accuracy                           0.92      2198
-            macro avg       0.64      0.78      0.68      2198
-         weighted avg       0.96      0.92      0.94      2198
+             accuracy                           0.94      2445
+            macro avg       0.65      0.79      0.69      2445
+         weighted avg       0.96      0.94      0.95      2445
 
-SECTION 4b — RANKING METRICS (all genes, positive (known) as ground truth)
+  --- xgboost ---
+  Model: xgboost
+  Fixed threshold: 0.15  Oracle threshold (ref): 0.1832
+  Accuracy@fixed: 0.9444
+  ------------------------------------------------------------
+                       precision    recall  f1-score   support
+  
+        Unlabeled (0)       0.98      0.96      0.97      2359
+  LCGene/Positive (1)       0.32      0.51      0.39        86
+  
+             accuracy                           0.94      2445
+            macro avg       0.65      0.74      0.68      2445
+         weighted avg       0.96      0.94      0.95      2445
+
+SECTION 4b — RANKING METRICS (positive (known) as ground truth; basis = out-of-fold or held-out genes only, see metric_basis)
 ----------------------------------------------------------------------
-  recall_at_50             : 0.0685
-  recall_at_100            : 0.1347
-  recall_at_200            : 0.2329
-  recall_at_500            : 0.4269
-  precision_at_50          : 0.6
-  precision_at_100         : 0.59
-  median_lcgene_rank       : 658.5
-  lcgene_top50             : 30
-  lcgene_top100            : 59
-  lcgene_top200            : 102
-  n_novel                  : 1854
+  recall_at_50             : 0.0671
+  recall_at_100            : 0.1343
+  recall_at_200            : 0.213
+  recall_at_500            : 0.4213
+  precision_at_50          : 0.58
+  precision_at_100         : 0.58
+  median_lcgene_rank       : 639.0
+  lcgene_top50             : 29
+  lcgene_top100            : 58
+  lcgene_top200            : 92
+  n_non_lcgene_candidates  : 316
+  metric_basis             : out_of_fold
+  score_source             : crossfit_oof_pu_bagging
+  n_eval_positives         : 432
 
 SECTION 5 — TOP 15 FEATURES
 ----------------------------------------------------------------------
   Rank  Feature                                   Mean Imp Group
-  1     tumor_std                                   0.8435  Tumor Expression Stats
-  2     tumor_iqr_rank                              0.7846  Rank Features
-  3     normal_std                                  0.6339  Normal Expression Stats
-  4     tumor_iqr                                   0.4444  Tumor Expression Stats
-  5     cohens_d_rank                               0.2953  Rank Features
-  6     normal_iqr                                  0.2883  Normal Expression Stats
-  7     tumor_cv                                    0.2761  Tumor Expression Stats
-  8     t_stat                                      0.2688  Differential Expression
-  9     cohens_d                                    0.2441  Differential Expression
-  10    neg_log10_padj                              0.2151  Differential Expression
-  11    neg_log10_padj_rank                         0.1924  Rank Features
-  12    abs_log2fc                                  0.1774  Differential Expression
-  13    normal_cv                                   0.1769  Normal Expression Stats
-  14    log2fc                                      0.1683  Differential Expression
-  15    tumor_mean                                  0.1539  Tumor Expression Stats
+  1     tumor_std                                   1.0000  Tumor Expression Stats
+  2     abs_log2fc                                  0.6092  Differential Expression
+  3     tumor_iqr                                   0.5657  Tumor Expression Stats
+  4     normal_std                                  0.3181  Normal Expression Stats
+  5     tumor_cv                                    0.2639  Tumor Expression Stats
+  6     normal_iqr                                  0.2173  Normal Expression Stats
+  7     eigenvector_centrality                      0.1489  Network Topology
+  8     tumor_normal_mean_ratio                     0.1428  Contrast Features
+  9     neg_log10_padj                              0.1384  Differential Expression
+  10    delta_degree                                0.1247  Other
+  11    normal_cv                                   0.1236  Normal Expression Stats
+  12    normal_degree                               0.1194  Other
+  13    normal_specific_degree                      0.1079  Other
+  14    closeness_centrality                        0.0949  Network Topology
+  15    normal_skewness                             0.0764  Normal Expression Stats
 
 SECTION 6 — TOP 20 RANKED GENES
 ----------------------------------------------------------------------
-  Rank   Gene               Prob   Log2FC   Dir Known+  Novel
-  1      MUC5B            0.9998    9.721    up    Yes     No
-  2      H19              0.9994    6.198    up     No    Yes
-  3      SFTPB            0.9993    4.443    up     No    Yes
-  4      SCGB3A1          0.9992    2.879    up    Yes     No
-  5      EIF1AY           0.9992    4.044    up     No    Yes
-  6      PGC              0.9990    2.645    up     No    Yes
-  7      HP               0.9990    4.087    up    Yes     No
-  8      ITLN1            0.9989    0.398    ns     No    Yes
-  9      CEACAM5          0.9987    9.229    up    Yes     No
-  10     FGG              0.9986    5.678    up    Yes     No
-  11     SFTPA2           0.9986    3.910    up     No    Yes
-  12     SPP1             0.9985    8.787    up    Yes     No
-  13     ALDH3A1          0.9983    4.786    up    Yes     No
-  14     FGA              0.9983    6.076    up    Yes     No
-  15     SCGB3A2          0.9983    2.982    up    Yes     No
-  16     TMPRSS4          0.9981    9.316    up    Yes     No
-  17     PRR4             0.9979    1.987    up     No    Yes
-  18     NAPSA            0.9972    5.563    up    Yes     No
-  19     CP               0.9972    9.370    up     No    Yes
-  20     MMP11            0.9971    8.927    up     No    Yes
+  Rank   Gene               Prob   Log2FC   Dir Known+ NonLCG
+  1      LCN2             0.9825    1.506    ns    Yes     No
+  2      MMP7             0.9815    1.289    ns    Yes     No
+  3      ALOX15B          0.9790   -1.729    ns     No    Yes
+  4      TFPI2            0.9769    1.346    ns    Yes     No
+  5      HP               0.9760   -0.831    ns    Yes     No
+  6      MKI67            0.9759    2.520    up    Yes     No
+  7      RASD1            0.9752    0.920    ns     No     No
+  8      C15ORF48         0.9736    2.431    up     No    Yes
+  9      CXCL14           0.9731    2.266    up    Yes     No
+  10     ALPL             0.9723   -2.258  down    Yes     No
+  11     S100P            0.9719    2.800    up    Yes     No
+  12     CXCL5            0.9719   -0.594    ns    Yes     No
+  13     UCHL1            0.9718    1.986    ns    Yes     No
+  14     CRABP2           0.9706    4.579    up    Yes     No
+  15     CDCA8            0.9702    2.570    up    Yes     No
+  16     RRM2             0.9697    2.548    up    Yes     No
+  17     LTF              0.9695    1.006    ns    Yes     No
+  18     AGR3             0.9691   -1.784    ns     No    Yes
+  19     DMBT1            0.9684   -2.166  down     No    Yes
+  20     GJB2             0.9680    3.402    up    Yes     No
 
-SECTION 7 — HIGH-SCORING UNLABELED CANDIDATES (top 15)
+SECTION 7 — NON-LCGENE CANDIDATES (top 15; absence from LCGene does not establish novelty)
 ----------------------------------------------------------------------
-  Total: 1,854
-  2      H19             prob=0.9994  log2fc=6.198  dir=up
-  3      SFTPB           prob=0.9993  log2fc=4.443  dir=up
-  5      EIF1AY          prob=0.9992  log2fc=4.044  dir=up
-  6      PGC             prob=0.9990  log2fc=2.645  dir=up
-  8      ITLN1           prob=0.9989  log2fc=0.398  dir=ns
-  11     SFTPA2          prob=0.9986  log2fc=3.910  dir=up
-  17     PRR4            prob=0.9979  log2fc=1.987  dir=up
-  19     CP              prob=0.9972  log2fc=9.370  dir=up
-  20     MMP11           prob=0.9971  log2fc=8.927  dir=up
-  22     MSMB            prob=0.9968  log2fc=3.778  dir=up
-  23     COL1A1          prob=0.9967  log2fc=7.329  dir=up
-  26     KRT17           prob=0.9964  log2fc=6.218  dir=up
-  27     SFTPA1          prob=0.9963  log2fc=2.824  dir=up
-  31     CXCL9           prob=0.9961  log2fc=6.307  dir=up
-  33     UTY             prob=0.9958  log2fc=3.959  dir=up
+  Total: 316
+  3      ALOX15B         prob=0.9790  log2fc=-1.729  dir=ns
+  8      C15ORF48        prob=0.9736  log2fc=2.431  dir=up
+  18     AGR3            prob=0.9691  log2fc=-1.784  dir=ns
+  19     DMBT1           prob=0.9684  log2fc=-2.166  dir=down
+  23     CX3CL1          prob=0.9674  log2fc=-1.393  dir=ns
+  25     KRT17           prob=0.9672  log2fc=1.365  dir=ns
+  26     CST6            prob=0.9671  log2fc=-1.394  dir=ns
+  28     QPCT            prob=0.9667  log2fc=1.764  dir=ns
+  29     PPP1R14D        prob=0.9666  log2fc=2.963  dir=up
+  34     COMP            prob=0.9650  log2fc=2.525  dir=up
+  35     PODXL2          prob=0.9648  log2fc=2.518  dir=up
+  36     SPINK1          prob=0.9642  log2fc=3.610  dir=up
+  40     STEAP1          prob=0.9636  log2fc=2.502  dir=up
+  45     MEX3A           prob=0.9621  log2fc=2.635  dir=up
+  48     SYT7            prob=0.9608  log2fc=2.102  dir=up
+
+SECTION 8 — OUT-OF-FOLD EVALUATION (step11c / step12b)
+----------------------------------------------------------------------
+  auroc                 : 0.9385  (95% CI 0.9311 - 0.9450)
+  auprc                 : 0.3592  (95% CI 0.3188 - 0.4019)
+  average_precision     : 0.3605  (95% CI 0.3208 - 0.4040)
+  precision_at_10       : 0.7000  (95% CI 0.4000 - 1.0000)
+  recall_at_10          : 0.0162  (95% CI 0.0093 - 0.0231)
+  ef_at_10              : 19.8042  (95% CI 11.3167 - 28.2917)
+  precision_at_50       : 0.5800  (95% CI 0.4400 - 0.7000)
+  recall_at_50          : 0.0671  (95% CI 0.0509 - 0.0810)
+  ef_at_50              : 16.4092  (95% CI 12.4483 - 19.8042)
+  precision_at_100      : 0.5800  (95% CI 0.4700 - 0.6700)
+  recall_at_100         : 0.1343  (95% CI 0.1088 - 0.1551)
+  ef_at_100             : 16.4092  (95% CI 13.2971 - 18.9554)
+  n_lcgene_in_top_10    : 7
+  n_lcgene_in_top_50    : 29
+  n_lcgene_in_top_100   : 58
+
+SECTION 9 — FEATURE-SET ABLATION VERDICT (step13b)
+----------------------------------------------------------------------
+  Does network integration add a measurable gain over expression-only features? NO. Full model minus expression-only: delta-AUPRC = +0.011 (95% CI -0.010 to +0.032), paired-bootstrap p = 0.304; delta-AUROC = +0.002 (95% CI -0.000 to +0.004), p = 0.11. Rule: 'yes' only if the 95% CI of delta-AUPRC lies entirely above 0. Network-derived features should be described as supporting contextual interpretation rather than as the source of predictive improvement in this run.
+
+SECTION 10 — COHORT / SAMPLE QC WARNINGS (step1 / step2b)
+----------------------------------------------------------------------
+  No cohort-confounding or global-artefact warning was raised.
+
+SECTION 11 — EXTERNAL EVIDENCE FOR NON-LCGENE CANDIDATES (step20, optional)
+----------------------------------------------------------------------
+  candidate_evidence.csv not found (step20 needs internet; run it separately).
 
 ======================================================================
 END OF REPORT

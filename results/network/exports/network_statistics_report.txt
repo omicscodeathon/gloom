@@ -1,38 +1,38 @@
 ============================================================
-LUAD CO-EXPRESSION NETWORK — STATISTICS REPORT
+LUAD CO-EXPRESSION NETWORK â€” STATISTICS REPORT
 ============================================================
 
-  n_nodes                            : 10986
-  n_edges                            : 110508
-  density                            : 0.0018314
-  n_connected_components             : 6165
-  largest_component_size             : 4591
-  avg_clustering_coeff               : 0.210099
-  avg_degree                         : 20.118
-  max_degree                         : 462
-  degree_assortativity               : 0.46266
-  n_lcgene_nodes                     : 438
-  n_novel_nodes                      : 203
+  n_nodes                            : 12222
+  n_edges                            : 159487
+  density                            : 0.00213553
+  n_connected_components             : 6997
+  largest_component_size             : 4998
+  avg_clustering_coeff               : 0.207075
+  avg_degree                         : 26.0983
+  max_degree                         : 730
+  degree_assortativity               : 0.285718
+  n_lcgene_nodes                     : 432
+  n_non_lcgene_candidate_nodes       : 316
 
 TOP 20 HUB GENES
 ============================================================
-  SASH3                degree=462
-  CD4                  degree=441
-  CD53                 degree=440
-  WAS                  degree=440
-  IL10RA               degree=436
-  LCP2                 degree=436
-  NCKAP1L              degree=432
-  SNX20                degree=429
-  DOCK2                degree=427
-  BTK                  degree=426
-  CYTH4                degree=425
-  CD37                 degree=424
-  MYO1F                degree=423
-  PTPRC                degree=421
-  EVI2B                degree=420
-  GIMAP4               degree=418
-  ARHGAP30             degree=416
-  SELPLG               degree=416
-  PLEK                 degree=415
-  FERMT3               degree=412
+  SHPRH                degree=730
+  AGO3                 degree=690
+  PIKFYVE              degree=658
+  SREK1                degree=636
+  CEP290               degree=608
+  PHC3                 degree=593
+  ANKRD26              degree=589
+  CHD9                 degree=581
+  BRWD3                degree=576
+  DMXL1                degree=576
+  INO80D               degree=575
+  HMBOX1               degree=570
+  MYSM1                degree=570
+  NFAT5                degree=567
+  SMG1                 degree=566
+  RC3H1                degree=563
+  BAZ2B                degree=560
+  CREB1                degree=560
+  REV3L                degree=559
+  CLDN20               degree=557

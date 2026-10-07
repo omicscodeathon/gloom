@@ -1,4 +1,4 @@
-subset,lung_pathways_tested,significant,top_pathway,top_padj
-All candidates,3,2,ECM-receptor interaction,0.005509
-Upregulated,3,3,ECM-receptor interaction,0.004059
-Downregulated,0,0,—,
+subset,input_genes,status,n_background,pathways_tested,significant,top_pathway,top_padj,note
+All candidates,316,ok,12222,320,1,Protein digestion and absorption,0.0464338,
+Upregulated,66,ok,12222,320,1,Protein digestion and absorption,0.00547042,
+Downregulated,69,no_significant,12222,320,0,Phagosome,1.0,No downregulated pathways passed padj < 0.05 with >= 3 overlapping genes.

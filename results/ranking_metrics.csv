@@ -1,2 +1,2 @@
-median_lcgene_rank,lcgene_top50,lcgene_top100,lcgene_top200,lcgene_top500,recall_at_50,recall_at_100,recall_at_200,recall_at_500,precision_at_50,precision_at_100,n_novel,pu_framing
-232.5,50,98,190,345,0.1142,0.2237,0.4338,0.7877,1.0,0.98,203,True
+score_source,metric_basis,n_eval_genes,n_eval_positives,median_lcgene_rank,lcgene_top50,recall_at_50,precision_at_50,lcgene_top50_training,lcgene_top100,recall_at_100,precision_at_100,lcgene_top100_training,lcgene_top200,recall_at_200,precision_at_200,lcgene_top200_training,lcgene_top500,recall_at_500,precision_at_500,lcgene_top500_training,n_non_lcgene_candidates,pu_framing
+crossfit_oof_pu_bagging,out_of_fold,12222,432,639.0,29,0.0671,0.58,,58,0.1343,0.58,,92,0.213,0.46,,182,0.4213,0.364,,316,True

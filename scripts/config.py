@@ -218,7 +218,7 @@ COEXPR_CORRELATION_METHOD  = "pearson"
 # P2.3 FIX: Lowered from 0.70 to 0.60 to reduce isolated nodes and increase
 # network feature variance. More genes will be connected, improving discriminative
 # power of network features. Rerun from step6 through step14 after changing.
-COEXPR_CORRELATION_CUTOFF  = 0.60
+COEXPR_CORRELATION_CUTOFF  = 0.80   # |r| cut-off; 0.60 gave a near-complete graph with n=64 (see docs/revision)
 COEXPR_MIN_SAMPLES         = 30
 
 # ==================================================
@@ -402,7 +402,7 @@ FEATURE_GROUP_NETWORK = [
 ]
 
 # ---- Step 7c: network stability --------------------------------------------------------------
-NETWORK_THRESHOLDS      = (0.50, 0.55, 0.60, 0.65, 0.70)   # |r| cut-offs
+NETWORK_THRESHOLDS      = (0.70, 0.75, 0.80, 0.85, 0.90)   # |r| cut-offs
 NETWORK_EQUAL_N         = True    # sub-sample the larger group to the size of the smaller one
 NETWORK_BOOTSTRAP_N     = 20      # sample bootstrap resamples (per group)
 NETWORK_BOOTSTRAP_REPLACE = True  # resample samples with replacement

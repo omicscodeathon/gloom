@@ -153,7 +153,7 @@ LCGENE_GENE_COL = "GeneSymbol"
 #                     (see COHORT_DESIGN check in step1 and docs/revision/).
 # "tcga_gdc"        : uniformly processed TCGA-LUAD primary tumors vs TCGA-LUAD adjacent normals
 #                     (GDC STAR counts), produced by scripts/fetch_gdc_tcga_luad.py.
-DATA_SOURCE = "cbioportal_gtex"
+DATA_SOURCE = "tcga_gdc"
 
 GDC_DIR               = RAW_DIR / "tcga_gdc"
 GDC_SAMPLE_SHEET_FILE = GDC_DIR / "sample_sheet.csv"     # sample_id, patient_id, group
@@ -203,7 +203,7 @@ DE_PVALUE_THRESHOLD  = 0.001
 #   "limma_voom" — limma-voom on raw counts via rpy2 + R (optional dependency; if rpy2/limma
 #                  or a counts matrix is unavailable the step logs a clear message and
 #                  falls back to Welch).  Needs DATA_SOURCE = "tcga_gdc" (counts matrix).
-DE_METHOD = "welch"
+DE_METHOD = "paired"
 
 # Optional CSV with columns sample_id, patient_id (tumor AND normal samples).  When None,
 # the patient_id column of the processed sample metadata is used, and as a last resort the
@@ -218,7 +218,7 @@ COEXPR_CORRELATION_METHOD  = "pearson"
 # P2.3 FIX: Lowered from 0.70 to 0.60 to reduce isolated nodes and increase
 # network feature variance. More genes will be connected, improving discriminative
 # power of network features. Rerun from step6 through step14 after changing.
-COEXPR_CORRELATION_CUTOFF  = 0.60
+COEXPR_CORRELATION_CUTOFF  = 0.80   # |r| cut-off; 0.60 gave a near-complete graph with n=64 (see docs/revision)
 COEXPR_MIN_SAMPLES         = 30
 
 # ==================================================
@@ -402,7 +402,7 @@ FEATURE_GROUP_NETWORK = [
 ]
 
 # ---- Step 7c: network stability --------------------------------------------------------------
-NETWORK_THRESHOLDS      = (0.50, 0.55, 0.60, 0.65, 0.70)   # |r| cut-offs
+NETWORK_THRESHOLDS      = (0.70, 0.75, 0.80, 0.85, 0.90)   # |r| cut-offs
 NETWORK_EQUAL_N         = True    # sub-sample the larger group to the size of the smaller one
 NETWORK_BOOTSTRAP_N     = 20      # sample bootstrap resamples (per group)
 NETWORK_BOOTSTRAP_REPLACE = True  # resample samples with replacement

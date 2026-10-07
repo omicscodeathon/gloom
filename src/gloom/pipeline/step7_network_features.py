@@ -48,9 +48,54 @@ def extract_betweenness_centrality(G):
         bc = nx.betweenness_centrality(G, normalized=True)
     s = pd.Series(bc, name="betweenness_centrality"); s.index.name = "gene"; return s
 
+CLOSENESS_EXACT_LIMIT = 3000
+CLOSENESS_K_PIVOTS    = 400
+
+
+def _approx_closeness(G, k=CLOSENESS_K_PIVOTS, seed=None):
+    """Pivot-sampling estimate of (Wasserman-Faust) closeness for large graphs.
+
+    Exact closeness needs one BFS per node (O(n*m)); with ~12,000 nodes this is impractical.
+    We run BFS from k random pivot nodes and estimate each node's mean distance from its
+    distances to the pivots that lie in its component (Eppstein-Wang estimator), then apply the
+    same disconnected-graph normalisation as networkx: ((c-1)/(n-1)) / mean_distance.
+    """
+    import numpy as np
+    from scipy.sparse import csr_matrix
+    from scipy.sparse.csgraph import connected_components, shortest_path
+    nodes = list(G.nodes())
+    n = len(nodes)
+    idx = {g: i for i, g in enumerate(nodes)}
+    rows, cols = [], []
+    for u, v in G.edges():
+        rows.append(idx[u]); cols.append(idx[v])
+    A = csr_matrix((np.ones(len(rows)), (rows, cols)), shape=(n, n))
+    A = A.maximum(A.T)
+    ncomp, labels = connected_components(A, directed=False)
+    comp_size = np.bincount(labels)
+    rng = np.random.default_rng(config.SEED if seed is None else seed)
+    pivots = rng.choice(n, size=min(k, n), replace=False)
+    D = shortest_path(A, method="D", directed=False, unweighted=True, indices=pivots)  # k x n
+    finite = np.isfinite(D) & (D > 0)
+    sum_d = np.where(finite, D, 0.0).sum(axis=0)
+    cnt = finite.sum(axis=0)
+    cc = np.zeros(n)
+    ok = (cnt > 0) & (sum_d > 0)
+    mean_d = np.zeros(n)
+    mean_d[ok] = sum_d[ok] / cnt[ok]
+    c = comp_size[labels]
+    cc[ok] = ((c[ok] - 1) / (n - 1)) / mean_d[ok]
+    return {nodes[i]: float(cc[i]) for i in range(n)}
+
+
 def extract_closeness_centrality(G):
-    log.info("  Closeness centrality …")
-    cc = nx.closeness_centrality(G)
+    n = G.number_of_nodes()
+    log.info(f"  Closeness centrality (n={n:,}) …")
+    if n > CLOSENESS_EXACT_LIMIT:
+        log.info(f"    n > {CLOSENESS_EXACT_LIMIT:,}: pivot-sampling estimate ({CLOSENESS_K_PIVOTS} BFS pivots, seed={config.SEED}).")
+        cc = _approx_closeness(G)
+    else:
+        cc = nx.closeness_centrality(G)
     s  = pd.Series(cc, name="closeness_centrality"); s.index.name = "gene"; return s
 
 def extract_eigenvector_centrality(G):

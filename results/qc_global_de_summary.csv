@@ -1,0 +1,2 @@
+n_genes,median_log2fc,mean_log2fc,n_de_significant,fraction_de_significant,n_up,n_down,up_down_ratio,padj_threshold,abs_log2fc_threshold,pc1_group_separation_auroc
+12222,0.007969759296960532,-0.08345203121241658,512,0.041891670757650136,155,357,0.4341736694677871,0.001,2.0,1.0

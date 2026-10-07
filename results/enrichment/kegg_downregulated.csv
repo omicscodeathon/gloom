@@ -1,1 +1,321 @@
-Gene_set,pathway,overlap,pvalue,padj,Old P-value,Old Adjusted P-value,odds_ratio,combined_score,genes,overlap_genes,pathway_size,neg_log10_padj,subset
+term,n_query,n_term_in_background,n_term_total,n_background,n_overlap,fold_enrichment,p_raw,p_adj,genes,odds_ratio,neg_log10_padj,pathway,pvalue,padj,overlap_genes,pathway_size,subset
+Phagosome,69,114,152,12222,3,4.661327231121281,0.02653539082251862,1.0,MARCO;MRC1;OLR1,5.6844465423648805,-0.0,Phagosome,0.02653539082251862,1.0,3,114,Downregulated
+Bile secretion,69,46,90,12222,2,7.70132325141777,0.027712941011902928,1.0,AQP1;AQP4,10.07865168539326,-0.0,Bile secretion,0.027712941011902928,1.0,2,46,Downregulated
+Complement and coagulation cascades,69,63,85,12222,2,5.6231884057971016,0.04920222439510717,1.0,C7;CFD,7.282445046672689,-0.0,Complement and coagulation cascades,0.04920222439510717,1.0,2,63,Downregulated
+Drug metabolism,69,65,108,12222,2,5.450167224080268,0.0520290257908806,1.0,CES1;FMO2,7.05191017789443,-0.0,Drug metabolism,0.0520290257908806,1.0,2,65,Downregulated
+Selenocompound metabolism,69,12,17,12222,1,14.760869565217392,0.06571086470599383,1.0,INMT,23.121231355125357,-0.0,Selenocompound metabolism,0.06571086470599383,1.0,1,12,Downregulated
+Proximal tubule bicarbonate reclamation,69,15,23,12222,1,11.808695652173913,0.08146210638958438,1.0,AQP1,18.332997734709288,-0.0,Proximal tubule bicarbonate reclamation,0.08146210638958438,1.0,1,15,Downregulated
+Renin-angiotensin system,69,17,23,12222,1,10.419437340153452,0.09181724215828208,1.0,AGTR2,16.10816191108162,-0.0,Renin-angiotensin system,0.09181724215828208,1.0,1,17,Downregulated
+alpha-Linolenic acid metabolism,69,17,25,12222,1,10.419437340153452,0.09181724215828208,1.0,PLA2G1B,16.10816191108162,-0.0,alpha-Linolenic acid metabolism,0.09181724215828208,1.0,1,17,Downregulated
+Linoleic acid metabolism,69,19,29,12222,1,9.322654462242564,0.10205731236773138,1.0,PLA2G1B,14.364371670941013,-0.0,Linoleic acid metabolism,0.10205731236773138,1.0,1,19,Downregulated
+Vascular smooth muscle contraction,69,97,133,12222,2,3.6521739130434785,0.10398375363844019,1.0,PLA2G1B;RAMP3,4.676556137289122,-0.0,Vascular smooth muscle contraction,0.10398375363844019,1.0,2,97,Downregulated
+Fat digestion and absorption,69,21,43,12222,1,8.434782608695652,0.11218357702163918,1.0,PLA2G1B,12.960833184974186,-0.0,Fat digestion and absorption,0.11218357702163918,1.0,1,21,Downregulated
+Tryptophan metabolism,69,24,42,12222,1,7.380434782608696,0.12716231142624373,1.0,INMT,11.303463270694207,-0.0,Tryptophan metabolism,0.12716231142624373,1.0,1,24,Downregulated
+Steroid hormone biosynthesis,69,25,61,12222,1,7.085217391304347,0.13209966185349323,1.0,HSD17B6,10.841203634738568,-0.0,Steroid hormone biosynthesis,0.13209966185349323,1.0,1,25,Downregulated
+Retinol metabolism,69,27,68,12222,1,6.5603864734299515,0.141891934646556,1.0,HSD17B6,10.021346921911583,-0.0,Retinol metabolism,0.141891934646556,1.0,1,27,Downregulated
+ABC transporters,69,30,45,12222,1,5.904347826086957,0.1563765297221314,1.0,ABCA3,9.0,-0.0,ABC transporters,0.1563765297221314,1.0,1,30,Downregulated
+Cocaine addiction,69,30,49,12222,1,5.904347826086957,0.1563765297221314,1.0,FOSB,9.0,-0.0,Cocaine addiction,0.1563765297221314,1.0,1,30,Downregulated
+Vasopressin-regulated water reabsorption,69,30,44,12222,1,5.904347826086957,0.1563765297221314,1.0,AQP4,9.0,-0.0,Vasopressin-regulated water reabsorption,0.1563765297221314,1.0,1,30,Downregulated
+Cholesterol metabolism,69,31,50,12222,1,5.713884992987377,0.16115097357459,1.0,PCSK9,8.7042000717961,-0.0,Cholesterol metabolism,0.16115097357459,1.0,1,31,Downregulated
+Neuroactive ligand-receptor interaction,69,135,341,12222,2,2.6241545893719804,0.17694261879333112,1.0,AGTR2;SSTR1,3.3348592037730613,-0.0,Neuroactive ligand-receptor interaction,0.17694261879333112,1.0,2,135,Downregulated
+Mineral absorption,69,39,60,12222,1,4.54180602006689,0.19839999365257716,1.0,MT1M,6.890984927481278,-0.0,Mineral absorption,0.19839999365257716,1.0,1,39,Downregulated
+Ether lipid metabolism,69,40,49,12222,1,4.428260869565217,0.20293995921425917,1.0,PLA2G1B,6.715975237919246,-0.0,Ether lipid metabolism,0.20293995921425917,1.0,1,40,Downregulated
+Synaptic vesicle cycle,69,40,78,12222,1,4.428260869565217,0.20293995921425917,1.0,SLC1A1,6.715975237919246,-0.0,Synaptic vesicle cycle,0.20293995921425917,1.0,1,40,Downregulated
+Amphetamine addiction,69,41,69,12222,1,4.320254506892895,0.20745458265985234,1.0,FOSB,6.5496080021627465,-0.0,Amphetamine addiction,0.20745458265985234,1.0,1,41,Downregulated
+Cortisol synthesis and secretion,69,42,65,12222,1,4.217391304347826,0.2119440033803573,1.0,KCNK3,6.391258464514994,-0.0,Cortisol synthesis and secretion,0.2119440033803573,1.0,1,42,Downregulated
+Malaria,69,44,50,12222,1,4.025691699604743,0.22084779043753205,1.0,ACKR1,6.0964007047571105,-0.0,Malaria,0.22084779043753205,1.0,1,44,Downregulated
+Arachidonic acid metabolism,69,45,61,12222,1,3.936231884057971,0.22526243179570346,1.0,PLA2G1B,5.958910850487985,-0.0,Arachidonic acid metabolism,0.22526243179570346,1.0,1,45,Downregulated
+PPAR signaling pathway,69,48,74,12222,1,3.690217391304348,0.2383589817083115,1.0,OLR1,5.581175566653861,-0.0,PPAR signaling pathway,0.2383589817083115,1.0,1,48,Downregulated
+Ras signaling pathway,69,167,232,12222,2,2.1213225722468105,0.24298677804252078,1.0,PLA2G1B;VEGFD,2.6828913505650664,-0.0,Ras signaling pathway,0.24298677804252078,1.0,2,167,Downregulated
+Renin secretion,69,52,69,12222,1,3.4063545150501677,0.2554821918233539,1.0,AQP1,5.145985401459854,-0.0,Renin secretion,0.2554821918233539,1.0,1,52,Downregulated
+Fc epsilon RI signaling pathway,69,53,68,12222,1,3.3420836751435603,0.2597033692074285,1.0,ALOX5AP,5.047549530761209,-0.0,Fc epsilon RI signaling pathway,0.2597033692074285,1.0,1,53,Downregulated
+Arrhythmogenic right ventricular cardiomyopathy,69,55,77,12222,1,3.220553359683795,0.2680750904253118,1.0,DES,4.861514765954597,-0.0,Arrhythmogenic right ventricular cardiomyopathy,0.2680750904253118,1.0,1,55,Downregulated
+Salivary secretion,69,56,93,12222,1,3.1630434782608696,0.2722258933151492,1.0,DMBT1,4.773525350167686,-0.0,Salivary secretion,0.2722258933151492,1.0,1,56,Downregulated
+Adherens junction,69,58,71,12222,1,3.0539730134932537,0.2804580260352288,1.0,PTPRB,4.606728022849889,-0.0,Adherens junction,0.2804580260352288,1.0,1,58,Downregulated
+Hypertrophic cardiomyopathy,69,59,90,12222,1,3.0022107590272658,0.28453961072805717,1.0,DES,4.5276062137376005,-0.0,Hypertrophic cardiomyopathy,0.28453961072805717,1.0,1,59,Downregulated
+Coronavirus disease,69,187,232,12222,2,1.8944431527551733,0.2849217622737064,1.0,C7;CFD,2.38963761605271,-0.0,Coronavirus disease,0.2849217622737064,1.0,2,187,Downregulated
+Protein digestion and absorption,69,60,103,12222,1,2.9521739130434783,0.28859837639933594,1.0,SLC1A1,4.451143961234129,-0.0,Protein digestion and absorption,0.28859837639933594,1.0,1,60,Downregulated
+Staphylococcus aureus infection,69,60,95,12222,1,2.9521739130434783,0.28859837639933594,1.0,CFD,4.451143961234129,-0.0,Staphylococcus aureus infection,0.28859837639933594,1.0,1,60,Downregulated
+Pancreatic secretion,69,61,102,12222,1,2.903777619387028,0.2926344487581953,1.0,PLA2G1B,4.377209386499366,-0.0,Pancreatic secretion,0.2926344487581953,1.0,1,61,Downregulated
+Dilated cardiomyopathy,69,64,96,12222,1,2.767663043478261,0.3046077528397202,1.0,DES,4.169377550433933,-0.0,Dilated cardiomyopathy,0.3046077528397202,1.0,1,64,Downregulated
+Aldosterone synthesis and secretion,69,68,98,12222,1,2.604859335038363,0.3202619597325933,1.0,KCNK3,3.9210056772100566,-0.0,Aldosterone synthesis and secretion,0.3202619597325933,1.0,1,68,Downregulated
+Glutamatergic synapse,69,68,114,12222,1,2.604859335038363,0.3202619597325933,1.0,SLC1A1,3.9210056772100566,-0.0,Glutamatergic synapse,0.3202619597325933,1.0,1,68,Downregulated
+Systemic lupus erythematosus,69,70,135,12222,1,2.5304347826086957,0.327958308094095,1.0,C7,3.807540828650948,-0.0,Systemic lupus erythematosus,0.327958308094095,1.0,1,70,Downregulated
+IL-17 signaling pathway,69,75,94,12222,1,2.3617391304347826,0.34682545967518563,1.0,FOSB,3.550531524028805,-0.0,IL-17 signaling pathway,0.34682545967518563,1.0,1,75,Downregulated
+TGF-beta signaling pathway,69,77,94,12222,1,2.300395256916996,0.3542252921629719,1.0,ID4,3.457134678688994,-0.0,TGF-beta signaling pathway,0.3542252921629719,1.0,1,77,Downregulated
+Glycerophospholipid metabolism,69,78,98,12222,1,2.270903010033445,0.35789416452532313,1.0,PLA2G1B,3.412243936896633,-0.0,Glycerophospholipid metabolism,0.35789416452532313,1.0,1,78,Downregulated
+"Growth hormone synthesis, secretion and action",69,88,119,12222,1,2.0128458498023716,0.39347148304700613,1.0,SSTR1,3.0197705943691346,-0.0,"Growth hormone synthesis, secretion and action",0.39347148304700613,1.0,1,88,Downregulated
+AGE-RAGE signaling pathway in diabetic complications,69,89,100,12222,1,1.990229604298974,0.3969205079085321,1.0,VEGFD,2.9854014598540144,-0.0,AGE-RAGE signaling pathway in diabetic complications,0.3969205079085321,1.0,1,89,Downregulated
+Alcoholism,69,90,186,12222,1,1.9681159420289855,0.4003502025392347,1.0,FOSB,2.951800350691188,-0.0,Alcoholism,0.4003502025392347,1.0,1,90,Downregulated
+Adrenergic signaling in cardiomyocytes,69,95,150,12222,1,1.8645308924485127,0.41721243831705634,1.0,AGTR2,2.794461823658904,-0.0,Adrenergic signaling in cardiomyocytes,0.41721243831705634,1.0,1,95,Downregulated
+Lysosome,69,99,128,12222,1,1.7891963109354412,0.43036501781347297,1.0,LAMP3,2.6800918892882284,-0.0,Lysosome,0.43036501781347297,1.0,1,99,Downregulated
+Relaxin signaling pathway,69,99,129,12222,1,1.7891963109354412,0.43036501781347297,1.0,VEGFD,2.6800918892882284,-0.0,Relaxin signaling pathway,0.43036501781347297,1.0,1,99,Downregulated
+TNF signaling pathway,69,100,112,12222,1,1.7713043478260868,0.43360718672965504,1.0,VEGFD,2.6529362139162966,-0.0,TNF signaling pathway,0.43360718672965504,1.0,1,100,Downregulated
+Signaling pathways regulating pluripotency of stem cells,69,108,143,12222,1,1.6400966183574879,0.4588981683054111,1.0,ID4,2.453878798166695,-0.0,Signaling pathways regulating pluripotency of stem cells,0.4588981683054111,1.0,1,108,Downregulated
+Osteoclast differentiation,69,109,127,12222,1,1.6250498603909056,0.4619802243056523,1.0,FOSB,2.431060580577887,-0.0,Osteoclast differentiation,0.4619802243056523,1.0,1,109,Downregulated
+Cushing syndrome,69,111,155,12222,1,1.5957696827262045,0.4680925258470782,1.0,KCNK3,2.386663143640387,-0.0,Cushing syndrome,0.4680925258470782,1.0,1,111,Downregulated
+Diabetic cardiomyopathy,69,125,203,12222,1,1.4170434782608696,0.5090038991365985,1.0,PDK4,2.1158209480256795,-0.0,Diabetic cardiomyopathy,0.5090038991365985,1.0,1,125,Downregulated
+Parkinson disease,69,129,249,12222,1,1.3731041456016178,0.5201121411149613,1.0,LRRK2,2.04927717344997,-0.0,Parkinson disease,0.5201121411149613,1.0,1,129,Downregulated
+Tuberculosis,69,129,180,12222,1,1.3731041456016178,0.5201121411149613,1.0,MRC1,2.04927717344997,-0.0,Tuberculosis,0.5201121411149613,1.0,1,129,Downregulated
+cAMP signaling pathway,69,132,216,12222,1,1.341897233201581,0.5282804362416555,1.0,SSTR1,2.002026033138131,-0.0,cAMP signaling pathway,0.5282804362416555,1.0,1,132,Downregulated
+Prion disease,69,148,273,12222,1,1.1968272620446534,0.5695845373564496,1.0,C7,1.7824817518248175,-0.0,Prion disease,0.5695845373564496,1.0,1,148,Downregulated
+Calcium signaling pathway,69,154,240,12222,1,1.150197628458498,0.5841365806163203,1.0,VEGFD,1.7119522575429753,-0.0,Calcium signaling pathway,0.5841365806163203,1.0,1,154,Downregulated
+Lipid and atherosclerosis,69,162,215,12222,1,1.0933977455716586,0.6027874716574142,1.0,OLR1,1.6260649476847981,-0.0,Lipid and atherosclerosis,0.6027874716574142,1.0,1,162,Downregulated
+Rap1 signaling pathway,69,165,210,12222,1,1.0735177865612648,0.6095669245132845,1.0,VEGFD,1.5960109156257627,-0.0,Rap1 signaling pathway,0.6095669245132845,1.0,1,165,Downregulated
+Focal adhesion,69,166,201,12222,1,1.0670508119434259,0.6118013014070878,1.0,VEGFD,1.5862350320859153,-0.0,Focal adhesion,0.6118013014070878,1.0,1,166,Downregulated
+MAPK signaling pathway,69,231,294,12222,1,0.766798418972332,0.7329494270778499,1.0,VEGFD,1.1327485472710863,-0.0,MAPK signaling pathway,0.7329494270778499,1.0,1,231,Downregulated
+PI3K-Akt signaling pathway,69,255,354,12222,1,0.6946291560102302,0.7675204631057359,1.0,VEGFD,1.0238624467612178,-0.0,PI3K-Akt signaling pathway,0.7675204631057359,1.0,1,255,Downregulated
+Pathways of neurodegeneration,69,282,475,12222,1,0.6281221091581868,0.8011594589754061,1.0,LRRK2,0.9235586210473091,-0.0,Pathways of neurodegeneration,0.8011594589754061,1.0,1,282,Downregulated
+Pathways in cancer,69,421,531,12222,1,0.4207373747805432,0.9115708743011774,1.0,VEGFD,0.6110296223647552,-0.0,Pathways in cancer,0.9115708743011774,1.0,1,421,Downregulated
+AMPK signaling pathway,69,84,120,12222,0,0.0,1.0,1.0,,1.0275850325656635,-0.0,AMPK signaling pathway,1.0,1.0,0,84,Downregulated
+Acute myeloid leukemia,69,56,67,12222,0,0.0,1.0,1.0,,1.5403960017826446,-0.0,Acute myeloid leukemia,1.0,1.0,0,56,Downregulated
+Adipocytokine signaling pathway,69,49,69,12222,0,0.0,1.0,1.0,,1.7592471477363563,-0.0,Adipocytokine signaling pathway,1.0,1.0,0,49,Downregulated
+African trypanosomiasis,69,28,37,12222,0,0.0,1.0,1.0,,3.060835542092642,-0.0,African trypanosomiasis,1.0,1.0,0,28,Downregulated
+"Alanine, aspartate and glutamate metabolism",69,27,37,12222,0,0.0,1.0,1.0,,3.1724002616088947,-0.0,"Alanine, aspartate and glutamate metabolism",1.0,1.0,0,27,Downregulated
+Aldosterone-regulated sodium reabsorption,69,29,37,12222,0,0.0,1.0,1.0,,2.9568345323741005,-0.0,Aldosterone-regulated sodium reabsorption,1.0,1.0,0,29,Downregulated
+Allograft rejection,69,31,38,12222,0,0.0,1.0,1.0,,2.7686422290738837,-0.0,Allograft rejection,1.0,1.0,0,31,Downregulated
+Alzheimer disease,69,217,369,12222,0,0.0,1.0,1.0,,0.39482345158356075,-0.0,Alzheimer disease,1.0,1.0,0,217,Downregulated
+Amino sugar and nucleotide sugar metabolism,69,39,48,12222,0,0.0,1.0,1.0,,2.206447500227666,-0.0,Amino sugar and nucleotide sugar metabolism,1.0,1.0,0,39,Downregulated
+Aminoacyl-tRNA biosynthesis,69,22,66,12222,0,0.0,1.0,1.0,,3.878976818545164,-0.0,Aminoacyl-tRNA biosynthesis,1.0,1.0,0,22,Downregulated
+Amoebiasis,69,84,102,12222,0,0.0,1.0,1.0,,1.0275850325656635,-0.0,Amoebiasis,1.0,1.0,0,84,Downregulated
+Amyotrophic lateral sclerosis,69,199,364,12222,0,0.0,1.0,1.0,,0.43109572492382037,-0.0,Amyotrophic lateral sclerosis,1.0,1.0,0,199,Downregulated
+Antigen processing and presentation,69,52,78,12222,0,0.0,1.0,1.0,,1.6583076396026035,-0.0,Antigen processing and presentation,1.0,1.0,0,52,Downregulated
+Apelin signaling pathway,69,96,137,12222,0,0.0,1.0,1.0,,0.8989078167517799,-0.0,Apelin signaling pathway,1.0,1.0,0,96,Downregulated
+Apoptosis,69,114,142,12222,0,0.0,1.0,1.0,,0.7564638245735289,-0.0,Apoptosis,1.0,1.0,0,114,Downregulated
+Arginine and proline metabolism,69,35,50,12222,0,0.0,1.0,1.0,,2.4558719221805654,-0.0,Arginine and proline metabolism,1.0,1.0,0,35,Downregulated
+Arginine biosynthesis,69,15,22,12222,0,0.0,1.0,1.0,,5.6340218148062196,-0.0,Arginine biosynthesis,1.0,1.0,0,15,Downregulated
+Ascorbate and aldarate metabolism,69,12,30,12222,0,0.0,1.0,1.0,,6.987913669064748,-0.0,Ascorbate and aldarate metabolism,1.0,1.0,0,12,Downregulated
+Asthma,69,20,31,12222,0,0.0,1.0,1.0,,4.25811545885243,-0.0,Asthma,1.0,1.0,0,20,Downregulated
+Autoimmune thyroid disease,69,29,53,12222,0,0.0,1.0,1.0,,2.9568345323741005,-0.0,Autoimmune thyroid disease,1.0,1.0,0,29,Downregulated
+Autophagy,69,98,137,12222,0,0.0,1.0,1.0,,0.8805098053536866,-0.0,Autophagy,1.0,1.0,0,98,Downregulated
+Axon guidance,69,153,182,12222,0,0.0,1.0,1.0,,0.5624399503198744,-0.0,Axon guidance,1.0,1.0,0,153,Downregulated
+B cell receptor signaling pathway,69,70,81,12222,0,0.0,1.0,1.0,,1.2330731159753048,-0.0,B cell receptor signaling pathway,1.0,1.0,0,70,Downregulated
+Bacterial invasion of epithelial cells,69,58,77,12222,0,0.0,1.0,1.0,,1.487486933530099,-0.0,Bacterial invasion of epithelial cells,1.0,1.0,0,58,Downregulated
+Basal cell carcinoma,69,55,63,12222,0,0.0,1.0,1.0,,1.5682805107265538,-0.0,Basal cell carcinoma,1.0,1.0,0,55,Downregulated
+Basal transcription factors,69,26,45,12222,0,0.0,1.0,1.0,,3.292384959956563,-0.0,Basal transcription factors,1.0,1.0,0,26,Downregulated
+Base excision repair,69,26,33,12222,0,0.0,1.0,1.0,,3.292384959956563,-0.0,Base excision repair,1.0,1.0,0,26,Downregulated
+Biosynthesis of unsaturated fatty acids,69,20,27,12222,0,0.0,1.0,1.0,,4.25811545885243,-0.0,Biosynthesis of unsaturated fatty acids,1.0,1.0,0,20,Downregulated
+Bladder cancer,69,37,41,12222,0,0.0,1.0,1.0,,2.3245083932853716,-0.0,Bladder cancer,1.0,1.0,0,37,Downregulated
+Breast cancer,69,115,147,12222,0,0.0,1.0,1.0,,0.749852066398829,-0.0,Breast cancer,1.0,1.0,0,115,Downregulated
+Butanoate metabolism,69,15,28,12222,0,0.0,1.0,1.0,,5.6340218148062196,-0.0,Butanoate metabolism,1.0,1.0,0,15,Downregulated
+C-type lectin receptor signaling pathway,69,85,104,12222,0,0.0,1.0,1.0,,1.0154823509613362,-0.0,C-type lectin receptor signaling pathway,1.0,1.0,0,85,Downregulated
+Caffeine metabolism,69,3,6,12222,0,0.0,1.0,1.0,,24.975334018499485,-0.0,Caffeine metabolism,1.0,1.0,0,3,Downregulated
+Carbohydrate digestion and absorption,69,28,47,12222,0,0.0,1.0,1.0,,3.060835542092642,-0.0,Carbohydrate digestion and absorption,1.0,1.0,0,28,Downregulated
+Cardiac muscle contraction,69,42,87,12222,0,0.0,1.0,1.0,,2.050190435886585,-0.0,Cardiac muscle contraction,1.0,1.0,0,42,Downregulated
+Cell adhesion molecules,69,128,148,12222,0,0.0,1.0,1.0,,0.6732637236514291,-0.0,Cell adhesion molecules,1.0,1.0,0,128,Downregulated
+Cell cycle,69,101,124,12222,0,0.0,1.0,1.0,,0.854272247226849,-0.0,Cell cycle,1.0,1.0,0,101,Downregulated
+Cellular senescence,69,127,156,12222,0,0.0,1.0,1.0,,0.6786006488926506,-0.0,Cellular senescence,1.0,1.0,0,127,Downregulated
+Central carbon metabolism in cancer,69,54,70,12222,0,0.0,1.0,1.0,,1.5971883044023496,-0.0,Central carbon metabolism in cancer,1.0,1.0,0,54,Downregulated
+Chagas disease,69,83,102,12222,0,0.0,1.0,1.0,,1.0399775987593158,-0.0,Chagas disease,1.0,1.0,0,83,Downregulated
+Chemical carcinogenesis,69,143,239,12222,0,0.0,1.0,1.0,,0.6021357130323616,-0.0,Chemical carcinogenesis,1.0,1.0,0,143,Downregulated
+Chemokine signaling pathway,69,155,192,12222,0,0.0,1.0,1.0,,0.5551134654976984,-0.0,Chemokine signaling pathway,1.0,1.0,0,155,Downregulated
+Choline metabolism in cancer,69,78,98,12222,0,0.0,1.0,1.0,,1.1066764422856619,-0.0,Choline metabolism in cancer,1.0,1.0,0,78,Downregulated
+Cholinergic synapse,69,71,113,12222,0,0.0,1.0,1.0,,1.2157267193238417,-0.0,Cholinergic synapse,1.0,1.0,0,71,Downregulated
+Chronic myeloid leukemia,69,66,76,12222,0,0.0,1.0,1.0,,1.3076756639800942,-0.0,Chronic myeloid leukemia,1.0,1.0,0,66,Downregulated
+Circadian entrainment,69,62,97,12222,0,0.0,1.0,1.0,,1.3918273381294963,-0.0,Circadian entrainment,1.0,1.0,0,62,Downregulated
+Circadian rhythm,69,24,31,12222,0,0.0,1.0,1.0,,3.5617383644105125,-0.0,Circadian rhythm,1.0,1.0,0,24,Downregulated
+Citrate cycle (TCA cycle),69,15,30,12222,0,0.0,1.0,1.0,,5.6340218148062196,-0.0,Citrate cycle (TCA cycle),1.0,1.0,0,15,Downregulated
+Collecting duct acid secretion,69,16,27,12222,0,0.0,1.0,1.0,,5.292129932417702,-0.0,Collecting duct acid secretion,1.0,1.0,0,16,Downregulated
+Colorectal cancer,69,73,86,12222,0,0.0,1.0,1.0,,1.1824499584006265,-0.0,Colorectal cancer,1.0,1.0,0,73,Downregulated
+Cysteine and methionine metabolism,69,34,50,12222,0,0.0,1.0,1.0,,2.527265144406214,-0.0,Cysteine and methionine metabolism,1.0,1.0,0,34,Downregulated
+Cytokine-cytokine receptor interaction,69,205,295,12222,0,0.0,1.0,1.0,,0.41829893749234187,-0.0,Cytokine-cytokine receptor interaction,1.0,1.0,0,205,Downregulated
+Cytosolic DNA-sensing pathway,69,37,63,12222,0,0.0,1.0,1.0,,2.3245083932853716,-0.0,Cytosolic DNA-sensing pathway,1.0,1.0,0,37,Downregulated
+D-Glutamine and D-glutamate metabolism,69,4,5,12222,0,0.0,1.0,1.0,,19.423661071143087,-0.0,D-Glutamine and D-glutamate metabolism,1.0,1.0,0,4,Downregulated
+DNA replication,69,29,36,12222,0,0.0,1.0,1.0,,2.9568345323741005,-0.0,DNA replication,1.0,1.0,0,29,Downregulated
+Dopaminergic synapse,69,83,132,12222,0,0.0,1.0,1.0,,1.0399775987593158,-0.0,Dopaminergic synapse,1.0,1.0,0,83,Downregulated
+ECM-receptor interaction,69,72,88,12222,0,0.0,1.0,1.0,,1.1988588439593153,-0.0,ECM-receptor interaction,1.0,1.0,0,72,Downregulated
+Endocrine and other factor-regulated calcium reabsorption,69,36,53,12222,0,0.0,1.0,1.0,,2.388390657337144,-0.0,Endocrine and other factor-regulated calcium reabsorption,1.0,1.0,0,36,Downregulated
+Endocytosis,69,189,252,12222,0,0.0,1.0,1.0,,0.45422448321026554,-0.0,Endocytosis,1.0,1.0,0,189,Downregulated
+Endometrial cancer,69,47,58,12222,0,0.0,1.0,1.0,,1.8336236274138584,-0.0,Endometrial cancer,1.0,1.0,0,47,Downregulated
+Epithelial cell signaling in Helicobacter pylori infection,69,54,70,12222,0,0.0,1.0,1.0,,1.5971883044023496,-0.0,Epithelial cell signaling in Helicobacter pylori infection,1.0,1.0,0,54,Downregulated
+Epstein-Barr virus infection,69,151,202,12222,0,0.0,1.0,1.0,,0.5699598736852103,-0.0,Epstein-Barr virus infection,1.0,1.0,0,151,Downregulated
+ErbB signaling pathway,69,68,85,12222,0,0.0,1.0,1.0,,1.2692853016856587,-0.0,ErbB signaling pathway,1.0,1.0,0,68,Downregulated
+Estrogen signaling pathway,69,95,137,12222,0,0.0,1.0,1.0,,0.9083957964518438,-0.0,Estrogen signaling pathway,1.0,1.0,0,95,Downregulated
+Fanconi anemia pathway,69,38,54,12222,0,0.0,1.0,1.0,,2.26394468840512,-0.0,Fanconi anemia pathway,1.0,1.0,0,38,Downregulated
+Fatty acid biosynthesis,69,12,18,12222,0,0.0,1.0,1.0,,6.987913669064748,-0.0,Fatty acid biosynthesis,1.0,1.0,0,12,Downregulated
+Fatty acid degradation,69,25,43,12222,0,0.0,1.0,1.0,,3.421780222880519,-0.0,Fatty acid degradation,1.0,1.0,0,25,Downregulated
+Fatty acid elongation,69,20,27,12222,0,0.0,1.0,1.0,,4.25811545885243,-0.0,Fatty acid elongation,1.0,1.0,0,20,Downregulated
+Fc gamma R-mediated phagocytosis,69,80,97,12222,0,0.0,1.0,1.0,,1.0790026364001966,-0.0,Fc gamma R-mediated phagocytosis,1.0,1.0,0,80,Downregulated
+Ferroptosis,69,32,41,12222,0,0.0,1.0,1.0,,2.6832318760376315,-0.0,Ferroptosis,1.0,1.0,0,32,Downregulated
+Fluid shear stress and atherosclerosis,69,115,139,12222,0,0.0,1.0,1.0,,0.749852066398829,-0.0,Fluid shear stress and atherosclerosis,1.0,1.0,0,115,Downregulated
+Folate biosynthesis,69,19,26,12222,0,0.0,1.0,1.0,,4.47684928979893,-0.0,Folate biosynthesis,1.0,1.0,0,19,Downregulated
+FoxO signaling pathway,69,101,131,12222,0,0.0,1.0,1.0,,0.854272247226849,-0.0,FoxO signaling pathway,1.0,1.0,0,101,Downregulated
+Fructose and mannose metabolism,69,25,33,12222,0,0.0,1.0,1.0,,3.421780222880519,-0.0,Fructose and mannose metabolism,1.0,1.0,0,25,Downregulated
+GABAergic synapse,69,44,89,12222,0,0.0,1.0,1.0,,1.9577237086735106,-0.0,GABAergic synapse,1.0,1.0,0,44,Downregulated
+Galactose metabolism,69,23,31,12222,0,0.0,1.0,1.0,,3.7136078371345476,-0.0,Galactose metabolism,1.0,1.0,0,23,Downregulated
+Gap junction,69,66,88,12222,0,0.0,1.0,1.0,,1.3076756639800942,-0.0,Gap junction,1.0,1.0,0,66,Downregulated
+Gastric acid secretion,69,45,76,12222,0,0.0,1.0,1.0,,1.9145386987113606,-0.0,Gastric acid secretion,1.0,1.0,0,45,Downregulated
+Gastric cancer,69,112,149,12222,0,0.0,1.0,1.0,,0.7700399680255795,-0.0,Gastric cancer,1.0,1.0,0,112,Downregulated
+Glioma,69,62,75,12222,0,0.0,1.0,1.0,,1.3918273381294963,-0.0,Glioma,1.0,1.0,0,62,Downregulated
+Glucagon signaling pathway,69,65,107,12222,0,0.0,1.0,1.0,,1.3277500137294744,-0.0,Glucagon signaling pathway,1.0,1.0,0,65,Downregulated
+Glutathione metabolism,69,44,57,12222,0,0.0,1.0,1.0,,1.9577237086735106,-0.0,Glutathione metabolism,1.0,1.0,0,44,Downregulated
+Glycerolipid metabolism,69,45,61,12222,0,0.0,1.0,1.0,,1.9145386987113606,-0.0,Glycerolipid metabolism,1.0,1.0,0,45,Downregulated
+"Glycine, serine and threonine metabolism",69,27,40,12222,0,0.0,1.0,1.0,,3.1724002616088947,-0.0,"Glycine, serine and threonine metabolism",1.0,1.0,0,27,Downregulated
+Glycolysis / Gluconeogenesis,69,43,67,12222,0,0.0,1.0,1.0,,2.0028942363350697,-0.0,Glycolysis / Gluconeogenesis,1.0,1.0,0,43,Downregulated
+Glycosaminoglycan biosynthesis,69,44,53,12222,0,0.0,1.0,1.0,,1.9577237086735106,-0.0,Glycosaminoglycan biosynthesis,1.0,1.0,0,44,Downregulated
+Glycosaminoglycan degradation,69,16,19,12222,0,0.0,1.0,1.0,,5.292129932417702,-0.0,Glycosaminoglycan degradation,1.0,1.0,0,16,Downregulated
+Glycosphingolipid biosynthesis,69,31,45,12222,0,0.0,1.0,1.0,,2.7686422290738837,-0.0,Glycosphingolipid biosynthesis,1.0,1.0,0,31,Downregulated
+Glycosylphosphatidylinositol (GPI)-anchor biosynthesis,69,14,26,12222,0,0.0,1.0,1.0,,6.0230711982138425,-0.0,Glycosylphosphatidylinositol (GPI)-anchor biosynthesis,1.0,1.0,0,14,Downregulated
+Glyoxylate and dicarboxylate metabolism,69,17,30,12222,0,0.0,1.0,1.0,,4.989311408016444,-0.0,Glyoxylate and dicarboxylate metabolism,1.0,1.0,0,17,Downregulated
+GnRH secretion,69,42,64,12222,0,0.0,1.0,1.0,,2.050190435886585,-0.0,GnRH secretion,1.0,1.0,0,42,Downregulated
+GnRH signaling pathway,69,70,93,12222,0,0.0,1.0,1.0,,1.2330731159753048,-0.0,GnRH signaling pathway,1.0,1.0,0,70,Downregulated
+Graft-versus-host disease,69,32,42,12222,0,0.0,1.0,1.0,,2.6832318760376315,-0.0,Graft-versus-host disease,1.0,1.0,0,32,Downregulated
+HIF-1 signaling pathway,69,80,109,12222,0,0.0,1.0,1.0,,1.0790026364001966,-0.0,HIF-1 signaling pathway,1.0,1.0,0,80,Downregulated
+Hedgehog signaling pathway,69,48,56,12222,0,0.0,1.0,1.0,,1.7956686197433807,-0.0,Hedgehog signaling pathway,1.0,1.0,0,48,Downregulated
+Hematopoietic cell lineage,69,81,99,12222,0,0.0,1.0,1.0,,1.0656750673081168,-0.0,Hematopoietic cell lineage,1.0,1.0,0,81,Downregulated
+Hepatitis B,69,123,162,12222,0,0.0,1.0,1.0,,0.7008126292488277,-0.0,Hepatitis B,1.0,1.0,0,123,Downregulated
+Hepatitis C,69,114,157,12222,0,0.0,1.0,1.0,,0.7564638245735289,-0.0,Hepatitis C,1.0,1.0,0,114,Downregulated
+Hepatocellular carcinoma,69,138,168,12222,0,0.0,1.0,1.0,,0.6241331844271875,-0.0,Hepatocellular carcinoma,1.0,1.0,0,138,Downregulated
+Herpes simplex virus 1 infection,69,406,498,12222,0,0.0,1.0,1.0,,0.20790747475820082,-0.0,Herpes simplex virus 1 infection,1.0,1.0,0,406,Downregulated
+Hippo signaling pathway,69,131,163,12222,0,0.0,1.0,1.0,,0.6577399677216402,-0.0,Hippo signaling pathway,1.0,1.0,0,131,Downregulated
+Histidine metabolism,69,18,22,12222,0,0.0,1.0,1.0,,4.719230021388295,-0.0,Histidine metabolism,1.0,1.0,0,18,Downregulated
+Homologous recombination,69,26,41,12222,0,0.0,1.0,1.0,,3.292384959956563,-0.0,Homologous recombination,1.0,1.0,0,26,Downregulated
+Human T-cell leukemia virus 1 infection,69,182,219,12222,0,0.0,1.0,1.0,,0.47192273578397553,-0.0,Human T-cell leukemia virus 1 infection,1.0,1.0,0,182,Downregulated
+Human cytomegalovirus infection,69,170,225,12222,0,0.0,1.0,1.0,,0.5056435789784595,-0.0,Human cytomegalovirus infection,1.0,1.0,0,170,Downregulated
+Human immunodeficiency virus 1 infection,69,155,212,12222,0,0.0,1.0,1.0,,0.5551134654976984,-0.0,Human immunodeficiency virus 1 infection,1.0,1.0,0,155,Downregulated
+Human papillomavirus infection,69,259,331,12222,0,0.0,1.0,1.0,,0.3297570036456384,-0.0,Human papillomavirus infection,1.0,1.0,0,259,Downregulated
+Huntington disease,69,167,306,12222,0,0.0,1.0,1.0,,0.5148287340277032,-0.0,Huntington disease,1.0,1.0,0,167,Downregulated
+Inflammatory bowel disease,69,51,65,12222,0,0.0,1.0,1.0,,1.6906474820143884,-0.0,Inflammatory bowel disease,1.0,1.0,0,51,Downregulated
+Inflammatory mediator regulation of TRP channels,69,72,98,12222,0,0.0,1.0,1.0,,1.1988588439593153,-0.0,Inflammatory mediator regulation of TRP channels,1.0,1.0,0,72,Downregulated
+Influenza A,69,128,172,12222,0,0.0,1.0,1.0,,0.6732637236514291,-0.0,Influenza A,1.0,1.0,0,128,Downregulated
+Inositol phosphate metabolism,69,64,73,12222,0,0.0,1.0,1.0,,1.3484468239362,-0.0,Inositol phosphate metabolism,1.0,1.0,0,64,Downregulated
+Insulin resistance,69,82,108,12222,0,0.0,1.0,1.0,,1.0526705908000873,-0.0,Insulin resistance,1.0,1.0,0,82,Downregulated
+Insulin secretion,69,53,86,12222,0,0.0,1.0,1.0,,1.6271767632622873,-0.0,Insulin secretion,1.0,1.0,0,53,Downregulated
+Insulin signaling pathway,69,100,137,12222,0,0.0,1.0,1.0,,0.8628440531157164,-0.0,Insulin signaling pathway,1.0,1.0,0,100,Downregulated
+Intestinal immune network for IgA production,69,36,48,12222,0,0.0,1.0,1.0,,2.388390657337144,-0.0,Intestinal immune network for IgA production,1.0,1.0,0,36,Downregulated
+JAK-STAT signaling pathway,69,109,162,12222,0,0.0,1.0,1.0,,0.7913340560428369,-0.0,JAK-STAT signaling pathway,1.0,1.0,0,109,Downregulated
+Kaposi sarcoma-associated herpesvirus infection,69,147,193,12222,0,0.0,1.0,1.0,,0.5856115107913669,-0.0,Kaposi sarcoma-associated herpesvirus infection,1.0,1.0,0,147,Downregulated
+Legionellosis,69,43,57,12222,0,0.0,1.0,1.0,,2.0028942363350697,-0.0,Legionellosis,1.0,1.0,0,43,Downregulated
+Leishmaniasis,69,65,77,12222,0,0.0,1.0,1.0,,1.3277500137294744,-0.0,Leishmaniasis,1.0,1.0,0,65,Downregulated
+Leukocyte transendothelial migration,69,91,114,12222,0,0.0,1.0,1.0,,0.9484215905963753,-0.0,Leukocyte transendothelial migration,1.0,1.0,0,91,Downregulated
+Long-term depression,69,43,60,12222,0,0.0,1.0,1.0,,2.0028942363350697,-0.0,Long-term depression,1.0,1.0,0,43,Downregulated
+Long-term potentiation,69,43,67,12222,0,0.0,1.0,1.0,,2.0028942363350697,-0.0,Long-term potentiation,1.0,1.0,0,43,Downregulated
+Longevity regulating pathway,69,77,102,12222,0,0.0,1.0,1.0,,1.1210489672777906,-0.0,Longevity regulating pathway,1.0,1.0,0,77,Downregulated
+Lysine degradation,69,51,63,12222,0,0.0,1.0,1.0,,1.6906474820143884,-0.0,Lysine degradation,1.0,1.0,0,51,Downregulated
+Mannose type O-glycan biosynthesis,69,14,23,12222,0,0.0,1.0,1.0,,6.0230711982138425,-0.0,Mannose type O-glycan biosynthesis,1.0,1.0,0,14,Downregulated
+Maturity onset diabetes of the young,69,8,26,12222,0,0.0,1.0,1.0,,10.279729157850191,-0.0,Maturity onset diabetes of the young,1.0,1.0,0,8,Downregulated
+Measles,69,104,139,12222,0,0.0,1.0,1.0,,0.8295411517675811,-0.0,Measles,1.0,1.0,0,104,Downregulated
+Melanogenesis,69,77,101,12222,0,0.0,1.0,1.0,,1.1210489672777906,-0.0,Melanogenesis,1.0,1.0,0,77,Downregulated
+Melanoma,69,55,72,12222,0,0.0,1.0,1.0,,1.5682805107265538,-0.0,Melanoma,1.0,1.0,0,55,Downregulated
+Metabolism of xenobiotics by cytochrome P450,69,39,76,12222,0,0.0,1.0,1.0,,2.206447500227666,-0.0,Metabolism of xenobiotics by cytochrome P450,1.0,1.0,0,39,Downregulated
+MicroRNAs in cancer,69,136,310,12222,0,0.0,1.0,1.0,,0.6333834031675758,-0.0,MicroRNAs in cancer,1.0,1.0,0,136,Downregulated
+Mismatch repair,69,18,23,12222,0,0.0,1.0,1.0,,4.719230021388295,-0.0,Mismatch repair,1.0,1.0,0,18,Downregulated
+Mitophagy,69,48,68,12222,0,0.0,1.0,1.0,,1.7956686197433807,-0.0,Mitophagy,1.0,1.0,0,48,Downregulated
+Morphine addiction,69,53,91,12222,0,0.0,1.0,1.0,,1.6271767632622873,-0.0,Morphine addiction,1.0,1.0,0,53,Downregulated
+Mucin type O-glycan biosynthesis,69,29,36,12222,0,0.0,1.0,1.0,,2.9568345323741005,-0.0,Mucin type O-glycan biosynthesis,1.0,1.0,0,29,Downregulated
+N-Glycan biosynthesis,69,28,50,12222,0,0.0,1.0,1.0,,3.060835542092642,-0.0,N-Glycan biosynthesis,1.0,1.0,0,28,Downregulated
+NF-kappa B signaling pathway,69,87,104,12222,0,0.0,1.0,1.0,,0.9921068859198355,-0.0,NF-kappa B signaling pathway,1.0,1.0,0,87,Downregulated
+NOD-like receptor signaling pathway,69,129,181,12222,0,0.0,1.0,1.0,,0.6680092219660565,-0.0,NOD-like receptor signaling pathway,1.0,1.0,0,129,Downregulated
+Natural killer cell mediated cytotoxicity,69,85,131,12222,0,0.0,1.0,1.0,,1.0154823509613362,-0.0,Natural killer cell mediated cytotoxicity,1.0,1.0,0,85,Downregulated
+Necroptosis,69,98,159,12222,0,0.0,1.0,1.0,,0.8805098053536866,-0.0,Necroptosis,1.0,1.0,0,98,Downregulated
+"Neomycin, kanamycin and gentamicin biosynthesis",69,4,5,12222,0,0.0,1.0,1.0,,19.423661071143087,-0.0,"Neomycin, kanamycin and gentamicin biosynthesis",1.0,1.0,0,4,Downregulated
+Neurotrophin signaling pathway,69,91,119,12222,0,0.0,1.0,1.0,,0.9484215905963753,-0.0,Neurotrophin signaling pathway,1.0,1.0,0,91,Downregulated
+Neutrophil extracellular trap formation,69,107,189,12222,0,0.0,1.0,1.0,,0.8061903965199934,-0.0,Neutrophil extracellular trap formation,1.0,1.0,0,107,Downregulated
+Nicotinate and nicotinamide metabolism,69,26,35,12222,0,0.0,1.0,1.0,,3.292384959956563,-0.0,Nicotinate and nicotinamide metabolism,1.0,1.0,0,26,Downregulated
+Nicotine addiction,69,7,40,12222,0,0.0,1.0,1.0,,11.651318944844125,-0.0,Nicotine addiction,1.0,1.0,0,7,Downregulated
+Nitrogen metabolism,69,12,17,12222,0,0.0,1.0,1.0,,6.987913669064748,-0.0,Nitrogen metabolism,1.0,1.0,0,12,Downregulated
+Non-alcoholic fatty liver disease,69,99,155,12222,0,0.0,1.0,1.0,,0.8715881566103901,-0.0,Non-alcoholic fatty liver disease,1.0,1.0,0,99,Downregulated
+Non-homologous end-joining,69,7,13,12222,0,0.0,1.0,1.0,,11.651318944844125,-0.0,Non-homologous end-joining,1.0,1.0,0,7,Downregulated
+Non-small cell lung cancer,69,59,72,12222,0,0.0,1.0,1.0,,1.4623662414606131,-0.0,Non-small cell lung cancer,1.0,1.0,0,59,Downregulated
+Notch signaling pathway,69,51,59,12222,0,0.0,1.0,1.0,,1.6906474820143884,-0.0,Notch signaling pathway,1.0,1.0,0,51,Downregulated
+Nucleotide excision repair,69,32,47,12222,0,0.0,1.0,1.0,,2.6832318760376315,-0.0,Nucleotide excision repair,1.0,1.0,0,32,Downregulated
+Olfactory transduction,69,26,440,12222,0,0.0,1.0,1.0,,3.292384959956563,-0.0,Olfactory transduction,1.0,1.0,0,26,Downregulated
+One carbon pool by folate,69,14,20,12222,0,0.0,1.0,1.0,,6.0230711982138425,-0.0,One carbon pool by folate,1.0,1.0,0,14,Downregulated
+Oocyte meiosis,69,74,129,12222,0,0.0,1.0,1.0,,1.1664815798368018,-0.0,Oocyte meiosis,1.0,1.0,0,74,Downregulated
+Other glycan degradation,69,15,18,12222,0,0.0,1.0,1.0,,5.6340218148062196,-0.0,Other glycan degradation,1.0,1.0,0,15,Downregulated
+Other types of O-glycan biosynthesis,69,36,47,12222,0,0.0,1.0,1.0,,2.388390657337144,-0.0,Other types of O-glycan biosynthesis,1.0,1.0,0,36,Downregulated
+Ovarian steroidogenesis,69,31,51,12222,0,0.0,1.0,1.0,,2.7686422290738837,-0.0,Ovarian steroidogenesis,1.0,1.0,0,31,Downregulated
+Oxidative phosphorylation,69,62,133,12222,0,0.0,1.0,1.0,,1.3918273381294963,-0.0,Oxidative phosphorylation,1.0,1.0,0,62,Downregulated
+Oxytocin signaling pathway,69,106,154,12222,0,0.0,1.0,1.0,,0.813827810990644,-0.0,Oxytocin signaling pathway,1.0,1.0,0,106,Downregulated
+PD-L1 expression and PD-1 checkpoint pathway in cancer,69,67,89,12222,0,0.0,1.0,1.0,,1.2881961097788437,-0.0,PD-L1 expression and PD-1 checkpoint pathway in cancer,1.0,1.0,0,67,Downregulated
+Pancreatic cancer,69,65,76,12222,0,0.0,1.0,1.0,,1.3277500137294744,-0.0,Pancreatic cancer,1.0,1.0,0,65,Downregulated
+Pantothenate and CoA biosynthesis,69,15,21,12222,0,0.0,1.0,1.0,,5.6340218148062196,-0.0,Pantothenate and CoA biosynthesis,1.0,1.0,0,15,Downregulated
+"Parathyroid hormone synthesis, secretion and action",69,81,106,12222,0,0.0,1.0,1.0,,1.0656750673081168,-0.0,"Parathyroid hormone synthesis, secretion and action",1.0,1.0,0,81,Downregulated
+Pathogenic Escherichia coli infection,69,147,197,12222,0,0.0,1.0,1.0,,0.5856115107913669,-0.0,Pathogenic Escherichia coli infection,1.0,1.0,0,147,Downregulated
+Pentose and glucuronate interconversions,69,12,34,12222,0,0.0,1.0,1.0,,6.987913669064748,-0.0,Pentose and glucuronate interconversions,1.0,1.0,0,12,Downregulated
+Pentose phosphate pathway,69,22,30,12222,0,0.0,1.0,1.0,,3.878976818545164,-0.0,Pentose phosphate pathway,1.0,1.0,0,22,Downregulated
+Peroxisome,69,56,82,12222,0,0.0,1.0,1.0,,1.5403960017826446,-0.0,Peroxisome,1.0,1.0,0,56,Downregulated
+Pertussis,69,62,76,12222,0,0.0,1.0,1.0,,1.3918273381294963,-0.0,Pertussis,1.0,1.0,0,62,Downregulated
+Phenylalanine metabolism,69,11,17,12222,0,0.0,1.0,1.0,,7.596183922427276,-0.0,Phenylalanine metabolism,1.0,1.0,0,11,Downregulated
+"Phenylalanine, tyrosine and tryptophan biosynthesis",69,3,6,12222,0,0.0,1.0,1.0,,24.975334018499485,-0.0,"Phenylalanine, tyrosine and tryptophan biosynthesis",1.0,1.0,0,3,Downregulated
+Phosphatidylinositol signaling system,69,78,97,12222,0,0.0,1.0,1.0,,1.1066764422856619,-0.0,Phosphatidylinositol signaling system,1.0,1.0,0,78,Downregulated
+Phospholipase D signaling pathway,69,116,148,12222,0,0.0,1.0,1.0,,0.7433538148022355,-0.0,Phospholipase D signaling pathway,1.0,1.0,0,116,Downregulated
+Phosphonate and phosphinate metabolism,69,3,6,12222,0,0.0,1.0,1.0,,24.975334018499485,-0.0,Phosphonate and phosphinate metabolism,1.0,1.0,0,3,Downregulated
+Phototransduction,69,9,28,12222,0,0.0,1.0,1.0,,9.196895115486559,-0.0,Phototransduction,1.0,1.0,0,9,Downregulated
+Platelet activation,69,102,124,12222,0,0.0,1.0,1.0,,0.8458676960870328,-0.0,Platelet activation,1.0,1.0,0,102,Downregulated
+Porphyrin and chlorophyll metabolism,69,19,43,12222,0,0.0,1.0,1.0,,4.47684928979893,-0.0,Porphyrin and chlorophyll metabolism,1.0,1.0,0,19,Downregulated
+Primary bile acid biosynthesis,69,9,17,12222,0,0.0,1.0,1.0,,9.196895115486559,-0.0,Primary bile acid biosynthesis,1.0,1.0,0,9,Downregulated
+Primary immunodeficiency,69,31,38,12222,0,0.0,1.0,1.0,,2.7686422290738837,-0.0,Primary immunodeficiency,1.0,1.0,0,31,Downregulated
+Progesterone-mediated oocyte maturation,69,63,100,12222,0,0.0,1.0,1.0,,1.3697955021809325,-0.0,Progesterone-mediated oocyte maturation,1.0,1.0,0,63,Downregulated
+Prolactin signaling pathway,69,50,70,12222,0,0.0,1.0,1.0,,1.7242681102642639,-0.0,Prolactin signaling pathway,1.0,1.0,0,50,Downregulated
+Propanoate metabolism,69,19,34,12222,0,0.0,1.0,1.0,,4.47684928979893,-0.0,Propanoate metabolism,1.0,1.0,0,19,Downregulated
+Prostate cancer,69,84,97,12222,0,0.0,1.0,1.0,,1.0275850325656635,-0.0,Prostate cancer,1.0,1.0,0,84,Downregulated
+Proteasome,69,16,46,12222,0,0.0,1.0,1.0,,5.292129932417702,-0.0,Proteasome,1.0,1.0,0,16,Downregulated
+Protein export,69,12,23,12222,0,0.0,1.0,1.0,,6.987913669064748,-0.0,Protein export,1.0,1.0,0,12,Downregulated
+Protein processing in endoplasmic reticulum,69,106,171,12222,0,0.0,1.0,1.0,,0.813827810990644,-0.0,Protein processing in endoplasmic reticulum,1.0,1.0,0,106,Downregulated
+Proteoglycans in cancer,69,168,205,12222,0,0.0,1.0,1.0,,0.5117306748073351,-0.0,Proteoglycans in cancer,1.0,1.0,0,168,Downregulated
+Purine metabolism,69,88,129,12222,0,0.0,1.0,1.0,,0.9808153477218226,-0.0,Purine metabolism,1.0,1.0,0,88,Downregulated
+Pyrimidine metabolism,69,43,56,12222,0,0.0,1.0,1.0,,2.0028942363350697,-0.0,Pyrimidine metabolism,1.0,1.0,0,43,Downregulated
+Pyruvate metabolism,69,29,47,12222,0,0.0,1.0,1.0,,2.9568345323741005,-0.0,Pyruvate metabolism,1.0,1.0,0,29,Downregulated
+RIG-I-like receptor signaling pathway,69,42,70,12222,0,0.0,1.0,1.0,,2.050190435886585,-0.0,RIG-I-like receptor signaling pathway,1.0,1.0,0,42,Downregulated
+RNA degradation,69,56,79,12222,0,0.0,1.0,1.0,,1.5403960017826446,-0.0,RNA degradation,1.0,1.0,0,56,Downregulated
+RNA polymerase,69,20,31,12222,0,0.0,1.0,1.0,,4.25811545885243,-0.0,RNA polymerase,1.0,1.0,0,20,Downregulated
+RNA transport,69,106,186,12222,0,0.0,1.0,1.0,,0.813827810990644,-0.0,RNA transport,1.0,1.0,0,106,Downregulated
+Regulation of actin cytoskeleton,69,165,218,12222,0,0.0,1.0,1.0,,0.5211371688147971,-0.0,Regulation of actin cytoskeleton,1.0,1.0,0,165,Downregulated
+Regulation of lipolysis in adipocytes,69,40,55,12222,0,0.0,1.0,1.0,,2.1517896793676172,-0.0,Regulation of lipolysis in adipocytes,1.0,1.0,0,40,Downregulated
+Renal cell carcinoma,69,55,69,12222,0,0.0,1.0,1.0,,1.5682805107265538,-0.0,Renal cell carcinoma,1.0,1.0,0,55,Downregulated
+Retrograde endocannabinoid signaling,69,76,148,12222,0,0.0,1.0,1.0,,1.1357972445572952,-0.0,Retrograde endocannabinoid signaling,1.0,1.0,0,76,Downregulated
+Rheumatoid arthritis,69,76,93,12222,0,0.0,1.0,1.0,,1.1357972445572952,-0.0,Rheumatoid arthritis,1.0,1.0,0,76,Downregulated
+Riboflavin metabolism,69,6,8,12222,0,0.0,1.0,1.0,,13.444936358605423,-0.0,Riboflavin metabolism,1.0,1.0,0,6,Downregulated
+Ribosome,69,105,158,12222,0,0.0,1.0,1.0,,0.8216100105697433,-0.0,Ribosome,1.0,1.0,0,105,Downregulated
+Ribosome biogenesis in eukaryotes,69,49,108,12222,0,0.0,1.0,1.0,,1.7592471477363563,-0.0,Ribosome biogenesis in eukaryotes,1.0,1.0,0,49,Downregulated
+SNARE interactions in vesicular transport,69,17,33,12222,0,0.0,1.0,1.0,,4.989311408016444,-0.0,SNARE interactions in vesicular transport,1.0,1.0,0,17,Downregulated
+Salmonella infection,69,185,249,12222,0,0.0,1.0,1.0,,0.46417421319009483,-0.0,Salmonella infection,1.0,1.0,0,185,Downregulated
+Serotonergic synapse,69,68,113,12222,0,0.0,1.0,1.0,,1.2692853016856587,-0.0,Serotonergic synapse,1.0,1.0,0,68,Downregulated
+Shigellosis,69,174,246,12222,0,0.0,1.0,1.0,,0.4938879841685391,-0.0,Shigellosis,1.0,1.0,0,174,Downregulated
+Small cell lung cancer,69,80,92,12222,0,0.0,1.0,1.0,,1.0790026364001966,-0.0,Small cell lung cancer,1.0,1.0,0,80,Downregulated
+Sphingolipid metabolism,69,39,49,12222,0,0.0,1.0,1.0,,2.206447500227666,-0.0,Sphingolipid metabolism,1.0,1.0,0,39,Downregulated
+Sphingolipid signaling pathway,69,95,119,12222,0,0.0,1.0,1.0,,0.9083957964518438,-0.0,Sphingolipid signaling pathway,1.0,1.0,0,95,Downregulated
+Spinocerebellar ataxia,69,82,143,12222,0,0.0,1.0,1.0,,1.0526705908000873,-0.0,Spinocerebellar ataxia,1.0,1.0,0,82,Downregulated
+Spliceosome,69,84,150,12222,0,0.0,1.0,1.0,,1.0275850325656635,-0.0,Spliceosome,1.0,1.0,0,84,Downregulated
+Starch and sucrose metabolism,69,22,36,12222,0,0.0,1.0,1.0,,3.878976818545164,-0.0,Starch and sucrose metabolism,1.0,1.0,0,22,Downregulated
+Steroid biosynthesis,69,17,20,12222,0,0.0,1.0,1.0,,4.989311408016444,-0.0,Steroid biosynthesis,1.0,1.0,0,17,Downregulated
+Sulfur metabolism,69,7,10,12222,0,0.0,1.0,1.0,,11.651318944844125,-0.0,Sulfur metabolism,1.0,1.0,0,7,Downregulated
+Sulfur relay system,69,5,8,12222,0,0.0,1.0,1.0,,15.890778286461739,-0.0,Sulfur relay system,1.0,1.0,0,5,Downregulated
+Synthesis and degradation of ketone bodies,69,7,10,12222,0,0.0,1.0,1.0,,11.651318944844125,-0.0,Synthesis and degradation of ketone bodies,1.0,1.0,0,7,Downregulated
+T cell receptor signaling pathway,69,83,104,12222,0,0.0,1.0,1.0,,1.0399775987593158,-0.0,T cell receptor signaling pathway,1.0,1.0,0,83,Downregulated
+Taste transduction,69,30,86,12222,0,0.0,1.0,1.0,,2.859653260997759,-0.0,Taste transduction,1.0,1.0,0,30,Downregulated
+Taurine and hypotaurine metabolism,69,6,11,12222,0,0.0,1.0,1.0,,13.444936358605423,-0.0,Taurine and hypotaurine metabolism,1.0,1.0,0,6,Downregulated
+Terpenoid backbone biosynthesis,69,12,22,12222,0,0.0,1.0,1.0,,6.987913669064748,-0.0,Terpenoid backbone biosynthesis,1.0,1.0,0,12,Downregulated
+Th1 and Th2 cell differentiation,69,75,92,12222,0,0.0,1.0,1.0,,1.150936204678641,-0.0,Th1 and Th2 cell differentiation,1.0,1.0,0,75,Downregulated
+Th17 cell differentiation,69,88,107,12222,0,0.0,1.0,1.0,,0.9808153477218226,-0.0,Th17 cell differentiation,1.0,1.0,0,88,Downregulated
+Thermogenesis,69,131,232,12222,0,0.0,1.0,1.0,,0.6577399677216402,-0.0,Thermogenesis,1.0,1.0,0,131,Downregulated
+Thiamine metabolism,69,10,15,12222,0,0.0,1.0,1.0,,8.320315176430285,-0.0,Thiamine metabolism,1.0,1.0,0,10,Downregulated
+Thyroid cancer,69,32,37,12222,0,0.0,1.0,1.0,,2.6832318760376315,-0.0,Thyroid cancer,1.0,1.0,0,32,Downregulated
+Thyroid hormone signaling pathway,69,94,121,12222,0,0.0,1.0,1.0,,0.9180845799550835,-0.0,Thyroid hormone signaling pathway,1.0,1.0,0,94,Downregulated
+Thyroid hormone synthesis,69,51,75,12222,0,0.0,1.0,1.0,,1.6906474820143884,-0.0,Thyroid hormone synthesis,1.0,1.0,0,51,Downregulated
+Tight junction,69,126,169,12222,0,0.0,1.0,1.0,,0.6840219523985555,-0.0,Tight junction,1.0,1.0,0,126,Downregulated
+Toll-like receptor signaling pathway,69,69,104,12222,0,0.0,1.0,1.0,,1.2509186895088247,-0.0,Toll-like receptor signaling pathway,1.0,1.0,0,69,Downregulated
+Toxoplasmosis,69,94,112,12222,0,0.0,1.0,1.0,,0.9180845799550835,-0.0,Toxoplasmosis,1.0,1.0,0,94,Downregulated
+Transcriptional misregulation in cancer,69,143,192,12222,0,0.0,1.0,1.0,,0.6021357130323616,-0.0,Transcriptional misregulation in cancer,1.0,1.0,0,143,Downregulated
+Type I diabetes mellitus,69,34,43,12222,0,0.0,1.0,1.0,,2.527265144406214,-0.0,Type I diabetes mellitus,1.0,1.0,0,34,Downregulated
+Type II diabetes mellitus,69,30,46,12222,0,0.0,1.0,1.0,,2.859653260997759,-0.0,Type II diabetes mellitus,1.0,1.0,0,30,Downregulated
+Tyrosine metabolism,69,24,36,12222,0,0.0,1.0,1.0,,3.5617383644105125,-0.0,Tyrosine metabolism,1.0,1.0,0,24,Downregulated
+Ubiquinone and other terpenoid-quinone biosynthesis,69,7,11,12222,0,0.0,1.0,1.0,,11.651318944844125,-0.0,Ubiquinone and other terpenoid-quinone biosynthesis,1.0,1.0,0,7,Downregulated
+Ubiquitin mediated proteolysis,69,100,140,12222,0,0.0,1.0,1.0,,0.8628440531157164,-0.0,Ubiquitin mediated proteolysis,1.0,1.0,0,100,Downregulated
+VEGF signaling pathway,69,45,59,12222,0,0.0,1.0,1.0,,1.9145386987113606,-0.0,VEGF signaling pathway,1.0,1.0,0,45,Downregulated
+"Valine, leucine and isoleucine degradation",69,31,48,12222,0,0.0,1.0,1.0,,2.7686422290738837,-0.0,"Valine, leucine and isoleucine degradation",1.0,1.0,0,31,Downregulated
+Various types of N-glycan biosynthesis,69,21,39,12222,0,0.0,1.0,1.0,,4.059728961017233,-0.0,Various types of N-glycan biosynthesis,1.0,1.0,0,21,Downregulated
+Vibrio cholerae infection,69,34,50,12222,0,0.0,1.0,1.0,,2.527265144406214,-0.0,Vibrio cholerae infection,1.0,1.0,0,34,Downregulated
+Viral carcinogenesis,69,139,203,12222,0,0.0,1.0,1.0,,0.6196075397746319,-0.0,Viral carcinogenesis,1.0,1.0,0,139,Downregulated
+Viral myocarditis,69,49,60,12222,0,0.0,1.0,1.0,,1.7592471477363563,-0.0,Viral myocarditis,1.0,1.0,0,49,Downregulated
+Viral protein interaction with cytokine and cytokine receptor,69,83,100,12222,0,0.0,1.0,1.0,,1.0399775987593158,-0.0,Viral protein interaction with cytokine and cytokine receptor,1.0,1.0,0,83,Downregulated
+Vitamin B6 metabolism,69,5,6,12222,0,0.0,1.0,1.0,,15.890778286461739,-0.0,Vitamin B6 metabolism,1.0,1.0,0,5,Downregulated
+Vitamin digestion and absorption,69,15,24,12222,0,0.0,1.0,1.0,,5.6340218148062196,-0.0,Vitamin digestion and absorption,1.0,1.0,0,15,Downregulated
+Wnt signaling pathway,69,128,166,12222,0,0.0,1.0,1.0,,0.6732637236514291,-0.0,Wnt signaling pathway,1.0,1.0,0,128,Downregulated
+Yersinia infection,69,108,137,12222,0,0.0,1.0,1.0,,0.7986937638829029,-0.0,Yersinia infection,1.0,1.0,0,108,Downregulated
+beta-Alanine metabolism,69,17,30,12222,0,0.0,1.0,1.0,,4.989311408016444,-0.0,beta-Alanine metabolism,1.0,1.0,0,17,Downregulated
+cGMP-PKG signaling pathway,69,113,167,12222,0,0.0,1.0,1.0,,0.763192089500206,-0.0,cGMP-PKG signaling pathway,1.0,1.0,0,113,Downregulated
+mRNA surveillance pathway,69,52,98,12222,0,0.0,1.0,1.0,,1.6583076396026035,-0.0,mRNA surveillance pathway,1.0,1.0,0,52,Downregulated
+mTOR signaling pathway,69,116,154,12222,0,0.0,1.0,1.0,,0.7433538148022355,-0.0,mTOR signaling pathway,1.0,1.0,0,116,Downregulated
+p53 signaling pathway,69,67,73,12222,0,0.0,1.0,1.0,,1.2881961097788437,-0.0,p53 signaling pathway,1.0,1.0,0,67,Downregulated

@@ -473,25 +473,53 @@ def pu_bagging_fit_predict(
         raise ValueError("PU bagging needs at least one positive and one unlabeled gene.")
     n_sub = max(1, int(round(n_pos * subsample_ratio)))
 
+    # The B subsamples are drawn up-front, sequentially, from ONE generator, and every base forest has
+    # its own fixed random_state -> the result is identical for any n_jobs (and for the former
+    # sequential implementation).  Only the fitting is parallel.  Each forest is small (100 trees on a
+    # few hundred rows), so parallelising ACROSS the B base learners (one single-threaded forest per
+    # worker) uses many-core machines far better than n_jobs=-1 inside each forest.
     rng = np.random.default_rng(seed)
-    accum = np.zeros(len(X_pred), dtype=np.float64)
-    for i in range(n_estimators):
-        replace = n_sub > len(X_unl)
-        sel = rng.choice(len(X_unl), size=n_sub, replace=replace)
-        X_iter = np.vstack([X_pos, X_unl[sel]])
-        y_iter = np.concatenate([np.ones(n_pos, dtype=np.int8), np.zeros(n_sub, dtype=np.int8)])
+    replace = n_sub > len(X_unl)
+    selections = [rng.choice(len(X_unl), size=n_sub, replace=replace) for _ in range(n_estimators)]
+    y_iter = np.concatenate([np.ones(n_pos, dtype=np.int8), np.zeros(n_sub, dtype=np.int8)])
+
+    def _fit_one(i):
         clf = RandomForestClassifier(
             n_estimators=base_n_trees,
             max_features="sqrt",
             class_weight="balanced",
-            n_jobs=n_jobs,
+            n_jobs=1,
             random_state=int(seed) + i,
         )
-        clf.fit(X_iter, y_iter)
-        accum += clf.predict_proba(X_pred)[:, 1]
+        clf.fit(np.vstack([X_pos, X_unl[selections[i]]]), y_iter)
+        return clf.predict_proba(X_pred)[:, 1]
+
+    n_workers = _resolve_n_jobs(n_jobs, n_estimators)
+    accum = np.zeros(len(X_pred), dtype=np.float64)
+    if n_workers <= 1:
+        for i in range(n_estimators):
+            accum += _fit_one(i)
+            if progress is not None:
+                progress(i + 1, n_estimators)
+    else:
+        from joblib import Parallel, delayed
+        preds = Parallel(n_jobs=n_workers, prefer="processes")(delayed(_fit_one)(i) for i in range(n_estimators))
+        for i, pr in enumerate(preds):          # summed in index order: deterministic
+            accum += pr
         if progress is not None:
-            progress(i + 1, n_estimators)
+            progress(n_estimators, n_estimators)
     return accum / n_estimators
+
+
+def _resolve_n_jobs(n_jobs, n_tasks):
+    """-1 -> all CPU cores (capped by the number of tasks); None/0/1 -> sequential."""
+    import os
+    if n_jobs is None or n_jobs == 0 or n_jobs == 1:
+        return 1
+    cores = os.cpu_count() or 1
+    if n_jobs < 0:
+        n_jobs = max(1, cores + 1 + n_jobs)
+    return max(1, min(int(n_jobs), cores, int(n_tasks)))
 
 
 # ======================================================================

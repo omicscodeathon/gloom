@@ -1,0 +1,3 @@
+group,reference_cutoff,n_boot,n_samples_used,reference_edges,hub_fraction,edge_retention_mean,edge_retention_median,edge_retention_p25,fraction_edges_retained_ge_50pct,fraction_edges_retained_ge_80pct,fraction_edges_retained_ge_95pct,hub_jaccard_mean,hub_jaccard_sd,degree_spearman_mean,sampling
+tumor,0.8,20,58,226994,0.05,0.7435438822171511,0.75,0.6,0.9455756539820436,0.45150092072918224,0.16533476655770638,0.6124413038650107,0.11509797782041811,0.8533545130933854,equal_n
+normal,0.8,20,58,832669,0.05,0.7908969830749072,0.8,0.65,0.9384713493597096,0.5645304436696935,0.3483797283194162,0.6882691837769614,0.07987951742609749,0.9295911292970939,equal_n

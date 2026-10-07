@@ -1,0 +1,85 @@
+variant,description,n_features,metric,estimate,ci_low,ci_high,n_boot
+a_abs_log2fc,|log2FC| alone (no model),0,auroc,0.8234212531021268,0.8016502037979456,0.844270038167939,1000
+a_abs_log2fc,|log2FC| alone (no model),0,auprc,0.20223122250082437,0.1754937393868386,0.23691336089204107,1000
+a_abs_log2fc,|log2FC| alone (no model),0,average_precision,0.20427848405531893,0.17800215035112443,0.2398681402913131,1000
+a_abs_log2fc,|log2FC| alone (no model),0,precision_at_10,0.3,0.1,0.7,1000
+a_abs_log2fc,|log2FC| alone (no model),0,recall_at_10,0.006944444444444444,0.0023148148148148147,0.016203703703703703,1000
+a_abs_log2fc,|log2FC| alone (no model),0,ef_at_10,8.4875,2.829166666666667,19.804166666666667,1000
+a_abs_log2fc,|log2FC| alone (no model),0,precision_at_50,0.32,0.2,0.46,1000
+a_abs_log2fc,|log2FC| alone (no model),0,recall_at_50,0.037037037037037035,0.023148148148148147,0.05324074074074074,1000
+a_abs_log2fc,|log2FC| alone (no model),0,ef_at_50,9.053333333333335,5.658333333333334,13.014166666666668,1000
+a_abs_log2fc,|log2FC| alone (no model),0,precision_at_100,0.38,0.28,0.47,1000
+a_abs_log2fc,|log2FC| alone (no model),0,recall_at_100,0.08796296296296297,0.06481481481481481,0.1087962962962963,1000
+a_abs_log2fc,|log2FC| alone (no model),0,ef_at_100,10.750833333333334,7.921666666666668,13.297083333333333,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,auroc,0.6760213457732541,0.6488944746803631,0.702734063314799,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,auprc,0.08548443134043905,0.07401599133601246,0.10072023801341827,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,average_precision,0.08640523707035634,0.07535016367030115,0.10328795524725037,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,precision_at_10,0.2,0.0,0.4,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,recall_at_10,0.004629629629629629,0.0,0.009259259259259259,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,ef_at_10,5.658333333333334,0.0,11.316666666666668,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,precision_at_50,0.2,0.08,0.3,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,recall_at_50,0.023148148148148147,0.009259259259259259,0.034722222222222224,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,ef_at_50,5.658333333333334,2.2633333333333336,8.4875,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,precision_at_100,0.13,0.07,0.2,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,recall_at_100,0.03009259259259259,0.016203703703703703,0.046296296296296294,1000
+b_adj_pvalue,adjusted p-value alone (no model),0,ef_at_100,3.677916666666667,1.980416666666667,5.658333333333334,1000
+c_expression_only,expression-derived features,16,auroc,0.9366605605817862,0.9282300722716992,0.944378227291647,1000
+c_expression_only,expression-derived features,16,auprc,0.3488414256629088,0.31000818488866194,0.39294836488128915,1000
+c_expression_only,expression-derived features,16,average_precision,0.3502951416693217,0.312764273028909,0.3963148803663819,1000
+c_expression_only,expression-derived features,16,precision_at_10,0.5,0.2,0.9,1000
+c_expression_only,expression-derived features,16,recall_at_10,0.011574074074074073,0.004629629629629629,0.020833333333333332,1000
+c_expression_only,expression-derived features,16,ef_at_10,14.145833333333334,5.658333333333334,25.462500000000002,1000
+c_expression_only,expression-derived features,16,precision_at_50,0.56,0.4,0.68,1000
+c_expression_only,expression-derived features,16,recall_at_50,0.06481481481481481,0.046296296296296294,0.0787037037037037,1000
+c_expression_only,expression-derived features,16,ef_at_50,15.843333333333335,11.316666666666668,19.238333333333337,1000
+c_expression_only,expression-derived features,16,precision_at_100,0.53,0.44,0.63,1000
+c_expression_only,expression-derived features,16,recall_at_100,0.12268518518518519,0.10185185185185185,0.14583333333333334,1000
+c_expression_only,expression-derived features,16,ef_at_100,14.994583333333335,12.448333333333334,17.82375,1000
+d_network_only,network-derived features,14,auroc,0.7399273159928377,0.7190948710850374,0.7599048574788742,1000
+d_network_only,network-derived features,14,auprc,0.09507085257905437,0.07929835416360326,0.11788091972387185,1000
+d_network_only,network-derived features,14,average_precision,0.09649036361861484,0.08097527144393708,0.12069764291509923,1000
+d_network_only,network-derived features,14,precision_at_10,0.4,0.1,0.7,1000
+d_network_only,network-derived features,14,recall_at_10,0.009259259259259259,0.0023148148148148147,0.016203703703703703,1000
+d_network_only,network-derived features,14,ef_at_10,11.316666666666668,2.829166666666667,19.804166666666667,1000
+d_network_only,network-derived features,14,precision_at_50,0.32,0.18,0.44,1000
+d_network_only,network-derived features,14,recall_at_50,0.037037037037037035,0.020833333333333332,0.05092592592592592,1000
+d_network_only,network-derived features,14,ef_at_50,9.053333333333335,5.0925,12.448333333333334,1000
+d_network_only,network-derived features,14,precision_at_100,0.27,0.18,0.36,1000
+d_network_only,network-derived features,14,recall_at_100,0.0625,0.041666666666666664,0.08333333333333333,1000
+d_network_only,network-derived features,14,ef_at_100,7.638750000000001,5.0925,10.185,1000
+e_expression_plus_network,expression + network features,30,auroc,0.9384143420349952,0.9308169440910377,0.945669060507178,1000
+e_expression_plus_network,expression + network features,30,auprc,0.3598665307694703,0.31761683560389753,0.4033560831751908,1000
+e_expression_plus_network,expression + network features,30,average_precision,0.3611778031439878,0.3201977488590657,0.4057066336345916,1000
+e_expression_plus_network,expression + network features,30,precision_at_10,0.8,0.5,1.0,1000
+e_expression_plus_network,expression + network features,30,recall_at_10,0.018518518518518517,0.011574074074074073,0.023148148148148147,1000
+e_expression_plus_network,expression + network features,30,ef_at_10,22.633333333333336,14.145833333333334,28.291666666666668,1000
+e_expression_plus_network,expression + network features,30,precision_at_50,0.58,0.44,0.74,1000
+e_expression_plus_network,expression + network features,30,recall_at_50,0.06712962962962964,0.05092592592592592,0.08564814814814815,1000
+e_expression_plus_network,expression + network features,30,ef_at_50,16.409166666666668,12.448333333333334,20.935833333333335,1000
+e_expression_plus_network,expression + network features,30,precision_at_100,0.56,0.46,0.65,1000
+e_expression_plus_network,expression + network features,30,recall_at_100,0.12962962962962962,0.10648148148148148,0.15046296296296297,1000
+e_expression_plus_network,expression + network features,30,ef_at_100,15.843333333333335,13.014166666666668,18.389583333333334,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,auroc,0.9296147080074136,0.9211472567775578,0.9372493903731975,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,auprc,0.3344281593230184,0.29575140426233076,0.37745371177263876,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,average_precision,0.33554766354514853,0.2980080195872118,0.37935790989865875,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,precision_at_10,0.7,0.3,1.0,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,recall_at_10,0.016203703703703703,0.006944444444444444,0.023148148148148147,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,ef_at_10,19.804166666666667,8.4875,28.291666666666668,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,precision_at_50,0.58,0.4595000000000001,0.74,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,recall_at_50,0.06712962962962964,0.05318287037037037,0.08564814814814815,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,ef_at_50,16.409166666666668,13.000020833333336,20.935833333333335,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,precision_at_100,0.59,0.47,0.67,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,recall_at_100,0.13657407407407407,0.1087962962962963,0.1550925925925926,1000
+f_combined_no_de_stats,expression + network without explicit DE/log2FC statistics,26,ef_at_100,16.692083333333333,13.297083333333333,18.955416666666668,1000
+g_full_model,all integrated features (GLOOM full model),30,auroc,0.9384143420349952,0.9308169440910377,0.945669060507178,1000
+g_full_model,all integrated features (GLOOM full model),30,auprc,0.3598665307694703,0.31761683560389753,0.4033560831751908,1000
+g_full_model,all integrated features (GLOOM full model),30,average_precision,0.3611778031439878,0.3201977488590657,0.4057066336345916,1000
+g_full_model,all integrated features (GLOOM full model),30,precision_at_10,0.8,0.5,1.0,1000
+g_full_model,all integrated features (GLOOM full model),30,recall_at_10,0.018518518518518517,0.011574074074074073,0.023148148148148147,1000
+g_full_model,all integrated features (GLOOM full model),30,ef_at_10,22.633333333333336,14.145833333333334,28.291666666666668,1000
+g_full_model,all integrated features (GLOOM full model),30,precision_at_50,0.58,0.44,0.74,1000
+g_full_model,all integrated features (GLOOM full model),30,recall_at_50,0.06712962962962964,0.05092592592592592,0.08564814814814815,1000
+g_full_model,all integrated features (GLOOM full model),30,ef_at_50,16.409166666666668,12.448333333333334,20.935833333333335,1000
+g_full_model,all integrated features (GLOOM full model),30,precision_at_100,0.56,0.46,0.65,1000
+g_full_model,all integrated features (GLOOM full model),30,recall_at_100,0.12962962962962962,0.10648148148148148,0.15046296296296297,1000
+g_full_model,all integrated features (GLOOM full model),30,ef_at_100,15.843333333333335,13.014166666666668,18.389583333333334,1000
